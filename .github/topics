@@ -1,0 +1,11 @@
+configuration
+dotfiles
+declarative
+nix
+nixos
+nixos-configuration
+nix-flake
+flake-parts
+nix-dotfiles
+home-manager-config
+wsl

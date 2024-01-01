@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./loic.nix
+  ];
+}
