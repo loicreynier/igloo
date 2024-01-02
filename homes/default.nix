@@ -13,7 +13,6 @@
       pkgs = withSystem system ({pkgs, ...}: pkgs);
       modules =
         [
-          inputs.nixneovim.nixosModules.default
           ../modules/igloo/homes
           ./${username}
         ]
