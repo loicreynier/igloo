@@ -17,9 +17,9 @@
       push.default = "current";
       color.ui = "auto";
       url = {
-        "https://github.com/".insteadOf = "github";
+        "https://github.com/".insteadOf = "github:";
         "ssh://git@github.com/".pushInsteadOf = "github:";
-        "https://gitlab.com/".insteadOf = "gitlab";
+        "https://gitlab.com/".insteadOf = "gitlab:";
         "ssh://git@gitlab.com/".pushInsteadOf = "gitlab:";
         "https://gitlab.in2p3.fr/".insteadOf = "in2p3:";
         "ssh://git@gitlab.in2p3.fr/".pushInsteadOf = "in2p3:";
