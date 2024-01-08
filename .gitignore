@@ -1,3 +1,6 @@
 # Nix generated
 /.pre-commit-config.yaml
 result
+
+# Builds
+*.tar.gz
