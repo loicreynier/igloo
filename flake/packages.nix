@@ -9,6 +9,7 @@
       config.allowUnfree = true;
       overlays = [
         inputs.nixpkgs-lor.overlays.default
+        inputs.nixneovimplugins.overlays.default
       ];
     };
   };

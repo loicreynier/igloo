@@ -13,6 +13,7 @@
       pkgs = withSystem system ({pkgs, ...}: pkgs);
       modules =
         [
+          inputs.nixvim.homeManagerModules.nixvim
           ../modules/igloo/homes
           ./${username}
         ]

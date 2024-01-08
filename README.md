@@ -58,6 +58,10 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
   for running NixOS on WSL
 - [comma](https://github.com/nix-community/comma)
   to run software without installing it
+- [NixVim](https://github.com/nix-community/nixvim)
+  to configure Neovim using Nix
+- [NixNeovimPlugins](https://github.com/nixneovim/nixneovimplugins)
+  to use Neovim plugins not available yet in `nixpkgs`
 
 </details>
 

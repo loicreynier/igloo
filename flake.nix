@@ -45,5 +45,15 @@
 
     # -- Windows Subsystem for Linux (WSL)
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
+
+    # -- Neovim
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixneovimplugins = {
+      url = "github:jooooscha/nixpkgs-vim-extra-plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

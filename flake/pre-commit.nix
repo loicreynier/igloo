@@ -45,6 +45,7 @@
           prettier = mkHook "prettier" {enable = true;};
           shellcheck = mkHook "shellcheck" {enable = true;};
           statix = mkHook "statix" {enable = true;};
+          stylua = mkHook "stylua" {enable = true;};
           typos = mkHook "typos" {enable = true;};
         };
       };

@@ -1,3 +1,6 @@
 deloading
 NixOS
 Neovim
+NixVim
+NixNeovim
+NixNeovimPlugins
