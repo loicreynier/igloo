@@ -35,7 +35,7 @@
     };
     loadInNixShell = true;
     direnvrcExtra = builtins.readFile (pkgs.substituteAll {
-      src = ./direnvrc.sh;
+      src = ../../../config/direnvrc.sh;
       sha1sum = "${pkgs.perl}/bin/shasum";
     });
   };
