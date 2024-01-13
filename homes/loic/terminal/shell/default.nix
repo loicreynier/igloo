@@ -15,9 +15,11 @@
     nix-direnv = {
       enable = true;
       # In case alternative `nix` package is used, such as `nix-super`
-      package = pkgs.nix-direnv.override {
-        nix = config.nix.package;
-      };
+      package =
+        lib.mkIf (config.nix.package != null)
+        (pkgs.nix-direnv.override {
+          nix = config.nix.package;
+        });
     };
     stdlib =
       lib.strings.fileContents
