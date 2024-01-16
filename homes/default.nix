@@ -15,6 +15,7 @@
         [
           inputs.nixvim.homeManagerModules.nixvim
           ../modules/igloo/homes
+          ../modules/home-manager
           ./${username}
         ]
         ++ args.modules or [];

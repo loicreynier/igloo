@@ -8,5 +8,9 @@ in {
     nixosModules = {
       comma-wrapped = mkFlakeModule /modules/nixos/comma;
     };
+
+    homeManagerModules = {
+      python = mkFlakeModule /modules/home-manager/programs/python;
+    };
   };
 }
