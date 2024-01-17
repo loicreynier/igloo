@@ -3,7 +3,15 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  pylab =
+    pkgs.writeShellScriptBin "pylab"
+    (builtins.readFile ../../../../bin/pylab);
+  # FIXME: doesn't work since the wrapper uses system's Python (and packages)
+  pyversion =
+    pkgs.writers.writePython3Bin "pyversion" {}
+    (builtins.readFile ../../../../bin/pyversion);
+in {
   programs.python = {
     enable = true;
     packages = pkgs:
@@ -20,4 +28,9 @@
         state = "${config.xdg.stateHome}";
       });
   };
+
+  home.packages = [
+    pylab
+    pyversion
+  ];
 }
