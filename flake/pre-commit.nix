@@ -44,6 +44,7 @@
           markdownlint = mkHook "markdownlint" {enable = true;};
           prettier = mkHook "prettier" {enable = true;};
           shellcheck = mkHook "shellcheck" {enable = true;};
+          ruff = mkHook "Ruff" {enable = true;};
           statix = mkHook "statix" {enable = true;};
           stylua = mkHook "stylua" {enable = true;};
           typos = mkHook "typos" {enable = true;};
