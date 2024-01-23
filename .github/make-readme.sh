@@ -6,4 +6,4 @@ cd "$(dirname "$0")" || exit
   cat "readme-header.html"
   tail -n +2 "../README.md"
   cat "readme-footer.html"
-) > "README.md"
+) | sed "s|(./|(../|g" > "README.md"
