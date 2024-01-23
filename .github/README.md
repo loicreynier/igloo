@@ -35,6 +35,8 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
 
 ## Layout
 
+- [`bin`](./bin): raw executable/script files (not generated using Nix)
+- [`config`](./config): raw configuration files (not generated using Nix)
 - [`flake.nix`](./flake.nix): Entry point of the Igloo
 - [`flake`](./flake): Individual parts of the flake, powered by flake parts
 - [`homes`](./homes): Home Manager/user environment configuration
