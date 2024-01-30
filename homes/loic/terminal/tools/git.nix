@@ -21,7 +21,7 @@
         "ssh://git@github.com/".pushInsteadOf = "github:";
         "https://gitlab.com/".insteadOf = "gitlab:";
         "ssh://git@gitlab.com/".pushInsteadOf = "gitlab:";
-        "https://gitlab.in2p3.fr/".insteadOf = "in2p3:";
+        "ssh://git@gitlab.in2p3.fr/".insteadOf = "in2p3:";
         "ssh://git@gitlab.in2p3.fr/".pushInsteadOf = "in2p3:";
         "https://aur.archlinux.org/".insteadOf = "aur:";
         "ssh://aur@aur.archlinux.org/".pushInsteadOf = "aur:";
