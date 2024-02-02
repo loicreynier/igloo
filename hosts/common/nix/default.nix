@@ -54,4 +54,6 @@
       generateCaches = lib.mkDefault true;
     };
   };
+
+  programs.nix-ld.enable = true;
 }

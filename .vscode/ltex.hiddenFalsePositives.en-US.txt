@@ -1,0 +1,1 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qdirenv for loading/deloading development environments depending on the current directory\nStarship because having a beautiful prompt is vital\\E$"}

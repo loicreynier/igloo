@@ -4,3 +4,4 @@ Neovim
 NixVim
 NixNeovim
 NixNeovimPlugins
+NixOS-WSL

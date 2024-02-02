@@ -87,6 +87,8 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
   to configure Neovim using Nix
 - [NixNeovimPlugins](https://github.com/nixneovim/nixneovimplugins)
   to use Neovim plugins not available yet in `nixpkgs`
+- [NixOS Visual Studio Code `server-env-setup`](https://github.com/sonowz/vscode-remote-wsl-nixos)
+  to connect to VS Code server running inside NixOS-WSL.
 
 </details>
 
