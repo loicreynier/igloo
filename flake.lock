@@ -416,6 +416,22 @@
         "type": "github"
       }
     },
+    "nixos-vscode-remote-wsl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701698976,
+        "narHash": "sha256-RvVMDn/sbRdp+8Uvqzn8UPUcwWPZsMFBCxYr/l+hxTE=",
+        "owner": "sonowz",
+        "repo": "vscode-remote-wsl-nixos",
+        "rev": "b8f59ee7839d00a3123c84ebe682318c023377fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sonowz",
+        "repo": "vscode-remote-wsl-nixos",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -703,6 +719,7 @@
         "home-manager": "home-manager",
         "nixneovimplugins": "nixneovimplugins",
         "nixos-hardware": "nixos-hardware",
+        "nixos-vscode-remote-wsl": "nixos-vscode-remote-wsl",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-lor": "nixpkgs-lor",

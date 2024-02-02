@@ -19,25 +19,27 @@ Alternatives:
 */
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
-}: let
-  # TODO: add dependencies as flake inputs
-  # nixosVSCodeServer = fetchTarball {
-  #   url = "https://github.com/nix-community/nixos-vscode-server/tarball/master";
-  #   sha256 = "sha256:0sz8njfxn5bw89n6xhlzsbxkafb6qmnszj4qxy2w0hw2mgmjp829";
-  # };
-  #
-  # # vscodeServer1_82Patch = pkgs.fetchpatch {
-  #   url = "https://github.com/nix-community/nixos-vscode-server/pull/68.patch";
-  #   hash = "sha256-kZWOcw3QKZK598nWj9UuMCJlQxQ/qzBKqACkQO8+jvI=";
-  # };
-  vscodeServerSetup = fetchTarball {
-    url = "https://github.com/sonowz/vscode-remote-wsl-nixos/tarball/master";
-    sha256 = "sha256:0cf5l5gzwaqn1d0w3c6rcg0irxahzhwsnby5zdlifvgcgw74rxa6";
-  };
-in {
+}:
+# let
+#   nixosVSCodeServer = fetchTarball {
+#     url = "https://github.com/nix-community/nixos-vscode-server/tarball/master";
+#     sha256 = "sha256:0sz8njfxn5bw89n6xhlzsbxkafb6qmnszj4qxy2w0hw2mgmjp829";
+#   };
+#
+#   # vscodeServer1_82Patch = pkgs.fetchpatch {
+#     url = "https://github.com/nix-community/nixos-vscode-server/pull/68.patch";
+#     hash = "sha256-kZWOcw3QKZK598nWj9UuMCJlQxQ/qzBKqACkQO8+jvI=";
+#   };
+#   vscodeServerSetup = fetchTarball {
+#     url = "https://github.com/sonowz/vscode-remote-wsl-nixos/tarball/master";
+#     sha256 = "sha256:0cf5l5gzwaqn1d0w3c6rcg0irxahzhwsnby5zdlifvgcgw74rxa6";
+#   };
+# in {
+{
   home.packages = with pkgs; [
     wget
     curl
@@ -48,7 +50,7 @@ in {
     builtins.replaceStrings
     [''$(nixos-version | cut -d "." -f1,2)'']
     ["${config.home.stateVersion}"]
-    (lib.fileContents "${vscodeServerSetup}/server-env-setup");
+    (lib.fileContents "${inputs.nixos-vscode-remote-wsl}/server-env-setup");
 
   # imports = [
   #   "${nixosVSCodeServer}/modules/vscode-server/home.nix"

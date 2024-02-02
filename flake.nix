@@ -45,6 +45,10 @@
 
     # -- Windows Subsystem for Linux (WSL)
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-vscode-remote-wsl = {
+      url = "github:sonowz/vscode-remote-wsl-nixos";
+      flake = false;
+    };
 
     # -- Neovim
     nixvim = {
