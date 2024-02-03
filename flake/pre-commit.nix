@@ -48,6 +48,7 @@
           statix = mkHook "statix" {enable = true;};
           stylua = mkHook "stylua" {enable = true;};
           typos = mkHook "typos" {enable = true;};
+          taplo = mkHook "taplo" {enable = true;};
         };
       };
     };
