@@ -16,6 +16,9 @@ Working with:
 Alternatives:
 - https://github.com/sonowz/vscode-remote-wsl-nixos
 - https://discourse.nixos.org/t/14615
+
+FIXME: this module is only needed if the system is running NixOS.
+It therefore should be moved to `hosts` instead of `homes.
 */
 {
   config,

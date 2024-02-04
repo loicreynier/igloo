@@ -20,6 +20,13 @@ Install Browserpass and VS Code server for WSL
     browserpass
   ];
 
-  # TODO: replace with `pinetry-wsl`
-  services.gpg-agent.pinentryFlavor = "gtk2";
+  services.gpg-agent = {
+    # TODO: replace with `pinentry-wsl`
+    # Currently `pinentry-wsl-ps1` does not support WSL 2 with systemd.
+    # pinentryFlavor = null;
+    # extraConfig = ''
+    #   pinentry-program "${pkgs.pinentry-wsl-ps1}/bin/pinentry-wsl-ps1"
+    # '';
+    pinentryFlavor = "gtk2";
+  };
 }
