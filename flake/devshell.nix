@@ -19,6 +19,7 @@
         deadnix
         git
         nil
+        age
         statix
         tree
 

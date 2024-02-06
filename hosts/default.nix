@@ -8,6 +8,7 @@
   # -- Flake inputs
   inherit (inputs.home-manager.nixosModules) home-manager;
   inherit (inputs.nixos-wsl.nixosModules) wsl;
+  agenix = inputs.agenix.nixosModules.default;
 
   # -- Custom modules
   modulesPath = ../modules;
@@ -16,6 +17,7 @@
   sharedModules = [
     nixosModules
     home-manager
+    agenix
     (iglooModules + /hosts/options)
   ];
 

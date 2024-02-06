@@ -43,6 +43,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # -- Secrets
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = ""; # Don't download Darwin deps
+    };
+
     # -- Windows Subsystem for Linux (WSL)
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-vscode-remote-wsl = {

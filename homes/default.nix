@@ -14,6 +14,8 @@
       modules =
         [
           inputs.nixvim.homeManagerModules.nixvim
+          inputs.agenix.homeManagerModules.default
+          {home.packages = [inputs.agenix.packages."${system}".default];}
           ../modules/igloo/homes
           ../modules/home-manager
           ./${username}
