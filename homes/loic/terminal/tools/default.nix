@@ -3,6 +3,7 @@
     ./git.nix
     ./gpg.nix
     ./pass.nix
+    #./ssh.nix
   ];
 
   home.packages = with pkgs; [
