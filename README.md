@@ -22,6 +22,9 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
   - [`igloo`](./modules/igloo): Home & system modularized configurations
   - [`home-manager`](./modules/home-manager): Home Manager custom modules
   - [`nixos`](./modules/nixos): Nix OS custom modules
+- [`secrets`](./secrets):
+  `age`-encrypted secrets
+  such as passwords and private keys
 
 ## Credits & References
 
