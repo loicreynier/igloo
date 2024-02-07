@@ -77,6 +77,8 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
   for loading/deloading development environments depending on the current directory
 - [Starship](https://starship.rs)
   because having a beautiful prompt is vital
+- [pet](https://github.com/knqyf263/pet)
+  to remember the juiciest commands
 
 </details>
 

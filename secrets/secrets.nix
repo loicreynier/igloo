@@ -6,7 +6,9 @@ let
 in {
   # -- Passwords & keys
   "key-ssh-bdp@p2chpd.age".publicKeys = mkSecret [];
+  "token-gist-loicreynier.age".publicKeys = mkSecret [];
 
   # -- Private config files
   "config-ssh-loic.age".publicKeys = mkSecret [];
+  "config-pet-loic.toml.age".publicKeys = mkSecret [];
 }
