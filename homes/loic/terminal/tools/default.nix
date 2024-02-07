@@ -3,6 +3,7 @@
     ./git.nix
     ./gpg.nix
     ./pass.nix
+    ./pet.nix
     ./ssh.nix
   ];
 
