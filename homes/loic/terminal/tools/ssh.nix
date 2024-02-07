@@ -6,7 +6,7 @@
   in {
     config-ssh-loic = {
       file = "${secretsPath}/config-ssh-loic.age";
-      path = "${sshHomePath}/.ssh/config";
+      path = "${sshHomePath}/config";
     };
     "key-ssh-bdp@p2chpd" = {
       file = "${secretsPath}/key-ssh-bdp@p2chpd.age";
