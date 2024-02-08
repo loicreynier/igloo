@@ -15,11 +15,12 @@
       DIRENV_LOG_FORMAT = ""; # Force direnv to shut up
 
       packages = with pkgs; [
+        age
         alejandra
         deadnix
         git
         nil
-        age
+        magic-wormhole-rs
         statix
         tree
 
