@@ -38,9 +38,7 @@ in {
   # -- Actual home configurations
   flake.homeConfigurations = {
     "loic" = mkHomeLoic "x86_64-linux" [];
-  };
 
-  flake.homeConfigurations = {
     "loic@wsl" = mkHomeLoic "x86_64-linux" [
       ./loic/wsl.nix
     ];
