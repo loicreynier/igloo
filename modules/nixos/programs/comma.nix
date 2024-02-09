@@ -1,3 +1,4 @@
+# Not required if using `nix-index-database`
 {
   config,
   lib,

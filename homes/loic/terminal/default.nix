@@ -1,5 +1,6 @@
 {
   imports = [
+    ./nix
     ./neovim
     ./python
     ./shell

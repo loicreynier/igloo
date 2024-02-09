@@ -1,4 +1,11 @@
 {config, ...}: {
+  # Enable SSH agent, requires  the following in SSH config:
+  #
+  #   Host *
+  #     AddKeysToAgent yes
+  #
+  services.ssh-agent.enable = true;
+
   age.secrets = let
     # TODO: propagate flake root path in variable to simplify
     secretsPath = ../../../../secrets;

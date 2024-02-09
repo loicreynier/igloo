@@ -1,9 +1,14 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }: {
+  imports = [
+    inputs.nix-index-database.nixosModules.nix-index
+  ];
+
   environment = {
     defaultPackages = lib.mkForce [];
 
@@ -18,9 +23,13 @@
   };
 
   programs = {
-    comma.enable = true;
     less.enable = true;
     starship.enable = true;
+  };
+
+  programs = {
+    command-not-found.enable = lib.mkForce false;
+    nix-index-database.comma.enable = true;
   };
 
   programs.direnv = {
