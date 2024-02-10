@@ -35,6 +35,9 @@ in {
     ffmpeg
     libwebp
     pdftk
+
+    # -- Networking
+    wormhole-rs
   ];
 
   # -- ripgrep
