@@ -29,7 +29,7 @@
             name = "igloo-update";
             text = ''
               nix flake update \
-                && git commit flake.lock -m "feat(flake): update inputs"
+                && git commit flake.lock -m "build(flake): update inputs"
             '';
           }
         )
