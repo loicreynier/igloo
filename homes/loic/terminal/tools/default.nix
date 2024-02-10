@@ -1,4 +1,12 @@
-{pkgs, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  rgConfigPath = "${config.xdg.configHome}/ripgrep/ripgreprc";
+  rgConfigSrc = ../../../../config/ripgrep/ripgreprc;
+in {
   imports = [
     ./git.nix
     ./gpg.nix
@@ -28,4 +36,10 @@
     libwebp
     pdftk
   ];
+
+  # -- ripgrep
+  home = {
+    file."${rgConfigPath}".text = lib.strings.fileContents rgConfigSrc;
+    sessionVariables."RIPGREP_CONFIG_PATH" = rgConfigPath;
+  };
 }
