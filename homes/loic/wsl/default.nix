@@ -1,6 +1,6 @@
 /*
 
-Install Browserpass and VS Code server for WSL
+Setup `pass` and VS Code for WSL
 
 
 - Import VS Code server module (see `../vscode-server.nix`).
@@ -10,10 +10,12 @@ Install Browserpass and VS Code server for WSL
   Only Browserpass binary is required.
   Home-Manager (and NixOS)'s Browserpass module is only required
   for the configuration of the browser.
+
+- Install a `pass` extension `wclip` to copy passwords into Windows clipboard
 */
 {pkgs, ...}: {
   imports = [
-    ../vscode-server.nix
+    ../../vscode-server.nix
   ];
 
   home.packages = with pkgs; [
@@ -29,4 +31,8 @@ Install Browserpass and VS Code server for WSL
     # '';
     pinentryFlavor = "gtk2";
   };
+
+  programs.password-store.package = pkgs.pass.withExtensions (_: [
+    (pkgs.callPackage ./pass-extension-wclip {})
+  ]);
 }
