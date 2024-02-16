@@ -12,10 +12,13 @@ Setup `pass` and VS Code for WSL
   for the configuration of the browser.
 
 - Install a `pass` extension `wclip` to copy passwords into Windows clipboard
+
+- Import Neovim module which sets WSL clipboard integration using `win32yank`
 */
 {pkgs, ...}: {
   imports = [
     ../../vscode-server.nix
+    ./neovim.nix
   ];
 
   home.packages = with pkgs; [
