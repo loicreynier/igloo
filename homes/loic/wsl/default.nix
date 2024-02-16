@@ -22,6 +22,7 @@ Setup `pass` and VS Code for WSL
   ];
 
   home.packages = with pkgs; [
+    win32yank-bin
     browserpass
   ];
 
