@@ -7,6 +7,7 @@
     # General exclude list
     globalExcludes = [
       "flake.lock"
+      ".*age$"
     ];
 
     # Hook to add the exclusion list
