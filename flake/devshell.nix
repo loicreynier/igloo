@@ -19,6 +19,7 @@
         alejandra
         deadnix
         git
+        home-manager
         nil
         magic-wormhole-rs
         statix
