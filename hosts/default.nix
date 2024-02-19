@@ -20,6 +20,9 @@
     agenix
     (iglooModules + /hosts/options)
   ];
+  roles = {
+    wsl = iglooModules + /hosts/roles;
+  };
 
   # -- Wrapper to inherit `inputs` and import shared modules
   mkNixosSystem = {
@@ -51,17 +54,19 @@
             or {};
         }
     );
+  #
 in {
   # -- Actual hosts configurations
   flake.nixosConfigurations = {
-    smaug =
+    smaug-wsl =
       mkNixosSystem
       {
-        name = "smaug";
+        name = "smaug-wsl";
         inherit withSystem;
         system = "x86_64-linux";
         modules = [
           wsl
+          roles.wsl
         ];
       };
   };
