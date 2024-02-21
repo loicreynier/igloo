@@ -14,7 +14,13 @@
 
       DIRENV_LOG_FORMAT = ""; # Force direnv to shut up
 
-      packages = with pkgs; [
+      packages = with pkgs; let
+        mkScript = name:
+          pkgs.writeShellApplication {
+            inherit name;
+            text = lib.fileContents ./${name}.sh;
+          };
+      in [
         age
         alejandra
         deadnix
@@ -25,15 +31,11 @@
         statix
         tree
 
-        (
-          pkgs.writeShellApplication {
-            name = "igloo-update";
-            text = ''
-              nix flake update \
-                && git commit flake.lock -m "build(flake): update inputs"
-            '';
-          }
-        )
+        (mkScript "igloo-update")
+        (mkScript "igloo-home-switch")
+        (mkScript "igloo-home-build")
+        (mkScript "igloo-nixos-switch")
+        (mkScript "igloo-nixos-build")
       ];
     };
   };
