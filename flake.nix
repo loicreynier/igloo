@@ -71,4 +71,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  nixConfig = {
+    allow-import-from-derivation = true;
+  };
 }

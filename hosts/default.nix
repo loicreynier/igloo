@@ -54,7 +54,6 @@
             or {};
         }
     );
-  #
 in {
   # -- Actual hosts configurations
   flake.nixosConfigurations = {
@@ -77,17 +76,23 @@ in {
     lib,
     system,
     ...
-  }: let
+  }:
+  # Provoke `allow-import-from-derivation-error` during evaluation:
+  # https://github.com/purenix-org/purenix/issues/34
+  let
     sysConfigs =
       lib.filterAttrs
       (_name: value: value.pkgs.system == system)
-      self.nixosConfigurations;
+      (self.nixosConfigurations or {});
   in {
     checks =
-      lib.mapAttrs' (name: value: {
-        name = "nixos-toplevel-${name}";
-        value = value.config.system.build.toplevel;
-      })
+      lib.mapAttrs'
+      (
+        name: value:
+          lib.nameValuePair
+          "nixos-toplevel-${name}"
+          value.config.system.build.toplevel
+      )
       sysConfigs;
   };
 }
