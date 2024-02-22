@@ -1,3 +1,7 @@
+full-switch:
+    igloo-nixos-switch
+    igloo-home-switch
+
 switch-home:
     igloo-home-switch
 
