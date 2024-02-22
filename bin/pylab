@@ -14,3 +14,4 @@ PYTHONLABMODULES="numpy=np:matplotlib.pyplot=plt"
 PYTHONMODULES="$PYTHONLABMODULES''${PYTHONMODULES:+:$PYTHONMODULES}" python
 
 # vim: ft=sh
+

@@ -6,11 +6,11 @@
 }: let
   pylab =
     pkgs.writeShellScriptBin "pylab"
-    (builtins.readFile ../../../../bin/pylab);
+    (lib.fileContents ../../../../bin/pylab);
   # FIXME: doesn't work since the wrapper uses system's Python (and packages)
   pyversion =
     pkgs.writers.writePython3Bin "pyversion" {}
-    (builtins.readFile ../../../../bin/pyversion);
+    (lib.fileContents ../../../../bin/pyversion);
 in {
   programs.python = {
     enable = true;
