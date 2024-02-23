@@ -26,6 +26,7 @@
         deadnix
         git
         home-manager
+        just
         nil
         magic-wormhole-rs
         statix
