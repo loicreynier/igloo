@@ -10,6 +10,7 @@
         enable = true;
         servers = {
           bashls.enable = true;
+          gopls.enable = true;
           julials.enable = true;
           ltex.enable = true;
           lua-ls.enable = true;
@@ -25,6 +26,7 @@
           };
           pylsp.enable = true;
           ruff-lsp.enable = true;
+          typos-lsp.enable = true;
           rust-analyzer = {
             enable = true;
             # TODO: install Rust by other means
