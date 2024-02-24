@@ -18,8 +18,15 @@ def _save_history(prev_history_len, file_):
     readline.append_history_file(new_history_len - prev_history_len, file_)
 
 
+try:
+    get_ipython()
+    _ipython_shell = True
+except NameError:
+    _ipython_shell = False
+    pass
+
 _version = sys.version_info
-if _version < (3, 13):
+if _version < (3, 13) and not _ipython_shell:
     try:
         import atexit
         import readline
@@ -61,4 +68,4 @@ for _module in os.environ.get("PYTHONMODULES", "").split(":"):
         _alias = _module.split("=")[1] if "=" in _module else _module
         locals()[_alias] = importlib.import_module(_module.split("=")[0])
 
-del _module, _alias, _version
+del _module, _alias, _version, _ipython_shell

@@ -7,6 +7,9 @@
   pylab =
     pkgs.writeShellScriptBin "pylab"
     (lib.fileContents ../../../../bin/pylab);
+  ipylab =
+    pkgs.writeShellScriptBin "ipylab"
+    (lib.fileContents ../../../../bin/ipylab);
   # FIXME: doesn't work since the wrapper uses system's Python (and packages)
   pyversion =
     pkgs.writers.writePython3Bin "pyversion" {}
@@ -19,6 +22,7 @@ in {
         matplotlib
         numpy
         pandas
+        ipython
       ];
     config =
       lib.strings.fileContents
@@ -30,7 +34,11 @@ in {
   };
 
   home.packages = [
+    ipylab
     pylab
     pyversion
   ];
+
+  home.file.".ipython/profile_default/ipython_config.py".text =
+    lib.fileContents ../../../../config/ipython/ipython_config_default.py;
 }
