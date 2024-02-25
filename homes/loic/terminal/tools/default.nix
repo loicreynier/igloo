@@ -6,11 +6,10 @@
 }: let
   rgConfigPath = "${config.xdg.configHome}/ripgrep/ripgreprc";
   rgConfigSrc = ../../../../config/ripgrep/ripgreprc;
-  rnm = with builtins;
-    pkgs.writeShellScriptBin
-    "rnm"
-    (replaceStrings ["#!/usr/bin/env bash\n"] [""]
-      (readFile ../../../../bin/rnm));
+  rnm =
+    pkgs.writeShellScriptBin "rnm"
+    (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
+      (lib.fileContents ../../../../bin/rnm));
 in {
   imports = [
     ./git.nix

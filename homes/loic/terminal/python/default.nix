@@ -6,14 +6,17 @@
 }: let
   pylab =
     pkgs.writeShellScriptBin "pylab"
-    (lib.fileContents ../../../../bin/pylab);
+    (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
+      (lib.fileContents ../../../../bin/pylab));
   ipylab =
     pkgs.writeShellScriptBin "ipylab"
-    (lib.fileContents ../../../../bin/ipylab);
+    (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
+      (lib.fileContents ../../../../bin/ipylab));
   # FIXME: doesn't work since the wrapper uses system's Python (and packages)
   pyversion =
     pkgs.writers.writePython3Bin "pyversion" {}
-    (lib.fileContents ../../../../bin/pyversion);
+    (builtins.replaceStrings ["#!/usr/bin/env python\n"] [""]
+      (lib.fileContents ../../../../bin/pyversion));
 in {
   programs.python = {
     enable = true;
