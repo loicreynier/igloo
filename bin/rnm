@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+print_usage() {
+    echo "Usage: $0 [-h | --help] [-f | --force] <file> <new-filename>"
+    echo
+    echo "OPTIONS"
+    echo "  -h, --help     Display this help message"
+    echo "  -f, --force    Force rename if the new filename already exists"
+}
+
+# Transform long options to short ones for `getopts`
+for arg in "$@"; do
+    shift
+    case "$arg" in
+        "--help")
+            set -- "$@" "-h"
+            ;;
+        "--force")
+            set -- "$@" "-f"
+            ;;
+        *)
+            set -- "$@" "$arg"
+            ;;
+    esac
+done
+
+# Default behavior
+force_rename=false
+
+while getopts ":hf" opt; do
+    case ${opt} in
+        h)
+            print_usage
+            exit 0
+            ;;
+        f)
+            force_rename=true
+            ;;
+        *)
+            echo "Invalid option: $opt"
+            print_usage
+            exit 2
+            ;;
+    esac
+done
+shift $((OPTIND -1))
+
+if [ $# -ne 2 ]; then
+    print_usage
+    exit 1
+fi
+
+old_filename="$1"
+new_filename="$2"
+
+if [ ! -f "$old_filename" ]; then
+    echo "Error: File '${old_filename}' does not exist."
+    exit 1
+fi
+
+# Get parent directory of target
+old_filename="${old_filename//\/*(\/)/\/}" # Remove duplicate slash
+old_filename="${old_filename%%/}" # Remove trailing slash
+dir_name="${old_filename%/*}"
+
+
+mvflags="-vi"
+[ $force_rename == true ] && mvflags="-v"
+mv $mvflags "$old_filename" "${dir_name}/${new_filename##*/}"
