@@ -88,4 +88,11 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
 
 </details>
 
+<details><summary>Misc</summary>
+
+- [Sourcegraph](https://sourcegraph.com)
+  to scavenge the entire web for Nix snippets using `file:\.nix <query>`
+
+</details>
+
 <!-- markdownlint-enable MD033 -->
