@@ -4,6 +4,7 @@
   pkgs,
   ...
 }: let
+  # -- Shell scripts
   pylab =
     pkgs.writeShellScriptBin "pylab"
     (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
@@ -12,9 +13,21 @@
     pkgs.writeShellScriptBin "ipylab"
     (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
       (lib.fileContents ../../../../bin/ipylab));
-  # FIXME: doesn't work since the wrapper uses system's Python (and packages)
+
+  # -- Python scripts wrapper
+  writePythonBin = let
+    python = config.programs.python.package;
+  in
+    name:
+      pkgs.writers.makePythonWriter
+      python
+      pkgs.python3Packages
+      pkgs.buildPackages.python3Packages
+      "/bin/${name}";
+
+  # -- Python scripts
   pyversion =
-    pkgs.writers.writePython3Bin "pyversion" {}
+    writePythonBin "pyversion" {}
     (builtins.replaceStrings ["#!/usr/bin/env python\n"] [""]
       (lib.fileContents ../../../../bin/pyversion));
 in {
