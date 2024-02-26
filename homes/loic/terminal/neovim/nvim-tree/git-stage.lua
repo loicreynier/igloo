@@ -6,6 +6,9 @@
     (or another keybinding defined in `on_attach`).
 --]]
 
+---@diagnostic disable: unused-function
+---@diagnostic disable: unused-local
+
 local api = require("nvim-tree.api")
 
 local git_add = function()

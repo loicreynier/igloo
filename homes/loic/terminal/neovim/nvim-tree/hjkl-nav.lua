@@ -18,6 +18,9 @@
     while `l` is used for editing just a file in the current buffer.
 --]]
 
+---@diagnostic disable: unused-local
+---@diagnostic disable: unused-function
+
 local api = require("nvim-tree.api")
 
 -- Open and close tree
