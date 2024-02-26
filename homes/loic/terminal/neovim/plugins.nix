@@ -100,7 +100,7 @@
       nvim-autopairs.enable = true;
       nvim-tree = {
         enable = true;
-        autoClose = true;
+        autoClose = false; # I want to use `vi <folder>`
         openOnSetup = true;
         tab.sync.open = true;
       };
