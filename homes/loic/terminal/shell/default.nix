@@ -8,6 +8,7 @@
     ./bash.nix
     ./starship.nix
     ./utils.nix
+    ./vars.nix
   ];
 
   programs.direnv = {
