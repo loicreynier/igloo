@@ -1,4 +1,11 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.programs.bash;
+in {
   programs.bash = {
     enable = true;
 
@@ -34,4 +41,8 @@
       "checkwinsize"
     ];
   };
+
+  home.file.".bash_completion".text = lib.mkIf cfg.enable (lib.mkOrder 0 ''
+    source ${pkgs.complete-alias}/bin/complete_alias
+  '');
 }
