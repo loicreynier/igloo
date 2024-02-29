@@ -23,6 +23,7 @@
       in [
         age
         alejandra
+        ansible
         deadnix
         git
         home-manager

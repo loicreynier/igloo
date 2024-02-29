@@ -1,0 +1,15 @@
+# No tested yet
+---
+- name: Mount WSl root
+  hosts: target
+  become: yes
+  tasks:
+      - name: Add mount point to `/etc/fstab`
+        mount:
+        path: "/mnt/wsl/instances/{{ WSL_DISTRO_NAME }}"
+        src: /
+        fstype: none
+        opts: defaults,bind,X-mount.mkdir
+        state: mounted
+        dump: 0
+        passno: 0
