@@ -26,7 +26,6 @@
           };
           pylsp.enable = true;
           ruff-lsp.enable = true;
-          typos-lsp.enable = true;
           rust-analyzer = {
             enable = true;
             # TODO: install Rust by other means
@@ -35,7 +34,9 @@
           };
           taplo.enable = true;
           texlab.enable = true;
+          typos-lsp.enable = true;
           typst-lsp.enable = true;
+          yamlls.enable = true;
         };
       };
       lsp-format.enable = true;
@@ -130,3 +131,5 @@
       '';
   };
 }
+# vim: nofoldenable
+
