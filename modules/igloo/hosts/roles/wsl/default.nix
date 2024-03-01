@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  # -- WSL configuration
   wsl = {
     enable = true;
     nativeSystemd = true;
@@ -9,6 +10,7 @@
     };
   };
 
+  # -- Environment
   environment = {
     systemPackages = with pkgs; [
       wslu
@@ -19,5 +21,28 @@
     shellAliases = {
       xdg-open = "wsl-open";
     };
+  };
+
+  # -- Mount root to `/mnt/wsl/instances` so it can be accessed by other WSLs
+  # Source: https://superuser.com/questions/1659218
+  #
+  # An alternative not using `/etc/fstab` could be adding something
+  # like the following snippet in `~/.profile`:
+  #
+  #     if [ ! -d "/mnt/wsl/instances/$WSL_DISTRO_NAME" ]; then
+  #         mkdir "/mnt/wsl/instances/$WSL_DISTRO_NAME"
+  #         wsl.exe -d "$WSL_DISTRO_NAME" -u root \
+  #             mount --bind / "/mnt/wsl/$WSL_DISTRO_NAME/"
+  #     fi
+  #
+  #
+  fileSystems."/mnt/wsl/instances/nixos" = {
+    device = "/";
+    fsType = "none";
+    options = [
+      "defaults"
+      "bind"
+      "X-mount.mkdir"
+    ];
   };
 }
