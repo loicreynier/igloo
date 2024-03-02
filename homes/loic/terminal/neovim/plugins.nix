@@ -12,7 +12,18 @@
           bashls.enable = true;
           gopls.enable = true;
           julials.enable = true;
-          ltex.enable = true;
+          ltex = {
+            enable = true;
+            onAttach.function =
+              # Path set to `.vscode` for compatibility
+              # with the VS Code extension
+              ''
+                require("ltex_extra").setup{
+                  load_langs = { "en-US", "fr-FR" },
+                  path = ".vscode",
+                }
+              '';
+          };
           lua-ls.enable = true;
           nil_ls = {
             enable = true;
@@ -116,6 +127,7 @@
     };
 
     extraPlugins = [
+      pkgs.vimPlugins.ltex_extra-nvim
       pkgs.vimPlugins.duck-nvim
       pkgs.vimPlugins.editorconfig-nvim
       pkgs.vimExtraPlugins.vscode-nvim
