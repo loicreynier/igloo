@@ -8,6 +8,32 @@
       # -- Language server
       lsp = {
         enable = true;
+        keymaps = {
+          diagnostic = {
+            "<Leader>lj" = {
+              # Could be `[d` on a more programming oriented keyboard layout
+              action = "goto_next";
+              desc = "Go to next diagnostic";
+            };
+            "<Leader>lk" = {
+              # Could be `]d` on a more programming oriented keyboard layout
+              action = "goto_prev";
+              desc = "Go to previous diagnostic";
+            };
+          };
+          lspBuf = {
+            "K" = "hover";
+            "<Leader>la" = {
+              action = "code_action";
+              desc = "LSP code action";
+            };
+            "<Leader>ld" = "definition";
+            "<Leader>lD" = "references";
+            "<Leader>lt" = "type_definition";
+            "<Leader>li" = "implementation";
+          };
+        };
+
         servers = {
           bashls.enable = true;
           gopls.enable = true;
