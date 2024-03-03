@@ -33,10 +33,10 @@
         tree
 
         (mkScript "igloo-update")
-        (mkScript "igloo-home-switch")
-        (mkScript "igloo-home-build")
-        (mkScript "igloo-nixos-switch")
-        (mkScript "igloo-nixos-build")
+        (mkScript "igloo-switch-home")
+        (mkScript "igloo-build-home")
+        (mkScript "igloo-switch-nixos")
+        (mkScript "igloo-build-nixos")
       ];
     };
   };

@@ -1,23 +1,21 @@
 # Run full switch: home + system
-full-switch:
-    igloo-nixos-switch
-    igloo-home-switch
+full-switch: switch-nixos switch-home
 
 # Build home and switch
 switch-home:
-    igloo-home-switch
+    igloo-switch-home
 
 # Build system and switch
 switch-nixos:
-    igloo-nixos-switch
+    igloo-switch-nixos
 
 # Build home
 build-home:
-    igloo-home-build
+    igloo-build-home
 
 # Build system
 build-nixos:
-    igloo-nixos-build
+    igloo-build-nixos
 
 # Build GitHub README
 build-readme:
