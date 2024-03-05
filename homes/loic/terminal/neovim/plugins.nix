@@ -55,7 +55,7 @@
             enable = true;
             settings = {
               formatting.command = [
-                "alejandra"
+                "${pkgs.alejandra}/bin/alejandra"
                 "--quiet"
                 "--"
               ];
