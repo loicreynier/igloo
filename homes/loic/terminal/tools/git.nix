@@ -10,12 +10,16 @@
     };
 
     extraConfig = {
+      color.ui = "auto";
       core.autocrlf = "input";
       core.pager = "cat";
+      diff.algorithm = "histogram"; # When using `--no-ext-diff`
       init.defaultBranch = "main";
+      log.data = "iso";
       pull.rebase = true;
       push.default = "current";
-      color.ui = "auto";
+      push.autoSetupRemote = true; # Automatically track remote branch
+      rere.enabled = true; # Reuse merge conflict fixes when rebasing
       url = {
         "https://github.com/".insteadOf = "github:";
         "ssh://git@github.com/".pushInsteadOf = "github:";
@@ -40,6 +44,7 @@
       "*.swp"
       "*.~lock"
       "result"
+      "debug.log"
     ];
 
     aliases = {
