@@ -62,7 +62,9 @@ fi
 old_filename="${old_filename//\/*(\/)/\/}" # Remove duplicate slash
 old_filename="${old_filename%%/}" # Remove trailing slash
 dir_name="${old_filename%/*}"
-
+if [ "$dir_name" == "$old_filename" ]; then
+    dir_name="."
+fi
 
 mvflags="-vi"
 [ $force_rename == true ] && mvflags="-v"
