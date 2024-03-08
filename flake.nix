@@ -64,7 +64,11 @@
     # -- Neovim
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+        flake-parts.follows = "flake-parts";
+      };
     };
     nixneovimplugins = {
       url = "github:jooooscha/nixpkgs-vim-extra-plugins";

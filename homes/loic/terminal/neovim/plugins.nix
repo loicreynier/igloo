@@ -86,40 +86,32 @@
       };
 
       # -- Completion
-      nvim-cmp = {
+      cmp = {
         enable = true;
-
-        mappingPresets = [
-          "insert"
-          # "cmdline" # TODO
-        ];
-        mapping = {
-          "<Tab>" = {
-            modes = ["i" "s"];
-            action = "cmp.mapping.select_next_item()";
-          };
-          "<S-Tab>" = {
-            modes = ["i" "s"];
-            action = "cmp.mapping.select_prev_item()";
-          };
-          "<CR>" = "cmp.mapping.confirm({select = true})";
-          "<C-j>" = "cmp.mapping.select_next_item()";
-          "<C-k>" = "cmp.mapping.select_prev_item()";
-          "<C-b>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-f>" = "cmp.mapping.scroll_docs(4)";
-          "<C-e>" = "cmp.mapping.close()";
-        };
-
         autoEnableSources = true;
-        sources = [
-          {name = "nvim_lsp";}
-          {name = "path";}
-          {name = "buffer";}
-          {name = "calc";}
-          {name = "latex_symbols";}
-          {name = "tree_sitter";}
-          # TODO: add filetype-specific sources
-        ];
+
+        settings = {
+          mapping = {
+            "<Tab>" = "cmp.mapping.select_next_item()";
+            "<S-Tab>" = "cmp.mapping.select_prev_item()";
+            "<CR>" = "cmp.mapping.confirm({select = true})";
+            "<C-j>" = "cmp.mapping.select_next_item()";
+            "<C-k>" = "cmp.mapping.select_prev_item()";
+            "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-f>" = "cmp.mapping.scroll_docs(4)";
+            "<C-e>" = "cmp.mapping.close()";
+          };
+
+          sources = [
+            {name = "nvim_lsp";}
+            {name = "path";}
+            {name = "buffer";}
+            {name = "calc";}
+            {name = "latex_symbols";}
+            {name = "tree_sitter";}
+            # TODO: add filetype-specific sources
+          ];
+        };
       };
       cmp-conventionalcommits.enable = true;
       cmp-git.enable = true;
