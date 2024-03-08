@@ -38,18 +38,7 @@
           bashls.enable = true;
           gopls.enable = true;
           julials.enable = true;
-          ltex = {
-            enable = true;
-            onAttach.function =
-              # Path set to `.vscode` for compatibility
-              # with the VS Code extension
-              ''
-                require("ltex_extra").setup{
-                  load_langs = { "en-US", "fr-FR" },
-                  path = ".vscode",
-                }
-              '';
-          };
+          ltex.enable = true;
           lua-ls.enable = true;
           nil_ls = {
             enable = true;
@@ -78,6 +67,12 @@
       };
       lsp-format.enable = true;
       lsp-lines.enable = true;
+      ltex-extra = {
+        enable = true;
+        settings = {
+          path = ".vscode"; # Compatibility with VS Code extension
+        };
+      };
 
       # -- Treesitter
       treesitter = {
