@@ -139,10 +139,12 @@
       mkdnflow.enable = true;
     };
 
-    extraPlugins = [
-      pkgs.vimPlugins.ltex_extra-nvim
-      pkgs.vimPlugins.duck-nvim
-      pkgs.vimPlugins.editorconfig-nvim
+    extraPlugins = with pkgs.vimPlugins; [
+      ltex_extra-nvim
+      duck-nvim
+      editorconfig-nvim
+      vim-just
+      typst-vim
       pkgs.vimExtraPlugins.vscode-nvim
     ];
 
