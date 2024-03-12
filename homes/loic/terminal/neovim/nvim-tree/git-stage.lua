@@ -17,14 +17,8 @@ local git_add = function()
 
     -- If the current node is a directory get children status
     if gs == nil then
-        gs = (
-            node.git_status.dir.direct ~= nil
-            and node.git_status.dir.direct[1]
-        )
-            or (
-                node.git_status.dir.indirect ~= nil
-                and node.git_status.dir.indirect[1]
-            )
+        gs = (node.git_status.dir.direct ~= nil and node.git_status.dir.direct[1])
+            or (node.git_status.dir.indirect ~= nil and node.git_status.dir.indirect[1])
     end
 
     -- If the file is untracked, unstaged or partially staged...

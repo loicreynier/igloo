@@ -5,17 +5,39 @@ charset = utf-8
 end_of_line = lf
 trim_trailing_whitespace = true
 insert_final_newline = true
-max_line_length = 78
 indent_style = space
-indent_size = 4
+indent_size = 2
+tab_width = 2
+max_line_length = 80
+
+[*.nix]
+max_line_length = off
+
+[*.txt]
+max_line_length = off
 
 [*.md]
 indent_size = unset
 trim_trailing_whitespace = false
+max_line_length = 100
 
-[*.{nix,yaml}]
-indent_size = 2
+[*.py]
+indent_size = 4
+max_line_length = 88
 
-[*.lock]
-indent_size = unset
+[*.lua]
+indent_size = 4
+max_line_length = 100
+
+[Justfile]
+indent_size = 4
+
+[*.{lock,age}]
+# Those files should not be opened by editors nor parsed by pre-commit hooks
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
 indent_style = unset
+indent_size = unset
+max_line_length = off

@@ -1,10 +1,10 @@
 {
-    "recommendations": [
-        "bbenoist.nix",
-        "editorconfig.editorconfig",
-        "kamadorueda.alejandra",
-        "davidanson.vscode-markdownlint",
-        "tekumara.typos-vscode",
-        "valentjn.vscode-ltex"
-    ]
+  "recommendations": [
+    "bbenoist.nix",
+    "editorconfig.editorconfig",
+    "kamadorueda.alejandra",
+    "davidanson.vscode-markdownlint",
+    "tekumara.typos-vscode",
+    "valentjn.vscode-ltex"
+  ]
 }

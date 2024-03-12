@@ -8,6 +8,7 @@
     globalExcludes = [
       "flake.lock"
       ".*age$"
+      "ltex.*txt$"
     ];
 
     # Hook to add the exclusion list
@@ -39,17 +40,19 @@
           commitizen = mkHook "commitizen" {enable = true;};
           deadnix = mkHook "deadnix" {enable = true;};
           editorconfig-checker = mkHook "editorconfig" {
-            enable = false;
+            enable = true;
             always_run = true;
           };
           markdownlint = mkHook "markdownlint" {enable = true;};
           prettier = mkHook "prettier" {enable = true;};
           shellcheck = mkHook "shellcheck" {enable = true;};
+          shfmt = mkHook "shfmt" {enable = true;};
           ruff = mkHook "Ruff" {enable = true;};
           statix = mkHook "statix" {enable = true;};
           stylua = mkHook "stylua" {enable = true;};
           typos = mkHook "typos" {enable = true;};
           taplo = mkHook "taplo" {enable = true;};
+          yamllint = mkHook "yamllint" {enable = true;};
         };
       };
     };

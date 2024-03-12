@@ -6,12 +6,12 @@
 : "${XDG_CACHE_HOME:="${HOME}/.cache"}"
 declare -A direnv_layout_dirs
 direnv_layout_dir() {
-    local hash path
-    echo "${direnv_layout_dirs[$PWD]:=$(
-        hash="$(@sha1sum@ - <<< "$PWD" | head -c40)"
-        path="${PWD//[^a-zA-Z0-9]/-}"
-        echo "${XDG_CACHE_HOME}/direnv/layouts/${hash}${path}"
-    )}"
+  local hash path
+  echo "${direnv_layout_dirs[$PWD]:=$(
+    hash="$(@sha1sum@ - <<<"$PWD" | head -c40)"
+    path="${PWD//[^a-zA-Z0-9]/-}"
+    echo "${XDG_CACHE_HOME}/direnv/layouts/${hash}${path}"
+  )}"
 }
 
 # -- Daemonize
@@ -50,7 +50,7 @@ daemonize() {
 
   # Check that we have exclusive access
   if ! flock --nonblock 200; then
-    echo "daemonize[$name] is already running as pid $(< "$pid_file")"
+    echo "daemonize[$name] is already running as pid $(<"$pid_file")"
     return
   fi
 

@@ -18,7 +18,7 @@
         mkScript = name:
           pkgs.writeShellApplication {
             inherit name;
-            text = lib.fileContents ./${name}.sh;
+            text = lib.fileContents ./scripts/${name}.sh;
           };
       in [
         age

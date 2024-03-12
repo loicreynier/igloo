@@ -47,9 +47,4 @@ local function vsplit_preview()
     api.tree.focus()
 end
 
-vim.api.nvim_set_keymap(
-    "n",
-    "<C-h>",
-    ":NvimTreeToggle<cr>",
-    { silent = true, noremap = true }
-)
+vim.api.nvim_set_keymap("n", "<C-h>", ":NvimTreeToggle<cr>", { silent = true, noremap = true })

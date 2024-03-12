@@ -4,21 +4,21 @@
 <h1 align="center">:snowflake:</h1>
 
 <p align="center">
-    <a href="https://nixos.wiki/wiki/NixOS"
-        ><img
-            src="https://img.shields.io/badge/NixOS-23.11-5277c3?logo=nixos&logoColor=white"
-            alt="NixOS"
-    /></a>
-    <a href="https://github.com/NixOS/nixpkgs"
-        ><img
-            src="https://img.shields.io/badge/nixpkgs-unstable-5277c3?logo=nixos&logoColor=white"
-            alt="nixpkgs"
-    /></a>
-    <a href="https://nixos.wiki/wiki/Home_Manager"
-        ><img
-            src="https://img.shields.io/badge/Home%20Manager-23.11-5277c3?logo=nixos&logoColor=white"
-            alt="Home Manager"
-    /></a>
+  <a href="https://nixos.wiki/wiki/NixOS"
+    ><img
+      src="https://img.shields.io/badge/NixOS-23.11-5277c3?logo=nixos&logoColor=white"
+      alt="NixOS"
+  /></a>
+  <a href="https://github.com/NixOS/nixpkgs"
+    ><img
+      src="https://img.shields.io/badge/nixpkgs-unstable-5277c3?logo=nixos&logoColor=white"
+      alt="nixpkgs"
+  /></a>
+  <a href="https://nixos.wiki/wiki/Home_Manager"
+    ><img
+      src="https://img.shields.io/badge/Home%20Manager-23.11-5277c3?logo=nixos&logoColor=white"
+      alt="Home Manager"
+  /></a>
 </p>
 
 <!-- editorconfig-checker-enable -->
@@ -70,8 +70,6 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
 
 > Software used to build Igloo and used within my systems
 
-<!-- markdownlint-disable MD033 -->
-
 <details><summary>Nix stuff</summary>
 
 - [Nix Flakes](https://nixos.wiki/wiki/Flakes)
@@ -117,13 +115,11 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
   to scavenge the entire web for Nix snippets using `file:\.nix <query>`
 
 </details>
-
-<!-- markdownlint-enable MD033 -->
 <!-- markdownlint-disable -->
 <!-- editorconfig-checker-disable -->
 
 ---
 
 <div align="right">
-    <a href="#readme">Back to the Top</a>
+  <a href="#readme">Back to the Top</a>
 </div>

@@ -47,8 +47,6 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
 
 > Software used to build Igloo and used within my systems
 
-<!-- markdownlint-disable MD033 -->
-
 <details><summary>Nix stuff</summary>
 
 - [Nix Flakes](https://nixos.wiki/wiki/Flakes)
@@ -94,5 +92,3 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
   to scavenge the entire web for Nix snippets using `file:\.nix <query>`
 
 </details>
-
-<!-- markdownlint-enable MD033 -->

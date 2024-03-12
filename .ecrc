@@ -1,0 +1,14 @@
+{
+  "Verbose": false,
+  "Format": "",
+  "SpacesAftertabs": false,
+  "Exclude": ["\\.python$", "\\.lua$"],
+  "Disable": {
+    "EndOfLine": false,
+    "Indentation": false,
+    "InsertFinalNewline": false,
+    "TrimTrailingWhitespace": false,
+    "IndentSize": false,
+    "MaxLineLength": false
+  }
+}

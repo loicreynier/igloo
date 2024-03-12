@@ -38,6 +38,14 @@ update:
 check:
     nix flake check
 
+# Run pre-commit checks
+pre-commit:
+    pre-commit run
+
+# Check code
+check-code:
+    pre-commit run --all-files
+
 # Run full clean: Nix store + repo
 clean: clean-result clean-store
 
