@@ -1,5 +1,14 @@
+alias sh := switch-home
+alias sn := switch-nixos
+alias bh := build
+alias bn := build-nixos
+alias s := switch
+alias b := build
+alias ls := show
+alias u := update
+
 # Run full switch: home + system
-full-switch: switch-nixos switch-home
+switch: switch-nixos switch-home
 
 # Build home and switch
 switch-home:
@@ -16,6 +25,9 @@ build-home:
 # Build system
 build-nixos:
     igloo-build-nixos
+
+# Build all
+build: build-nixos build-home
 
 # Build GitHub README
 build-readme:
