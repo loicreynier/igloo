@@ -16,6 +16,7 @@
           inputs.nixvim.homeManagerModules.nixvim
           inputs.agenix.homeManagerModules.default
           {home.packages = [inputs.agenix.packages."${system}".default];}
+          {news.display = "silent";}
           ../modules/igloo/homes
           ../modules/home-manager
           ./${username}
