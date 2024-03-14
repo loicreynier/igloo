@@ -18,6 +18,12 @@ in {
       "doc"
       "devdoc"
     ];
+
+    file = {
+      ".editorconfig".text =
+        lib.strings.fileContents
+        ../../config/editorconfig/dot-editorconfig;
+    };
   };
 
   services.git-sync.enable = true;
