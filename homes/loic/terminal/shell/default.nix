@@ -11,6 +11,11 @@
     ./vars.nix
   ];
 
+  # Readline configuration file
+  home.file.".inputrc".text =
+    lib.strings.fileContents
+    ../../../../config/readline/dot-inputrc;
+
   programs.direnv = {
     enable = true;
     nix-direnv = {
