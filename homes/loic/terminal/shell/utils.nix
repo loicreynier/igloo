@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs = {
     zoxide.enable = true;
 
@@ -20,13 +24,19 @@
     };
   };
 
-  home.sessionVariables = {
-    "_ZO_DATA_DIR" = "${config.xdg.stateHome}";
-  };
+  home = {
+    packages = with pkgs; [
+      edir
+    ];
 
-  home.shellAliases = {
-    "cat" = "bat";
-    "ls" = "eza";
-    "tree" = "eza --tree";
+    sessionVariables = {
+      "_ZO_DATA_DIR" = "${config.xdg.stateHome}";
+    };
+
+    shellAliases = {
+      "cat" = "bat";
+      "ls" = "eza";
+      "tree" = "eza --tree";
+    };
   };
 }
