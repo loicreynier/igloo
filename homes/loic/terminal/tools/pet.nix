@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   pkgs,
   ...
@@ -13,4 +14,8 @@
     file = ../../../../secrets/config-pet-loic.toml.age;
     path = "${config.xdg.configHome}/pet/config.toml";
   };
+
+  programs.bash.initExtra =
+    lib.strings.fileContents
+    ../../../../config/bash/functions/pet-select.bash;
 }
