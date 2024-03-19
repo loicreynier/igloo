@@ -3,6 +3,10 @@
 # Vim > Emacs
 # set editing-mode vi # TODO: configure keymaps
 
+# Keymaps
+"\C-n": history-search-forward
+"\C-p": history-search-backward
+
 # 8bit input
 set input-meta on
 set output-meta on
