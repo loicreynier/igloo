@@ -33,7 +33,7 @@ Setup `pass` and VS Code for WSL
     # extraConfig = ''
     #   pinentry-program "${pkgs.pinentry-wsl-ps1}/bin/pinentry-wsl-ps1"
     # '';
-    pinentryFlavor = "gtk2";
+    pinentryPackage = pkgs.pinentry-gtk2;
   };
 
   programs.password-store.package = pkgs.pass.withExtensions (_: [
