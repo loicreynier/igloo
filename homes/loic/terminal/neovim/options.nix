@@ -68,6 +68,8 @@
       backup = false;
       undofile = true;
       undodir = "${config.xdg.stateHome}/nvim/undo/";
+
+      exrc = true;
     };
   };
 }

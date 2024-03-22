@@ -4,6 +4,14 @@
   ];
 
   programs.nixvim = {
+    colorschemes.vscode = {
+      enable = true;
+      settings = {
+        transparent = true;
+        disable_nvimtree_bg = true;
+      };
+    };
+
     plugins = {
       # -- Language server
       lsp = {
@@ -36,10 +44,13 @@
 
         servers = {
           bashls.enable = true;
+          fortls.enable = true;
           gopls.enable = true;
           julials.enable = true;
+          lemminx.enable = true;
           ltex.enable = true;
           lua-ls.enable = true;
+          marksman.enable = true;
           nil_ls = {
             enable = true;
             settings = {
@@ -67,10 +78,51 @@
       };
       lsp-format.enable = true;
       lsp-lines.enable = true;
+
+      # -- `non-ls`
+      none-ls = {
+        enable = true;
+        enableLspFormat = true;
+        sources = {
+          code_actions = {
+            gitrebase.enable = true;
+            gitsigns.enable = true;
+            statix.enable = true;
+          };
+          diagnostics = {
+            actionlint.enable = true;
+            ansiblelint.enable = true;
+            checkmake.enable = true;
+            deadnix.enable = true;
+            editorconfig_checker.enable = true;
+            gitlint.enable = true;
+            markdownlint.enable = true;
+            selene.enable = true;
+            statix.enable = true;
+            yamllint.enable = true;
+          };
+          formatting = {
+            clang_format.enable = true;
+            fprettify.enable = true;
+            just.enable = true;
+            prettier.enable = true;
+            shfmt.enable = true;
+            typstfmt.enable = true;
+          };
+        };
+      };
+
+      # -- LSP-related plugins
       ltex-extra = {
         enable = true;
         settings = {
           path = ".vscode"; # Compatibility with VS Code extension
+        };
+      };
+      trouble = {
+        enable = true;
+        settings = {
+          auto_close = true;
         };
       };
 
@@ -89,9 +141,11 @@
           mapping = {
             "<Tab>" = "cmp.mapping.select_next_item()";
             "<S-Tab>" = "cmp.mapping.select_prev_item()";
-            "<CR>" = "cmp.mapping.confirm({select = true})";
+            "<C-y>" = "cmp.mapping.confirm({select = true})";
             "<C-j>" = "cmp.mapping.select_next_item()";
             "<C-k>" = "cmp.mapping.select_prev_item()";
+            "<C-n>" = "cmp.mapping.select_next_item()";
+            "<C-p>" = "cmp.mapping.select_prev_item()";
             "<C-b>" = "cmp.mapping.scroll_docs(-4)";
             "<C-f>" = "cmp.mapping.scroll_docs(4)";
             "<C-e>" = "cmp.mapping.close()";
@@ -140,22 +194,16 @@
     };
 
     extraPlugins = with pkgs.vimPlugins; [
-      ltex_extra-nvim
-      duck-nvim
+      # -- Core
       editorconfig-nvim
+
+      # -- Memes
+      duck-nvim
+
+      # -- Highlighting
       vim-just
       typst-vim
-      pkgs.vimExtraPlugins.vscode-nvim
     ];
-
-    extraConfigLuaPost =
-      # -- VS Code theme
-      ''
-        -- Colorscheme {{{
-        require("vscode").setup({disable_nvimtree_bg = true})
-        require("vscode").load("dark")
-        -- }}}
-      '';
   };
 }
 # vim: nofoldenable

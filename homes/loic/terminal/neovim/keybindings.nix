@@ -35,6 +35,13 @@
         mode = ["i" "c"];
       }
 
+      # -- Trouble
+      {
+        action = ":TroubleToggle<CR>";
+        key = "<Leader>lT";
+        mode = ["n"];
+      }
+
       # -- `duck.nvim`
       {
         action = "function() require('duck').hatch() end";
