@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./bash.nix
+    ./fzf.nix
     ./starship.nix
     ./utils.nix
     ./vars.nix
