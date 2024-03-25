@@ -17,6 +17,7 @@
         ./flake/devshell
         ./flake/formatter.nix
         ./flake/modules.nix
+        ./flake/templates.nix
       ];
     };
 

@@ -1,0 +1,9 @@
+# Nix generated
+/.pre-commit-config.yaml
+result
+
+# Build
+/dist
+
+# Cache
+__pycache__/

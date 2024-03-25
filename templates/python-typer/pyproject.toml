@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = "CLI application"
+authors = ["Loïc Reynier <loic+dev@loicreynier.fr>"]
+homepage = "https://github.com/loicreynier/app"
+license = "Unlicense"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+typer = "^0.9.0"
+
+[tool.poetry.group.dev.dependencies]
+poetry = "^1.8.2"
+
+[tool.poetry.scripts]
+run = "app.main:app"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

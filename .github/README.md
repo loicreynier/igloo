@@ -48,6 +48,7 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
 - [`secrets`](../secrets):
   `age`-encrypted secrets
   such as passwords and private keys
+- [`templates`](../templates): Nix flake templates
 
 ## Credits & References
 
