@@ -14,7 +14,7 @@
 
         ./flake/packages.nix
         ./flake/pre-commit.nix
-        ./flake/devshell
+        ./flake/devshells
         ./flake/formatter.nix
         ./flake/modules.nix
         ./flake/templates.nix
