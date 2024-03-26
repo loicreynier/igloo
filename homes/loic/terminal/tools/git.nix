@@ -41,6 +41,7 @@
     ignores = [
       ".cache/"
       ".direnv/"
+      "__pycache__/"
       "*.swp"
       "*.~lock"
       "result"
@@ -48,6 +49,7 @@
     ];
 
     aliases = {
+      "ch" = "!git checkout $(git branch --sort='-committerdate' | fzf --reverse --height 40%)";
       "log1" = "log --oneline";
       "push-all" = "!git remote | xargs -L1 git push --all";
       "stash-untracked" = ''
@@ -73,5 +75,9 @@
       git_protocol = "ssh";
       prompt = "enabled";
     };
+  };
+
+  home.shellAliases = {
+    groot = "cd $(git rev-parse --show-toplevel)";
   };
 }
