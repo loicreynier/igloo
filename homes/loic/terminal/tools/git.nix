@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  home.packages = with pkgs; [
+    git-fire
+  ];
+
   programs.git = {
     enable = true;
 
@@ -69,7 +73,9 @@
     extensions = with pkgs; [
       gh-dash # Dashboard with PR and issues
       gh-eco # Explore the ecosystem
-      gh-cal # Contributions calendar viewer
+      gh-f # FZF shenanigans
+      gh-notify # Show notifications
+      gh-markdown-preview # Bro
     ];
     settings = {
       git_protocol = "ssh";
