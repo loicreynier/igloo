@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = [
-    inputs.pre-commit-hooks.flakeModule
+    inputs.git-hooks.flakeModule
   ];
 
   perSystem = {pkgs, ...}: let

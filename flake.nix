@@ -31,7 +31,7 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
     };
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    git-hooks.url = "github:cachix/git-hooks.nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
