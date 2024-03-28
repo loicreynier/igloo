@@ -1,0 +1,21 @@
+# ~/.config/starship.toml
+
+add_newline = true
+
+[username]
+show_always = true
+
+[hostname]
+ssh_only = false
+detect_env_vars = ["WSL_DISTRO_NAME"]
+style = "bold green"
+
+[shell]
+disabled = false
+
+[nix_shell]
+# Remove shell state, don't care if impure
+# format = "via [$symbol$state( \\($name\\))]($style) "
+format = "via [$symbol(\\($name\\))]($style) "
+# Trailing space removed
+symbol = "❄️ "

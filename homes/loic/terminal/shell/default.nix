@@ -8,7 +8,6 @@
   imports = [
     ./bash.nix
     ./fzf.nix
-    ./starship.nix
     ./utils.nix
     ./vars.nix
   ];
@@ -17,6 +16,9 @@
   home.file.".inputrc".text =
     lib.strings.fileContents
     "${self}/config/readline/dot-inputrc";
+
+  programs.starship.enable = true;
+  xdg.configFile."starship.toml".source = "${self}/config/starship/default.toml";
 
   programs.direnv = {
     enable = true;
