@@ -14,14 +14,6 @@
         "--group-directories-first"
       ];
     };
-
-    bat = {
-      enable = true;
-      config = {
-        style = "plain";
-        pager = "never";
-      };
-    };
   };
 
   home = {

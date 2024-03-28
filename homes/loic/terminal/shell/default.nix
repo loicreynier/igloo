@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./bash.nix
+    ./bat.nix
     ./fzf.nix
     ./utils.nix
     ./vars.nix
