@@ -55,6 +55,5 @@ in {
     pyversion
   ];
 
-  home.file.".ipython/profile_default/ipython_config.py".text =
-    lib.fileContents "${self}/config/ipython/ipython_config_default.py";
+  home.file.".ipython/profile_default/ipython_config.py".source = "${self}/config/ipython/ipython_config_default.py";
 }

@@ -5,7 +5,7 @@
   self,
   ...
 }: let
-  rgConfigPath = "${config.xdg.configHome}/ripgrep/ripgreprc";
+  rgConfigPath = "${config.xdg.configHome}/ripgreprc";
   rgConfigSrc = "${self}/config/ripgrep/ripgreprc";
   rnm =
     pkgs.writeShellScriptBin "rnm"
@@ -50,7 +50,7 @@ in {
 
   # -- ripgrep
   home = {
-    file."${rgConfigPath}".text = lib.strings.fileContents rgConfigSrc;
+    file."${rgConfigPath}".source = rgConfigSrc;
     sessionVariables."RIPGREP_CONFIG_PATH" = rgConfigPath;
   };
 }

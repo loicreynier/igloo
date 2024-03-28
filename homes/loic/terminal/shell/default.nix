@@ -12,14 +12,14 @@
     ./vars.nix
   ];
 
-  # Readline configuration file
-  home.file.".inputrc".text =
-    lib.strings.fileContents
-    "${self}/config/readline/dot-inputrc";
+  # -- Readline configuration file
+  home.file.".inputrc".source = "${self}/config/readline/dot-inputrc";
 
+  # -- Starship
   programs.starship.enable = true;
   xdg.configFile."starship.toml".source = "${self}/config/starship/default.toml";
 
+  # -- direnv
   programs.direnv = {
     enable = true;
     nix-direnv = {

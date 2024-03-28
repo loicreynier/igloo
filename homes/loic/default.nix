@@ -21,9 +21,7 @@ in {
     ];
 
     file = {
-      ".editorconfig".text =
-        lib.strings.fileContents
-        "${self}/config/editorconfig/dot-editorconfig";
+      ".editorconfig".source = "${self}/config/editorconfig/dot-editorconfig";
     };
   };
 
