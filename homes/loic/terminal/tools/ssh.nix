@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  self,
+  ...
+}: {
   # Enable SSH agent, requires  the following in SSH config:
   #
   #   Host *
@@ -7,8 +11,7 @@
   services.ssh-agent.enable = true;
 
   age.secrets = let
-    # TODO: propagate flake root path in variable to simplify
-    secretsPath = ../../../../secrets;
+    secretsPath = "${self}/secrets";
     sshHomePath = "${config.home.homeDirectory}/.ssh";
   in {
     config-ssh-loic = {

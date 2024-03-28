@@ -3,6 +3,7 @@
   inputs,
   lib,
   pkgs,
+  self,
   ...
 }: {
   imports = [
@@ -44,7 +45,7 @@
     };
     loadInNixShell = true;
     direnvrcExtra = lib.fileContents (pkgs.substituteAll {
-      src = ../../../config/direnv/direnvrc.sh;
+      src = "${self}/config/direnv/direnvrc.sh";
       sha1sum = "${pkgs.perl}/bin/shasum";
     });
   };

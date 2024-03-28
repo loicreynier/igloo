@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  self,
   ...
 }: {
   home.packages = with pkgs; [
@@ -11,11 +12,11 @@
 
   # Using encrypted configuration file since it contains GitHub Gist token
   age.secrets."config-pet-loic" = {
-    file = ../../../../secrets/config-pet-loic.toml.age;
+    file = "${self}/secrets/config-pet-loic.toml.age";
     path = "${config.xdg.configHome}/pet/config.toml";
   };
 
   programs.bash.initExtra =
     lib.strings.fileContents
-    ../../../../config/bash/functions/pet-select.bash;
+    "${self}/config/bash/functions/pet-select.bash";
 }

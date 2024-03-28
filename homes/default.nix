@@ -1,6 +1,7 @@
 {
   inputs,
   withSystem,
+  self,
   ...
 }: let
   # -- Wrapper to inherit `inputs` and import shared modules
@@ -24,7 +25,7 @@
         ++ args.modules or [];
       extraSpecialArgs =
         {
-          inherit inputs;
+          inherit inputs self;
         }
         // args.extraSpecialArgs or {};
     };

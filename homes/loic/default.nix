@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  self,
   ...
 }: let
   username = "loic";
@@ -22,7 +23,7 @@ in {
     file = {
       ".editorconfig".text =
         lib.strings.fileContents
-        ../../config/editorconfig/dot-editorconfig;
+        "${self}/config/editorconfig/dot-editorconfig";
     };
   };
 

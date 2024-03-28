@@ -2,17 +2,18 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }: let
   # -- Shell scripts
   pylab =
     pkgs.writeShellScriptBin "pylab"
     (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
-      (lib.fileContents ../../../../bin/pylab));
+      (lib.fileContents "${self}/bin/pylab"));
   ipylab =
     pkgs.writeShellScriptBin "ipylab"
     (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
-      (lib.fileContents ../../../../bin/ipylab));
+      (lib.fileContents "${self}/bin/ipylab"));
 
   # -- Python scripts wrapper
   writePythonBin = let
@@ -29,7 +30,7 @@
   pyversion =
     writePythonBin "pyversion" {}
     (builtins.replaceStrings ["#!/usr/bin/env python\n"] [""]
-      (lib.fileContents ../../../../bin/pyversion));
+      (lib.fileContents "${self}/bin/pyversion"));
 in {
   programs.python = {
     enable = true;
@@ -43,8 +44,7 @@ in {
     config =
       lib.strings.fileContents
       (pkgs.substituteAll {
-        # TODO: propagate flake root path in variable to simplify
-        src = ../../../../config/python/startup.py;
+        src = "${self}/config/python/startup.py";
         state = "${config.xdg.stateHome}";
       });
   };
@@ -56,5 +56,5 @@ in {
   ];
 
   home.file.".ipython/profile_default/ipython_config.py".text =
-    lib.fileContents ../../../../config/ipython/ipython_config_default.py;
+    lib.fileContents "${self}/config/ipython/ipython_config_default.py";
 }

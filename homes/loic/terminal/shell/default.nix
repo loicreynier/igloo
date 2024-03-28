@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }: {
   imports = [
@@ -15,7 +16,7 @@
   # Readline configuration file
   home.file.".inputrc".text =
     lib.strings.fileContents
-    ../../../../config/readline/dot-inputrc;
+    "${self}/config/readline/dot-inputrc";
 
   programs.direnv = {
     enable = true;
@@ -31,7 +32,7 @@
     stdlib =
       lib.strings.fileContents
       (pkgs.substituteAll {
-        src = ../../../../config/direnv/direnvrc.sh;
+        src = "${self}/config/direnv/direnvrc.sh";
         sha1sum = "${pkgs.perl}/bin/shasum";
       });
   };

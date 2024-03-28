@@ -2,14 +2,15 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }: let
   rgConfigPath = "${config.xdg.configHome}/ripgrep/ripgreprc";
-  rgConfigSrc = ../../../../config/ripgrep/ripgreprc;
+  rgConfigSrc = "${self}/config/ripgrep/ripgreprc";
   rnm =
     pkgs.writeShellScriptBin "rnm"
     (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
-      (lib.fileContents ../../../../bin/rnm));
+      (lib.fileContents "${self}/bin/rnm"));
 in {
   imports = [
     ./git.nix
