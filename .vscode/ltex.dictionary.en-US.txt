@@ -5,3 +5,11 @@ NixVim
 NixNeovim
 NixNeovimPlugins
 NixOS-WSL
+daemonization
+EditorConfig
+autoreload
+Readline
+BBCode
+Justfiles
+Numbat
+Typst
