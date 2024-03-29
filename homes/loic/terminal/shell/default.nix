@@ -7,20 +7,20 @@
 }: {
   imports = [
     ./bash.nix
-    ./bat.nix
     ./fzf.nix
     ./utils.nix
     ./vars.nix
   ];
 
-  # -- Readline configuration file
-  home.file.".inputrc".source = "${self}/config/readline/dot-inputrc";
+  programs = {
+    starship.enable = true;
 
-  # -- Starship
-  programs.starship.enable = true;
-  xdg.configFile."starship.toml".source = "${self}/config/starship/default.toml";
+    bat = {
+      enable = true;
+      installExtraSyntaxes = true;
+    };
+  };
 
-  # -- direnv
   programs.direnv = {
     enable = true;
     nix-direnv = {
@@ -38,5 +38,14 @@
         src = "${self}/config/direnv/direnvrc.sh";
         sha1sum = "${pkgs.perl}/bin/shasum";
       });
+  };
+
+  home.file = {
+    ".inputrc".source = "${self}/config/readline/dot-inputrc";
+  };
+
+  xdg.configFile = {
+    "bat/config".source = "${self}/config/bat/plain-vscode.conf";
+    "starship.toml".source = "${self}/config/starship/default.toml";
   };
 }
