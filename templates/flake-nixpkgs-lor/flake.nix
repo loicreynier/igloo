@@ -6,7 +6,7 @@
     nixpkgs,
     nixpkgs-lor,
     flake-utils,
-    pre-commit-hooks,
+    git-hooks,
     ...
   }: (flake-utils.lib.eachDefaultSystem (
     system: let
@@ -25,7 +25,7 @@
       };
 
       checks = {
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        pre-commit-check = git-hooks.lib.${system}.run {
           src = "./.";
           excludes = ["flake\.lock"];
           hooks = {
@@ -51,7 +51,7 @@
     };
     flake-utils.url = "github:numtide/flake-utils";
     git-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

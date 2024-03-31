@@ -5,7 +5,7 @@
     self,
     nixpkgs,
     flake-utils,
-    pre-commit-hooks,
+    git-hooks,
     ...
   }: (flake-utils.lib.eachDefaultSystem (
     system: let
@@ -45,37 +45,17 @@
       };
 
       checks = {
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        pre-commit-check = git-hooks.lib.${system}.run {
           src = "./.";
           excludes = ["flake\.lock"];
-          hooks = with pkgs; let
-            poetryHookSettings = {
-              files = "(poetry\.lock|pyproject\.toml)";
-              pass_filenames = false;
-            };
-          in {
-            poetry_check =
-              {
-                enable = true;
-                name = "poetry check";
-                entry = "${poetry}/bin/poetry check";
-                description = "Check the Poetry config for errors";
-              }
-              // poetryHookSettings;
-            poetry-lock =
-              {
-                enable = true;
-                name = "poetry lock";
-                entry = "${poetry}/bin/poetry lock";
-                description = "Update the Poetry lock file";
-              }
-              // poetryHookSettings;
-
+          hooks = {
             alejandra.enable = true;
             commitizen.enable = true;
             deadnix.enable = true;
             editorconfig-checker.enable = true;
             markdownlint.enable = true;
+            poetry-check.enable = true;
+            poetry-lock.enable = true;
             prettier.enable = true;
             ruff.enable = true;
             statix.enable = true;
@@ -90,7 +70,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     git-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
