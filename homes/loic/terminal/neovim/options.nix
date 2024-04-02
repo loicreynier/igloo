@@ -4,7 +4,7 @@
   ...
 }: {
   programs.nixvim = {
-    options = {
+    opts = {
       # -- UI
       mouse = "nv";
       title = true;
