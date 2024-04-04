@@ -17,6 +17,7 @@ in {
     ./gpg.nix
     ./pass.nix
     ./pet.nix
+    ./pubs.nix
     ./ssh.nix
   ];
 
