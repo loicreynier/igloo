@@ -21,6 +21,14 @@ indent_size = unset
 trim_trailing_whitespace = false
 max_line_length = 100
 
+[*.tex]
+indent_size = 2
+max_line_length = 100
+
+[.bib]
+indent_size = 2
+max_line_length = unset
+
 [*.nix]
 max_line_length = off
 
