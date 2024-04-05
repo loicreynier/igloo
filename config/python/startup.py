@@ -34,8 +34,7 @@ if _version < (3, 13) and not _ipython_shell:
         # -- Python 2
         if _version < (3,):
             _history_file = (
-                os.environ.get("XDG_STATE_HOME", "@state@")
-                + "/python2_history"
+                os.environ.get("XDG_STATE_HOME", "@state@") + "/python2_history"
             )
             try:
                 readline.read_history_file(_history_file)
@@ -46,8 +45,7 @@ if _version < (3, 13) and not _ipython_shell:
         # -- Python 3 < 3.13
         else:
             _history_file = (
-                os.environ.get("XDG_STATE_HOME", "@state@")
-                + "/python_history"
+                os.environ.get("XDG_STATE_HOME", "@state@") + "/python_history"
             )
             try:
                 readline.read_history_file(_history_file)

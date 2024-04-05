@@ -39,7 +39,9 @@ in {
         matplotlib
         numpy
         pandas
+
         ipython
+        pyfzf
       ];
     config =
       lib.strings.fileContents
@@ -49,11 +51,26 @@ in {
       });
   };
 
+  programs.fzf.enable = lib.mkDefault true; # Enable `fzf` for `pyfzf`
+
   home.packages = [
     ipylab
     pylab
     pyversion
   ];
 
-  home.file.".ipython/profile_default/ipython_config.py".source = "${self}/config/ipython/ipython_config_default.py";
+  # IPython files
+  # TODO: attribute set for IPython profile with startup files as list
+  home.file = {
+    ".ipython/profile_default/ipython_config.py".source = "${self}/config/ipython/ipython_config_default.py";
+    ".ipython/profile_default/startup/fzf-hist-search.py".text =
+      builtins.replaceStrings [
+        "bat_bin=\"bat\""
+        "sed_bin=\"sed\""
+      ] [
+        "bat_bin=\"${pkgs.bat}/bin/bat\""
+        "sed_bin=\"${pkgs.gnused}/bin/sed\""
+      ]
+      (lib.fileContents "${self}/config/ipython/startup/fzf-hist-search.py");
+  };
 }
