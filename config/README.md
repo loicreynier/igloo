@@ -15,7 +15,7 @@ These configurations files do not contain Nix expressions and can be imported in
   `direnv` configuration with cache in `~/.cache/direnv/layouts` and daemonization
 - [`editorconfig`](./editorconfig):
   EditorConfig with rules for all files I work with outside of repos.
-- [`ipython`](./ipython): IPython shell configuration with autoreload
+- [`ipython`](./ipython): IPython shell configuration with autoreload and `fzf` history search
 - [`python`](./python): Python shell configuration
   with history in `$XDG_STATE_HOME/python_history`
   and auto-import modules from `$PYTHONMODULES`
