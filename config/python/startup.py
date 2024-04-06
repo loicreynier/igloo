@@ -1,3 +1,4 @@
+import builtins
 import importlib
 import os
 import sys
@@ -65,5 +66,22 @@ for _module in os.environ.get("PYTHONMODULES", "").split(":"):
     if _module != "":
         _alias = _module.split("=")[1] if "=" in _module else _module
         locals()[_alias] = importlib.import_module(_module.split("=")[0])
+
+# -- Rich interface
+try:
+    from functools import partial
+
+    from rich import inspect, pretty, print, traceback  # noqa: F401
+
+    builtins.help = partial(
+        inspect,
+        help=True,
+        # methods=True,
+    )
+    pretty.install()
+    traceback.install()
+    del partial
+except ImportError:
+    pass
 
 del _module, _alias, _version, _ipython_shell

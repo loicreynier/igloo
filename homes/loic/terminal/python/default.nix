@@ -41,6 +41,7 @@ in {
         pandas
 
         ipython
+        rich
         pyfzf
       ];
     config =
