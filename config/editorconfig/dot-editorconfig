@@ -45,7 +45,7 @@ indent_style = tab
 indent_size = 2
 tab_width = 2
 
-[Justfile]
+[{Justfile,justfile,.justfile,*.just}]
 indent_size = 4
 
 [{Makefile,*.makefile}]
