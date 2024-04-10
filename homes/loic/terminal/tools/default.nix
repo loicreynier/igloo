@@ -50,9 +50,15 @@ in {
     rnm
   ];
 
-  # -- ripgrep
   home = {
+    # -- ripgrep
     file."${rgConfigPath}".source = rgConfigSrc;
     sessionVariables."RIPGREP_CONFIG_PATH" = rgConfigPath;
+
+    # -- Just
+    shellAliases = {
+      j = "just";
+      ji = "just --choose";
+    };
   };
 }
