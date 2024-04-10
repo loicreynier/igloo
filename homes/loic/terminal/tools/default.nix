@@ -23,6 +23,7 @@ in {
 
   home.packages = with pkgs; [
     # -- Modern core utils
+    just
     fd
     ripgrep
     ripgrep-all
