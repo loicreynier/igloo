@@ -1,0 +1,1 @@
+{"rule":"GIT_GET","sentence":"^\\QMutagen for Spriggit which allows to git Bethesda plugins\\E$"}

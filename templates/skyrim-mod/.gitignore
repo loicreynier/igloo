@@ -1,0 +1,13 @@
+# Nix generated
+/.pre-commit-config.yaml
+
+# Assets
+/data/*.esp
+*.jpg
+*.png
+
+# Builds
+/dist
+
+# User files
+.env

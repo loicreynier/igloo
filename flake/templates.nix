@@ -19,5 +19,10 @@
       description = "Typer Python CLI app packaged with Poetry";
       path = ../templates/python-typer;
     };
+
+    skyrimMod = {
+      description = "SkyrimSE mod versioned by Git with Spriggit";
+      path = ../templates/skyrim-mod;
+    };
   };
 }
