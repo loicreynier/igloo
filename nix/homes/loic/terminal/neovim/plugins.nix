@@ -245,18 +245,21 @@
       mkdnflow.enable = true;
     };
 
-    extraPlugins = with pkgs.vimPlugins; [
-      # -- Core
-      editorconfig-nvim
+    extraPlugins = with pkgs.vimPlugins;
+      [
+        # -- Core
+        editorconfig-nvim
 
-      # -- Memes
-      duck-nvim
+        # -- Memes
+        duck-nvim
 
-      # -- Highlighting
-      vim-just
-      typst-vim
-    ];
-
+        # -- Highlighting
+        vim-just
+        typst-vim
+      ]
+      ++ [
+        pkgs.vimExtraPlugins.hlchunk-nvim
+      ];
     extraConfigLuaPre = lib.fileContents ./ltex-dir-path.lua;
   };
 }
