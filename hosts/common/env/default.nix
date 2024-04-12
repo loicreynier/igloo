@@ -23,6 +23,13 @@
     ];
   };
 
+  environment.sessionVariables = let
+    iglooPath = "/home/loic/.igloo";
+  in {
+    IGLOO = iglooPath;
+    FLAKE = iglooPath; # Some tooling use this variable, e.g. `nh`
+  };
+
   programs = {
     less.enable = true;
     starship.enable = true;
