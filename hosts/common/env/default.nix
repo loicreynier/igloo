@@ -23,11 +23,9 @@
     ];
   };
 
-  environment.sessionVariables = let
-    iglooPath = "/home/loic/.igloo";
-  in {
-    IGLOO = iglooPath;
-    FLAKE = iglooPath; # Some tooling use this variable, e.g. `nh`
+  environment.sessionVariables = {
+    IGLOO = self; # Should I use the writable (Git repo) location instead?
+    FLAKE = self; # Some tooling use this variable, e.g. `nh`
   };
 
   programs = {

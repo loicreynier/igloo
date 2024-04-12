@@ -19,12 +19,6 @@ in {
       "doc"
       "devdoc"
     ];
-
-    file = {
-      ".editorconfig".source = "${config.home.homeDirectory}/Code/Projects/Nix/igloo";
-      # `self` refers to the Nix store entry, so it's not writable. Do I need it writable?
-      # "${self}/config/editorconfig/dot-editorconfig";
-    };
   };
 
   home.file.".igloo".source = config.lib.file.mkOutOfStoreSymlink self;
