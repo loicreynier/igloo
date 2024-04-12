@@ -1,5 +1,15 @@
 # SkyrimSE Mod
 
+Releases are hosted on [Nexus Mods].
+
+[Nexus Mods]: https://www.nexusmods.com/skyrimspecialedition/mods/...
+
+## About
+
+See the documentation on [GitHub](./description.md) or [Nexus Mods].
+
+## Repo setup
+
 1. Setup environment by defining MO2 path
 
    ```shell

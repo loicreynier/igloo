@@ -21,7 +21,7 @@ max_line_length = off
 [Justfile]
 indent_size = 4
 
-[*.lock]
+[{*.lock,plugins/**/*.yaml}]
 indent_size = unset
 indent_style = unset
 max_line_length = off

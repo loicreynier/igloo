@@ -11,7 +11,6 @@ Komeyt zuliil wah lok ahrk pah fent koraav ahrk mindoraan vahzah mul do diiv.
 ## Credits
 
 - [Koveich] for the [Sovngarde] font used for the images.
-- [Catacoon] for the [banner] image.
 - [Mutagen] for [Spriggit] which allows to git Bethesda plugins
 
 ## My Skyrim mods
@@ -21,8 +20,6 @@ Komeyt zuliil wah lok ahrk pah fent koraav ahrk mindoraan vahzah mul do diiv.
 
 [Koveich]: https://www.nexusmods.com/skyrimspecialedition/users/34763925
 [Sovngarde]: https://www.nexusmods.com/skyrimspecialedition/mods/386
-[catacoon]: https://www.nexusmods.com/skyrimspecialedition/users/28944970
-[banner]: https://www.nexusmods.com/skyrimspecialedition/images/26115
 [Mutagen]: https://github.com/Mutagen-Modding
 [Spriggit]: https://github.com/Mutagen-Modding/Spriggit
 [SHA_SE]: https://www.nexusmods.com/skyrimspecialedition/mods/43033

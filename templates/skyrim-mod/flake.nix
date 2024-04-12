@@ -45,6 +45,11 @@
       pre-commit-check = pre-commit-hooks.lib.${system}.run {
         src = ./.;
 
+        excludes = [
+          ''^flake\.lock$''
+          ''^plugins/.*\.yaml$''
+        ];
+
         hooks = {
           fomod-validator = {
             enable = true;
@@ -58,6 +63,7 @@
           deadnix.enable = true;
           editorconfig-checker.enable = true;
           prettier.enable = true;
+          markdownlint.enable = true;
           statix.enable = true;
           typos.enable = true;
         };
