@@ -17,6 +17,10 @@
     filetype = {
       extension = {
         cuf = "fortran";
+        bbcode = "bbcode";
+      };
+      filename = {
+        ".ecrc" = "json";
       };
     };
   };
