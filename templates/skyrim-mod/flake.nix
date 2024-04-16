@@ -55,7 +55,7 @@
             enable = true;
             name = "fomod_validator";
             entry = "${fomodValidator}/bin/fomod-validator ./data";
-            files = ".*\\.(nix|py|md)";
+            files = "^data/.*\.xml$";
             pass_filenames = false;
           };
           alejandra.enable = true;
