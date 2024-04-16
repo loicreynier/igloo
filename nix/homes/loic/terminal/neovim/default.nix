@@ -17,6 +17,7 @@
     filetype = {
       extension = {
         cuf = "fortran";
+        bbcode = "bbcode";
       };
     };
   };
