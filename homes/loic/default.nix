@@ -21,7 +21,10 @@ in {
     ];
   };
 
-  home.file.".igloo".source = config.lib.file.mkOutOfStoreSymlink self;
+  home.file = {
+    ".igloo".source = config.lib.file.mkOutOfStoreSymlink self;
+    ".editorconfig".source = "${self}/config/editorconfig/dot-editorconfig";
+  };
 
   services.git-sync.enable = true;
 }
