@@ -8,7 +8,8 @@ plugins := spriggit_output / '*.esp/'
 data_dir := './data'
 esp_plugins := data_dir / '*.esp/'
 dist_dir := './dist'
-release := dist_dir / "SkyrimSE-CCDCF-`git describe --always --dirt`.zip"
+name := `basename $(git rev-parse --show-toplevel)`
+release := dist_dir / name + "-`git describe --always --dirt`.zip"
 
 _list:
     @just --list --unsorted
