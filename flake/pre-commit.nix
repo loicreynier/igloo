@@ -28,6 +28,7 @@
         excludes = globalExcludes;
 
         hooks = {
+          # -- Pre-commit additions
           make_readme = mkHook "make-readme" {
             enable = true;
             entry = "${pkgs.stdenv.shell} .github/make-readme.sh";
@@ -36,21 +37,32 @@
             pass_filenames = false;
           };
 
+          # -- Nix
           alejandra = mkHook "Alejandra" {enable = true;};
-          commitizen = mkHook "commitizen" {enable = true;};
           deadnix = mkHook "deadnix" {enable = true;};
+          statix = mkHook "statix" {enable = true;};
+          flake-checker = mkHook "Flake checker" {
+            enable = true;
+            entry = "${pkgs.flake-checker}/bin/flake-checker -f";
+            always_run = true;
+            pass_filenames = false;
+          };
+
+          # -- General linters/formatters
           editorconfig-checker = mkHook "editorconfig" {
             enable = true;
             always_run = true;
           };
-          markdownlint = mkHook "markdownlint" {enable = true;};
           prettier = mkHook "prettier" {enable = true;};
+          typos = mkHook "typos" {enable = true;};
+
+          # -- Language specific linters/formatters
+          commitizen = mkHook "commitizen" {enable = true;};
+          markdownlint = mkHook "markdownlint" {enable = true;};
           shellcheck = mkHook "shellcheck" {enable = true;};
           shfmt = mkHook "shfmt" {enable = true;};
           ruff = mkHook "Ruff" {enable = true;};
-          statix = mkHook "statix" {enable = true;};
           stylua = mkHook "stylua" {enable = true;};
-          typos = mkHook "typos" {enable = true;};
           taplo = mkHook "taplo" {enable = true;};
           yamllint = mkHook "yamllint" {enable = true;};
         };
