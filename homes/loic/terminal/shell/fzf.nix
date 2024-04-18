@@ -1,6 +1,8 @@
 {
+  lib,
   config,
   pkgs,
+  self,
   ...
 }: let
   fzfBin = "${config.programs.fzf.package}/bin/fzf";
@@ -12,10 +14,19 @@ in {
     defaultCommand = "${pkgs.fd}/bin/fd --type f --hidden --follow --strip-cwd-prefix";
   };
 
+  programs.bash.initExtra =
+    builtins.replaceStrings [
+      "bat_bin=\"bat\""
+      "fzf_bin=\"fzf\""
+    ]
+    [
+      "bat_bin=\"${batBin}\""
+      "fzf_bin=\"${fzfBin}\""
+    ]
+    (lib.strings.fileContents
+      "${self}/config/bash/functions/fzf-v.bash");
+
   home = {
-    shellAliases = {
-      v = "${fzfBin} --multi --bind 'enter:become(vi {+})' --preview '${batBin} --color=always {}' --height 40% --layout reverse";
-    };
     sessionVariables = {
       JUST_CHOOSER = builtins.concatStringsSep " " [
         fzfBin
