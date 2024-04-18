@@ -5,18 +5,23 @@
     supportedSystems = [
       "x86_64-linux"
     ];
-    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-    nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
+    overlays = [
+      # ...
+    ];
+    forAllSystems = f:
+      nixpkgs.lib.attrsets.genAttrs supportedSystems (system:
+        f {
+          pkgs = import nixpkgs {inherit overlays system;};
+        });
   in {
-    devShells = forAllSystems (system: let
-      pkgs = nixpkgsFor.${system};
-    in {
-      default = pkgs.mkShell {
-        packages = with pkgs; [
-          hello
-        ];
-      };
-    });
+    devShells = forAllSystems ({pkgs}:
+      with pkgs; {
+        default = mkShell {
+          packages = [
+            hello
+          ];
+        };
+      });
   };
 
   inputs = {
