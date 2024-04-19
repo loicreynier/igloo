@@ -5,15 +5,47 @@
   self,
   ...
 }: let
+  ezabin = "${config.programs.eza.package}/bin/eza";
+  fdBin = "${config.programs.fd.package}/bin/fd";
+  fdCmd = "${fdBin} --type f --hidden --follow --strip-cwd-prefix";
   fzfBin = "${config.programs.fzf.package}/bin/fzf";
   batBin = "${pkgs.bat}/bin/bat";
   justBin = "${pkgs.just}/bin/just";
 in {
+  # -- Commands configurations
   programs.fzf = {
     enable = true;
-    defaultCommand = "${pkgs.fd}/bin/fd --type f --hidden --follow --strip-cwd-prefix";
+    defaultCommand = fdCmd;
+    historyWidgetOptions = [
+      "--height 40%"
+      "--preview 'echo {}'"
+      "--preview-window down:3:hidden:wrap"
+      "--reverse"
+      "--bind 'ctrl-space:toggle-preview'"
+      # "--bind 'ctrl-y:execute-silent(echo -n {2..} | win32yank.exe -i)+abort'" # TODO
+      "--color header:italic"
+      "--header 'Press <CTRL-Space> to preview command'" # and <CTRL-y> to copy command into clipboard'"
+    ];
+    fileWidgetCommand = fdCmd;
+    fileWidgetOptions = [
+      "--multi"
+      "--height 40%"
+      "--preview '${batBin} --color=always {}'"
+      "--reverse"
+      "--bind 'ctrl-u:preview-page-up,ctrl-d:preview-page-down'"
+      # TODO: add copy bind here too
+    ];
+    changeDirWidgetCommand = "${fdBin} --type d";
+    changeDirWidgetOptions = [
+      "--height 40%"
+      "--reverse"
+      "--preview '${ezabin} -a --icons --group-directories-first --color=always {}'"
+      "--bind 'ctrl-u:preview-page-up,ctrl-d:preview-page-down'"
+      # TODO: add copy bind here too
+    ];
   };
 
+  # -- Custom commands/functions
   programs.bash.initExtra =
     builtins.replaceStrings [
       "bat_bin=\"bat\""
@@ -23,20 +55,18 @@ in {
       "bat_bin=\"${batBin}\""
       "fzf_bin=\"${fzfBin}\""
     ]
-    (lib.strings.fileContents
-      "${self}/config/bash/functions/fzf-v.bash");
+    (lib.strings.fileContents "${self}/config/bash/functions/fzf-v.bash");
 
+  # -- Configuration for other tools using `fzf`
   home = {
     sessionVariables = {
       JUST_CHOOSER = builtins.concatStringsSep " " [
         fzfBin
-        "--border=top"
-        "--border-label='Parameterless Just recipes'"
-        "--height=40%"
-        "--margin='5%,0%,5%,0%'"
-        "--preview-window=right:85%:wrap:nocycle"
-        "--preview='${justBin} --show {} | ${batBin} --language=Just --color=always --style=plain'"
-        "--bind=ctrl-u:preview-page-up,ctrl-d:preview-page-down"
+        "--height 40%"
+        "--preview-window right:85%:wrap:nocycle"
+        "--preview '${justBin} --show {} | ${batBin} --language=Just --color=always --style=plain'"
+        "--reverse"
+        "--bind 'ctrl-u:preview-page-up,ctrl-d:preview-page-down'"
         "|| false"
       ];
     };

@@ -50,7 +50,8 @@ def _fzf_i_search(
     try:
         text = fzf.prompt(
             history_strings,
-            fzf_options="--no-sort --multi --border --height=80% --margin=1 --padding=1"
+            fzf_options="--no-sort --multi --border --height=40% --margin=1 --padding=1"
+            " --reverse"
             " --preview 'echo {}"
             f' | {sed_bin} "s/ @@ /\\n/g"'
             f" | {bat_bin} --color=always --style=numbers -l py -'",
