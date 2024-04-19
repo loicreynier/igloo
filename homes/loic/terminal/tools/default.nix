@@ -24,7 +24,6 @@ in {
   home.packages = with pkgs; [
     # -- Modern core utils
     just
-    fd
     ripgrep
     ripgrep-all
     sd
@@ -59,6 +58,16 @@ in {
     shellAliases = {
       j = "just";
       ji = "just --choose";
+    };
+  };
+
+  programs = {
+    fd = {
+      enable = true;
+      extraOptions = [
+        "--hidden" # Can be ignored with `--no-hidden`
+        "--follow" # Always descend into symlinked dir, useful in Nix & ignored with `--no-follow`
+      ];
     };
   };
 }
