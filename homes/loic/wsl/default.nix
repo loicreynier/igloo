@@ -15,16 +15,43 @@ Setup `pass` and VS Code for WSL
 
 - Import Neovim module which sets WSL clipboard integration using `win32yank`
 */
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../vscode-server.nix
     ./neovim.nix
   ];
 
   home.packages = with pkgs; [
-    win32yank-bin
     browserpass
   ];
+
+  home.activation = {
+    checkWindowBinaries = let
+      # Check whether Windows clipboard binaries are in the expected path.
+      # Since activation is not run in the user shell,
+      # it is actually not possible to check if they are in `$PATH`.
+      # Therefore it only checks if they are in the expected path and prints a warning.
+      commands = {
+        "clip.exe" = "/mnt/c/Windows/System32/clip.exe";
+        "win32yank.exe" = "/mnt/c/Users/Loic/AppData/Local/Microsoft/WinGet/Links/win32yank.exe";
+      };
+      check = name: path: ''
+        if  run --quiet command -v ${path}; then
+          echo "Windows binary '${name}' found in '${path}', check if it's in 'PATH'."
+        else
+          errorEcho '${name}' not found in '${path}'
+          exit 1
+        fi
+      '';
+    in
+      with builtins;
+        lib.hm.dag.entryAfter ["reloadSystemd"]
+        (concatStringsSep "\n" (attrValues (mapAttrs check commands)));
+  };
 
   services.gpg-agent = {
     # TODO: replace with `pinentry-wsl`
