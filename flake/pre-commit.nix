@@ -43,9 +43,7 @@
           statix = mkHook "statix" {enable = true;};
           flake-checker = mkHook "Flake checker" {
             enable = true;
-            entry = "${pkgs.flake-checker}/bin/flake-checker -f";
             always_run = true;
-            pass_filenames = false;
           };
 
           # -- General linters/formatters
