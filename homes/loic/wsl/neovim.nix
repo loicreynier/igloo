@@ -18,8 +18,8 @@
         "*" = "${clipCmd} -i";
       };
       paste = {
-        "+" = "${clipCmd} -o";
-        "*" = "${clipCmd} -o";
+        "+" = "${clipCmd} -o --lf";
+        "*" = "${clipCmd} -o --lf";
       };
       cache_enabled = 0;
     };
