@@ -7,7 +7,7 @@ function v() {
     "--preview '$bat_bin --color=always {}'"
     "--height 40%"
     "--layout reverse"
-    "--bind=ctrl-u:preview-page-up,ctrl-d:preview-page-down"
+    "--bind=alt-u:preview-page-up,alt-d:preview-page-down"
   )
   local vi_opts=()
   local query=""

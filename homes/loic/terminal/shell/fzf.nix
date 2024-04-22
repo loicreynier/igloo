@@ -32,7 +32,7 @@ in {
       "--height 40%"
       "--preview '${batBin} --color=always {}'"
       "--reverse"
-      "--bind 'ctrl-u:preview-page-up,ctrl-d:preview-page-down'"
+      "--bind 'alt-u:preview-page-up,alt-d:preview-page-down'"
       # TODO: add copy bind here too
     ];
     changeDirWidgetCommand = "${fdBin} --type d";
@@ -40,7 +40,7 @@ in {
       "--height 40%"
       "--reverse"
       "--preview '${ezabin} -a --icons --group-directories-first --color=always {}'"
-      "--bind 'ctrl-u:preview-page-up,ctrl-d:preview-page-down'"
+      "--bind 'alt-u:preview-page-up,alt-d:preview-page-down'"
       # TODO: add copy bind here too
     ];
   };
@@ -66,7 +66,7 @@ in {
         "--preview-window right:85%:wrap:nocycle"
         "--preview '${justBin} --show {} | ${batBin} --language=Just --color=always --style=plain'"
         "--reverse"
-        "--bind 'ctrl-u:preview-page-up,ctrl-d:preview-page-down'"
+        "--bind 'alt-u:preview-page-up,alt-d:preview-page-down'"
         "|| false"
       ];
     };
