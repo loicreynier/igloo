@@ -183,7 +183,10 @@
         openOnSetup = true;
         tab.sync.open = true;
       };
-      notify.enable = true;
+      notify = {
+        enable = true;
+        backgroundColour = "#000000";
+      };
 
       # -- Git
       diffview.enable = true;
