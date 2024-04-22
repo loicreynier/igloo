@@ -224,6 +224,24 @@
           "man"
           "nvim-tree"
         ];
+        sections.lualine_y = [
+          "progress"
+          {
+            name = "word count";
+            fmt = ''
+              function()
+                  local filetypes = { 'text', 'markdown', 'tex' }
+                  if vim.tbl_contains(filetypes, vim.bo.filetype) then
+                      if vim.fn.mode() == "v" or vim.fn.mode() == "V" or vim.fn.mode() == "" then
+                        return vim.fn.wordcount().visual_words .. " words"
+                      else
+                        return vim.fn.wordcount().words .. " words"
+                      end
+                  end
+              end
+            '';
+          }
+        ];
       };
       nvim-autopairs.enable = true;
       nvim-tree = {
