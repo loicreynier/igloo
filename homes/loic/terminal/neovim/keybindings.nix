@@ -35,6 +35,13 @@
         mode = ["i" "c"];
       }
 
+      # -- Telescope
+      {
+        action = ":Telescope<CR>";
+        key = "<C-k>";
+        mode = ["n"];
+      }
+
       # -- Trouble
       {
         action = ":TroubleToggle<CR>";

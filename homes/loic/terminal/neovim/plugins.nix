@@ -165,6 +165,31 @@
       cmp-conventionalcommits.enable = true;
       cmp-git.enable = true;
 
+      # -- Telescope
+      telescope = {
+        enable = true;
+        keymaps = {
+          "<C-p>" = {
+            action = "git_files";
+            options = {
+              desc = "Telescope Git files";
+            };
+          };
+          "<Leader>pf" = {
+            action = "find_files";
+            options = {
+              desc = "Telescope files";
+            };
+          };
+          "<Leader>pb" = {
+            action = "buffers";
+            options = {
+              desc = "Telescope buffers";
+            };
+          };
+        };
+      };
+
       # -- UI
       bufferline.enable = true;
       gitsigns.enable = true;
