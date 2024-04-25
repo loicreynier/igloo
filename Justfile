@@ -37,6 +37,10 @@ build-readme:
 show:
     nix flake show --allow-import-from-derivation
 
+# Show flake outputs with `nix-schema`
+show-schema:
+    nix-schema flake show
+
 # Show TODO-s and FIXME-s:
 todo:
     @rg -g '!Justfile' TODO

@@ -28,6 +28,7 @@
         home-manager
         just
         nil
+        nix-schema
         magic-wormhole-rs
         statix
         tree

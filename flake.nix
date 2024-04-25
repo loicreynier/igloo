@@ -17,6 +17,7 @@
         ./flake/devshells
         ./flake/formatter.nix
         ./flake/modules.nix
+        ./flake/schemas.nix
         ./flake/templates.nix
       ];
     };
@@ -40,6 +41,11 @@
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-schemas.url = "github:gvolpe/flake-schemas";
+    nix-schema = {
+      inputs.flake-schemas.follows = "flake-schemas";
+      url = "github:DeterminateSystems/nix-src/flake-schemas";
     };
 
     # -- Packages
