@@ -40,6 +40,9 @@ in {
         numpy
         pandas
 
+        pillow
+        requests
+
         ipython
         rich
         pyfzf
