@@ -13,6 +13,7 @@ in {
 
   imports = [
     ./wclip.nix
+    ./vscode-server.nix
   ];
 
   config = mkIf cfg.enable {
