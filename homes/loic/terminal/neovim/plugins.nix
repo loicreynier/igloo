@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./nvim-tree
   ];
@@ -116,7 +120,7 @@
       ltex-extra = {
         enable = true;
         settings = {
-          path = ".vscode"; # Compatibility with VS Code extension
+          path = {__raw = "ltex_dir_path()";};
         };
       };
       trouble = {
@@ -232,6 +236,8 @@
       vim-just
       typst-vim
     ];
+
+    extraConfigLuaPre = lib.fileContents ./ltex-dir-path.lua;
   };
 }
 # vim: nofoldenable
