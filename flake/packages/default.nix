@@ -10,6 +10,7 @@
   }: let
     flakePackages = final: _: {
       x2y = final.callPackage ./x2y {srcPath = "${self}/bin/x2y";};
+      rnm = final.callPackage ./rnm {srcPath = "${self}/bin/rnm";};
     };
 
     schemaOverlay = _: _: {
@@ -36,7 +37,7 @@
     };
 
     packages = {
-      inherit (pkgs) x2y;
+      inherit (pkgs) x2y rnm;
     };
   };
 }

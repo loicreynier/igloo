@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+the_name="rnm"
+
 print_usage() {
-  echo "Usage: $0 [-h | --help] [-f | --force] <file> <new-filename>"
+  echo "Usage: $the_name [-h | --help] [-f | --force] <file> <new-filename>"
   echo
   echo "OPTIONS"
   echo "  -h, --help     Display this help message"
@@ -54,7 +56,7 @@ old_filename="$1"
 new_filename="$2"
 
 if [ ! -f "$old_filename" ]; then
-  echo "Error: File '${old_filename}' does not exist."
+  echo "Error: File '${old_filename}' does not exist"
   exit 1
 fi
 
