@@ -1,0 +1,131 @@
+#!/bin/bash
+
+the_name="x2y"
+
+print_usage() {
+  echo "Usage: $the_name [(-f | --format) <format>] <file>[:<format>] ..."
+  echo
+  echo "OPTIONS"
+  echo "  -h, --help                        Display this help message"
+  echo "  -f <format>, --format <format>    Set default output format"
+  echo
+  echo "EXAMPLES"
+  echo "  $the_name --format mp3 *.opus"
+  echo "  $the_name foo:pdf bar:png"
+}
+
+convert_with_ffmpeg() {
+  ffmpeg -i "$1" "$2"
+}
+
+convert_with_imagemagick() {
+  convert "$1" "$2"
+}
+
+convert_with_pdftoppm() {
+  input_file="$1"
+  output_file="$2"
+  output_format=${output_file##*.}
+  output_base="$(basename "$output_file" ."$output_format")"
+
+  case $output_format in
+  png)
+    command="pdftoppm -png"
+    ;;
+  jpeg | jpg)
+    command="pdftoppm -jpeg"
+    ;;
+  tiff)
+    command="pdftoppm -tiff"
+    ;;
+  *)
+    echo "Error: Output format must be PNG/JPEG/TIFF for PDF conversion"
+    exit 1
+    ;;
+  esac
+
+  "$command" "$input_file" "$output_base"
+}
+
+# Transform long options to short ones for `getopts`
+for arg in "$@"; do
+  shift
+  case "$arg" in
+  "--help")
+    set -- "$@" "-h"
+    ;;
+  "--format")
+    set -- "$@" "-f"
+    ;;
+  *)
+    set -- "$@" "$arg"
+    ;;
+  esac
+done
+
+format=
+
+while getopts ":hf:" opt; do
+  case ${opt} in
+  h)
+    print_usage
+    exit 0
+    ;;
+  f)
+    format=$OPTARG
+    ;;
+  *)
+    echo "Invalid option: $opt"
+    print_usage
+    exit 2
+    ;;
+  esac
+done
+
+# Remove processed options
+shift $((OPTIND - 1))
+
+if [ $# -eq 0 ]; then
+  print_usage
+  exit 1
+fi
+
+for arg in "$@"; do
+  if [[ -z $format ]]; then
+    if [[ $arg == *:* ]]; then
+      input_file="${arg%:*}"
+      output_format="${arg#*:}"
+      output_file="${input_file%.*}.$output_format"
+    else
+      print_usage
+      exit 2
+    fi
+  else
+    input_file="$arg"
+    output_file="${input_file%.*}.$format"
+  fi
+
+  if [ ! -f "$input_file" ]; then
+    echo "Error: Input file '$input_file' does not exist"
+    exit 1
+  fi
+
+  mime_type="$(file --brief --mime-type "$input_file")"
+
+  case "$mime_type" in
+  audio/* | video/*)
+    convert_cmd=convert_with_ffmpeg
+    ;;
+  image/*)
+    convert_cmd=convert_with_imagemagick
+    ;;
+  application/pdf)
+    convert_cmd=convert_with_pdftoppm
+    ;;
+  *)
+    echo "Error: Unsupported MIME type '$mime_type'"
+    ;;
+  esac
+
+  $convert_cmd "$input_file" "$output_file"
+done

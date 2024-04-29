@@ -46,6 +46,7 @@ in {
     wormhole-rs
 
     # -- Custom scripts
+    x2y
     rnm
   ];
 

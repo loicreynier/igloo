@@ -12,7 +12,7 @@
         ./homes
         ./hosts
 
-        ./flake/packages.nix
+        ./flake/packages
         ./flake/pre-commit.nix
         ./flake/devshells
         ./flake/formatter.nix
