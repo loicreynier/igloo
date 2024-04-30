@@ -17,17 +17,27 @@ in {
   ];
 
   home.packages = with pkgs; [
+    coreutils
+
     # -- Modern core utils
     just
     ripgrep
     ripgrep-all
     sd
 
+    # -- File manipulation
+    trashy
+
+    # -- Process manipulation
+    killall
+    pueue
+
     # -- TUIS
     du-dust
     glow
 
     # -- Text processing
+    dos2unix
     grex
     xsv
 
@@ -35,7 +45,9 @@ in {
     exiftool
     ffmpeg
     libwebp
+    imagemagick
     pdftk
+    poppler_utils
 
     # -- Networking
     wormhole-rs
@@ -43,6 +55,15 @@ in {
     # -- Custom scripts
     x2y
     rnm
+
+    # -- Fetching
+    neofetch
+    onefetch
+
+    # -- Memes
+    sl
+    uwufetch
+    uwuify
   ];
 
   home = {
@@ -58,12 +79,26 @@ in {
   };
 
   programs = {
+    # -- `fd`
     fd = {
       enable = true;
       extraOptions = [
         "--hidden" # Can be ignored with `--no-hidden`
         "--follow" # Always descend into symlinked dir, useful in Nix & ignored with `--no-follow`
       ];
+    };
+  };
+
+  systemd.user.services = {
+    # -- Pueue
+    # TODO: Home Manager module
+    pueued = {
+      Unit.Description = "Pueue  Daemon - CLI Process scheduler and aanager";
+      Install.WantedBy = ["default.target"];
+      Service = {
+        Restart = "no";
+        ExecStart = "${pkgs.pueue}/bin/pueued -vv";
+      };
     };
   };
 }

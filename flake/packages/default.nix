@@ -24,6 +24,16 @@
           '';
       });
     };
+
+    uwufetchFix = _: prev: {
+      uwufetch = prev.uwufetch.overrideAttrs (old: {
+        postFixup =
+          old.postFixup
+          + ''
+            rm $out/include
+          '';
+      });
+    };
   in {
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
@@ -33,6 +43,7 @@
         inputs.nixneovimplugins.overlays.default
         flakePackages
         schemaOverlay # See `./schemas.nix`
+        uwufetchFix
       ];
     };
 
