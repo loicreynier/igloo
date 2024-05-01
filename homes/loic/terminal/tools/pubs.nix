@@ -26,6 +26,27 @@
         "${config.programs.fzf.package}/bin/fzf"
       ]
       (lib.strings.fileContents "${self}/bin/pubs-fzf-open.sh"));
+
+  fzfExport = let
+    fdBin = "${config.programs.fd.package}/bin/fd";
+    fzfBin = "${config.programs.fzf.package}/bin/fzf";
+    batBin = "${pkgs.bat}/bin/bat";
+  in
+    pkgs.writeShellScriptBin "pubs-fzf-export"
+    (builtins.replaceStrings [
+        "#!/usr/bin/env sh\n"
+        "fd_bin=\"fd\""
+        "bat_bin=\"bat\""
+        "fzf_bin=\"fzf\""
+      ]
+      [
+        ""
+        "fd_bin=\"${fdBin}\""
+        "bat_bin=\"${batBin}\""
+        "fzf_bin=\"${fzfBin}\""
+      ]
+      (lib.strings.fileContents "${self}/bin/pubs-fzf-export.sh"));
+
   exportTag =
     pkgs.writeShellScriptBin "pubs-export-tag"
     (builtins.replaceStrings
@@ -61,6 +82,8 @@ in {
       add-doi = !pubs add -D "$1" -k "$2" -d "~/Library/Papers/$2.pdf" -L
       fzf-open = !${fzfOpen}/bin/pubs-fzf-open "$@"
       fopen = fzf-open
+      fzf-export = !${fzfExport}/bin/pubs-fzf-export "$@"
+      fexport = fzf-export
       export-tag = !${exportTag}/bin/pubs-export-tag "$@"
     '';
   };
