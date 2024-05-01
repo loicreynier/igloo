@@ -24,14 +24,15 @@
     ];
 
     shellOptions = [
-      "histappend"
-      "autocd"
-      "direxpand"
-      "dirspell"
-      "extglob"
-      "globstar"
-      "checkjobs"
-      "checkwinsize"
+      "autocd" # Treat command as `cd` argument if command is a directory name
+      "cdspell" # Fix spelling while `cd`-ing
+      "checkjobs" # Prevent exiting if jobs are running
+      "direxpand" # Expand `~` paths and more during completion
+      "dirspell" # Fix dir names during completion
+      "dotglob" # Globbing also includes dotfiles
+      "extglob" # Enable advanced pattern matching
+      "globstar" # Enable `**` for subdirectory globbing
+      "histappend" # Append to history file instead of overwriting it
     ];
   };
 }
