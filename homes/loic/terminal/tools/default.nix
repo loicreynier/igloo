@@ -34,12 +34,16 @@ in {
 
     # -- TUIS
     du-dust
+    duf
+    fx
     glow
 
     # -- Text processing
     dos2unix
+    jq
     grex
     xsv
+    yq
 
     # -- Media processing tools
     exiftool
