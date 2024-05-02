@@ -22,3 +22,4 @@ These configurations files do not contain Nix expressions and can be imported in
 - [`readline`](./readline): GNU Readline configuration (for Bash) with some completion tweaks
 - [`ripgrep`](./ripgrep): default `rg` CLI arguments
 - [`starship`](./starship): mostly Starship default config, just a little more verbose
+- [`xxh`](./xxh): `xxh` config for a portable Bash shell with zoxide and Starship

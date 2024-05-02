@@ -13,3 +13,4 @@ BBCode
 Justfiles
 Numbat
 Typst
+zoxide
