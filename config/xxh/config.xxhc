@@ -1,0 +1,13 @@
+# vim: ft=yaml
+---
+hosts:
+  ".*":
+    +s: bash
+    ++quiet:
+    ++pexpect-timeout: "10"  # Wait longer, proxy jump can be slow, default is 6
+    +hhh: "~"                # Set `~` as home directory
+    # +hhx: "~"                # Set `XDG_CONFIG_HOME` to `~/.config`
+    +I:
+      - xxh-shell-bash
+      - xxh-plugin-prerun-zoxide
+      - xxh-plugin-prerun-starship+git+https://github.com/izissise/xxh-plugin-prerun-starship.git

@@ -12,6 +12,10 @@
     ./vars.nix
   ];
 
+  home.packages = with pkgs; [
+    xxh
+  ];
+
   programs = {
     starship.enable = true;
 
@@ -47,5 +51,6 @@
   xdg.configFile = {
     "bat/config".source = "${self}/config/bat/plain-vscode.conf";
     "starship.toml".source = "${self}/config/starship/default.toml";
+    "xxh/config.xxhc".source = "${self}/config/xxh/config.xxhc";
   };
 }
