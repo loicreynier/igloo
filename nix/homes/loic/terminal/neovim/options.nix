@@ -62,7 +62,7 @@
       # -- Memory
       hidden = true;
       history = 100;
-      lazyredraw = true;
+      lazyredraw = false;
       autowrite = true;
       swapfile = false;
       backup = false;
