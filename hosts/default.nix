@@ -20,9 +20,14 @@
     agenix
     (iglooModules + /hosts/options)
   ];
-  roles = {
-    wsl = iglooModules + /hosts/roles;
-  };
+  roles = let
+    rolesOptions = ["wsl"];
+  in
+    builtins.listToAttrs (map (name: {
+        inherit name;
+        value = "${iglooModules}/hosts/roles/${name}";
+      })
+      rolesOptions);
 
   # -- Wrapper to inherit `inputs` and import shared modules
   mkNixosSystem = {
