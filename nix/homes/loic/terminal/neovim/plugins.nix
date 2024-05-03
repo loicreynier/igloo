@@ -250,10 +250,13 @@
         openOnSetup = true;
         tab.sync.open = true;
       };
+      zen-mode.enable = true;
+      twilight.enable = true;
       notify = {
         enable = true;
         backgroundColour = "#000000";
       };
+      noice.enable = true;
 
       # -- Git
       diffview.enable = true;
