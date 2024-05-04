@@ -1,5 +1,5 @@
 {
   imports = [
-    ./devices
+    ./device
   ];
 }
