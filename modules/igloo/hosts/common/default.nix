@@ -3,6 +3,7 @@
     ./env
     ./nix
     ./users
+    ./virt
   ];
 
   programs.gnupg.agent.enable = true;
