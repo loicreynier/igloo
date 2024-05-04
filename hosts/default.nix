@@ -19,6 +19,7 @@
     home-manager
     agenix
     (iglooModules + /hosts/options)
+    (iglooModules + /hosts/common)
   ];
   roles = let
     rolesOptions = ["wsl"];
@@ -47,7 +48,6 @@
           modules =
             [
               ./${name}
-              ./common
             ]
             ++ lib.concatLists [
               args.modules
