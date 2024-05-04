@@ -1,7 +1,6 @@
-{pkgs, ...}: {
-  virtualisation.podman.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    distrobox
+{
+  imports = [
+    ./distrobox.nix
+    ./podman.nix
   ];
 }
