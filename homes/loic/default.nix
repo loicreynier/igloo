@@ -10,7 +10,7 @@ in {
     ./terminal
   ];
 
-  home = {
+  home = rec {
     inherit username;
     homeDirectory = "/home/${config.home.username}";
     stateVersion = lib.mkDefault "23.11";
@@ -19,11 +19,15 @@ in {
       "doc"
       "devdoc"
     ];
-  };
 
-  home.file = {
-    ".igloo".source = config.lib.file.mkOutOfStoreSymlink self;
-    ".editorconfig".source = "${self}/config/editorconfig/dot-editorconfig";
+    sessionPath = [
+      "${homeDirectory}/.local/bin"
+    ];
+
+    file = {
+      ".igloo".source = config.lib.file.mkOutOfStoreSymlink self;
+      ".editorconfig".source = "${self}/config/editorconfig/dot-editorconfig";
+    };
   };
 
   services.git-sync.enable = true;
