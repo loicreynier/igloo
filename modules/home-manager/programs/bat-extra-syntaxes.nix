@@ -22,6 +22,24 @@ in {
       };
       file = "BBCode.sublime-syntax";
     };
+    coconut = {
+      src = pkgs.fetchFromGitHub {
+        owner = "loicreynier";
+        repo = "sublime-syntaxes-converted";
+        rev = "94ff11239a9485f2c27b91ca682c6dddfa8d67fb";
+        hash = "sha256-H4YNngh7WuXHuIp3eFhYZWPOIVjoK8UYifOUx5OIHFo=";
+      };
+      file = "syntaxes/coconut.sublime-syntax";
+    };
+    cuda = {
+      src = pkgs.fetchFromGitHub {
+        owner = "loicreynier";
+        repo = "sublime-syntaxes-converted";
+        rev = "94ff11239a9485f2c27b91ca682c6dddfa8d67fb";
+        hash = "sha256-H4YNngh7WuXHuIp3eFhYZWPOIVjoK8UYifOUx5OIHFo=";
+      };
+      file = "syntaxes/cuda-c++.sublime-syntax";
+    };
     just = {
       src = pkgs.fetchFromGitHub {
         owner = "nk9";
