@@ -18,6 +18,7 @@
       extension = {
         cuf = "fortran";
         bbcode = "bbcode";
+        cuf = "fortran";
       };
     };
   };
