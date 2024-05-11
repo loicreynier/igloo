@@ -1,5 +1,6 @@
 {
   lib,
+  config,
   pkgs,
   ...
 }: {
@@ -46,9 +47,18 @@
           };
         };
 
-        servers = {
+        servers = let
+          cfg = config.programs.nixvim.plugins.lsp.servers;
+        in {
           bashls.enable = true;
-          fortls.enable = true;
+          fortls = {
+            enable = true;
+            cmd = [
+              "${cfg.fortls.package}/bin/fortls"
+              "--disable_autoupdate"
+              "--lowercase_intrinsics"
+            ];
+          };
           gopls.enable = true;
           julials.enable = true;
           lemminx.enable = true;
@@ -107,7 +117,17 @@
           };
           formatting = {
             clang_format.enable = true;
-            fprettify.enable = true;
+            fprettify = {
+              enable = true;
+              withArgs = ''
+                {
+                  extra_args = {
+                    "--indent=4",
+                    "line-length=100",
+                  },
+                }
+              '';
+            };
             just.enable = true;
             prettier.enable = true;
             shfmt.enable = true;

@@ -13,5 +13,11 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+
+    filetype = {
+      extension = {
+        cuf = "fortran";
+      };
+    };
   };
 }
