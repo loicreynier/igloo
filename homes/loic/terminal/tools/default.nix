@@ -27,16 +27,19 @@ in {
 
     # -- File manipulation
     trashy
+    ouch
 
     # -- Process manipulation
     killall
     pueue
+    viddy
 
     # -- TUIS
     du-dust
     duf
     fx
     glow
+    sysz
 
     # -- Text processing
     dos2unix
@@ -68,6 +71,9 @@ in {
     sl
     uwufetch
     uwuify
+
+    # -- Misc
+    when-cli
   ];
 
   home = {

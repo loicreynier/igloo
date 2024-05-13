@@ -22,6 +22,14 @@
     bat = {
       enable = true;
       installExtraSyntaxes = true;
+      extraPackages = with pkgs.bat-extras; [
+        batgrep
+        batman
+        batpipe
+        batwatch
+        batdiff
+        prettybat
+      ];
     };
   };
 

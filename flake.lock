@@ -649,11 +649,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1713264263,
-        "narHash": "sha256-bJVeEXwedIXnGXtSWAmUK2d/XO4dhDd/MFfXuG12G1A=",
+        "lastModified": 1715585132,
+        "narHash": "sha256-+5FvXVjwv5GBs3YfT6AdCo7jE+oNI9CrbN3VZv3K1Xw=",
         "owner": "loicreynier",
         "repo": "nixpkgs-lor",
-        "rev": "e16b706f7e53d746b4324bf8140169a830e627b1",
+        "rev": "4a54018247ab2e7aa79244d734e599969211f353",
         "type": "github"
       },
       "original": {
