@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  self,
+  ...
+}: {
   home.packages = with pkgs; [
     git-fire
   ];
@@ -52,10 +57,26 @@
       "debug.log"
     ];
 
-    aliases = {
+    aliases = let
+      fzfBin = "${config.programs.fzf.package}/bin/fzf";
+      difftBin = "${pkgs.difftastic}/bin/difft";
+      fzfStage = pkgs.stdenv.mkDerivation {
+        name = "fzf-git-stage";
+        src = "${self}/config/bash/functions/fzf-git-stage.bash";
+        dontUnpack = true;
+        doBuild = false;
+        installPhase = ''
+          mkdir -p $out/share/bash
+          sed -e 's,fzf_bin="fzf",fzf_bin=${fzfBin}',g \
+              -e 's,difft_bin="difft",difft_bin=${difftBin},g' \
+              $src > $out/share/bash/fzf-git-stage.bash
+        '';
+      };
+    in {
       "ch" = "!git checkout $(git branch --sort='-committerdate' | fzf --reverse --height 40%)";
       "log1" = "log --oneline";
       "push-all" = "!git remote | xargs -L1 git push --all";
+      "sf" = "!bash -c 'source ${fzfStage}/share/bash/fzf-git-stage.bash && __fzf_git_stage'";
       "stash-untracked" = ''
         !f() {
           git stash;
