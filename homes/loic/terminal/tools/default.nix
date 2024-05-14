@@ -31,7 +31,6 @@ in {
 
     # -- Process manipulation
     killall
-    pueue
     viddy
 
     # -- TUIS
@@ -99,15 +98,16 @@ in {
     };
   };
 
-  systemd.user.services = {
-    # -- Pueue
-    # TODO: Home Manager module
-    pueued = {
-      Unit.Description = "Pueue  Daemon - CLI Process scheduler and aanager";
-      Install.WantedBy = ["default.target"];
-      Service = {
-        Restart = "no";
-        ExecStart = "${pkgs.pueue}/bin/pueued -vv";
+  services = {
+    # -- `pueue`
+    pueue = {
+      enable = true;
+      settings = {
+        client = {
+          dark_mode = true;
+          show_expanded_aliases = true;
+          show_confirmation_questions = true;
+        };
       };
     };
   };
