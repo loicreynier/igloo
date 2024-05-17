@@ -21,6 +21,17 @@
     shellAliases = {
       xdg-open = "wsl-open";
     };
+
+    variables = with pkgs; {
+      NIX_LD_LIBRARY_PATH = lib.mkForce (lib.makeLibraryPath [
+        # Keep the default and NVIDIA driver
+        "/run/current-system/sw/share/nix-ld"
+        "/usr/lib/wsl" # Windows NVIDIA driver
+      ]);
+      LD_LIBRARY_PATH = with pkgs; (lib.makeLibraryPath [
+        "/usr/lib/wsl"
+      ]);
+    };
   };
 
   # -- Mount root to `/mnt/wsl/instances` so it can be accessed by other WSLs
