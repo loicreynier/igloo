@@ -25,12 +25,20 @@ max_line_length = 100
 indent_size = 2
 max_line_length = 100
 
-[.bib]
+[*.bib]
 indent_size = 2
 max_line_length = unset
 
 [*.nix]
 max_line_length = off
+
+
+[*.{sh,bash}]
+max_line_length = 100
+
+[*.ps1]
+max_line_length = 100
+indent_size = 4
 
 [*.py]
 indent_size = 4
