@@ -28,9 +28,9 @@
         "/run/current-system/sw/share/nix-ld"
         "/usr/lib/wsl" # Windows NVIDIA driver
       ]);
-      LD_LIBRARY_PATH = with pkgs; (lib.makeLibraryPath [
+      LD_LIBRARY_PATH = lib.makeLibraryPath [
         "/usr/lib/wsl"
-      ]);
+      ];
     };
   };
 
