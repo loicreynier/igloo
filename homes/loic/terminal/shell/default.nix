@@ -8,6 +8,7 @@
   imports = [
     ./bash.nix
     ./fzf.nix
+    ./powershell.nix
     ./utils.nix
     ./vars.nix
   ];

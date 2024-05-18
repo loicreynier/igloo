@@ -5,6 +5,7 @@
     "kamadorueda.alejandra",
     "davidanson.vscode-markdownlint",
     "tekumara.typos-vscode",
-    "valentjn.vscode-ltex"
+    "valentjn.vscode-ltex",
+    "ms-vscode.powershell"
   ]
 }

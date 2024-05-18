@@ -16,6 +16,8 @@ These configurations files do not contain Nix expressions and can be imported in
 - [`editorconfig`](./editorconfig):
   EditorConfig with rules for all files I work with outside of repos.
 - [`ipython`](./ipython): IPython shell configuration with autoreload and `fzf` history search
+- [`powershell`](./powershell): Cross-platform PowerShell 7+ config
+  with zoxide, Starship and fzf features and automatic profile update.
 - [`python`](./python): Python shell configuration
   with history in `$XDG_STATE_HOME/python_history`
   and auto-import modules from `$PYTHONMODULES`
