@@ -74,7 +74,7 @@ function Update-Profile {
 
     try {
         $repo = "loicreynier/igloo"
-        $branch = "feat-config-powershell"
+        $branch = "main"
         $path = "config/powershell/Microsoft.PowerShell_profile.ps1"
         $url = "https://raw.githubusercontent.com/$repo/$branch/$path"
         $oldHash = Get-FileHash $PROFILE
