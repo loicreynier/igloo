@@ -1,4 +1,9 @@
-{config, ...}: {
+{
+  lib,
+  config,
+  self,
+  ...
+}: {
   programs.bash = {
     enable = true;
 
@@ -34,5 +39,7 @@
       "globstar" # Enable `**` for subdirectory globbing
       "histappend" # Append to history file instead of overwriting it
     ];
+
+    initExtra = lib.strings.fileContents "${self}/config/bash/functions/core-utils.bash";
   };
 }
