@@ -52,6 +52,8 @@
       ".direnv/"
       "__pycache__/"
       "*.swp"
+      "*.bak"
+      "*.old"
       "*.~lock"
       "result"
       "debug.log"
