@@ -1,0 +1,30 @@
+search_mode = "fuzzy"
+search_mode_shell_up_key_binding = "fuzzy"
+filter_mode = "global"
+filter_mode_shell_up_key_binding = "global"
+workspaces = true
+
+style = "auto"
+inline_height = 40
+invert = true
+history_format = "{time}\t{command}\t{duration}"
+show_preview = false
+max_preview_height = 4
+show_help = true
+
+exit_mode = "return-original"
+
+enter_accept = false
+word_jump_mode = "emacs"
+
+history_filter = [
+  # Secrets
+  "^pass",
+  # Interactive menus
+  "^z ",
+  "^v ",
+]
+cwd_filter = [
+  # Secrets
+  "^/home/loic/.local/share/password-store",
+]
