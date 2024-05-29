@@ -17,14 +17,22 @@ exit_mode = "return-original"
 enter_accept = false
 word_jump_mode = "emacs"
 
-history_filter = [
-  # Secrets
-  "^pass",
+history_filter = ["^pass"]
+cwd_filter = [".*password-store.*"]
+
+[stats]
+
+ignored_commands = [
+  "ls",
+  "vi",
+  "cd",
   # Interactive menus
-  "^z ",
-  "^v ",
+  "v",
+  "z",
+  "zi",
+  "ji",
 ]
-cwd_filter = [
-  # Secrets
-  "^/home/loic/.local/share/password-store",
-]
+
+[dotfiles]
+
+enabled = true
