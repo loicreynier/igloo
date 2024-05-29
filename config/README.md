@@ -7,6 +7,7 @@ rather than working in Nix multiline strings.
 
 These configurations files do not contain Nix expressions and can be imported in non-Nix systems.
 
+- [`atuin`](./atuin): mostly Atuin default config
 - [`bash/functions`](./bash/functions):
   Bash functions (with associated keybinding) imported in `~/.bashrc`
 - [`bat`](./bat):

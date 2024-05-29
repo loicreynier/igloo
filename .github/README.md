@@ -109,6 +109,8 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
   because `cd`-ing is boring and `z` is a fast boy
 - [pet](https://github.com/knqyf263/pet)
   to remember the juiciest commands
+- [Atuin](https://atuin.sh)
+  to have a shell history on steroids
 
 </details>
 

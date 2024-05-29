@@ -17,3 +17,4 @@ zoxide
 direnv
 Sourcegraph
 fzf
+Atuin
