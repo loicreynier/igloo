@@ -54,4 +54,15 @@
       sha1sum = "${pkgs.perl}/bin/shasum";
     });
   };
+
+  programs.nano = let
+    nanoConf = lib.strings.fileContents "${self}/config/nano/nanorc";
+  in {
+    enable = true;
+    nanorc = ''
+      include ${pkgs.nanorc}/share/*.nanorc # Extended syntax highlighting
+
+      ${nanoConf}
+    '';
+  };
 }

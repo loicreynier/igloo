@@ -1,0 +1,33 @@
+# -- Options
+# Inspired by: https://github.com/davidhcefx/Modern-Nano-Keybindings
+
+set tabsize 4
+set tabstospaces
+set linenumbers
+set mouse                        # Enable mouse support
+set indicator                    # Side bar for indicating cursor position
+set smarthome                    # `Home` jumps to line start first
+set wordchars "_"                # Recognize '_' as part of a word
+set historylog                   # Remember search history
+
+# set locking                    # vim-like file locks
+# nohelp                         # Disable help
+
+# -- Ricing
+
+set numbercolor yellow,normal
+set scrollercolor grey,normal
+
+# -- Keybindings
+
+bind ^C     copy              main
+bind ^V     paste             main
+bind ^X     cut               main
+bind ^H     chopwordleft      all
+bind ^Q     exit              all
+bind ^Z     suspend           main
+bind M-R    redo              main
+bind ^G     firstline         all
+bind M-G    lastline          all
+bind ^U     pageup            all
+bind ^D     pagedown          all
