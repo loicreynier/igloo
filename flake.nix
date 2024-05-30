@@ -47,6 +47,7 @@
       inputs.flake-schemas.follows = "flake-schemas";
       url = "github:DeterminateSystems/nix-src/flake-schemas";
     };
+    flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
 
     # -- Packages
     nur.url = "github:nix-community/nur";
