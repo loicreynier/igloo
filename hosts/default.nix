@@ -73,6 +73,18 @@ in {
           roles.wsl
         ];
       };
+
+    latios-wsl =
+      mkNixosSystem
+      {
+        name = "latios-wsl";
+        inherit withSystem;
+        system = "x86_64-linux";
+        modules = [
+          wsl
+          roles.wsl
+        ];
+      };
   };
 
   # -- Checks & TODO: run packages
