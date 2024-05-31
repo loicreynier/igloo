@@ -41,6 +41,11 @@ in {
         # Therefore it only checks if they are in the expected path and prints a warning.
         commands = {
           "clip.exe" = "/mnt/c/Windows/System32/clip.exe";
+
+          # Note that programs installed with WinGet are only symlinked to
+          # `%AppData%/Local/Microsoft/WinGet/Links`
+          # if "Developer Mode" is enabled or if the command is run from an admin shell.
+          # Source: https://github.com/microsoft/winget-cli/issues/3498
           "win32yank.exe" = "/mnt/c/Users/Loic/AppData/Local/Microsoft/WinGet/Links/win32yank.exe";
         };
         check = name: path: ''
