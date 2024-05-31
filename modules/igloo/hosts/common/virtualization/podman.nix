@@ -5,9 +5,7 @@
 }: let
   cfg = config.igloo.system.virtualization;
 
-  enableNvidiaContainers =
-    (builtins.any (driver: driver == "nvidia") config.services.xserver.videoDrivers)
-    || (config.igloo.device.type == "wsl");
+  enableNvidiaContainers = config.igloo.device.gpu.type == "nvidia";
 in {
   config = lib.mkIf cfg.podman.enable {
     virtualisation = {
