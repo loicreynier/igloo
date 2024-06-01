@@ -28,6 +28,7 @@ done
 
 # Default behavior
 force_rename=false
+mvflags="-v"
 
 while getopts ":hf" opt; do
   case ${opt} in
@@ -52,22 +53,23 @@ if [ $# -ne 2 ]; then
   exit 1
 fi
 
-old_filename="$1"
-new_filename="$2"
+# Parse and convert to absolute paths
+# Using `realink` here because it converts to absolute path
+# and remove both duplicate and trailing slashing
+# which is tideous in pure Bash.
+# Also, it resolve symbolic links which can be useful on a Nix system.
+old_filename=$(readlink -n -e "$1")
+new_filename=$(readlink -n -m "$(dirname "$old_filename")/$2")
 
-if [ ! -f "$old_filename" ]; then
+if [ ! -e "$old_filename" ]; then
   echo "Error: File '${old_filename}' does not exist"
   exit 1
 fi
 
-# Get parent directory of target
-old_filename="${old_filename//\/*(\/)/\/}" # Remove duplicate slash
-old_filename="${old_filename%%/}"          # Remove trailing slash
-dir_name="${old_filename%/*}"
-if [ "$dir_name" == "$old_filename" ]; then
-  dir_name="."
-fi
+if git ls-files --error-unmatch "$old_filename" &>/dev/null; then
+  git mv $mvflags "$old_filename" "$new_filename"
 
-mvflags="-vi"
-[ $force_rename == true ] && mvflags="-v"
-mv $mvflags "$old_filename" "${dir_name}/${new_filename##*/}"
+else
+  [ $force_rename == true ] && mvflags="-v"
+  mv $mvflags "$old_filename" "$new_filename"
+fi
