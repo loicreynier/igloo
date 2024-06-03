@@ -51,15 +51,13 @@
 
       # -- `duck.nvim`
       {
-        action = "function() require('duck').hatch() end";
-        lua = true;
+        action.__raw = "function() require('duck').hatch() end";
         key = "<Leader>dd";
         options.desc = "Spawn a little duck, coin coin";
         mode = ["n"];
       }
       {
-        action = "function() require('duck').cook() end";
-        lua = true;
+        action.__raw = "function() require('duck').cook() end";
         key = "<Leader>dk";
         options.desc = "Despawn a little duck, coin coin";
         mode = ["n"];
