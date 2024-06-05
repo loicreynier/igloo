@@ -29,6 +29,16 @@ build-nixos:
 # Build all
 build: build-nixos build-home
 
+# Build WSL system tarball
+build-wsl system="smaug":
+    @mkdir -p build
+    @echo 'Building "{{ system }}" WSL system tarball'
+    sudo nix run .#nixosConfigurations.{{ system }}-wsl.config.system.build.tarballBuilder
+    @mv -v nixos-wsl.tar.gz \
+        build/nixos-wsl-{{ system }}_\
+        "$(git rev-parse --abbrev-ref HEAD)"-\
+        "$(git describe --always --dirty --tags --abbrev=7)".tar.gz
+
 # Build GitHub README
 build-readme:
     sh .github/make-readme.sh

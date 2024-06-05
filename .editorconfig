@@ -41,6 +41,7 @@ max_line_length = unset
 
 [Justfile]
 indent_size = 4
+max_line_length = 100
 
 [*.{lock,age}]
 # Those files should not be opened by editors nor parsed by pre-commit hooks
