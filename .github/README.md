@@ -27,6 +27,7 @@
 
 Home baked configurations for all my systems and user environments.
 Using [Nix], [flakes], [flake parts] and [Home Manager].
+Also contains raw configuration files and scripts for ~~cringe~~ non-Nix systems.
 
 [Nix]: https://nixos.org
 [flakes]: https://nixos.wiki/wiki/Flakes
@@ -38,17 +39,18 @@ Using [Nix], [flakes], [flake parts] and [Home Manager].
 - [`bin`](../bin): raw executable/script files (not generated using Nix)
 - [`config`](../config): raw configuration files (not generated using Nix)
 - [`flake.nix`](../flake.nix): Entry point of the Igloo
-- [`flake`](../flake): Individual parts of the flake, powered by flake parts
-- [`homes`](../homes): Home Manager/user environment configuration
-- [`hosts`](../hosts): NixOS/system configurations
-- [`modules`](../modules): Configuration resources
-  - [`igloo`](../modules/igloo): Home & system modularized configurations
-  - [`home-manager`](../modules/home-manager): Home Manager custom modules
-  - [`nixos`](../modules/nixos): Nix OS custom modules
+- [`nix`](../nix): Nix part of Igloo
+  - [`flake`](../flake): Individual parts of the flake, powered by flake parts
+  - [`homes`](../homes): Home Manager/user environment configuration
+  - [`hosts`](../hosts): NixOS/system configurations
+  - [`modules`](../modules): Configuration modules
+    - [`igloo`](../modules/igloo): Home & system modularized configurations relative to Igloo
+    - [`home-manager`](../modules/home-manager): Home Manager custom modules
+    - [`nixos`](../modules/nixos): Nix OS custom modules
+  - [`templates`](../templates): Nix flake templates
 - [`secrets`](../secrets):
   `age`-encrypted secrets
   such as passwords and private keys
-- [`templates`](../templates): Nix flake templates
 
 ## Credits & References
 

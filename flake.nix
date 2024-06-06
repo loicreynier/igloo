@@ -9,16 +9,16 @@
       ];
 
       imports = [
-        ./homes
-        ./hosts
+        ./nix/homes
+        ./nix/hosts
 
-        ./flake/packages
-        ./flake/pre-commit.nix
-        ./flake/devshells
-        ./flake/formatter.nix
-        ./flake/modules.nix
-        ./flake/schemas.nix
-        ./flake/templates.nix
+        ./nix/flake/packages
+        ./nix/flake/pre-commit.nix
+        ./nix/flake/devshells
+        ./nix/flake/formatter.nix
+        ./nix/flake/modules.nix
+        ./nix/flake/schemas.nix
+        ./nix/flake/templates.nix
       ];
     };
 

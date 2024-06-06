@@ -39,6 +39,18 @@ build-wsl system="smaug":
         "$(git rev-parse --abbrev-ref HEAD)"-\
         "$(git describe --always --dirty --tags --abbrev=7)".tar.gz
 
+# Build WSL system tarball on non-flake enabled instances
+build-wsl-noflake system="smaug":
+    @mkdir -p build
+    @echo 'Building "{{ system }}" WSL system tarball'
+    nix-build nix/default.nix \
+        -A nixosConfigurations.{{ system }}-wsl.config.system.build.tarballBuilder \
+        && sudo ./result/bin/nixos-wsl-tarball-builder
+    @mv -v nixos-wsl.tar.gz \
+        build/nixos-wsl-{{ system }}_\
+        "$(git rev-parse --abbrev-ref HEAD)"-\
+        "$(git describe --always --dirty --tags --abbrev=7)".tar.gz
+
 # Build GitHub README
 build-readme:
     sh .github/make-readme.sh

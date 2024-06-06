@@ -3,7 +3,7 @@
   import
   (
     let
-      lock = builtins.fromJSON (builtins.readFile ./flake.lock);
+      lock = builtins.fromJSON (builtins.readFile ../flake.lock);
     in
       fetchTarball {
         url =
@@ -12,7 +12,7 @@
         sha256 = lock.nodes.flake-compat.locked.narHash;
       }
   )
-  {src = ./.;}
+  {src = ../.;}
 )
 .shellNix
 .default

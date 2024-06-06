@@ -1,28 +1,32 @@
 {self, ...}: {
-  flake.templates = {
+  flake.templates = let
+    templatePath = name: "${self}/nix/templates/${name}";
+  in rec {
+    default = flakeDefault;
+
     flakeDefault = {
       description = "Default flake with `flake-utils` and pre-commit hooks";
-      path = "${self}/templates/flake-default";
+      path = templatePath "flake-default";
     };
 
     flakeNixpkgsLor = {
       description = "Default flake with `flake-utils`, pre-commit hooks and personal `nixpkgs` overlay";
-      path = "${self}/templates/flake-nixpkgs-lor";
+      path = templatePath "flake-nixpkgs-lor";
     };
 
     flakeVanila = {
       description = "Vanilla-flavored flake";
-      path = "${self}/templates/flake-vanilla";
+      path = templatePath "flake-vanilla";
     };
 
     pythonTyper = {
       description = "Typer Python CLI app packaged with Poetry";
-      path = "${self}/templates/python-typer";
+      path = templatePath "python-typer";
     };
 
     skyrimMod = {
       description = "SkyrimSE mod versioned by Git with Spriggit";
-      path = "${self}/templates/skyrim-mod";
+      path = templatePath "skyrim-mod";
     };
   };
 }

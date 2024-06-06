@@ -2,6 +2,7 @@
   imports = [
     ./env
     ./nix
+    ./system
     ./users
     ./virtualization
   ];
