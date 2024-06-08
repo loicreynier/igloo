@@ -20,6 +20,9 @@
         bbcode = "bbcode";
         cuf = "fortran";
       };
+      filename = {
+        ".ecrc" = "json";
+      };
     };
   };
 }
