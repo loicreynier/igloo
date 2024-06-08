@@ -285,6 +285,18 @@
       vim-just
       coconut-vim
       typst-vim
+
+      # -- Misc
+      (firenvim.overrideAttrs (_:
+        with pkgs; {
+          version = "2024-04-28";
+          src = fetchFromGitHub {
+            owner = "glacambre";
+            repo = "firenvim";
+            rev = "03ba12a5a92a02d171005775a8150998c4060a74";
+            sha256 = "0fa49443b21rzfvbyx4kri673y7nny8j3jgd591y71mfiaa7w5bw";
+          };
+        }))
     ];
 
     extraConfigLuaPre = lib.fileContents ./ltex-dir-path.lua;
