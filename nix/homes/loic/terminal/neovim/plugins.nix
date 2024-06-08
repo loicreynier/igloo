@@ -84,7 +84,15 @@
             installCargo = true;
           };
           taplo.enable = true;
-          texlab.enable = true;
+          texlab = {
+            enable = true;
+            # settings = {
+            #   build = {
+            #     onSave = true;
+            #     executable = "latexmk";
+            #   };
+            # };
+          };
           typos-lsp.enable = true;
           typst-lsp.enable = true;
           yamlls.enable = true;
