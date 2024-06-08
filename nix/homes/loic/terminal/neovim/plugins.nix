@@ -283,9 +283,9 @@
         duck-nvim
 
         # -- Highlighting
+        vim-bbcode-syntax
         vim-just
         typst-vim
-        vim-bbcode-syntax
       ]
       ++ [
         pkgs.vimExtraPlugins.hlchunk-nvim
