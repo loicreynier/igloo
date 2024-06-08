@@ -119,7 +119,7 @@
             editorconfig_checker.enable = true;
             gitlint.enable = true;
             markdownlint.enable = true;
-            selene.enable = true;
+            # selene.enable = true; # Not needed with `lua-ls`
             statix.enable = true;
             yamllint.enable = true;
           };
