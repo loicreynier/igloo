@@ -1,7 +1,7 @@
 # -- Prologue --------------------------------------------------------------------------------------
 
 if ($PSVersionTable.PSVersion.Major -lt 7) {
-    Write-Host "PowerShell version is older than 7.0. Profile will not load"
+    Write-Error "PowerShell version is older than 7.0. Profile will not load"
     Exit
 }
 
@@ -68,7 +68,8 @@ function Test-GitHubConnection {
 
 function Update-Profile {
     if (-not $(Test-GitHubConnection -TimeoutSeconds 2)) {
-        Write-Host "Skipping profile update check: 'github.com' not responding within 2 seconds"
+        Write-Host -ForegroundColor `
+            "Skipping profile update check: 'github.com' not responding within 2 seconds"
         return
     }
 
@@ -87,10 +88,11 @@ function Update-Profile {
                 "A new profile update is available. Do you want to update the profile? (Y/n)"
             if ($updateConfirmation -match '^(Y|y)?$') {
                 Copy-Item -Path $tempPath -Destination $PROFILE -Force
-                Write-Host "Profile has been updated. Restart shell to reflect changes"
+                Write-Host -ForegroundColor DarkCyan `
+                    "Profile has been updated. Restart shell to reflect changes"
             }
             else {
-                Write-Host "Profile update canceled by user."
+                Write-Host "Profile update canceled by user"
             }
         }
     }
@@ -109,7 +111,7 @@ function Update-PowerShell {
     }
 
     try {
-        Write-Host "Checking for PowerShell updates..."
+        Write-Host -ForegroundColor DarkCyan "Checking for PowerShell updates..."
         $updateNeeded = $false
         $currentVersion = $PSVersionTable.PSVersion.ToString()
         $gitHubApiUrl = "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
@@ -120,11 +122,11 @@ function Update-PowerShell {
         }
 
         if ($updateNeeded) {
-            Write-Host "Updating PowerShell..."
+            Write-Host -ForegroundColor DarkCyan "Updating PowerShell..."
             winget upgrade "Microsoft.PowerShell" `
                 --accept-source-agreements `
                 --accept-package-agreements
-            Write-Host "PowerShell has been updated. Rrestart shell to reflect changes"
+            Write-Host "PowerShell has been updated. Restart shell to reflect changes"
         }
         else {
             Write-Host "PowerShell is up to date"
@@ -156,6 +158,16 @@ function Install-ModuleIfNotExists {
 
 # -- Configuration functions -----------------------------------------------------------------------
 
+function Initialize-Shell {
+    if ($IsWindows) {
+        Set-PSReadLineOption -EditMode Emacs
+        Initialize-ShellFzf
+    }
+
+    Initialize-ShellZoxide
+    Initialize-ShellStarship
+}
+
 function Initialize-ShellFzf {
     function Set-FzfOptions {
         Install-ModuleIfNotExists -Name PSFzf
@@ -167,9 +179,9 @@ function Initialize-ShellFzf {
         Set-FzfOptions
     }
     elseif ($IsWindows) {
-        Write-Host "fzf command not found. Attempting to install via winget..."
+        Write-Host "fzf command not found. Attempting to install via WinGet..."
         try {
-            winget install -e --id junegunn.fzf
+            winget install -e --id junegunn.fzf --source winget
             Write-Host "fzf installed successfully. Initializing..."
             Set-FzfOptions
         }
@@ -184,9 +196,9 @@ function Initialize-ShellZoxide {
         Invoke-Expression (& { (zoxide init powershell | Out-String) })
     }
     elseif ($IsWindows) {
-        Write-Host "zoxide command not found. Attempting to install via winget..."
+        Write-Host "zoxide command not found. Attempting to install via WinGet..."
         try {
-            winget install -e --id ajeetdsouza.zoxide
+            winget install -e --id ajeetdsouza.zoxide --source winget
             Write-Host "zoxide installed successfully. Initializing..."
             Invoke-Expression (& { (zoxide init powershell | Out-String) })
         }
@@ -201,9 +213,9 @@ function Initialize-ShellStarship {
         Invoke-Expression (& starship init powershell)
     }
     elseif ($IsWindows) {
-        Write-Host "Starship command not found. Attempting to install via winget..."
+        Write-Host "Starship command not found. Attempting to install via WinGet..."
         try {
-            winget install -e --id Starship.Starship
+            winget install -e --id Starship.Starship --source winget
             Write-Host "Starship installed successfully. Initializing..."
             Invoke-Expression (& starship init powershell)
         }
@@ -221,11 +233,11 @@ function Invoke-LinuxConfig {
 
         switch ($linuxDistro) {
             "NixOS" {
-                Write-Host "Setting up for NixOS..."
+                Write-Host -ForegroundColor DarkCyan "Setting up for NixOS..."
                 Invoke-LinuxConfigNixOS
             }
             default {
-                Write-Host "Setting up for default Linux distro"
+                Write-Host -ForegroundColor DarkCyan "Setting up for default Linux distro..."
                 Invoke-LinuxConfigDefault
             }
         }
@@ -236,22 +248,19 @@ function Invoke-LinuxConfig {
 }
 
 function Invoke-LinuxConfigNixOS {
-    Initialize-ShellZoxide
-    Initialize-ShellStarship
+    Initialize-Shell
 }
 
 function Invoke-LinuxConfigDefault {
     Update-Profile
-    Initialize-ShellZoxide
-    Initialize-ShellStarship
+    Initialize-Shell
 }
 
 function Invoke-WindowsConfig {
+    Write-Host -ForegroundColor DarkCyan "Setting up for Windows..."
     Update-PowerShell
     Update-Profile
-    Initialize-ShellFzf
-    Initialize-ShellZoxide
-    Initialize-ShellStarship
+    Initialize-Shell
 }
 
 # -- Actual configuration --------------------------------------------------------------------------
