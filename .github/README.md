@@ -6,7 +6,7 @@
 <p align="center">
   <a href="https://nixos.wiki/wiki/NixOS"
     ><img
-      src="https://img.shields.io/badge/NixOS-23.11-5277c3?logo=nixos&logoColor=white"
+      src="https://img.shields.io/badge/NixOS-24.05-5277c3?logo=nixos&logoColor=white"
       alt="NixOS"
   /></a>
   <a href="https://github.com/NixOS/nixpkgs"
@@ -16,7 +16,7 @@
   /></a>
   <a href="https://nixos.wiki/wiki/Home_Manager"
     ><img
-      src="https://img.shields.io/badge/Home%20Manager-23.11-5277c3?logo=nixos&logoColor=white"
+      src="https://img.shields.io/badge/Home%20Manager-24.05-5277c3?logo=nixos&logoColor=white"
       alt="Home Manager"
   /></a>
 </p>

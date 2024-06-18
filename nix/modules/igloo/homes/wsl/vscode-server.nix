@@ -9,9 +9,9 @@ Not tested for SSH connection.
 Might break on VS Code updates.
 
 Working with:
-- WSL 2.0.14.0
-- VS Code 1.88.1
-- nixpkgs 23.11
+- WSL 2.2.4.0
+- VS Code 1.90.0
+- nixpkgs 24.05
 
 Alternatives:
 - https://github.com/nix-community/nixos-vscode-server

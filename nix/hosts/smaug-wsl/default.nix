@@ -1,5 +1,5 @@
 {
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
   networking.hostName = "smaug-wsl";
   services.openssh.ports = [2201];
 
