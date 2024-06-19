@@ -1,6 +1,6 @@
 alias sh := switch-home
 alias sn := switch-nixos
-alias bh := build
+alias bh := build-home
 alias bn := build-nixos
 alias s := switch
 alias b := build
