@@ -45,4 +45,14 @@ in {
       ./loic/wsl.nix
     ];
   };
+
+  perSystem = {lib, ...}: {
+    checks =
+      lib.mapAttrs'
+      (name: value: {
+        name = "home-${name}";
+        value = value.activation-script;
+      })
+      self.homeConfigurations;
+  };
 }
