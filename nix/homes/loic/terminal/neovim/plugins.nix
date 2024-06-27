@@ -231,6 +231,7 @@
         autoClose = false; # I want to use `vi <folder>`
         openOnSetup = true;
         tab.sync.open = true;
+        view.side = "right";
       };
       notify = {
         enable = true;
