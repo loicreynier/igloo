@@ -5,6 +5,8 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
     Exit
 }
 
+$env:POWERSHELL_TELEMETRY_OPTOUT = 1
+
 # -- Utility functions -----------------------------------------------------------------------------
 
 function Get-LinuxDistribution {
