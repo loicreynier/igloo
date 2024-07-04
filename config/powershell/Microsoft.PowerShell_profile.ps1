@@ -284,3 +284,21 @@ function Get-PathElements {
     }
 }
 New-Alias -Name path -Value Get-PathElements
+
+function Invoke-WinUtil {
+    $ctUrl = "https://christitus.com/win"
+    $ghUrl = "https://github.com/ChrisTitusTech/winutil/releases/latest/download/winutil.ps1"
+    try {
+        Invoke-Expression (Invoke-RestMethod -Uri $ctUrl)
+    }
+    catch {
+        Write-Warning "Failed to invoke WinUtil from 'christitus.com', trying from GitHub..."
+        try {
+            Invoke-Expression (Invoke-RestMethod -Uri $ghUrl)
+        }
+        catch {
+            Write-Error "Failed to invoke WinUtil from GitHub. Error: $_"
+        }
+    }
+}
+New-Alias -Name winutil -Value Invoke-WinUtil
