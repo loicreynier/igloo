@@ -46,9 +46,9 @@ function Install-NerdFonts {
     try {
         [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
         $fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name
-        if ($fontFamilies -notcontains "${FontDisplayName} Mono") {
+        if ($fontFamilies -notcontains "${FontDisplayName}") {
             # editorconfig-checker-disable
-            $fontZipUrl = "https://github.com/ryanoasis/nerd-fonts/releases/download/${Version}/${FontName}.zip"
+            $fontZipUrl = "https://github.com/ryanoasis/nerd-fonts/releases/download/v${Version}/${FontName}.zip"
             # editorconfig-checker-enable
             $zipFilePath = "$env:temp\${FontName}.zip"
             $extractPath = "$env:temp\${FontName}"
