@@ -33,7 +33,7 @@ max_line_length = 88
 indent_size = 4
 max_line_length = 100
 
-[*.yaml]
+[*.{yaml,json}]
 max_line_length = unset
 
 [{*.conf,config.xxhc}]
