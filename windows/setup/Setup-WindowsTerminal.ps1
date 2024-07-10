@@ -39,7 +39,7 @@ function Update-WindowsTerminal {
 # editorconfig-checker-disable
 function Update-WindowsTerminalSettings {
     param (
-        [string]$SourceURL = "https://github.com/loicreynier/igloo/raw/dev/config/WindowsTerminal/settings.json",
+        [string]$SourceURL = "https://github.com/loicreynier/igloo/raw/dev/config/windowsterminal/settings.json",
         [switch]$Preview
     )
 
