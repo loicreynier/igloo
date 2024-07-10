@@ -161,6 +161,8 @@ function Install-ModuleIfNotExists {
 function Initialize-Shell {
     if ($IsWindows) {
         Set-PSReadLineOption -EditMode Emacs
+        Set-PSReadlineKeyHandler -Key "Ctrl+p" -Function HistorySearchBackward
+        Set-PSReadlineKeyHandler -Key "Ctrl+n" -Function HistorySearchForward
         Initialize-ShellFzf
     }
 
@@ -172,7 +174,8 @@ function Initialize-ShellFzf {
     function Set-FzfOptions {
         Install-ModuleIfNotExists -Name PSFzf
         Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-        Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+        Set-PSReadLineKeyHandler -Key "Tab" -ScriptBlock { Invoke-FzfTabCompletion }
+        Set-PSReadLineKeyHandler -Key "Ctrl+i" -ScriptBlock { Invoke-FzfTabCompletion }
     }
 
     if (Get-Command fzf -ErrorAction SilentlyContinue) {
