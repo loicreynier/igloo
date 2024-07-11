@@ -18,3 +18,4 @@ direnv
 Sourcegraph
 fzf
 Atuin
+PowerToys
