@@ -153,7 +153,7 @@
       # -- Treesitter
       treesitter = {
         enable = true;
-        indent = true;
+        settings.indent.enable = true;
       };
 
       # -- Completion
