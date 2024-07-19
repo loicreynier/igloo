@@ -80,8 +80,8 @@ function Update-WindowsTerminalSettings {
 function Install-NerdFonts {
     param (
         [string]$FontName = "CascadiaCode",
-        [string]$FontDisplayName = "CaskaydiaCove NF",
-        [string]$Version = "3.2.1"
+        [string]$FontDisplayName = "CaskaydiaCove NF"
+        # [string]$Version = "3.2.1"
     )
 
     Write-Host -ForegroundColor DarkCyan "Installing Nerd Font ${FontDisplayName} (${FontName})..."
@@ -91,7 +91,8 @@ function Install-NerdFonts {
         $fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name
         if ($fontFamilies -notcontains "${FontDisplayName}") {
             # editorconfig-checker-disable
-            $fontZipUrl = "https://github.com/ryanoasis/nerd-fonts/releases/download/v${Version}/${FontName}.zip"
+            # $fontZipUrl = "https://github.com/ryanoasis/nerd-fonts/releases/download/v${Version}/${FontName}.zip"
+            $fontZipUrl = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/${FontName}.zip"
             # editorconfig-checker-enable
             $zipFilePath = "$env:temp\${FontName}.zip"
             $extractPath = "$env:temp\${FontName}"
