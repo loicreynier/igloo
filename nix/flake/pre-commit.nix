@@ -36,6 +36,11 @@
             language = "system";
             pass_filenames = false;
           };
+          check_github_urls_branch = mkHook "check-github-urls-branch" {
+            enable = true;
+            entry = "${pkgs.python3}/bin/python3 .pre-commit/check_github_urls_branch.py";
+            language = "system";
+          };
 
           # -- Nix
           alejandra = mkHook "Alejandra" {enable = true;};
