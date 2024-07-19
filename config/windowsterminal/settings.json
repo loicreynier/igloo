@@ -48,13 +48,25 @@
       "bellStyle": "none",
       "colorScheme": "VS Code Dark",
       "font": {
-        "face": "CaskaydiaCove NF Mono",
+        "face": "CaskaydiaCove NF",
         "size": 8.0
       },
       "opacity": 100,
       "tabColor": "#1E1E1E"
     },
     "list": [
+      {
+        "guid": "{c397f356-5e7b-55bc-956b-8cb4b9762c26}",
+        "hidden": false,
+        "name": "NixOS",
+        "source": "Windows.Terminal.Wsl"
+      },
+      {
+        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+        "hidden": false,
+        "name": "PowerShell",
+        "source": "Windows.Terminal.PowershellCore"
+      },
       {
         "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
@@ -67,18 +79,6 @@
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "hidden": true,
         "name": "Command Prompt"
-      },
-      {
-        "guid": "{c397f356-5e7b-55bc-956b-8cb4b9762c26}",
-        "hidden": false,
-        "name": "NixOS",
-        "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-        "hidden": false,
-        "name": "PowerShell",
-        "source": "Windows.Terminal.PowershellCore"
       }
     ]
   },
@@ -358,6 +358,29 @@
       "selectionBackground": "#FFFFFF",
       "white": "#C0C0C0",
       "yellow": "#808000"
+    },
+    {
+      "background": "#101010",
+      "black": "#101010",
+      "blue": "#008080",
+      "brightBlack": "#585858",
+      "brightRed": "#FF8080",
+      "brightGreen": "#565656",
+      "brightYellow": "#FFC799",
+      "brightBlue": "#94FFE4",
+      "brightPurple": "#FFC799",
+      "brightCyan": "#94FFE4",
+      "brightWhite": "#FFFFFF",
+      "cursorColor": "#aeafad",
+      "cyan": "#94FFE4",
+      "foreground": "#FFFFFF",
+      "green": "#565656",
+      "name": "Vesper",
+      "purple": "#FFC799",
+      "red": "#FF8080",
+      "selectionBackground": "#323232",
+      "yellow": "#FFC799",
+      "white": "#FFFFFF"
     }
   ],
   "showTabsInTitlebar": true,
