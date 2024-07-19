@@ -10,7 +10,7 @@ function Update-PowerToys {
     $configPath = "$env:TEMP\powertoys-config.dsc.yaml"
 
     try {
-        Invoke-RestMethod $SourceURL -OutFile $configPath
+        Invoke-RestMethod -Headers @{ "Cache-Control" = "no-cache" } $SourceURL -OutFile $configPath
         try {
             winget configure --verbose --logs --accept-configuration-agreements "$configPath"
             Remove-Item -Path $configPath

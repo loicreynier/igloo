@@ -81,7 +81,7 @@ function Update-Profile {
         $path = "config/powershell/Microsoft.PowerShell_profile.ps1"
         $url = "https://raw.githubusercontent.com/$repo/$branch/$path"
         $oldHash = Get-FileHash $PROFILE
-        Invoke-RestMethod $url -OutFile $tempPath
+        Invoke-RestMethod -Headers @{ "Cache-Control" = "no-cache" } $url -OutFile $tempPath
         $newHash = Get-FileHash "$env:temp/Microsoft.PowerShell_profile.ps1"
         if ($newHash.Hash -ne $oldHash.Hash) {
             $updateConfirmation = Read-Host `

@@ -2,7 +2,7 @@ function Update-Winget {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
     $releasesURL = 'https://api.github.com/repos/microsoft/winget-cli/releases/latest'
-    $releases = Invoke-RestMethod -uri $releasesURL
+    $releases = Invoke-RestMethod -Headers @{ "Cache-Control" = "no-cache" } -Uri $releasesURL
     $latestRelease = $releases.assets
     | Where-Object { $_.browser_download_url.EndsWith('msixbundle') }
     | Select-Object -First 1

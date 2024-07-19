@@ -49,7 +49,7 @@ function Update-Profile {
     if (!(Test-Path -Path $PROFILE -PathType Leaf)) {
         try {
             New-Item -Path ([System.IO.Path]::GetDirectoryName($PROFILE)) -ItemType Directory -Force
-            Invoke-RestMethod $URL -OutFile $PROFILE
+            Invoke-RestMethod -Headers @{ "Cache-Control" = "no-cache" } $URL -OutFile $PROFILE
             Write-Host "PowerShell profile created at '$PROFILE'"
         }
         catch {
@@ -60,7 +60,7 @@ function Update-Profile {
         try {
             Write-Host "Found existing profile"
             Move-Item -Path $PROFILE -Destination "$PROFILE.old" -Force
-            Invoke-RestMethod $URL -OutFile $PROFILE
+            Invoke-RestMethod -Headers @{ "Cache-Control" = "no-cache" } $URL -OutFile $PROFILE
             Write-Host "PowerShell profile updated. Old profile backed-up at '$PROFILE.old'"
         }
         catch {

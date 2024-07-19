@@ -56,7 +56,7 @@ function Update-WindowsTerminalSettings {
     if (!(Test-Path -Path $settingsPath -PathType Leaf)) {
         try {
             New-Item -Path ([System.IO.Path]::GetDirectoryName($settingsPath)) -ItemType Directory -Force
-            Invoke-RestMethod $SourceURL -OutFile $settingsPath
+            Invoke-RestMethod -Headers @{ "Cache-Control" = "no-cache" } $SourceURL -OutFile $settingsPath
             Write-Host "Windows Terminal settings file created at '$settingsPath'"
         }
         catch {
@@ -67,7 +67,7 @@ function Update-WindowsTerminalSettings {
         try {
             Write-Host "Found existing settings file"
             Move-Item -Path $settingsPath -Destination "$settingsPath.old" -Force
-            Invoke-RestMethod $SourceURL -OutFile $settingsPath
+            Invoke-RestMethod -Headers @{ "Cache-Control" = "no-cache" } $SourceURL -OutFile $settingsPath
             Write-Host "Settings file updated. Old profile backed-up at '$settingsPath.old'"
         }
         catch {
