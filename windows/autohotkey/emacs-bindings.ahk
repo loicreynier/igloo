@@ -35,6 +35,10 @@ IsScriptActive() {
   return State
 }
 
+IsFirefox() {
+  return WinGetClass("A") == "MozillaWindowClass"
+}
+
 #!a:: Suspend
 
 $^f:: {
@@ -44,11 +48,25 @@ $^f:: {
     Send("^{f}")
 }
 
+$^!f:: {
+  If IsFirefox()
+    Send("^{f}")
+  Else
+    Send("^!{f}")
+}
+
 $^b:: {
   If IsScriptActive()
     Send("{Left}")
   Else
     Send("^{b}")
+}
+
+$^!b:: {
+  If IsFirefox()
+    Send("^{b}")
+  Else
+    Send("^!{b}")
 }
 
 $^a:: {
@@ -72,11 +90,25 @@ $^h:: {
     Send("^{h}")
 }
 
+$^!h:: {
+  If IsFirefox()
+    Send("^{h}")
+  Else
+    Send("^!{h}")
+}
+
 $^w:: {
   If IsScriptActive()
     Send("{Ctrl down}{Backspace}{Ctrl up}")
   Else
     Send("^{w}")
+}
+
+$^!w:: {
+  If IsFirefox()
+    Send("^{w}")
+  Else
+    Send("^!{w}")
 }
 
 $^u:: {
