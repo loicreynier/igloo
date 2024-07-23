@@ -132,3 +132,32 @@ $^m:: {
   Else
     Send("^{m}")
 }
+
+$^n:: {
+  If IsScriptActive()
+    Send("{Down}")
+  Else
+    Send("^{n}")
+}
+
+$^!n:: {
+  If IsFirefox()
+    Send("^{n}")
+  Else
+    Send("^!{n}")
+}
+
+$^p:: {
+  If IsScriptActive()
+    Send("{Up}")
+  Else
+    Send("^{p}")
+}
+
+$^!p:: {
+  If IsFirefox()
+    Send("^{p}")
+  Else
+    Send("^!{p}")
+}
+
