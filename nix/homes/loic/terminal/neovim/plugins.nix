@@ -18,6 +18,9 @@
     };
 
     plugins = {
+      # -- Key mappings
+      better-escape.enable = true;
+
       # -- Language server
       lsp = {
         enable = true;
@@ -111,7 +114,7 @@
             editorconfig_checker.enable = true;
             gitlint.enable = true;
             markdownlint.enable = true;
-            selene.enable = true;
+            # selene.enable = true; # Not needed with `lua-ls`
             statix.enable = true;
             yamllint.enable = true;
           };
@@ -119,14 +122,10 @@
             clang_format.enable = true;
             fprettify = {
               enable = true;
-              withArgs = ''
-                {
-                  extra_args = {
-                    "--indent=4",
-                    "line-length=100",
-                  },
-                }
-              '';
+              settings.extra_args = [
+                "--indent=4"
+                "line-length=100"
+              ];
             };
             just.enable = true;
             prettier.enable = true;
@@ -150,11 +149,12 @@
         };
       };
 
-      # -- Treesitter
+      # -- Treesitter - Highlighting - Indentation
       treesitter = {
         enable = true;
         settings.indent.enable = true;
       };
+      guess-indent.enable = true;
 
       # -- Completion
       cmp = {
@@ -216,6 +216,7 @@
 
       # -- UI
       bufferline.enable = true;
+      bufdelete.enable = true;
       gitsigns.enable = true;
       lualine = {
         enable = true;
