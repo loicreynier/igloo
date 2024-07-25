@@ -19,3 +19,4 @@ Sourcegraph
 fzf
 Atuin
 PowerToys
+AutoHotkey

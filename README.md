@@ -25,9 +25,10 @@ Also contains raw configuration files and scripts for ~~cringe~~ non-Nix systems
     - [`home-manager`](./modules/home-manager): Home Manager custom modules
     - [`nixos`](./modules/nixos): Nix OS custom modules
   - [`templates`](./templates): Nix flake templates
-- [`secrets`](./secrets):
-  `age`-encrypted secrets
-  such as passwords and private keys
+- [`secrets`](./secrets): `age`-encrypted secrets such as passwords and private keys
+- [`unix`](./unix): Linux/Unix related fluff
+- [`windows`](./windows): Windows related fluff
+  such as setup AutoHotkey and PowerShell scripts
 
 ## Credits & References
 
