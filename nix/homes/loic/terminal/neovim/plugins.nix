@@ -254,7 +254,9 @@
       duck-nvim
 
       # -- Highlighting
+      vim-bbcode-syntax
       vim-just
+      coconut-vim
       typst-vim
     ];
 
