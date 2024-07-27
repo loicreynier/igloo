@@ -252,9 +252,17 @@
         tab.sync.open = true;
         view.side = "right";
       };
+      zen-mode.enable = true;
+      twilight.enable = true;
       notify = {
         enable = true;
         backgroundColour = "#000000";
+      };
+      noice = {
+        enable = true;
+        lsp = {
+          progress.enabled = false;
+        };
       };
 
       # -- Git

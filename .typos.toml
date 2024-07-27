@@ -1,2 +1,5 @@
 [files]
 extend-exclude = ["**.age"]
+
+[default.extend-words]
+noice = "noice" # Neovim plugin
