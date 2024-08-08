@@ -18,6 +18,7 @@ in {
 
   home.packages = with pkgs; [
     coreutils
+    file
 
     # -- Modern core utils
     just
@@ -42,6 +43,7 @@ in {
 
     # -- Text processing
     dos2unix
+    jc
     jq
     grex
     xsv
