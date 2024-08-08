@@ -13,14 +13,22 @@
   environment = {
     defaultPackages = lib.mkForce [];
 
-    systemPackages = with pkgs; [
-      curl
-      git
-      ripgrep
-      rsync
-      vim
-      wget
-    ];
+    systemPackages = with pkgs;
+      [
+        curl
+        file
+        git
+        gnutar
+        ripgrep
+        rsync
+        vim
+        wget
+        zip
+        unzip
+      ]
+      ++ lib.optionals (config.igloo.device.gpu.type == "nvidia") [
+        nvitop
+      ];
   };
 
   environment.sessionVariables = {

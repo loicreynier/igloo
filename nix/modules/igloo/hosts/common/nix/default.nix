@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   nix = {
     settings = {
       trusted-users = [
@@ -56,4 +60,8 @@
   };
 
   programs.nix-ld.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    nh
+  ];
 }
