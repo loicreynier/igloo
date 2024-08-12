@@ -27,13 +27,24 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    # -- Nix utilities
-    flake-utils.url = "github:numtide/flake-utils";
+    # -- Nix utilities & dependencies
+    flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    git-hooks.url = "github:cachix/git-hooks.nix";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+        gitignore.follows = "gitignore";
+      };
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,29 +53,66 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-schemas.url = "github:gvolpe/flake-schemas";
     nix-schema = {
-      inputs.flake-schemas.follows = "flake-schemas";
       url = "github:DeterminateSystems/nix-src/flake-schemas";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        flake-schemas.follows = "flake-schemas";
+        pre-commit-hooks.follows = "";
+      };
     };
-    flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
+
+    # -- Nix dependencies (not directly used)
+    systems.url = "github:nix-systems/default";
+    flake-schemas.url = "github:gvolpe/flake-schemas";
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    poetry2nix = {
+      url = "github:nix-community/poetry2nix";
+      inputs = {
+        systems.follows = "systems";
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        nix-github-actions.follows = "";
+        treefmt-nix.follows = "";
+      };
+    };
 
     # -- Packages
     nur.url = "github:nix-community/nur";
     nixpkgs-lor = {
       url = "github:loicreynier/nixpkgs-lor";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        git-hooks.follows = "git-hooks";
+      };
     };
 
     # -- Secrets
     agenix = {
       url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.darwin.follows = ""; # Don't download Darwin deps
+      inputs = {
+        systems.follows = "systems";
+        nixpkgs.follows = "nixpkgs";
+        darwin.follows = "";
+        home-manager.follows = "home-manager";
+      };
     };
 
     # -- Windows Subsystem for Linux (WSL)
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        flake-compat.follows = "flake-compat";
+      };
+    };
     nixos-vscode-remote-wsl = {
       url = "github:sonowz/vscode-remote-wsl-nixos";
       flake = false;
@@ -75,13 +123,23 @@
       url = "github:nix-community/nixvim";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        nix-darwin.follows = "";
         home-manager.follows = "home-manager";
         flake-parts.follows = "flake-parts";
+        flake-compat.follows = "flake-compat";
+        git-hooks.follows = "git-hooks";
+        devshell.follows = "";
+        treefmt-nix.follows = "";
+        nuschtosSearch.follows = "";
       };
     };
     nixneovimplugins = {
       url = "github:jooooscha/nixpkgs-vim-extra-plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        poetry2nix.follows = "poetry2nix";
+      };
     };
   };
 
