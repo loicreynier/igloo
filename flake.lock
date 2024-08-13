@@ -179,6 +179,26 @@
         "type": "github"
       }
     },
+    "nix-auto-follow": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1722961876,
+        "narHash": "sha256-u8rTsKMIY9i4nTIgZ6/zuPKQqGuwG2CGhkNK7yryd+8=",
+        "owner": "fzakaria",
+        "repo": "nix-auto-follow",
+        "rev": "04c391e9ce9b2b8145979c637ec9109819f54c03",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fzakaria",
+        "repo": "nix-auto-follow",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -496,6 +516,7 @@
         "git-hooks": "git-hooks",
         "gitignore": "gitignore",
         "home-manager": "home-manager",
+        "nix-auto-follow": "nix-auto-follow",
         "nix-index-database": "nix-index-database",
         "nix-schema": "nix-schema",
         "nixneovimplugins": "nixneovimplugins",

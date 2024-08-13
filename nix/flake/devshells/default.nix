@@ -1,7 +1,8 @@
-{
+{inputs, ...}: {
   perSystem = {
     config,
     pkgs,
+    system,
     ...
   }: {
     devShells.default = pkgs.mkShell {
@@ -32,6 +33,8 @@
         magic-wormhole-rs
         statix
         tree
+
+        inputs.nix-auto-follow.packages.${system}.default
 
         (mkScript "igloo-update")
         (mkScript "igloo-switch-home")

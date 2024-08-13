@@ -3,7 +3,11 @@
     inputs.git-hooks.flakeModule
   ];
 
-  perSystem = {pkgs, ...}: let
+  perSystem = {
+    pkgs,
+    # system,
+    ...
+  }: let
     # General exclude list
     globalExcludes = [
       "flake.lock"
@@ -41,6 +45,14 @@
             entry = "${pkgs.python3}/bin/python3 .pre-commit/check_github_urls_branch.py";
             language = "system";
           };
+          # FIXME: see error while running
+          # nix-auto-follow = mkHook "nix-auto-follow" {
+          #   enable = true;
+          #   entry = "${inputs.nix-auto-follow.packages.${system}.default}/bin/auto-follow --check";
+          #   files = "flake\.nix";
+          #   language = "system";
+          #   pass_filenames = false;
+          # };
 
           # -- Nix
           alejandra = mkHook "Alejandra" {enable = true;};

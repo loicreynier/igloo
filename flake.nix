@@ -63,6 +63,10 @@
         pre-commit-hooks.follows = "";
       };
     };
+    nix-auto-follow = {
+      url = "github:fzakaria/nix-auto-follow";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # -- Nix dependencies (not directly used)
     systems.url = "github:nix-systems/default";

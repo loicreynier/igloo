@@ -74,6 +74,7 @@ update:
 
 # Run flake checks
 check:
+    auto-follow --check ./flake.lock # TODO: add to pre-commit instead
     nix flake check
 
 # Run pre-commit checks
