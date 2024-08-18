@@ -12,6 +12,7 @@ def check_github_urls(file_paths, user, repo, branch="main"):
     url_pattern = re.compile(
         r"https://(?:raw\.githubusercontent\.com|github\.com)/"
         f"{user}/{repo}/"
+        r"(?:raw/)?"
         r"([^/]+)/"
     )
     all_good = True
