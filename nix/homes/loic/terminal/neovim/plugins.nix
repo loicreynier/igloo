@@ -271,6 +271,20 @@
       # -- Markdown
       markdown-preview.enable = true;
       mkdnflow.enable = true;
+
+      # -- Misc
+      codesnap = {
+        enable = true;
+        settings = {
+          save_path = "${config.xdg.userDirs.pictures}/CodeSnap";
+          watermark = "";
+          has_breadcrumbs = true;
+          has_line_number = true;
+          show_workspace = false;
+          bg_theme = "default";
+          mac_window_bar = false;
+        };
+      };
     };
 
     extraPlugins = with pkgs.vimPlugins; [
