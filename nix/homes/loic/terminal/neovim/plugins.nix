@@ -116,7 +116,22 @@
             markdownlint.enable = true;
             # selene.enable = true; # Not needed with `lua-ls`
             statix.enable = true;
-            yamllint.enable = true;
+            yamllint = {
+              enable = true;
+              settings = {
+                # Settings for synergy with `yamlls`
+                extra_args = [
+                  "-d"
+                  (lib.strings.concatStringsSep
+                    " "
+                    [
+                      "{extends: default, rules: {"
+                      "comments: {min-spaces-from-content: 1},"
+                      "braces: {min-spaces-inside: 1, max-spaces-inside: 1}}}"
+                    ])
+                ];
+              };
+            };
           };
           formatting = {
             clang_format.enable = true;
