@@ -43,6 +43,9 @@ max_line_length = unset
 indent_size = 4
 max_line_length = 100
 
+[config/glazewm/config.yaml]
+end_of_line = unset
+
 [*.{lock,age}]
 # Those files should not be opened by editors nor parsed by pre-commit hooks
 charset = unset
