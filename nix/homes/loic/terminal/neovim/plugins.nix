@@ -127,7 +127,7 @@
                     [
                       "{extends: default, rules: {"
                       "comments: {min-spaces-from-content: 1},"
-                      "braces: {min-spaces-inside: 1, max-spaces-inside: 1}}}"
+                      "braces: {min-spaces-inside: 0, max-spaces-inside: 1}}}"
                     ])
                 ];
               };

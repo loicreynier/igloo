@@ -21,6 +21,7 @@
       };
       filename = {
         ".ecrc" = "json";
+        ".yamllint" = "yaml";
       };
     };
   };
