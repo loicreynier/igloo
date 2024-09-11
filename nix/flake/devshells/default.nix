@@ -47,7 +47,7 @@
         home-manager
         just
         nil
-        nix-schema
+        # nix-schema # FIXME
         magic-wormhole-rs
         statix
         tree
