@@ -44,6 +44,10 @@ in {
     "loic@wsl" = mkHomeLoic "x86_64-linux" [
       ./loic/wsl.nix
     ];
+
+    "loic@latios" = mkHomeLoic "x86_64-linux" [
+      ./loic/desktop.nix
+    ];
   };
 
   perSystem = {lib, ...}: {

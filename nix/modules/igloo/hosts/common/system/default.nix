@@ -4,6 +4,10 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./locale.nix
+  ];
+
   systemd = with lib;
     mkIf (any (device: device == config.igloo.device.type) [
       "server"

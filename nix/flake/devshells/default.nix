@@ -55,8 +55,7 @@
         inputs.nix-auto-follow.packages.${system}.default
 
         (mkScript "igloo-update")
-        (mkScript "igloo-switch-home")
-        (mkScript "igloo-build-home")
+        (mkScript "igloo-home")
         (mkScript "igloo-switch-nixos")
         (mkScript "igloo-build-nixos")
       ];

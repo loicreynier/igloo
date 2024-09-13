@@ -12,7 +12,7 @@ switch: switch-nixos switch-home
 
 # Build home and switch
 switch-home:
-    igloo-switch-home
+    igloo-home switch
 
 # Build system and switch
 switch-nixos:
@@ -20,7 +20,7 @@ switch-nixos:
 
 # Build home
 build-home:
-    igloo-build-home
+    igloo-home build
 
 # Build system
 build-nixos:

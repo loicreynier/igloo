@@ -18,11 +18,12 @@
     nixosModules
     home-manager
     agenix
+    wsl
     (iglooModules + /hosts/options)
     (iglooModules + /hosts/common)
   ];
   roles = let
-    rolesOptions = ["wsl"];
+    rolesOptions = ["graphical" "wsl"];
   in
     builtins.listToAttrs (map (name: {
         inherit name;
@@ -69,10 +70,18 @@ in {
         inherit withSystem;
         system = "x86_64-linux";
         modules = [
-          wsl
           roles.wsl
         ];
       };
+
+    latios = mkNixosSystem {
+      name = "latios";
+      inherit withSystem;
+      system = "x86_64-linux";
+      modules = [
+        roles.graphical
+      ];
+    };
 
     latios-wsl =
       mkNixosSystem
@@ -81,7 +90,6 @@ in {
         inherit withSystem;
         system = "x86_64-linux";
         modules = [
-          wsl
           roles.wsl
         ];
       };
