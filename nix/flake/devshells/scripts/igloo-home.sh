@@ -18,7 +18,7 @@ fi
 hostnames=(latios)
 
 if [[ "$(</proc/version)" =~ 'WSL' ]]; then
-  home="$USER@WSL"
+  home="$USER@wsl"
 else
   if [[ " ${hostnames[*]} " =~ $HOSTNAME ]]; then
     home="loic@$HOSTNAME"
