@@ -230,6 +230,7 @@
       };
 
       # -- UI
+      web-devicons.enable = true;
       bufferline.enable = true;
       bufdelete.enable = true;
       gitsigns.enable = true;
