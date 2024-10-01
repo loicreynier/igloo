@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  self,
+  ...
+}: {
   perSystem = {
     config,
     pkgs,
@@ -34,11 +38,16 @@
       DIRENV_LOG_FORMAT = ""; # Force direnv to shut up
 
       packages = with pkgs; let
-        mkScript = name:
-          pkgs.writeShellApplication {
-            inherit name;
-            text = lib.fileContents ./scripts/${name}.sh;
-          };
+        scriptsDir = "${self}/nix/flake/devshells/scripts";
+        # mkScript = name:
+        #   pkgs.writeShellApplication {
+        #     inherit name;
+        #     text = lib.fileContents ${scriptsDir}/${name}.sh;
+        #   };
+        pythonForIgloo = python3.withPackages (ps: with ps; [typer]);
+        igloo = pkgs.writeScriptBin "igloo" ''
+          ${pythonForIgloo}/bin/python3 ${scriptsDir}/igloo.py "$@"
+        '';
       in [
         age
         alejandra
@@ -52,12 +61,9 @@
         statix
         tree
 
-        inputs.nix-auto-follow.packages.${system}.default
+        igloo
 
-        (mkScript "igloo-update")
-        (mkScript "igloo-home")
-        (mkScript "igloo-switch-nixos")
-        (mkScript "igloo-build-nixos")
+        inputs.nix-auto-follow.packages.${system}.default
       ];
     };
   };
