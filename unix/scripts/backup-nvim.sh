@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 data_source="${XDG_DATA_HOME:-$HOME/.local/share}/nvim"
 config_source="${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
