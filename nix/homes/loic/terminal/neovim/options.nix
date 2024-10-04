@@ -25,7 +25,7 @@
         extends = "⟩";
         precedes = "⟨";
         trail = "·";
-        nbsp = "_";
+        nbsp = "␣";
         # eol = "↲";
       };
       clipboard = "unnamedplus";
