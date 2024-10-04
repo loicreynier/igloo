@@ -12,17 +12,17 @@ These configurations files do not contain Nix expressions and can be imported in
   - [`.bashrc`](./bash/.bashrc):
     minimal Bash configuration for non-Nix systems.
   - [`functions`](./bash/functions):
-    Bash functions (with associated keybinding), should be imported by `.bashrc`.
+    Bash functions (with associated keybinding), should be imported by `.bashrc`
 - [`bat`](./bat):
   default `bat` CLI arguments (different files for different themes/styles)
 - [`direnv`](./direnv):
   `direnv` configuration with cache in `~/.cache/direnv/layouts` and daemonization
 - [`editorconfig`](./editorconfig):
-  EditorConfig with rules for all files I work with outside of repos.
+  EditorConfig with rules for all files I work with outside of repos
 - [`glazewm`](./glazewm): mostly GlazeWM default config
 - [`ipython`](./ipython): IPython shell configuration with autoreload and `fzf` history search
 - [`powershell`](./powershell): Cross-platform PowerShell 7+ config
-  with zoxide, Starship and fzf features and automatic profile update.
+  with zoxide, Starship and fzf features and automatic profile update
 - [`powertoys`](./powertoys): Windows PowerToys configuration with a lot of disabled modules
 - [`python`](./python): Python shell configuration
   with history in `$XDG_STATE_HOME/python_history`
@@ -30,5 +30,5 @@ These configurations files do not contain Nix expressions and can be imported in
 - [`readline`](./readline): GNU Readline configuration (for Bash) with some completion tweaks
 - [`ripgrep`](./ripgrep): default `rg` CLI arguments
 - [`starship`](./starship): mostly Starship default config, just a little more verbose
-- [`windowsterminal`](./windowsterminal): Windows Terminal keybindings, profiles and color schemes.
+- [`windowsterminal`](./windowsterminal): Windows Terminal keybindings, profiles and color schemes
 - [`xxh`](./xxh): `xxh` config for a portable Bash shell with zoxide and Starship
