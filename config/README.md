@@ -21,6 +21,7 @@ These configurations files do not contain Nix expressions and can be imported in
   EditorConfig with rules for all files I work with outside of repos
 - [`glazewm`](./glazewm): mostly GlazeWM default config
 - [`ipython`](./ipython): IPython shell configuration with autoreload and `fzf` history search
+- [`neovim`](./neovim): Neovim configuration for non-Nix systems
 - [`powershell`](./powershell): Cross-platform PowerShell 7+ config
   with zoxide, Starship and fzf features and automatic profile update
 - [`powertoys`](./powertoys): Windows PowerToys configuration with a lot of disabled modules
