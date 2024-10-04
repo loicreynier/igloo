@@ -67,8 +67,8 @@
       swapfile = false;
       backup = false;
       undofile = true;
-      undodir = "${config.xdg.stateHome}/nvim/undo/";
 
+      # -- Environment
       exrc = true;
     };
   };
