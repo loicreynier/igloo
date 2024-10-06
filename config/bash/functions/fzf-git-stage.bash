@@ -2,6 +2,11 @@
 # vim: set ts=2 sts=2 sw=2 noexpandtab:
 # editorconfig-checker-disable-file
 
+if ! command -v fzf >/dev/null 2>&1 ||
+  ! command -v git >/dev/null 2>&1; then
+  return 1
+fi
+
 function __fzf_git_stage() {
   local -r fzf_bin="fzf"
   local -r difft_bin="difft"

@@ -1,3 +1,8 @@
+if ! command -v fzf >/dev/null 2>&1 ||
+  ! command -v bat >/dev/null 2>&1; then
+  return 1
+fi
+
 function v() {
   local fzf_bin="fzf"
   local bat_bin="bat"
