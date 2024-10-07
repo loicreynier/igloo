@@ -29,6 +29,7 @@ These configurations files do not contain Nix expressions and can be imported in
   and auto-import modules from `$PYTHONMODULES`
 - [`readline`](./readline): GNU Readline configuration (for Bash) with some completion tweaks
 - [`ripgrep`](./ripgrep): default `rg` CLI arguments
+- [`sh`](./sh): minimal shell profile for non-Nix systems
 - [`starship`](./starship): mostly Starship default config, just a little more verbose
 - [`windowsterminal`](./windowsterminal): Windows Terminal keybindings, profiles and color schemes
 - [`xxh`](./xxh): `xxh` config for a portable Bash shell with zoxide and Starship
