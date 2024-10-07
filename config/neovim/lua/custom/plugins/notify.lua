@@ -3,7 +3,6 @@
 
 return {
   "rcarriga/nvim-notify",
-  lazy = true,
 
   keys = {
     {
@@ -14,6 +13,10 @@ return {
       desc = "Dismiss all notifications (Notify)"
     },
   },
+
+  config = function()
+    vim.notify = require("notify")
+  end,
 
   opts = {
     stages = "static",
