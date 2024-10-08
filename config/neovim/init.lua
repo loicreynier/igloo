@@ -1,5 +1,4 @@
---[[
-  Neovim Lua startup configuration file
+--[[-- Neovim Lua startup configuration file
 
   Mainly just download and execute `lazy.nvim`.
   Also determine system and system options from environment variables.

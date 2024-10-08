@@ -1,6 +1,6 @@
 local system = vim.g.system
 
-vim.notify = require("notify")
+-- vim.notify = require("notify")
 
 local function set_python_host_prog(path)
   if vim.fn.filereadable(path) == 1 then

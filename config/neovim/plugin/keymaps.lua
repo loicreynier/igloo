@@ -1,32 +1,41 @@
 local set = vim.keymap.set
+local set_api = vim.api.nvim_set_keymap
+
+-- # Azerty keyboard
+-- TODO: add test if keyboard is Azerty
+set_api("n", "ù", "[", {})
+set_api("n", "*", "]", {})
 
 -- # Escaping insert mode
-vim.keymap.set({"i", "c"}, "jj", "<Esc>")
-vim.keymap.set("t", "kj", "<C-\\><C-n>")
-vim.keymap.set("i", "<C-c>", "<Esc>")
+set({"i", "c"}, "jj", "<Esc>")
+set("t", "kj", "<C-\\><C-n>")
+set("i", "<C-c>", "<Esc>")
 
 -- # Insert mode Emacs-like motions
-vim.keymap.set({"i", "c", "t"}, "<C-a>", "<Home>", {desc = "Beginning of line"})
-vim.keymap.set({"i", "c", "t"}, "<C-e>", "<End>", {desc = "End of line"})
-vim.keymap.set({"i", "c", "t"}, "<C-f>", "<Right>", {desc = "Move forward"})
-vim.keymap.set({"i", "c", "t"}, "<C-b>", "<Left>", {desc = "Move backward"})
+set({"i", "c", "t"}, "<C-a>", "<Home>", {desc = "Beginning of line"})
+set({"i", "c", "t"}, "<C-e>", "<End>", {desc = "End of line"})
+set({"i", "c", "t"}, "<C-f>", "<Right>", {desc = "Move forward"})
+set({"i", "c", "t"}, "<C-b>", "<Left>", {desc = "Move backward"})
 
 -- # Yanking, pasting & register stuff
-vim.keymap.set({"n", "v",}, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+yg_]]) -- Last visual selection
-vim.keymap.set("n", "<leader>yy", [["+yy]]) -- Entire line
-vim.keymap.set({"n", "v"}, "<leader>p", [["+p]])
-vim.keymap.set({"n", "v"}, "<leader>P", [["+P]])
+set({"n", "v",}, "<Leader>y", [["+y]])
+set("n", "<Leader>Y", [["+yg_]]) -- Last visual selection
+set("n", "<Leader>yy", [["+yy]]) -- Entire line
+set({"n", "v"}, "<Leader>p", [["+p]])
+set({"n", "v"}, "<Leader>P", [["+P]])
 
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]]) -- Embrace the void
+set({"n", "v"}, "<Leader>d", [["_d]]) -- Embrace the void
 
 -- # Completion & wildmenu
-vim.keymap.set({"i", "c", "t"}, "<C-o>", "<S-Tab>")
+set({"i", "c", "t"}, "<C-o>", "<S-Tab>")
 
-vim.keymap.set("c", "<C-p>", function()
+set("c", "<C-p>", function()
   return vim.fn.wildmenumode() == 1 and "<Left>" or "<Up>"
 end, { expr = true })
 
-vim.keymap.set("c", "<C-n>", function()
+set("c", "<C-n>", function()
   return vim.fn.wildmenumode() == 1 and "<Right>" or "<Down>"
 end, { expr = true })
+
+-- # Windows and buffers
+set({"n"}, "<Leader>q", "<Cmd>bdelete<CR>", {desc="Delete current buffer"})

@@ -8,6 +8,8 @@ vim.filetype.add({
     [".envrc"] = "sh",
     [".ecrc"] = "json",
     [".yamllint"] = "yaml",
+    ["ns.inp"] = "fortran", -- POUSSINS input file
+    ["Dyjeat.in"] = "fortran",
   },
   pattern = {
     ["%.env%..*"] = "sh",
