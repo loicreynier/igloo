@@ -41,13 +41,13 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- # Completion
-pumheight = 10;
-wildoptions = "pum";
-wildmode = {
+opt.pumheight = 10;
+opt.wildoptions = "pum";
+opt.wildmode = {
   "longest",
   "full",
 }
-wildignore = {
+opt.wildignore = {
   "__pycache__",
   "*pycache*",
   "*.pyc",

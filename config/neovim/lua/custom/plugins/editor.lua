@@ -25,7 +25,7 @@ return {
       {
         "<Leader>fe",
         function()
-          require("neo-tree.command").execute({toggle = true})
+          require("neo-tree.command").execute({ toggle = true })
         end,
         desc = "Toggle file explorer (NeoTree)",
       },
@@ -165,22 +165,22 @@ return {
       {
         "<Leader>th",
         "<Cmd>ToggleTerm direction=horizontal<CR>",
-        desc="Toggle terminal in horizontal split (ToggleTerm)"
+        desc = "Toggle terminal in horizontal split (ToggleTerm)"
       },
       {
         "<Leader>tv",
         "<Cmd>ToggleTerm size=80 direction=vertical<CR>",
-        desc="Toggle terminal in vertical split (ToggleTerm)"
+        desc = "Toggle terminal in vertical split (ToggleTerm)"
       },
       {
         "<Leader>tf",
         "<Cmd>ToggleTerm direction=float<CR>",
-        desc="Toggle floating terminal (ToggleTerm)"
+        desc = "Toggle floating terminal (ToggleTerm)"
       },
       {
         "<F7>",
         "<Cmd>ToggleTerm<CR>",
-        desc="Toggle terminal (ToggleTerm)",
+        desc = "Toggle terminal (ToggleTerm)",
       },
     },
     opts = {
@@ -195,7 +195,7 @@ return {
         WinBarNC = { link = "WinBarNC" },
       },
       --@param term Terminal
-      on_create = function(term)
+      on_create = function()
         vim.opt_local.foldcolumn = "0"
         vim.opt_local.signcolumn = "no"
       end,
