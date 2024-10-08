@@ -16,12 +16,12 @@ opt.laststatus = 2
 opt.equalalways = true
 opt.list = true
 opt.listchars = {
-    tab = "»·",
-    extends = "⟩",
-    precedes = "⟨",
-    trail = "·",
-    nbsp = "␣",
-    -- eol = "↲",
+  tab = "»·",
+  extends = "⟩",
+  precedes = "⟨",
+  trail = "·",
+  nbsp = "␣",
+  -- eol = "↲",
 }
 opt.inccommand = "split"
 
@@ -44,14 +44,14 @@ opt.smartcase = true
 opt.pumheight = 10
 opt.wildoptions = "pum"
 opt.wildmode = {
-    "longest",
-    "full",
+  "longest",
+  "full",
 }
 opt.wildignore = {
-    "__pycache__",
-    "*pycache*",
-    "*.pyc",
-    "*.o",
+  "__pycache__",
+  "*pycache*",
+  "*.pyc",
+  "*.o",
 }
 
 -- # Memory
@@ -68,5 +68,5 @@ opt.undofile = true
 opt.exrc = true
 
 if vim.fn.executable("rg") == 1 then
-    opt.grepprg = "rg --vimgrep"
+  opt.grepprg = "rg --vimgrep"
 end

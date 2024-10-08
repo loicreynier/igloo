@@ -13,18 +13,18 @@
 
 vim.g.mapleader = " " -- Love having it accessible from both hands, sorry comma
 
--- # System recognition from environment variables -------------------------------------------------
+-- # System recognition from environment variables -----------------------------
 
 vim.g.system = os.getenv("SYSTEM") or "unknown"
 
 local system_options = os.getenv("SYSTEM_OPTIONS") or ""
 local options_list = {}
 for option in string.gmatch(system_options, "([^:]+)") do
-    table.insert(options_list, option)
+  table.insert(options_list, option)
 end
 vim.g.system_options = options_list
 
--- # Lazy setup ------------------------------------------------------------------------------------
+-- # Lazy setup ----------------------------------------------------------------
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -32,20 +32,20 @@ vim.opt.rtp:prepend(lazypath)
 
 ---@diagnostic disable-next-line: undefined-field
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable",
-        lazypath,
-    })
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 
 require("lazy").setup({
-    spec = {
-        { import = "custom.plugins" },
-    },
-    checker = { enabled = false },
-    change_detection = { notify = false },
+  spec = {
+    { import = "custom.plugins" },
+  },
+  checker = { enabled = false },
+  change_detection = { notify = false },
 })

@@ -12,20 +12,20 @@
 ---@diagnostic disable: unused-function
 
 local function ltex_dir_path()
-    local util = require("lspconfig.util")
-    local path
+  local util = require("lspconfig.util")
+  local path
 
-    local git_root = util.find_git_ancestor(vim.loop.cwd())
+  local git_root = util.find_git_ancestor(vim.loop.cwd())
 
-    if git_root then
-        if #vim.fn.glob(git_root .. "/.vscode" .. "/ltex.*", 1, 1) == 0 then
-            path = git_root .. "/.ltex"
-        else
-            path = git_root .. "/.vscode"
-        end
+  if git_root then
+    if #vim.fn.glob(git_root .. "/.vscode" .. "/ltex.*", 1, 1) == 0 then
+      path = git_root .. "/.ltex"
     else
-        path = vim.fn.stdpath("data") .. "/ltex"
+      path = git_root .. "/.vscode"
     end
+  else
+    path = vim.fn.stdpath("data") .. "/ltex"
+  end
 
-    return path
+  return path
 end

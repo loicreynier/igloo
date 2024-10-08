@@ -25,26 +25,31 @@ local api = require("nvim-tree.api")
 
 -- Open and close tree
 local function edit_or_open()
-    local node = api.tree.get_node_under_cursor()
+  local node = api.tree.get_node_under_cursor()
 
-    if node.nodes ~= nil then
-        api.node.open.edit()
-    else
-        api.node.open.edit()
-        api.tree.close()
-    end
+  if node.nodes ~= nil then
+    api.node.open.edit()
+  else
+    api.node.open.edit()
+    api.tree.close()
+  end
 end
 
 -- Open `vsplit` and keep focus on tree
 local function vsplit_preview()
-    local node = api.tree.get_node_under_cursor()
+  local node = api.tree.get_node_under_cursor()
 
-    if node.nodes ~= nil then
-        api.node.open.edit()
-    else
-        api.node.open.vertical()
-    end
-    api.tree.focus()
+  if node.nodes ~= nil then
+    api.node.open.edit()
+  else
+    api.node.open.vertical()
+  end
+  api.tree.focus()
 end
 
-vim.api.nvim_set_keymap("n", "<C-h>", ":NvimTreeToggle<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<C-h>",
+  ":NvimTreeToggle<cr>",
+  { silent = true, noremap = true }
+)

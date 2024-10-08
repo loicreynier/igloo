@@ -30,12 +30,17 @@ set({ "n", "v" }, "<Leader>d", [["_d]]) -- Embrace the void
 set({ "i", "c", "t" }, "<C-o>", "<S-Tab>")
 
 set("c", "<C-p>", function()
-    return vim.fn.wildmenumode() == 1 and "<Left>" or "<Up>"
+  return vim.fn.wildmenumode() == 1 and "<Left>" or "<Up>"
 end, { expr = true })
 
 set("c", "<C-n>", function()
-    return vim.fn.wildmenumode() == 1 and "<Right>" or "<Down>"
+  return vim.fn.wildmenumode() == 1 and "<Right>" or "<Down>"
 end, { expr = true })
 
 -- # Windows and buffers
-set({ "n" }, "<Leader>q", "<Cmd>bdelete<CR>", { desc = "Delete current buffer" })
+set(
+  { "n" },
+  "<Leader>q",
+  "<Cmd>bdelete<CR>",
+  { desc = "Delete current buffer" }
+)
