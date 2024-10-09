@@ -2,6 +2,9 @@
 
 # ~/.profile
 
+[ -z "$UID" ] && UID="$(id -u)"
+[ -z "$HOSTNAME" ] && HOSTNAME="$(hostname)"
+
 # == SYSTEM RECOGNITION ========================================================
 
 # This script uses the `SYSTEM` variable to recognize different systems.
@@ -32,12 +35,12 @@ if command -v hostnamectl >/dev/null 2>&1; then
 
   unset system_id
 else
-  echo "System not recognized from hardware: $(hostnamectl) not found"
+  echo "System not recognized from hardware: 'hostnamectl' not found"
 fi
 
 # Automatically determine system based on hostname if not recognized
 if [ "$SYSTEM" = "unknown" ]; then
-  hostname=$(printf "%s" "$(hostname)" | sha256sum | awk '{print $1}')
+  hostname=$(printf "%s" "$HOSTNAME" | sha256sum | awk '{print $1}')
 
   case "$hostname" in
   "120d48ac77121271bd444cf4c93769ba6d6f36b3c6228c61949c5a25a40f1b5a")
@@ -81,10 +84,6 @@ export LC_CTYPE="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 
-if [ -z "$UID" ]; then
-  UID="$(id -u)"
-fi
-
 [ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="$HOME/.local/share"
 [ -z "$XDG_SATE_HOME" ] && export XDG_STATE_HOME="$HOME/.local/state"
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
@@ -96,16 +95,17 @@ fi
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
 
-# == SHELL CONFIGURATION =======================================================
+# == SHELL CONFIGURATON ========================================================
 
 if [ "$0" = "-bash" ] && [ -n "$PS1" ]; then
   echo "Sourcing '${HOME}/.bashrc'"
-  # shellcheck disable=SC1091
   . "${HOME}/.bashrc"
 fi
 
 case "$SYSTEM" in
 "ONERA_workstation")
+  module purge
   module load python/3.12.2-gnu850
+  export PATH="$PATH":"/tmp_user/$HOSTNAME/$USER/local/bin"
   ;;
 esac
