@@ -93,6 +93,7 @@ fi
 
 # -- Software configuration
 
+export INPUTRC="$HOME/.inputrc"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
 
