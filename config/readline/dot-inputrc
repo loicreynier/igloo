@@ -4,6 +4,12 @@
 # set editing-mode vi # TODO: configure keymaps
 
 # Keymaps
+# Necessary to bind stty special characters
+# Source:
+# https://stackoverflow.com/questions/23349325/inputrc-override-controlw
+set bind-tty-special-chars off
+
+"\C-w": unix-filename-rubout
 "\C-n": history-search-forward
 "\C-p": history-search-backward
 
