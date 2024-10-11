@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # ~/.bashrc
 
 # -- Utility functions and variables
@@ -14,7 +16,7 @@ state_dir="${XDG_STATE_HOME:-$HOME/.local/state}"
 HISTFILE="$state_dir/bash_history"
 HISTCONTROL=ignoredups:ignorespace:erasedups
 HISTFILESIZE=1000
-HISTIGNORE=?:??:pwd:clear:tree:history:exit:pass*
+HISTIGNORE='?:??:pwd:clear:tree:history:exit:pass*'
 
 shopt -s "autocd"     # Treat command as `cd` argument if command is a path
 shopt -s "cdspell"    # Fix spelling while `cd`-ing
@@ -37,7 +39,7 @@ if command_exists "eza"; then
 fi
 
 command_exists "python3" && alias python="python3"
-command_exists "stowsh" && alias stowsh-local="stowsh -t $HOME/.local"
+command_exists "stowsh" && alias stowsh-local='stowsh -t $HOME/.local'
 
 # -- Software setup
 
@@ -48,6 +50,7 @@ command_exists "zoxide" && eval "$(zoxide init bash)"
 # -- Custom functions
 
 for file in "$config_dir/bash/functions"/*.bash; do
+  # shellcheck disable=SC1090
   [ -f "$file" ] && source "$file"
 done
 
