@@ -33,9 +33,13 @@ shopt -s "histappend" # Append to history file instead of overwriting it
 command_exists "vim" && alias vi="vim"
 command_exists "nvim" && alias vim="nvim"
 
+command_exists "bat" && alias cat="bat --paging=never"
+
 if command_exists "eza"; then
+  alias eza="eza --group-directories-first"
   alias ls="eza"
   alias lrt="eza -l -snew"
+  alias tree="eza --tree"
 fi
 
 command_exists "python3" && alias python="python3"
@@ -43,6 +47,7 @@ command_exists "stowsh" && alias stowsh-local='stowsh -t $HOME/.local'
 
 # -- Software setup
 
+command_exists "direnv" && eval "$(direnv hook bash)"
 command_exists "fzf" && eval "$(fzf --bash)"
 command_exists "starship" && eval "$(starship init bash --print-full-init)"
 command_exists "zoxide" && eval "$(zoxide init bash)"
