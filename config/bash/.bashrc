@@ -2,6 +2,10 @@
 
 # ~/.bashrc
 
+if [ -f /etc/bashrc ]; then
+  . /etc/bashrc
+fi
+
 # -- Utility functions and variables
 
 command_exists() {
