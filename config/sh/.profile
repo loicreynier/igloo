@@ -77,7 +77,7 @@ export SYSTEM_OPTIONS
 
 # -- System configuration
 
-export PATH="$PATH":"$HOME/.local/bin"
+export PATH="$HOME/.local/bin":"$PATH"
 
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
