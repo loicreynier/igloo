@@ -63,12 +63,11 @@
             ];
           };
           gopls.enable = true;
-          julials.enable = true;
           lemminx.enable = true;
           ltex.enable = true;
-          lua-ls.enable = true;
+          lua_ls.enable = true;
           marksman.enable = true;
-          nil-ls = {
+          nil_ls = {
             enable = true;
             settings = {
               formatting.command = [
@@ -79,8 +78,8 @@
             };
           };
           pylsp.enable = true;
-          ruff-lsp.enable = true;
-          rust-analyzer = {
+          ruff_lsp.enable = true;
+          rust_analyzer = {
             enable = true;
             # TODO: install Rust by other means
             installRustc = true;
@@ -88,8 +87,8 @@
           };
           taplo.enable = true;
           texlab.enable = true;
-          typos-lsp.enable = true;
-          typst-lsp.enable = true;
+          typos_lsp.enable = true;
+          typst_lsp.enable = true;
           yamlls.enable = true;
         };
       };
