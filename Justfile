@@ -70,7 +70,7 @@ todo:
 
 # Update flake inputs
 update:
-    igloo-update
+    igloo update
 
 # Run flake checks
 check:
