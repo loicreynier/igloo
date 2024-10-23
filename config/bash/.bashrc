@@ -34,13 +34,24 @@ shopt -s "histappend" # Append to history file instead of overwriting it
 
 # -- Aliases
 
+alias mv="mv -i"
+alias cp="cp -i"
+# alias rm="rm -i"
+
+alias ls="ls --color=auto"
+alias l.="ls -d .*"
+alias ll="ls -l"
+alias lrt="ls -lrt"
+
+command_exists "git" && alias groot='cd $(git rev-parse --show-toplevel)'
+
 command_exists "vim" && alias vi="vim"
 command_exists "nvim" && alias vim="nvim"
 
 command_exists "bat" && alias cat="bat --paging=never"
 
 if command_exists "eza"; then
-  alias eza="eza --group-directories-first"
+  alias eza="eza --group-directories-first --color=auto --icons=auto"
   alias ls="eza"
   alias lrt="eza -l -snew"
   alias tree="eza --tree"
