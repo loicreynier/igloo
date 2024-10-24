@@ -110,7 +110,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
 
 # == SHELL CONFIGURATION =======================================================
 
-if [ "$0" = "-bash" ] && [ -n "$PS1" ]; then
+if [ "$0" = "-bash" ] || [ "$0" = "/bin/bash" ] && [ -n "$PS1" ]; then
   echo "Sourcing '${HOME}/.bashrc'"
   # shellcheck disable=SC1091
   . "${HOME}/.bashrc"
