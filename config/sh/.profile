@@ -40,11 +40,23 @@ fi
 
 # Automatically determine system based on hostname if not recognized
 if [ "$SYSTEM" = "unknown" ]; then
-  hostname=$(printf "%s" "$HOSTNAME" | sha256sum | awk '{print $1}')
+  hostname_sha=$(printf "%s" "$HOSTNAME" | sha256sum | awk '{print $1}')
 
-  case "$hostname" in
+  case "$hostname_sha" in
   "120d48ac77121271bd444cf4c93769ba6d6f36b3c6228c61949c5a25a40f1b5a")
     SYSTEM="ONERA_workstation"
+    ;;
+  *)
+    SYSTEM="unknown"
+    ;;
+  esac
+
+  case "$HOSTNAME" in
+  olympe*)
+    SYSTEM="HPCC_Olympe"
+    ;;
+  topaze*)
+    SYSTEM="HPCC_Topaze"
     ;;
   *)
     SYSTEM="unknown"
@@ -107,7 +119,13 @@ fi
 case "$SYSTEM" in
 "ONERA_workstation")
   module purge
-  module load python/3.12.2-gnu850
+  module load -s python/3.12.2-gnu850
   export PATH="$PATH":"/tmp_user/$HOSTNAME/$USER/local/bin"
+  ;;
+"HPCC_Olympe")
+  module load -s python/3.11.3
+  ;;
+"HPCC_Topaze")
+  module load -s python/3.11.4
   ;;
 esac
