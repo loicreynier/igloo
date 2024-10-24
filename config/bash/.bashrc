@@ -57,8 +57,23 @@ if command_exists "eza"; then
   alias tree="eza --tree"
 fi
 
-command_exists "python3" && alias python="python3"
+if command_exists "python3"; then
+  alias python="python3"
+  # NOTE: `no-build-isolation` doesn't seem to work with `--force-reinstall`
+  alias pip-install-offline="python3 -m pip install --user --no-index --no-build-isolation"
+  alias pip-uninstall-all='pip freeze --exclude-editable | cut -d "@" -f1 | xargs pip uninstall -y'
+fi
+
 command_exists "stowsh" && alias stowsh-local='stowsh -t $HOME/.local'
+
+case "$SYSTEM" in
+"ONERA_workstation")
+  if command_exists "pass"; then
+    alias ssh-olympe="pass -c srv/olympe && ssh -X olympe"
+    alias ssh-topaze="PASSWORD_STORE_CLIP_TIME=60 pass -c srv/topaze && ssh -X topaze"
+  fi
+  ;;
+esac
 
 # -- Software setup
 
