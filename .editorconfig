@@ -33,6 +33,9 @@ max_line_length = 88
 indent_size = 2
 max_line_length = 80
 
+[{*.bash,*.sh,.bashrc}]
+max_line_length = 100
+
 [*.{yaml,json}]
 max_line_length = unset
 

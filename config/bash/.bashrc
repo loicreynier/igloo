@@ -3,6 +3,7 @@
 # ~/.bashrc
 
 if [ -f /etc/bashrc ]; then
+  # shellcheck disable=SC1091
   . /etc/bashrc
 fi
 
@@ -39,9 +40,13 @@ alias cp="cp -i"
 # alias rm="rm -i"
 
 alias ls="ls --color=auto"
+alias l="l -alh"
 alias l.="ls -d .*"
-alias ll="ls -l"
-alias lrt="ls -lrt"
+alias ll.="ls -lhd .*"
+alias ll="ls -lh"
+alias lrt="ls -rt"
+alias llrt="ls -lhrt"
+alias lt="tree"
 
 command_exists "git" && alias groot='cd $(git rev-parse --show-toplevel)'
 
@@ -53,7 +58,8 @@ command_exists "bat" && alias cat="bat --paging=never"
 if command_exists "eza"; then
   alias eza="eza --group-directories-first --color=auto --icons=auto"
   alias ls="eza"
-  alias lrt="eza -l -snew"
+  alias lrt="eza -snew"
+  alias llrt="eza -l -snew"
   alias tree="eza --tree"
 fi
 

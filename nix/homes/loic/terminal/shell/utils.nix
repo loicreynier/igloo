@@ -5,30 +5,32 @@
 }: {
   programs = {
     zoxide.enable = true;
-
-    eza = {
-      enable = true;
-      icons = "auto";
-      git = true;
-      extraOptions = [
-        "--group-directories-first"
-      ];
-    };
   };
 
   home = {
     packages = with pkgs; [
       edir
+      eza # Don't use HM module which only sets aliases
     ];
 
     sessionVariables = {
       "_ZO_DATA_DIR" = "${config.xdg.stateHome}";
     };
 
-    shellAliases = {
+    shellAliases = let
+      eza = "${pkgs.eza}/bin/eza --group-directories-first --color=auto --icons=auto --git";
+    in {
       "cat" = "bat";
-      "ls" = "eza";
-      "tree" = "eza --tree";
+      "ls" = "${eza}";
+      "l" = "ls -la";
+      "la" = "ls -a";
+      "lla" = "ls -la";
+      "l." = "ls -d .*";
+      "ll." = "ls -ld .*";
+      "lrt" = "ls -snew";
+      "llrt" = "ls -lsnew";
+      "lt" = "ls --tree";
+      "tree" = "ls --tree";
     };
   };
 }
