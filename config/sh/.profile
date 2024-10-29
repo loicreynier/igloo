@@ -56,6 +56,9 @@ if [ "$SYSTEM" = "unknown" ]; then
   esac
 
   case "$HOSTNAME" in
+  ldmpe*)
+    SYSTEM="ONERA_workstation"
+    ;;
   olympe*)
     SYSTEM="HPCC_Olympe"
     ;;
@@ -130,18 +133,29 @@ if [ "$0" = "-bash" ] || [ "$0" = "/bin/bash" ] && [ -n "$PS1" ]; then
   . "${HOME}/.bashrc"
 fi
 
-case "$SYSTEM" in
-"ONERA_workstation")
+# Shell setups are stored as functions so then can be loaded manually
+# if system is not automatically recognized
+
+_setup_shell_ONERA_workstation() {
   module purge
   module load -s python/3.12.2-gnu850
   export PATH="$PATH":"/tmp_user/$HOSTNAME/$USER/local/bin"
-  ;;
-"HPCC_Olympe")
+}
+
+_setup_shell_HPCC_Olympe() {
+  module purge
   module load -s python/3.11.3
-  ;;
-"HPCC_Topaze")
+  clear
+}
+
+_setup_shell_HPCC_Topaze() {
   module load -s python/3.11.4
-  ;;
+}
+
+case "$SYSTEM" in
+"ONERA_workstation") _setup_shell_ONERA_workstation ;;
+"HPCC_Olympe") _setup_shell_HPCC_Olympe ;;
+"HPCC_Topaze") _setup_shell_HPCC_Topaze ;;
 esac
 
 # == CLEANING ==================================================================
