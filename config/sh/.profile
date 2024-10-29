@@ -2,6 +2,10 @@
 
 # ~/.profile
 
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
 [ -z "$UID" ] && UID="$(id -u)"
 [ -z "$HOSTNAME" ] && HOSTNAME="$(hostname)"
 
@@ -96,6 +100,16 @@ export LC_CTYPE="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 
+if command_exists "nvim"; then
+  export EDITOR=nvim
+  export TERMINAL=nvim
+  export SUDO_EDITOR=nvim
+elif command_exists "vim"; then
+  export EDITOR=vim
+  export TERMINAL=vim
+  export SUDO_EDITOR=vim
+fi
+
 [ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="$HOME/.local/share"
 [ -z "$XDG_SATE_HOME" ] && export XDG_STATE_HOME="$HOME/.local/state"
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
@@ -129,3 +143,7 @@ case "$SYSTEM" in
   module load -s python/3.11.4
   ;;
 esac
+
+# == CLEANING ==================================================================
+
+unset -f command_exists
