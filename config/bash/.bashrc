@@ -40,10 +40,12 @@ alias cp="cp -i"
 # alias rm="rm -i"
 
 alias ls="ls --color=auto"
-alias l="l -alh"
+alias l="l -lha"
+alias ll="ls -lh"
+alias la="ls -a"
+alias lla="ls -lha"
 alias l.="ls -d .*"
 alias ll.="ls -lhd .*"
-alias ll="ls -lh"
 alias lrt="ls -rt"
 alias llrt="ls -lhrt"
 alias lt="tree"
@@ -53,14 +55,24 @@ command_exists "git" && alias groot='cd $(git rev-parse --show-toplevel)'
 command_exists "vim" && alias vi="vim"
 command_exists "nvim" && alias vim="nvim"
 
-command_exists "bat" && alias cat="bat --paging=never"
+if command_exists "bat"; then
+  alias cat="bat --plain --paging=never"
+fi
 
 if command_exists "eza"; then
-  alias eza="eza --group-directories-first --color=auto --icons=auto"
+  alias eza="eza --group-directories-first --color=auto --icons=auto --git"
   alias ls="eza"
-  alias lrt="eza -snew"
-  alias llrt="eza -l -snew"
-  alias tree="eza --tree"
+  alias l="ls -lba"
+  alias l1="ls -1"
+  alias ll="ls -lb"
+  alias la="ls -a"
+  alias lla="ls -lba"
+  alias l.="ls -d .*"
+  alias ll.="ls -lbd .*"
+  alias lrt="ls -snew"
+  alias llrt="ls -lbsnew"
+  alias lt="ls --tree"
+  alias tree="ls --tree"
 fi
 
 if command_exists "python3"; then

@@ -22,13 +22,15 @@
     in {
       "cat" = "bat";
       "ls" = "${eza}";
-      "l" = "ls -la";
+      "l" = "ls -lba";
+      "l1" = "ls -1";
+      "ll" = "ls -lb";
       "la" = "ls -a";
-      "lla" = "ls -la";
+      "lla" = "ls -lba";
       "l." = "ls -d .*";
-      "ll." = "ls -ld .*";
+      "ll." = "ls -lbd .*";
       "lrt" = "ls -snew";
-      "llrt" = "ls -lsnew";
+      "llrt" = "ls -lbsnew";
       "lt" = "ls --tree";
       "tree" = "ls --tree";
     };
