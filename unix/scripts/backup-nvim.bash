@@ -48,7 +48,7 @@ backup() {
 
   archive_path="$backup_dir/$archive_name.tar.gz"
 
-  if tar -czf "$archive_path" -C "$HOME" "${tar_targets[@]}"; then
+  if tar -czhf "$archive_path" -C "$HOME" "${tar_targets[@]}"; then
     echo "Backup of Neovim data created successfully: '$archive_path'"
   else
     echo "Error: Failed to create backup."
@@ -73,7 +73,7 @@ restore() {
 
   rm -rf "$data_source" "$config_source"
 
-  if tar -xzf "$backup_file" -C "$HOME" "$data_source" "$config_source"; then
+  if tar -xzhf "$backup_file" -C "$HOME"; then
     echo "Neovim data restored successfully from '$backup_file'"
   else
     echo "Error: Failed to restore from backup."
