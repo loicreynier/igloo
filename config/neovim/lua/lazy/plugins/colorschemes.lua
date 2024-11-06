@@ -1,6 +1,6 @@
 --[[-- Colorschemes
 
-  TODO: add a better selection mechanism than `enabled false`.
+  TODO: add a better selection mechanism
 
   Plugins are loaded with
 
@@ -9,6 +9,7 @@
 
   to make sure they are loaded during startup we want them available asap.
 --]]
+
 return {
   {
     "Mofiqul/vscode.nvim",
@@ -17,18 +18,13 @@ return {
     opts = {
       transparent = false,
     },
-    config = function()
-      vim.cmd.colorscheme("vscode")
-    end,
+    config = function() vim.cmd.colorscheme("vscode") end,
   },
 
   {
     "folke/tokyonight.nvim",
-    enabled = false,
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme("tokyonight")
-    end,
+    -- config = function() vim.cmd.colorscheme("tokyonight-night") end,
   },
 }

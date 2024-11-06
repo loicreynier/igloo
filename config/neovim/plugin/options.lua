@@ -62,11 +62,10 @@ opt.autowrite = true
 opt.swapfile = false
 opt.backup = false
 opt.undofile = true
+vim.g.netrw_home = vim.fn.stdpath("state") .. "/nvim"
 
 -- # Environment
 
 opt.exrc = true
 
-if vim.fn.executable("rg") == 1 then
-  opt.grepprg = "rg --vimgrep"
-end
+if vim.fn.executable("rg") == 1 then opt.grepprg = "rg --vimgrep" end

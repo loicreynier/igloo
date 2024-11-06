@@ -1,10 +1,10 @@
-deloading
 NixOS
 Neovim
 NixVim
 NixNeovim
 NixNeovimPlugins
 NixOS-WSL
+deloading
 daemonization
 EditorConfig
 autoreload
@@ -21,3 +21,9 @@ Atuin
 PowerToys
 AutoHotkey
 GlazeWM
+Neovim
+jk
+LazyVim
+AstroNvim
+Keymaps
+keymap

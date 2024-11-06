@@ -31,7 +31,7 @@ max_line_length = 88
 
 [*.lua]
 indent_size = 2
-max_line_length = 80
+max_line_length = 120
 
 [{*.bash,*.sh,.bashrc}]
 max_line_length = 100
