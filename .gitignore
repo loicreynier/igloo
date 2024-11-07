@@ -4,3 +4,6 @@ result
 
 # Builds
 *.tar.gz
+
+# User/local files
+.env
