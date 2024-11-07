@@ -1,0 +1,119 @@
+---
+exclude: "(flake.lock|.*age$|ltex.*txt$)"
+repos:
+  # --  Treewide
+  - repo: local
+    hooks:
+      - id: check-github-urls-branch
+        name: "Treewide >> Check branch in GitHub URLs (check_github_urls_branch)"
+        entry: python3 .pre-commit/check_github_urls_branch.py
+        language: system
+  - repo: "https://github.com/crate-ci/typos"
+    rev: v1.27.0
+    hooks:
+      - id: typos
+        name: "Treewide >> Typos check (typos)"
+  - repo: "https://github.com/editorconfig-checker/editorconfig-checker.python"
+    rev: 3.0.3
+    hooks:
+      - id: editorconfig-checker
+        name: "Treewide >> EditorConfig check (editorconfig-checker)"
+        always_run: true
+  - repo: local
+    hooks:
+      - id: prettier
+        name: "Treewide >> Prettier format (prettier)"
+        entry: prettier
+        args: [--ignore-unknown --list-different --write]
+        language: system
+  # -- Docs
+  - repo: local
+    hooks:
+      - id: make-readme
+        name: "    Docs >> Generate GitHub README (make-readme)"
+        entry: sh .github/make-readme.sh
+        language: system
+        files: README\.md
+        pass_filenames: false
+  # -- Shell scripts
+  - repo: local
+    hooks:
+      - id: shellcheck-system
+        name: "   Shell >> ShellCheck lint (shellcheck-system)"
+        entry: shellcheck
+        types:
+          - shell
+        language: system
+      - id: shfmt-system
+        name: "   Shell >> shfmt format (shfmt-system)"
+        entry: shfmt
+        args: [--simplify --list --write]
+        types: [shell]
+        language: system
+  # -- Nix
+  - repo: local
+    hooks:
+      - id: flake-checker
+        entry: flake-checker -f
+        name: "     Nix >> Check flake health (flake-checker)"
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: deadnix
+        name: "     Nix >> deadnix lint (deadnix)"
+        entry: statix
+        args: [--edit]
+        language: system
+        types: [nix]
+      - id: statix
+        name: "     Nix >> statix lint (statix)"
+        entry: statix fix
+        language: system
+        types: [nix]
+        pass_filenames: false
+  - repo: "https://github.com/kamadorueda/alejandra"
+    rev: 3.1.0
+    hooks:
+      - id: alejandra-system
+        name: "     Nix >> Alejandra format (alejandra-system)"
+  # -- Python
+  - repo: "https://github.com/astral-sh/ruff-pre-commit"
+    rev: v0.7.2
+    hooks:
+      - id: ruff
+        args: [--fix]
+        name: "  Python >> Ruff lint (ruff)"
+      - id: ruff-format
+        name: "  Python >> Ruff format (ruff-format)"
+  # -- Lua
+  - repo: "https://github.com/JohnnyMorganz/StyLua"
+    rev: v0.20.0
+    hooks:
+      - id: stylua-system
+        name: "     Lua >> StyLua format (stylua-system)"
+        args: [--respect-ignores]
+  # -- Markdown
+  - repo: "https://github.com/markdownlint/markdownlint"
+    rev: v0.13.0
+    hooks:
+      - id: markdownlint
+        name: "Markdown >> Markdown lint (markdownlint)"
+  # -- Data (YAML, TOML, etc..)
+  - repo: "https://github.com/adrienverge/yamllint"
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        name: "    YAML >> Lint (yamllint)"
+  - repo: "https://github.com/ComPWA/taplo-pre-commit"
+    rev: v0.9.3
+    hooks:
+      - id: taplo-lint
+        name: "    TOML >> Taplo lint (taplo-lint)"
+      - id: taplo-format
+        name: "    TOML >> Taplo format (taplo-format)"
+  # -- Commit message
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.30.0
+    hooks:
+      - id: commitizen
+        name: "  Commit >> Commitizen check (commitizen)"

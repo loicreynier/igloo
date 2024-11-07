@@ -18,7 +18,7 @@ def check_github_urls(file_paths, user, repo, branch="main"):
     all_good = True
 
     for file_path in file_paths:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
             lines = f.readlines()
             for line_num, line in enumerate(lines, 1):
                 match = url_pattern.search(line)
