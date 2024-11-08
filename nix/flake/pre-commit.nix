@@ -53,6 +53,16 @@
           #   language = "system";
           #   pass_filenames = false;
           # };
+          commitlint = let
+            nodeEnv = pkgs.nodePackages."@commitlint/config-conventional";
+          in
+            mkHook "commitlint" {
+              enable = true;
+              entry = "env NODE_PATH=${nodeEnv}/lib/node_modules ${pkgs.commitlint}/bin/commitlint -e";
+              stages = ["commit-msg"];
+              language = "system";
+              pass_filenames = false;
+            };
 
           # -- Nix
           alejandra = mkHook "Alejandra" {enable = true;};
@@ -72,7 +82,7 @@
           typos = mkHook "typos" {enable = true;};
 
           # -- Language specific linters/formatters
-          commitizen = mkHook "commitizen" {enable = true;};
+          commitizen = mkHook "commitizen" {enable = false;};
           markdownlint = mkHook "markdownlint" {enable = true;};
           shellcheck = mkHook "shellcheck" {enable = true;};
           shfmt = mkHook "shfmt" {enable = true;};

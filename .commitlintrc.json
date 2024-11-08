@@ -1,0 +1,46 @@
+{
+  "extends": ["@commitlint/config-conventional"],
+  "rules": {
+    "scope-enum": [
+      2,
+      "always",
+      [
+        "homes",
+        "hosts",
+        "hosts.wsl",
+        "latios",
+        "latios-wsl",
+        "loic",
+        "loic@wsl",
+        "README",
+        "config",
+        "config.atuin",
+        "config.bash",
+        "config.bat",
+        "config.direnv",
+        "config.editorconfig",
+        "config.glazewm",
+        "config.ipython",
+        "config.nano",
+        "config.neovim",
+        "config.powershell",
+        "config.powertoyz",
+        "config.python",
+        "config.readline",
+        "config.ripgrep",
+        "config.sh",
+        "config.starship",
+        "config.windowsterminal",
+        "config.xxh",
+        "unix.scripts",
+        "windows",
+        "flake",
+        "Justfile",
+        "pre-commit",
+        "devshells",
+        "devshells.default",
+        "direnv"
+      ]
+    ]
+  }
+}
