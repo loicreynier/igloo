@@ -61,7 +61,7 @@ repos:
         always_run: true
       - id: deadnix
         name: "     Nix >> deadnix lint (deadnix)"
-        entry: statix
+        entry: deadnix
         args: [--edit]
         language: system
         types: [nix]
