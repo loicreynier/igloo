@@ -5,6 +5,7 @@ vim.filetype.add({
     dig = "fortran", -- DYJEAT input file
   },
   filename = {
+    ["edir.sh"] = nil,
     [".envrc"] = "sh",
     [".ecrc"] = "json",
     [".yamllint"] = "yaml",

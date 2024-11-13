@@ -1,7 +1,11 @@
 local M = {}
 
--- Nerd Fonts icons (stolen from LazyVim)
 M.icons = {
+  prompt = {
+    prefix = " ",
+    selection = " ",
+  },
+  -- Nerd Fonts icons (stolen from LazyVim)
   diagnostics = {
     Error = " ",
     Warn = " ",

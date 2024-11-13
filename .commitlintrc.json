@@ -12,6 +12,7 @@
         "latios-wsl",
         "loic",
         "loic@wsl",
+        "loic.neovim",
         "README",
         "config",
         "config.atuin",

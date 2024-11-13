@@ -13,7 +13,7 @@ vim.g.system_options = options_list
 
 -- # Nix detection
 
-M.is_nix = vim.g.nix == true
+M.is_nix = os.getenv("NVIM_NIX_WRAPPER") and true or false
 
 function M.set_if_nix(nix, non_nix)
   if M.is_nix then
@@ -26,5 +26,7 @@ end
 -- # Utility function/variables
 
 M.has_self_install = not (M.is_nix or vim.tbl_contains(vim.g.system_options, "offline"))
+
+M.is_ssh = os.getenv("SSH_CONNECTION") and true or false
 
 return M

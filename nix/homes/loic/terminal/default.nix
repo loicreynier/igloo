@@ -1,9 +1,9 @@
 {
   imports = [
     ./nix
-    ./neovim
     ./python
     ./shell
     ./tools
+    ./neovim.nix
   ];
 }

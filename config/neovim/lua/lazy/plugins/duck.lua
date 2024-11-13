@@ -8,7 +8,7 @@ return {
   "tamton-aquib/duck.nvim",
   keys = {
     {
-      "<Leader>uD",
+      "<Leader>ud",
       function() require("duck").hatch() end,
       desc = "Spawn a little duck, coin coin",
     },

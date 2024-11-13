@@ -24,7 +24,8 @@ return {
       markdwon = { "markdownlint" },
       nix = require("system").set_if_nix({ "nix", "deadnix", "statix" }, {}),
       sh = { "shellcheck" },
-      yaml = { "actionlint", "yamllint" },
+      yaml = { "yamllint" },
+      ["yaml.ghactions"] = { "actionlint", "yamllint" },
       ["yaml.ansible"] = { "ansiblelint" },
     },
     linters = {

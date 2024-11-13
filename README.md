@@ -66,8 +66,8 @@ Also contains raw configuration files and scripts for ~~cringe~~ non-Nix systems
 - [comma](https://github.com/nix-community/comma)
   and [`nix-index` database](https://github.com/nix-community/nix-index-database)
   to run software without installing it
-- [NixVim](https://github.com/nix-community/nixvim)
-  to configure Neovim using Nix
+- ~~[NixVim](https://github.com/nix-community/nixvim)
+  to configure Neovim using Nix~~
 - [NixNeovimPlugins](https://github.com/nixneovim/nixneovimplugins)
   to use Neovim plugins not available yet in `nixpkgs`
 - [NixOS Visual Studio Code `server-env-setup`](https://github.com/sonowz/vscode-remote-wsl-nixos)

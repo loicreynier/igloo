@@ -85,6 +85,9 @@ return {
           Lua = {},
         },
       },
+      nil_ls = {
+        formatting = { command = { "alejandra", "--quiet", "--" } },
+      },
       pylsp = {
         plugins = {
           ruff = {
@@ -95,6 +98,13 @@ return {
       },
       -- ruff = {}, -- Use `pylsp` plugin instead for renaming
       taplo = {},
+      -- tinymist = {
+      --   formatterMode = "typstyle",
+      --   exportPdf  = "onSave",
+      -- },
+      texlab = {
+        latexFormatter = "texlab", -- Not implemented yet
+      },
       typos_lsp = {},
     }
 

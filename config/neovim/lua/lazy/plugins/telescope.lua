@@ -116,11 +116,12 @@ return {
   opts = function()
     local actions = require("telescope.actions")
     local os_sep = require("plenary.path").path.sep
+    local icons = require("rice").icons
 
     return {
       defaults = {
-        prompt_prefix = " ",
-        selection_caret = " ",
+        prompt_prefix = icons.prompt.prefix,
+        selection_caret = icons.prompt.selection,
         mappings = {
           i = {
             ["jj"] = { "<Esc>", type = "command" },

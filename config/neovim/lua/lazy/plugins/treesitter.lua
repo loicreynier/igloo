@@ -1,3 +1,5 @@
+local has_self_install = require("system").has_self_install
+
 return {
   "nvim-treesitter/nvim-treesitter",
   cmd = {
@@ -27,10 +29,16 @@ return {
     pcall(require, "nvim-treesitter.query_predicates")
   end,
   opts = {
-    ensure_installed = {
-      "c",
-      "lua",
-    },
+    auto_install = has_self_install,
+    ensure_installed = function()
+      local parsers
+      if has_self_install then
+        parsers = "maintained"
+      else
+        parsers = { "c", "lua", "markdown", "markdown_inline", "vim", "vimdoc", "query" }
+      end
+      return parsers
+    end,
     highlight = { enable = true },
     indent = { enable = true },
   },

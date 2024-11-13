@@ -47,19 +47,28 @@ if not system.is_nix then
       os.exit(1)
     end
   end
-
-  require("lazy").setup({
-    spec = {
-      { import = "lazy.plugins" },
-    },
-    checker = { enabled = false },
-    change_detection = { notify = false },
-    install = {
-      missing = system.has_self_install,
-    },
-    lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
-    ui = {
-      border = "rounded",
-    },
-  })
 end -- `not system.is_nix`
+
+require("lazy").setup({
+  -- Base settings
+  spec = {
+    { import = "lazy.plugins" },
+  },
+  ui = {
+    border = "rounded",
+  },
+  change_detection = { notify = false },
+  lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
+
+  -- System specific
+  performance = {
+    reset_packpath = not system.is_nix,
+    rtp = { reset = not system.is_nix },
+  },
+  checker = { enabled = system.has_self_install }, -- Automatically check for plugin updates
+  install = { missing = system.has_self_install }, -- Automatically install missing plugins
+  dev = system.set_if_nix({
+    path = os.getenv("NVIM_NIX_PLUGINS_PATH"),
+    patterns = { "" },
+  }, {}),
+})
