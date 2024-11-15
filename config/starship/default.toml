@@ -1,17 +1,46 @@
 # ~/.config/starship.toml
 
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[\u256D\u2574](fg:bright-black)\
+$username\
+$hostname\
+$directory\
+$git_branch$git_commit$git_state$git_metrics$git_status\
+$package\
+$python\
+$nix_shell\
+$cmd_duration\
+[ ](fg:bright-dark)\
+$fill\
+$fill\
+[ ](fg:bright-dark)\
+$shell\
+$line_break\
+[\u2570\u2574](fg:bright-black)\
+$jobs\
+$character"""
+
 add_newline = true
 
+[fill]
+style = 'fg:bright-black'
+symbol = "\u2500"
+
 [username]
-show_always = true
+detect_env_vars = ["WSL_DISTRO_NAME"]
 
 [hostname]
 ssh_only = false
-detect_env_vars = ["WSL_DISTRO_NAME"]
+detect_env_vars = ["WSL_DISTRO_NAME", "SSH_CONNECTION"]
 style = "bold green"
 
 [shell]
 disabled = false
+
+[python]
+detect_extensions = []
 
 [nix_shell]
 # Remove shell state, don't care if impure
