@@ -158,6 +158,16 @@ case "$SYSTEM" in
 "HPCC_Topaze") _setup_shell_HPCC_Topaze ;;
 esac
 
+# == RICING ====================================================================
+
+[ -z "$SYSTEM_THEME" ] && export SYSTEM_THEME="base16"
+
+case "$SYSTEM_THEME" in
+"base16")
+  export BAT_THEME=base16
+  ;;
+esac
+
 # == CLEANING ==================================================================
 
 unset -f command_exists

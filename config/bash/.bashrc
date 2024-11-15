@@ -56,7 +56,8 @@ command_exists "vim" && alias vi="vim"
 command_exists "nvim" && alias vim="nvim"
 
 if command_exists "bat"; then
-  alias cat="bat --style=plain --paging=never"
+  alias bat='bat --theme=${BAT_THEME:-base16}'
+  alias cat='bat --style=plain --paging=never'
 fi
 
 if command_exists "eza"; then
