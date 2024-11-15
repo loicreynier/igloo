@@ -9,7 +9,7 @@
   fdBin = "${config.programs.fd.package}/bin/fd";
   fdCmd = "${fdBin} --type f --hidden --follow --strip-cwd-prefix";
   fzfBin = "${config.programs.fzf.package}/bin/fzf";
-  batBin = "${pkgs.bat}/bin/bat";
+  batBin = "${pkgs.bat}/bin/bat --theme=\\\"Visual Studio Dark+\\\""; # TODO: better theme handling
   justBin = "${pkgs.just}/bin/just";
 in {
   # -- Commands configurations
@@ -30,7 +30,7 @@ in {
     fileWidgetOptions = [
       "--multi"
       "--height 40%"
-      "--preview '${batBin} --color=always {}'"
+      "--preview '${batBin} --color=always --style=plain {}'"
       "--reverse"
       "--bind 'alt-u:preview-page-up,alt-d:preview-page-down'"
       # TODO: add copy bind here too
