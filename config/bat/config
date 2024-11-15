@@ -1,6 +1,3 @@
---pager='never'
---style='plain'
---theme='Visual Studio Dark+'
 --map-syntax '*.cuf:Fortran (Modern)'
 --map-syntax '.ecrc:JSON'
 --map-syntax '.latexmkrc:Perl'

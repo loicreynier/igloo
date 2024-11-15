@@ -14,9 +14,16 @@
     ./vars.nix
   ];
 
-  home.packages = with pkgs; [
-    xxh
-  ];
+  home = {
+    packages = with pkgs; [
+      xxh
+    ];
+
+    shellAliases = {
+      bat = "bat --theme 'Visual Studio Dark+'";
+      cat = "bat --style=plain --paging=never";
+    };
+  };
 
   programs = {
     starship.enable = true;
@@ -59,7 +66,7 @@
   };
 
   xdg.configFile = {
-    "bat/config".source = "${self}/config/bat/plain-vscode.conf";
+    "bat/config".source = "${self}/config/bat/config";
     "starship.toml".source = "${self}/config/starship/default.toml";
     "xxh/config.xxhc".source = "${self}/config/xxh/config.xxhc";
   };

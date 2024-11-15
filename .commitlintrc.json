@@ -13,6 +13,7 @@
         "loic",
         "loic@wsl",
         "loic.neovim",
+        "loic.shell",
         "README",
         "config",
         "config.atuin",

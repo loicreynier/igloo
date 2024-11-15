@@ -20,7 +20,6 @@
     shellAliases = let
       eza = "${pkgs.eza}/bin/eza --group-directories-first --color=auto --icons=auto --git";
     in {
-      "cat" = "bat";
       "ls" = "${eza}";
       "l" = "ls -lba";
       "l1" = "ls -1";
