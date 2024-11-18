@@ -42,6 +42,8 @@
       noice-nvim
       nvim-notify
       telescope-nvim
+      telescope-manix
+      telescope-undo-nvim
       toggleterm-nvim
       zen-mode-nvim
       twilight-nvim
@@ -88,6 +90,7 @@
       git
       gitlint
       mercurial
+      delta
       # -- Shell
       shfmt
       shellcheck
@@ -98,6 +101,7 @@
       # -- Nix
       alejandra
       deadnix
+      manix
       statix
       # -- Fortran
       fortls
