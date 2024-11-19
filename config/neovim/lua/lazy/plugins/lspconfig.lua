@@ -105,12 +105,36 @@ return {
       texlab = {
         latexFormatter = "texlab", -- Not implemented yet
       },
-      typos_lsp = {},
+      typos_lsp = {
+        init_options = {
+          diagnosticSeverity = "Warning",
+        },
+      },
     }
 
     for name, config in pairs(servers) do
       lspconfig[name].setup(config)
     end
+
+    -- Cannot be parsed by previous loop: "Cannot serialize function"
+    lspconfig["typos_lsp"].setup({
+      on_attach = function(client, _) -- , bufnr)
+        -- We could also check if LTeX is loaded with something like
+        --
+        -- for _, lsp in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+        --   if lsp.name == "ltex" then
+        --     vim.lsp.stop_client(client.id, true)
+        --   end
+        -- end
+        --
+        -- but Typos LSP loads way faster than LTeX so it doesn't seems to work.
+
+        local disabled_filetypes = vim.iter({ "markdown", "tex", "plaintex", "help" })
+        if disabled_filetypes:find(vim.bo.filetype) ~= nil then
+          vim.lsp.stop_client(client.id, true)
+        end
+      end,
+    })
 
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
