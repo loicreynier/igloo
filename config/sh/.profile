@@ -121,9 +121,17 @@ fi
 
 # -- Software configuration
 
-export INPUTRC="$HOME/.inputrc"
-export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
+export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
+
+export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
+export TEXMFHOME="$XDG_DATA_HOME/texmf"
+
+export LESSHISTFILE="$XDG_STATE_HOME/lesshst"
+
+export MYPY_CACHE_DIR="$XDG_CACHE_HOME/mypy"
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
+export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 
 # == SHELL CONFIGURATION =======================================================
 
