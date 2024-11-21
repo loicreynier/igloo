@@ -145,19 +145,20 @@ fi
 # if system is not automatically recognized
 
 _setup_shell_ONERA_workstation() {
-  module purge
-  module load -s python/3.12.2-gnu850
-  export PATH="$PATH":"/tmp_user/$HOSTNAME/$USER/local/bin"
+  export PATH="$HOME/.bin":"$PATH"
+
+  module -s purge
+  module -s load python/3.12.2-gnu850
+  module -s load firefox
 }
 
 _setup_shell_HPCC_Olympe() {
-  module purge
-  module load -s python/3.11.3
-  clear
+  module -s purge
+  module -s load python/3.11.3
 }
 
 _setup_shell_HPCC_Topaze() {
-  module load -s python/3.11.4
+  module -s load python/3.11.4
 }
 
 case "$SYSTEM" in
