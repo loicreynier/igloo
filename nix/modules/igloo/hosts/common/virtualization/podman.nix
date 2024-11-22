@@ -29,6 +29,10 @@ in {
       mount-nvidia-docker-1-directories = false;
     };
 
+    # Must be set because `nvidia-container-toolkit` force driver requirement
+    hardware.nvidia.open = lib.mkIf enableNvidiaContainers false;
+    services.xserver.videoDrivers = lib.mkIf enableNvidiaContainers ["nvidia"];
+
     wsl.useWindowsDriver = enableNvidiaContainers;
   };
 }
