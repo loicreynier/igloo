@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+the_name="backup-local-onera"
+
+print_usage() {
+  echo "Usage: $the_name {backup|restore <backup-file>}"
+  echo
+  echo "Examples:"
+  echo "  $the_name backup"
+  echo "  BACKUP_DIR=/tmp $the_name backup"
+  echo "  $the_name restore local-onera-20240101_123456.tar.gz"
+}
+
+check_commands() {
+  local required_commands=("tar")
+
+  for cmd in "${required_commands[@]}"; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+      echo "Error: '$cmd' is required but not installed."
+      return 1
+    fi
+  done
+
+  return 0
+}
+
+if ! check_commands; then
+  exit 1
+fi
+
+backup_dir="${BACKUP_DIR:-/stck/$USER/Archives/Backups}"
+backup_filename="local-onera-$(date +%Y%m%d_%H%M%S).tar.gz"
+backup_file="$backup_dir/$backup_filename"
+
+backup() {
+  mkdir -p "$backup_dir"
+
+  tmp_dir=$(mktemp -d)
+  tmp_file="$tmp_dir/$backup_filename"
+
+  if [ -L "$HOME/.local" ]; then
+    tar -czhf "$tmp_file" -C "$HOME" .local
+  else
+    tar -czf "$tmp_file" -C "$HOME" .local
+  fi
+
+  mv "$tmp_file" "$backup_file"
+  rmdir "$tmp_dir"
+}
+
+restore() {
+  if [ -z "$2" ]; then
+    echo "Error: No backup file specified."
+    print_usage
+    exit 1
+  fi
+
+  restore_file="$2"
+
+  if [ ! -f "$restore_file" ]; then
+    echo "Error: Backup file '$restore_file' not found."
+    exit 1
+  fi
+
+  if [ ! -L "$HOME/.local" ] || [ ! -d "$HOME/.local" ]; then
+    echo "Error: Target location '~/.local' not found."
+    exit 1
+  fi
+
+  tmp_dir=$(mktemp -d)
+
+  tar -xzf "$restore_file" -C "$tmp_dir"
+  cp -r "$tmp_dir/.local"/* "$HOME/.local"
+  rm -rf "$tmp_dir"
+}
+
+case "$1" in
+backup)
+  backup
+  ;;
+restore)
+  restore "$@"
+  ;;
+*)
+  print_usage
+  exit 1
+  ;;
+esac

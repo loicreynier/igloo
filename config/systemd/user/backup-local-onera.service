@@ -1,0 +1,12 @@
+[Unit]
+Description=Backup `.local` folder to `/stck/$USER/Archives/Backups/local`
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/.bin/backup-local-onera backup
+ExecPost=/bin/bash -c "ls -1 /stck/lreynier/Archives/Backups/local-onera-* | head -n -3 | xargs rm -v
+Environment=HOME=%h
+
+[Install]
+WantedBy=default.target
