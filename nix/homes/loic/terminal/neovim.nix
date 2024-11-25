@@ -102,6 +102,7 @@
       alejandra
       deadnix
       manix
+      nil
       statix
       # -- Fortran
       fortls
