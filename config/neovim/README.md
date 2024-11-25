@@ -20,6 +20,7 @@ Keymaps are mainly inspired from [LazyVim's](https://www.lazyvim.org/keymaps).
 | `<Leader>u` | "UI" related                       |
 | `<Leader>x` | "eXtra" stuff (mostly Trouble)     |
 | `<Leader>b` | "buffer" related                   |
+| `<Leader>q` | "session" related                  |
 
 ## References
 
