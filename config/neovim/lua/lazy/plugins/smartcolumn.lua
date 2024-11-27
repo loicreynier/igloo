@@ -14,12 +14,10 @@ return {
       "NvimTree",
     },
     custom_colorcolumn = function()
-      local column = 81
-      if vim.b[0].editorconfig and vim.b[0].editorconfig.max_line_length then
-        column = vim.b[0].editorconfig.max_line_length
-      end
-
-      return column
+      return vim.b[0].editorconfig
+          and vim.b[0].editorconfig.max_line_length ~= "off"
+          and vim.b[0].editorconfig.max_line_length
+        or "80"
     end,
   },
 }
