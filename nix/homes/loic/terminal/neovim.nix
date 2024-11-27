@@ -32,6 +32,7 @@
       # -- Vim stuff
       better-escape-nvim
       bufdelete-nvim
+      smartcolumn-nvim
       yanky-nvim
       # -- UI
       alpha-nvim
