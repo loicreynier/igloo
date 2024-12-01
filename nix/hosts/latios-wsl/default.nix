@@ -1,5 +1,5 @@
 {
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
   networking.hostName = "latios-wsl";
   services.openssh.ports = [2201];
 

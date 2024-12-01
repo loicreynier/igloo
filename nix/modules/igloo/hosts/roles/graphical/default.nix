@@ -51,13 +51,9 @@
   # -- Fonts
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override {
-        fonts = [
-          "DroidSansMono"
-          "FiraCode"
-          "SourceCodePro"
-        ];
-      })
+      nerd-fonts.fira-code
+      nerd-fonts.droid-sans-mono
+      nerd-fonts.sauce-code-pro
     ];
   };
 }

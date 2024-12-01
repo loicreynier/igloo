@@ -13,7 +13,7 @@ in {
   home = rec {
     inherit username;
     homeDirectory = "/home/${config.home.username}";
-    stateVersion = lib.mkDefault "24.05";
+    stateVersion = lib.mkDefault "24.11";
     extraOutputsToInstall = [
       "man"
       "doc"
