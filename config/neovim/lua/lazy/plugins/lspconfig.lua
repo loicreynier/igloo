@@ -130,9 +130,7 @@ return {
         -- but Typos LSP loads way faster than LTeX so it doesn't seems to work.
 
         local disabled_filetypes = vim.iter({ "markdown", "tex", "plaintex", "help" })
-        if disabled_filetypes:find(vim.bo.filetype) ~= nil then
-          vim.lsp.stop_client(client.id, true)
-        end
+        if disabled_filetypes:find(vim.bo.filetype) ~= nil then vim.lsp.stop_client(client.id, true) end
       end,
     })
 

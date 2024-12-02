@@ -5,17 +5,17 @@ return {
   keys = {
     {
       "<Leader>ql",
-      function()require('persistence').load() end,
+      function() require("persistence").load() end,
       desc = "Load session (Persistence)",
     },
     {
       "<Leader>qs",
-      function()require('persistence').save() end,
+      function() require("persistence").save() end,
       desc = "Save session (Persistence)",
     },
     {
       "<Leader>qS",
-      function()require('persistence').select() end,
+      function() require("persistence").select() end,
       desc = "Select session (Persistence)",
     },
   },

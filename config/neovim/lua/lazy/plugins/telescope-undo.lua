@@ -32,7 +32,7 @@ return {
       }
     else
       opts = {
-        use_delta = false
+        use_delta = false,
       }
     end
     return { extensions = { undo = opts } }
