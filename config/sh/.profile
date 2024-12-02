@@ -62,6 +62,9 @@ if [ "$SYSTEM" = "unknown" ]; then
   olympe*)
     SYSTEM="HPCC_Olympe"
     ;;
+  turpan*)
+    SYSTEM="HPCC_Turpan"
+    ;;
   topaze*)
     SYSTEM="HPCC_Topaze"
     ;;
@@ -82,10 +85,10 @@ fi
 # Set system options depending on the value of `SYSTEM`
 case "$SYSTEM" in
 "ONERA_workstation")
-  SYSTEM_OPTIONS="offline"
+  SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}offline"
   ;;
-*)
-  SYSTEM_OPTIONS=""
+"HPCC_"*)
+  SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}hpcc"
   ;;
 esac
 
@@ -157,6 +160,10 @@ _setup_shell_HPCC_Olympe() {
   module -s load python/3.11.3
 }
 
+_setup_shell_HPCC_Turpan() {
+  module -s python/3.10.9
+}
+
 _setup_shell_HPCC_Topaze() {
   module -s load python/3.11.4
 }
@@ -164,6 +171,7 @@ _setup_shell_HPCC_Topaze() {
 case "$SYSTEM" in
 "ONERA_workstation") _setup_shell_ONERA_workstation ;;
 "HPCC_Olympe") _setup_shell_HPCC_Olympe ;;
+"HPCC_Turpan") _setup_shell_HPCC_Turpan ;;
 "HPCC_Topaze") _setup_shell_HPCC_Topaze ;;
 esac
 
