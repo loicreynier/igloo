@@ -17,83 +17,88 @@ command_exists() {
 # or the hashed hostname if recognized.
 # Once the system if recognized, a list of options `SYSTEM_OPTIONS` is set up.
 
-# Try to determine system from `hostnamectl`'s machine ID
-if command -v hostnamectl >/dev/null 2>&1; then
-  system_id=$(hostnamectl | grep 'Machine ID' | awk '{print $3}')
-  system_id=$(printf "%s" "$system_id" | sha256sum | awk '{print $1}')
+if [ -z "$SYSTEM" ]; then
+  # Try to determine system from `hostnamectl`'s machine ID
+  if command -v hostnamectl >/dev/null 2>&1; then
+    system_id=$(hostnamectl | grep 'Machine ID' | awk '{print $3}')
+    system_id=$(printf "%s" "$system_id" | sha256sum | awk '{print $1}')
 
-  case "$system_id" in
-  "6b1a62a469cfe86e197f5a04746504696971733f8ad47978a04dcbf26cad1cd2")
-    SYSTEM="ONERA_workstation"
-    ;;
-  *)
-    SYSTEM="unknown"
-    ;;
-  esac
+    case "$system_id" in
+    "6b1a62a469cfe86e197f5a04746504696971733f8ad47978a04dcbf26cad1cd2")
+      SYSTEM="ONERA_workstation"
+      ;;
+    *)
+      SYSTEM="unknown"
+      ;;
+    esac
 
-  if [ "$SYSTEM" = "unknown" ]; then
-    echo "System not recognized from hardware"
+    if [ "$SYSTEM" = "unknown" ]; then
+      echo "System not recognized from hardware"
+    else
+      echo "System recognized from hardware as: '$SYSTEM'"
+    fi
+
+    unset system_id
   else
-    echo "System recognized from hardware as: '$SYSTEM'"
+    echo "System not recognized from hardware: 'hostnamectl' not found"
   fi
 
-  unset system_id
-else
-  echo "System not recognized from hardware: 'hostnamectl' not found"
-fi
-
-# Automatically determine system based on hostname if not recognized
-if [ "$SYSTEM" = "unknown" ]; then
-  hostname_sha=$(printf "%s" "$HOSTNAME" | sha256sum | awk '{print $1}')
-
-  case "$hostname_sha" in
-  "120d48ac77121271bd444cf4c93769ba6d6f36b3c6228c61949c5a25a40f1b5a")
-    SYSTEM="ONERA_workstation"
-    ;;
-  *)
-    SYSTEM="unknown"
-    ;;
-  esac
-
-  case "$HOSTNAME" in
-  ldmpe*)
-    SYSTEM="ONERA_workstation"
-    ;;
-  olympe*)
-    SYSTEM="HPCC_Olympe"
-    ;;
-  turpan*)
-    SYSTEM="HPCC_Turpan"
-    ;;
-  topaze*)
-    SYSTEM="HPCC_Topaze"
-    ;;
-  *)
-    SYSTEM="unknown"
-    ;;
-  esac
-
+  # Automatically determine system based on hostname if not recognized
   if [ "$SYSTEM" = "unknown" ]; then
-    echo "System not recognized from hostname"
-  else
-    echo "System recognized from hostname as: '$SYSTEM'"
+    hostname_sha=$(printf "%s" "$HOSTNAME" | sha256sum | awk '{print $1}')
+
+    case "$hostname_sha" in
+    "120d48ac77121271bd444cf4c93769ba6d6f36b3c6228c61949c5a25a40f1b5a")
+      SYSTEM="ONERA_workstation"
+      ;;
+    *)
+      SYSTEM="unknown"
+      ;;
+    esac
+
+    case "$HOSTNAME" in
+    ldmpe*)
+      SYSTEM="ONERA_workstation"
+      ;;
+    olympe*)
+      SYSTEM="HPCC_Olympe"
+      ;;
+    turpan*)
+      SYSTEM="HPCC_Turpan"
+      ;;
+    topaze*)
+      SYSTEM="HPCC_Topaze"
+      ;;
+    *)
+      SYSTEM="unknown"
+      ;;
+    esac
+
+    if [ "$SYSTEM" = "unknown" ]; then
+      echo "System not recognized from hostname"
+    else
+      echo "System recognized from hostname as: '$SYSTEM'"
+    fi
+
+    unset hostname
   fi
 
-  unset hostname
+  export SYSTEM
 fi
 
-# Set system options depending on the value of `SYSTEM`
-case "$SYSTEM" in
-"ONERA_workstation")
-  SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}offline"
-  ;;
-"HPCC_"*)
-  SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}hpcc"
-  ;;
-esac
+if [ -z "$SYSTEM_OPTIONS" ]; then
+  # Set system options depending on the value of `SYSTEM`
+  case "$SYSTEM" in
+  "ONERA_workstation")
+    SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}offline"
+    ;;
+  "HPCC_"*)
+    SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}hpcc"
+    ;;
+  esac
 
-export SYSTEM
-export SYSTEM_OPTIONS
+  export SYSTEM_OPTIONS
+fi
 
 # == ENVIRONMENT VARIABLES =====================================================
 
