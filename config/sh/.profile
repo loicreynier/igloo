@@ -141,6 +141,11 @@ export MYPY_CACHE_DIR="$XDG_CACHE_HOME/mypy"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 
+if [ -d "$HOME/.local/opt/pyenv" ]; then
+  export PYENV_ROOT="$HOME/.local/opt/pyenv"
+  command_exists "pyenv " || export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
 # == SHELL CONFIGURATION =======================================================
 
 if [ "$0" = "-bash" ] || [ "$0" = "/bin/bash" ] && [ -n "$PS1" ]; then

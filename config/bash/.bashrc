@@ -98,6 +98,7 @@ esac
 
 command_exists "direnv" && eval "$(direnv hook bash)"
 command_exists "fzf" && eval "$(fzf --bash)"
+command_exists "pyenv" && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
 command_exists "starship" && eval "$(starship init bash --print-full-init)"
 command_exists "zoxide" && eval "$(zoxide init bash)"
 
