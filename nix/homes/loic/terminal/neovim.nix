@@ -35,6 +35,7 @@
       persistence-nvim
       persisted-nvim
       smartcolumn-nvim
+      pkgs.vimExtraPlugins.visual-whitespace-nvim
       yanky-nvim
       # -- UI
       alpha-nvim
