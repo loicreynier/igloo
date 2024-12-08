@@ -34,6 +34,7 @@
       bufdelete-nvim
       persistence-nvim
       persisted-nvim
+      guess-indent-nvim
       smartcolumn-nvim
       pkgs.vimExtraPlugins.visual-whitespace-nvim
       yanky-nvim
