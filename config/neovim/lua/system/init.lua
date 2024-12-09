@@ -46,4 +46,7 @@ M.has_self_install = not (M.is_nix or vim.tbl_contains(vim.g.system_options, "of
 
 M.is_ssh = os.getenv("SSH_CONNECTION") and true or false
 
+---@diagnostic disable-next-line: param-type-mismatch
+M.site_dir = vim.fs.joinpath(vim.fn.stdpath("data"), "site")
+
 return M

@@ -1,4 +1,8 @@
-local has_self_install = require("system").has_self_install
+local system = require("system")
+local parsers_base = { "c", "lua", "markdown", "markdown_inline", "vim", "vimdoc", "query" }
+local parsers_ensure_installed = system.has_self_install and "all" or (system.is_nix and {} or parsers_base)
+---@diagnostic disable-next-line: param-type-mismatch
+local parsers_install_dir = vim.fs.joinpath(system.site_dir, "treesitter")
 
 return {
   "nvim-treesitter/nvim-treesitter",
@@ -17,6 +21,7 @@ return {
     "TSUpdate",
     "TSUpdateSync",
   },
+  event = { "BufReadPre", "BufNewFile" },
   init = function(plugin)
     -- PERF: add `nvim-treesitter` queries to the `rtp`.
     -- This is needed because bunch of plugins no longer requires it, which
@@ -29,17 +34,14 @@ return {
     pcall(require, "nvim-treesitter.query_predicates")
   end,
   opts = {
-    auto_install = has_self_install,
-    ensure_installed = function()
-      local parsers
-      if has_self_install then
-        parsers = "maintained"
-      else
-        parsers = { "c", "lua", "markdown", "markdown_inline", "vim", "vimdoc", "query" }
-      end
-      return parsers
-    end,
     highlight = { enable = true },
     indent = { enable = true },
+    ensure_installed = parsers_ensure_installed,
+    auto_install = system.has_self_install,
+    parser_install_dir = parsers_install_dir,
   },
+  config = function(_, opts)
+    vim.opt.runtimepath:prepend(parsers_install_dir)
+    require("nvim-treesitter.configs").setup(opts)
+  end,
 }
