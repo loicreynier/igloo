@@ -105,11 +105,6 @@ return {
       texlab = {
         latexFormatter = "texlab", -- Not implemented yet
       },
-      typos_lsp = {
-        init_options = {
-          diagnosticSeverity = "Warning",
-        },
-      },
     }
 
     for name, config in pairs(servers) do
@@ -118,6 +113,9 @@ return {
 
     -- Cannot be parsed by previous loop: "Cannot serialize function"
     lspconfig["typos_lsp"].setup({
+      init_options = {
+        diagnosticSeverity = "Hint",
+      },
       on_attach = function(client, _) -- , bufnr)
         -- We could also check if LTeX is loaded with something like
         --
@@ -128,7 +126,6 @@ return {
         -- end
         --
         -- but Typos LSP loads way faster than LTeX so it doesn't seems to work.
-
         local disabled_filetypes = vim.iter({ "markdown", "tex", "plaintex", "help" })
         if disabled_filetypes:find(vim.bo.filetype) ~= nil then vim.lsp.stop_client(client.id, true) end
       end,
