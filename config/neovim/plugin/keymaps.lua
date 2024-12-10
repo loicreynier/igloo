@@ -38,10 +38,3 @@ set("n", "<Leader>bb", "<Cmd>e #<CR>", { desc = "Switch to other buffer" })
 set("n", "[b", "<Cmd>bprevious<CR>", { desc = "Switch to previous buffer" })
 set("n", "]b", "<Cmd>bnext<CR>", { desc = "Switch to next buffer" })
 set("n", "<Leader>bd", "<Cmd>bdelete<CR>", { desc = "Delete current buffer" })
-
--- # LSP
--- TODO: better visibility toggle
--- Two keymaps as there is no built-in variable to track visibility
--- See: https://github.com/neovim/neovim/issues/14825
-set("", "<Leader>cd", function() vim.diagnostic.show() end, { desc = "Show code diagnostics" })
-set("", "<Leader>cD", function() vim.diagnostic.hide() end, { desc = "Hide code diagnostics" })
