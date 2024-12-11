@@ -52,7 +52,7 @@ end -- `not system.is_nix`
 require("lazy").setup({
   -- Base settings
   spec = {
-    { import = "lazy.plugins" },
+    { import = "plugins.lazy" },
   },
   ui = {
     border = "rounded",
