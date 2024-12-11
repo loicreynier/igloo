@@ -47,6 +47,7 @@
       noice-nvim
       nvim-notify
       telescope-nvim
+      telescope-fzf-native
       telescope-manix
       telescope-undo-nvim
       toggleterm-nvim

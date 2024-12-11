@@ -8,7 +8,10 @@
 
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = { "stevearc/dressing.nvim" },
+  dependencies = {
+    { "stevearc/dressing.nvim" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  },
   specs = {
     { "nvim-lua/plenary.nvim", lazy = true },
   },
@@ -144,6 +147,14 @@ return {
           sort_lastused = true,
         },
       },
+      extensions = {
+        fzf = {},
+      },
     }
+  end,
+  config = function(_, opts)
+    local telescope = require("telescope")
+    telescope.setup(opts)
+    telescope.load_extension("fzf")
   end,
 }
