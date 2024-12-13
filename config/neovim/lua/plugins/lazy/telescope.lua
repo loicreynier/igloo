@@ -40,7 +40,8 @@ return {
     },
     {
       "<Leader>/",
-      "<Cmd>Telescope live_grep<CR>",
+      -- "<Cmd>Telescope live_grep<CR>",
+      require("plugins.config.telescope.live-rg-glob"),
       desc = "Live grep (Telescope)",
     },
     -- "Find" actions
@@ -154,6 +155,16 @@ return {
   end,
   config = function(_, opts)
     local telescope = require("telescope")
+
+    if vim.fn.executable("rg") == 0 then
+      vim.notify(
+        "Cannot find ripgrep executable, live grepping may not work",
+        ---@diagnostic disable-next-line: param-type-mismatch
+        "warn",
+        { title = "Telescope setup" }
+      )
+    end
+
     telescope.setup(opts)
     telescope.load_extension("fzf")
   end,
