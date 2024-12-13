@@ -3,6 +3,8 @@ local M = {}
 -- # System recognition from environment variables
 
 vim.g.system = os.getenv("SYSTEM") or "unknown"
+M.name = vim.g.system
+M.arch = vim.loop.os_uname().machine
 
 local system_options = os.getenv("SYSTEM_OPTIONS") or ""
 local options_list = {}
