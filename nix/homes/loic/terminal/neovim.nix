@@ -38,6 +38,71 @@
         else []
       );
     withPython3 = true;
+    plugins = with pkgs.vimPlugins; [
+      # Plugins from `vimExtraPlugins` must be renamed to their GitHub name to be recognized by Lazy
+      lazy-nvim
+      # -- Vim stuff
+      better-escape-nvim
+      bufdelete-nvim
+      persistence-nvim
+      persisted-nvim
+      guess-indent-nvim
+      smartcolumn-nvim
+      (pkgs.vimExtraPlugins.visual-whitespace-nvim.overrideAttrs (_: {pname = "visual-whitespace.nvim";}))
+      yanky-nvim
+      # -- UI
+      alpha-nvim
+      bufferline-nvim
+      (pkgs.vimExtraPlugins.incline-nvim.overrideAttrs (_: {pname = "incline.nvim";}))
+      lualine-nvim
+      neo-tree-nvim
+      (pkgs.vimExtraPlugins.noice-nvim.overrideAttrs (_: {pname = "noice.nvim";}))
+      nvim-notify
+      telescope-nvim
+      telescope-fzf-native-nvim
+      telescope-manix
+      telescope-undo-nvim
+      toggleterm-nvim
+      zen-mode-nvim
+      twilight-nvim
+      pkgs.vimExtraPlugins.beacon-nvim
+      # -- Code/LSP
+      nvim-cmp
+      cmp-buffer
+      cmp-path
+      cmp-nvim-lsp
+      nvim-lspconfig
+      nvim-lint
+      nvim-treesitter.withAllGrammars
+      neoconf-nvim
+      lsp_lines-nvim
+      conform-nvim
+      (comment-nvim.overrideAttrs (_: {pname = "Comment.nvim";}))
+      nvim-ts-context-commentstring
+      trouble-nvim
+      todo-comments-nvim
+      ltex_extra-nvim
+      # -- Git
+      gitsigns-nvim
+      diffview-nvim
+      # -- Markdown
+      markdown-preview-nvim
+      # -- Rice
+      vscode-nvim
+      tokyonight-nvim
+      helpview-nvim
+      # -- Highlights
+      coconut-vim
+      (vim-bbcode-syntax.overrideAttrs (_: {pname = "bbcode";}))
+      vim-syntax-vidir-ls
+      # -- Memes
+      duck-nvim
+      # -- Dependencies
+      plenary-nvim
+      nvim-web-devicons
+      dressing-nvim
+    ];
+>>>>>>> 6f8b19f (feat(config.neovim): add Beacon plugin)
     extraPackages = with pkgs; let
       # WARNING: tricky hack for installing Python LSP Server plugins
       # See:
