@@ -54,6 +54,7 @@
       toggleterm-nvim
       zen-mode-nvim
       twilight-nvim
+      pkgs.vimExtraPlugins.beacon-nvim
       # -- Code/LSP
       nvim-cmp
       cmp-buffer
