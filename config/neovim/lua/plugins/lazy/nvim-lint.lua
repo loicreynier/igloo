@@ -13,6 +13,7 @@
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  dependencies = { "rshkarin/mason-nvim-lint" },
   opts = {
     events = { "BufWritePost", "BufReadPost", "InsertLeave" },
     linters_by_ft = {
@@ -26,7 +27,7 @@ return {
       sh = { "shellcheck" },
       yaml = { "yamllint" },
       ["yaml.ghactions"] = { "actionlint", "yamllint" },
-      ["yaml.ansible"] = { "ansiblelint" },
+      ["yaml.ansible"] = { "ansible-lint" },
     },
     linters = {
       -- Use `selene` only when a `selene.toml` file is present
@@ -54,6 +55,24 @@ return {
       end
     end
     lint.linters_by_ft = opts.linters_by_ft
+
+    local linters_ignore_install = {
+      "bash",
+      "markdownlint", -- TODO: fix Node
+    }
+
+    lint = require("lint")
+    local linters_mason_install = {}
+    for _, linters in pairs(lint.linters_by_ft) do
+      for _, linter in ipairs(linters) do
+        if not vim.tbl_contains(linters_ignore_install, linter) then table.insert(linters_mason_install, linter) end
+      end
+    end
+
+    require("mason-nvim-lint").setup({
+      ensure_installed = linters_mason_install,
+      automatic_installation = false, -- If true, all linters set up via `nvim-lint` are installed
+    })
 
     -- Wrapper to unfreeze it linter is too slow
     -- Source: https://www.lazyvim.org/plugins/linting

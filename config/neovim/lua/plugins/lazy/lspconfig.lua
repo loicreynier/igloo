@@ -1,13 +1,12 @@
-local has_self_install = require("system").has_self_install
+local system = require("system")
+local has_self_install = system.has_self_install
 
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    {
-      "folke/neoconf.nvim",
-      cmd = "Neoconf",
-      opts = {},
-    },
+    { "williamboman/mason.nvim" },
+    { "williamboman/mason-lspconfig.nvim", config = function() end },
+    { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -34,7 +33,7 @@ return {
     end
 
     local servers = {
-      clangd = {},
+      clangd = { },
       fortls = {
         cmd = {
           "fortls",
@@ -107,8 +106,10 @@ return {
       },
     }
 
+    local ensure_installed = {}
     for name, config in pairs(servers) do
       lspconfig[name].setup(config)
+      if config.mason ~= false then ensure_installed[#ensure_installed + 1] = name end
     end
 
     -- Cannot be parsed by previous loop: "Cannot serialize function"
@@ -129,6 +130,23 @@ return {
         local disabled_filetypes = vim.iter({ "markdown", "tex", "plaintex", "help" })
         if disabled_filetypes:find(vim.bo.filetype) ~= nil then vim.lsp.stop_client(client.id, true) end
       end,
+    })
+    if system.name ~= "HPCC_Olympe" then
+      ensure_installed[#ensure_installed + 1] = "typos_lsp"
+    end
+
+    -- Overrides for Olympe which has GLIBC problems
+    if system.name == "HPCC_Olympe" then
+      ensure_installed = {
+        "fortls",
+        "lua_ls",
+        "pylsp",
+        "taplo",
+      }
+    end
+
+    require("mason-lspconfig").setup({
+      ensure_installed = ensure_installed,
     })
 
     vim.api.nvim_create_autocmd("LspAttach", {
