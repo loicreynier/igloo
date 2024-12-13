@@ -1,13 +1,16 @@
 local system = require("system")
+local use_mason = system.has_self_install and not system.is_nix
 
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
     {
-      "folke/neoconf.nvim",
-      cmd = "Neoconf",
-      opts = {},
+      "mason-org/mason-lspconfig.nvim",
+      enabled = use_mason,
+      config = function() end,
+      dependencies = { "mason-org/mason.nvim" },
     },
+    { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -15,7 +18,9 @@ return {
     local fs_stat = (vim.loop or vim.uv).fs_stat
 
     local servers = {
-      clangd = {},
+      clangd = {
+        mason = system.arch ~= "aarch64",
+      },
       fortls = {
         cmd = {
           "fortls",
@@ -28,7 +33,7 @@ return {
         },
       },
       jsonls = {
-        mason = system.has_self_install and vim.fn.executable("npm"),
+        mason = use_mason and vim.fn.executable("npm"),
       },
       ltex = {
         settings = {
@@ -38,6 +43,7 @@ return {
         },
       },
       lua_ls = {
+        mason = system.name ~= "HPCC_Turpan", -- GLIBC issue
         -- Recommended configuration for Neovim code linting:
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
         on_init = function(client)
@@ -65,6 +71,7 @@ return {
       },
       neocmake = {},
       nil_ls = system.set_if_nix({
+        mason = false,
         settings = {
           ["nil"] = {
             formatting = {
@@ -92,8 +99,10 @@ return {
       },
     }
 
+    local ensure_installed = {}
     for name, config in pairs(servers) do
       lspconfig[name].setup(config)
+      if config.mason ~= false then ensure_installed[#ensure_installed + 1] = name end
     end
 
     -- Cannot be parsed by previous loop: "Cannot serialize function"
@@ -115,6 +124,26 @@ return {
         if disabled_filetypes:find(vim.bo.filetype) ~= nil then vim.lsp.stop_client(client.id, true) end
       end,
     })
+    if system.name ~= "HPCC_Olympe" and system.arch ~= "aarch64" then
+      ensure_installed[#ensure_installed + 1] = "typos_lsp"
+    end
+
+    -- Overrides for Olympe which has GLIBC problems
+    if system.name == "HPCC_Olympe" then
+      ensure_installed = {
+        "fortls",
+        "lua_ls",
+        "pylsp",
+        "taplo",
+      }
+    end
+
+    if use_mason then
+      require("mason-lspconfig").setup({
+        automatic_enable = {},
+        ensure_installed = ensure_installed,
+      })
+    end
 
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)

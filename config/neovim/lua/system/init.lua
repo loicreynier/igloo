@@ -3,6 +3,8 @@ local M = {}
 -- # System recognition from environment variables
 
 vim.g.system = os.getenv("SYSTEM") or "unknown"
+M.name = vim.g.system
+M.arch = vim.loop.os_uname().machine
 
 local system_options = os.getenv("SYSTEM_OPTIONS") or ""
 local options_list = {}
@@ -70,6 +72,8 @@ M.has_self_install = not M.is_offline
 M.is_slow = vim.tbl_contains(vim.g.system_options, "slow")
 
 M.is_ssh = os.getenv("SSH_CONNECTION") and true or false
+
+M.has_node = vim.fn.executable("node")
 
 ---@diagnostic disable-next-line: param-type-mismatch
 M.site_dir = vim.fs.joinpath(vim.fn.stdpath("data"), "site")
