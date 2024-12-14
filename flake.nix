@@ -87,7 +87,13 @@
     };
 
     # -- Packages
-    nur.url = "github:nix-community/nur";
+    nur = {
+      url = "github:nix-community/nur";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
     nixpkgs-lor = {
       url = "github:loicreynier/nixpkgs-lor";
       inputs = {
