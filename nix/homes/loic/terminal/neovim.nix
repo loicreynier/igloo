@@ -28,6 +28,7 @@
     ];
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
+      # Plugins from `vimExtraPlugins` must be renamed to their GitHub name to be recognized by Lazy
       lazy-nvim
       # -- Vim stuff
       better-escape-nvim
@@ -36,12 +37,12 @@
       persisted-nvim
       guess-indent-nvim
       smartcolumn-nvim
-      pkgs.vimExtraPlugins.visual-whitespace-nvim
+      (pkgs.vimExtraPlugins.visual-whitespace-nvim.overrideAttrs (_: {pname = "visual-whitespace.nvim";}))
       yanky-nvim
       # -- UI
       alpha-nvim
       bufferline-nvim
-      pkgs.vimExtraPlugins.incline-nvim
+      (pkgs.vimExtraPlugins.incline-nvim.overrideAttrs (_: {pname = "incline.nvim";}))
       lualine-nvim
       neo-tree-nvim
       noice-nvim
@@ -64,7 +65,7 @@
       neoconf-nvim
       lsp_lines-nvim
       conform-nvim
-      comment-nvim
+      (comment-nvim.overrideAttrs (_: {pname = "Comment.nvim";}))
       nvim-ts-context-commentstring
       trouble-nvim
       todo-comments-nvim
@@ -80,7 +81,8 @@
       helpview-nvim
       # -- Highlights
       coconut-vim
-      vim-bbcode-syntax
+      (vim-bbcode-syntax.overrideAttrs (_: {pname = "bbcode";}))
+      vim-syntax-vidir-ls
       # -- Memes
       duck-nvim
       # -- Dependencies
