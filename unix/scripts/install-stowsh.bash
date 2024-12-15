@@ -21,5 +21,6 @@ echo "\`stowsh\` installed in $dest"
 ln -s "$dest" "$HOME/.local/bin" && echo "\`stowsh\` linked in $HOME/.local/bin"
 
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-  echo "Warning: \$HOME/.local/bin is not in your PATH."
+  # shellcheck disable=2016
+  echo 'Warning: $HOME/.local/bin is not in your PATH.'
 fi
