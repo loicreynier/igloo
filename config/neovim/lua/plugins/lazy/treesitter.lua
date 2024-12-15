@@ -1,6 +1,6 @@
 local system = require("system")
-local parsers_base = { "c", "lua", "markdown", "markdown_inline", "vim", "vimdoc", "query" }
-local parsers_ensure_installed = system.has_self_install and "all" or (system.is_nix and {} or parsers_base)
+-- local parsers_base = { "c", "lua", "markdown", "markdown_inline", "vim", "vimdoc", "query" }
+local parsers_ensure_installed = system.has_self_install and "all" or {}
 ---@diagnostic disable-next-line: param-type-mismatch
 local parsers_install_dir = vim.fs.joinpath(system.site_dir, "treesitter")
 
