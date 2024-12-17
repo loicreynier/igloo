@@ -45,7 +45,7 @@
       (pkgs.vimExtraPlugins.incline-nvim.overrideAttrs (_: {pname = "incline.nvim";}))
       lualine-nvim
       neo-tree-nvim
-      noice-nvim
+      (pkgs.vimExtraPlugins.noice-nvim.overrideAttrs (_: {pname = "noice.nvim";}))
       nvim-notify
       telescope-nvim
       telescope-fzf-native-nvim
