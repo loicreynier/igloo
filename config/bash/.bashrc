@@ -16,6 +16,14 @@ command_exists() {
 config_dir="${XDG_CONFIG_HOME:-$HOME/.config}"
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}"
 
+# -- TurboVNC hack
+
+if [[ -n $VNCDESKTOP ]]; then
+  if [[ $SYSTEM == "HPCC_Turpan" ]]; then
+    export PATH="$HOME/.local/binx86":"$PATH"
+  fi
+fi
+
 # -- Bash options
 
 HISTFILE="$state_dir/bash_history"

@@ -63,6 +63,9 @@ if [ -z "$SYSTEM" ]; then
     olympe*)
       SYSTEM="HPCC_Olympe"
       ;;
+    turpanvisu*)
+      SYSTEM="HPCC_Turpan_visu"
+      ;;
     turpan*)
       SYSTEM="HPCC_Turpan"
       ;;
@@ -157,7 +160,10 @@ fi
 
 # == SHELL CONFIGURATION =======================================================
 
-if [ "$0" = "-bash" ] || [ "$0" = "/bin/bash" ] && [ -n "$PS1" ]; then
+if [ "$0" = "-bash" ] ||
+  [ "$0" = "/bin/bash" ] ||
+  [ "$0" = "bash" ] &&
+  [ -n "$PS1" ]; then
   echo "Sourcing '${HOME}/.bashrc'"
   # shellcheck disable=SC1091
   . "${HOME}/.bashrc"
@@ -170,20 +176,32 @@ _setup_shell_ONERA_workstation() {
   export PATH="$HOME/.bin":"$PATH"
 
   module -s purge
+  module -s load cmake/3.29.3
+  module -s load gcc/14.2.0
   module -s load python/3.12.2-gnu850
   module -s load firefox
 }
 
 _setup_shell_HPCC_Olympe() {
   module -s purge
+  module -s load cmake/3.30.3
+  module -s load gcc/12.3.0
   module -s load python/3.11.3
 }
 
 _setup_shell_HPCC_Turpan() {
-  module -s python/3.10.9
+  module -s load cmake/3.25.1
+  module -s load gnu/12.2.0
+  module -s load python/3.10.9
+}
+
+_setup_shell_HPCC_Turpan_visu() {
+  export PATH="$HOME/.local/binx86":"$PATH"
 }
 
 _setup_shell_HPCC_Topaze() {
+  module -s load cmake/default
+  module -s load gcc/14.2.0
   module -s load python/3.11.4
 }
 
@@ -191,6 +209,7 @@ case "$SYSTEM" in
 "ONERA_workstation") _setup_shell_ONERA_workstation ;;
 "HPCC_Olympe") _setup_shell_HPCC_Olympe ;;
 "HPCC_Turpan") _setup_shell_HPCC_Turpan ;;
+"HPCC_Turpan_visu") _setup_shell_HPCC_Turpan_visu ;;
 "HPCC_Topaze") _setup_shell_HPCC_Topaze ;;
 esac
 
