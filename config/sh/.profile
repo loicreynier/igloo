@@ -133,9 +133,10 @@ fi
 # -- Software configuration
 
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 
-export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export TEXMFHOME="$XDG_DATA_HOME/texmf"
 
 export LESSHISTFILE="$XDG_STATE_HOME/lesshst"
