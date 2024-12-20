@@ -68,6 +68,8 @@ if [ -z "$SYSTEM" ]; then
       ;;
     turpan*)
       SYSTEM="HPCC_Turpan"
+      GPG_TTY="$(tty)"
+      export GPG_TTY
       ;;
     topaze*)
       SYSTEM="HPCC_Topaze"
