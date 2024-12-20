@@ -71,4 +71,9 @@ require("lazy").setup({
     path = os.getenv("NVIM_NIX_PLUGINS_PATH"),
     patterns = { "" },
   }, {}),
+
+  -- Dev settings
+  dev = {
+    path = "~/git/neovim",
+  },
 })
