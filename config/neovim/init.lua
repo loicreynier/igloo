@@ -64,7 +64,9 @@ local lazy_dev_nix_setup = function()
       -- patterns = { "" },
     }
   else
-    dev_ = {}
+    dev_ = {
+      path = "~/git/neovim",
+    }
   end
   return dev_
 end
