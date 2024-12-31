@@ -117,7 +117,6 @@
       fprettify
       # -- Misc
       actionlint
-      ansible-lint
       bash
       clang-tools
       checkmake
