@@ -10,44 +10,42 @@ vim.g.mapleader = " " -- Should be set before loading `lazy`
 
 local system = require("system")
 
-if not system.is_nix then
-  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-  vim.opt.rtp:prepend(lazypath)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
 
-  ---@diagnostic disable-next-line: undefined-field
-  if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    if system.has_self_install then
-      local out = vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable",
-        lazypath,
-      })
-      if vim.v.shell_error ~= 0 then
-        vim.api.nvim_echo({
-          { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-          { out, "WarningMsg" },
-          { "\nPress any key to exit..." },
-        }, true, {})
-        vim.fn.getchar()
-        os.exit(1)
-      end
-    else
+---@diagnostic disable-next-line: undefined-field
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  if system.has_self_install then
+    local out = vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable",
+      lazypath,
+    })
+    if vim.v.shell_error ~= 0 then
       vim.api.nvim_echo({
-        { "Plugin `lazy.nvim` not installed/found in: ", "ErrorMsg" },
-        { lazypath, "ErrorMsg" },
-        { "\nSystem cannot install, install it manually", "WarningMsg" },
-        { "\nNeovim can be started without config with: " },
-        { "nvim --clean" },
+        { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+        { out, "WarningMsg" },
         { "\nPress any key to exit..." },
       }, true, {})
       vim.fn.getchar()
       os.exit(1)
     end
+  else
+    vim.api.nvim_echo({
+      { "Plugin `lazy.nvim` not installed/found in: ", "ErrorMsg" },
+      { lazypath, "ErrorMsg" },
+      { "\nSystem cannot install, install it manually", "WarningMsg" },
+      { "\nNeovim can be started without config with: " },
+      { "nvim --clean" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
   end
-end -- `not system.is_nix`
+end
 
 require("lazy").setup({
   -- Base settings
@@ -69,6 +67,7 @@ require("lazy").setup({
   install = { missing = system.has_self_install }, -- Automatically install missing plugins
   dev = system.set_if_nix({
     path = os.getenv("NVIM_NIX_PLUGINS_PATH"),
-    patterns = { "" },
+    -- TODO: read patterns from environment variable from Nix wrapper?
+    -- patterns = { "" },
   }, {}),
 })

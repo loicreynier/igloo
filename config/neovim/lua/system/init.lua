@@ -42,7 +42,8 @@ end
 
 -- # Utility function/variables
 
-M.has_self_install = not (M.is_nix or vim.tbl_contains(vim.g.system_options, "offline"))
+M.is_offline = vim.tbl_contains(vim.g.system_options, "offline")
+M.has_self_install = not M.is_offline
 
 M.is_ssh = os.getenv("SSH_CONNECTION") and true or false
 
