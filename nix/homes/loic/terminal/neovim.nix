@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   self,
   ...
@@ -90,7 +91,60 @@
       nvim-web-devicons
       dressing-nvim
     ];
-    extraPackages = with pkgs; [
+    extraPackages = with pkgs; let
+      # WARNING: tricky hack for installing Python LSP Server plugins
+      # See:
+      # - https://github.com/nix-community/nixvim/blob/main/plugins/lsp/language-servers/pylsp.nix
+      # - https://github.com/NixOS/nixpkgs/issues/229337
+      # `pylsp` plugins are installed by adding them into `python-lsp-server`'s `propagatedBuildInputs`.
+      # Since plugins have the server as the dependencies, the latter is removed from the plugins deps
+      # to prevent circular dependencies issues.
+      pylspPlugins = lib.lists.flatten (
+        lib.mapAttrsToList
+        (
+          _pluginName: pluginPkg: (
+            pluginPkg.overridePythonAttrs (old: {
+              dependencies = lib.filter (dep: dep.pname != "python-lsp-server") old.dependencies;
+              doCheck = false;
+            })
+          )
+        )
+        (
+          with python3Packages; {
+            # pylsp_mypy = pylsp-mypy.overridePythonAttrs (old: {
+            #   postPatch =
+            #     old.postPatch
+            #     or ''''
+            #     + ''
+            #       substituteInPlace setup.cfg \
+            #         --replace-fail "python-lsp-server >=1.7.0" ""
+            #     '';
+            # });
+            ruff = python-lsp-ruff.overridePythonAttrs (old: {
+              postPatch =
+                old.postPatch
+                or ''''
+                + ''
+                  sed -i '/python-lsp-server/d' pyproject.toml
+                '';
+
+              build-system = [setuptools] ++ (old.build-system or []);
+            });
+          }
+        )
+      );
+
+      pylsp = python3Packages.python-lsp-server.overridePythonAttrs (old: {
+        propagatedBuildInputs = pylspPlugins ++ old.dependencies;
+        disabledTests =
+          (old.disabledTests or [])
+          ++ [
+            # Those tests fail when third-party plugins are loaded
+            "test_notebook_document__did_open"
+            "test_notebook_document__did_change"
+          ];
+      });
+    in [
       editorconfig-checker
       ltex-ls
       typos-lsp
@@ -102,6 +156,8 @@
       # -- Shell
       shfmt
       shellcheck
+      # -- Python
+      pylsp
       # -- Lua
       lua-language-server
       selene
@@ -128,10 +184,5 @@
       tinymist
       yamllint
     ];
-    extraPython3Packages = ps:
-      with ps; [
-        python-lsp-server
-        python-lsp-ruff
-      ];
   };
 }
