@@ -190,6 +190,7 @@ _setup_shell_HPCC_Olympe() {
   module -s load cmake/3.30.3
   module -s load gcc/12.3.0
   module -s load python/3.11.3
+  export CC=gcc
 }
 
 _setup_shell_HPCC_Turpan() {
