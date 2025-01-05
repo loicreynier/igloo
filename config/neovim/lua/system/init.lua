@@ -11,9 +11,20 @@ for option in string.gmatch(system_options, "([^:]+)") do
 end
 vim.g.system_options = options_list
 
--- # Nix detection
+-- # Nix (stuff) detection
 
-M.is_nix = os.getenv("NVIM_NIX_WRAPPER") and true or false
+M.is_nix = os.getenv("NVIM_NIX_WRAPPER") or vim.fn.executable("nix") and true or false
+if M.is_nix then
+  M.nix_plugins_path = os.getenv("NVIM_NIX_PLUGINS_PATH")
+      ---@diagnostic disable-next-line: undefined-field
+      and vim.loop.fs_stat(os.getenv("NVIM_NIX_PLUGINS_PATH"))
+      and os.getenv("NVIM_NIX_PLUGINS_PATH")
+    or nil
+
+  -- TODO: speedup Lazy Nix install detection by passing an environment from Nix wrapper?
+  ---@diagnostic disable-next-line: undefined-field
+  M.lazy_nix_installed = M.nix_plugins_path and vim.loop.fs_stat(M.nix_plugins_path .. "/lazy.nvim") ~= nil
+end
 
 function M.set_if_nix(nix, non_nix)
   if M.is_nix then
@@ -42,7 +53,8 @@ end
 
 -- # Utility function/variables
 
-M.has_self_install = not (M.is_nix or vim.tbl_contains(vim.g.system_options, "offline"))
+M.is_offline = vim.tbl_contains(vim.g.system_options, "offline")
+M.has_self_install = not M.is_offline
 
 M.is_ssh = os.getenv("SSH_CONNECTION") and true or false
 

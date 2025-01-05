@@ -1,4 +1,4 @@
-local has_self_install = require("system").has_self_install
+local system = require("system")
 
 return {
   "neovim/nvim-lspconfig",
@@ -39,7 +39,7 @@ return {
         cmd = {
           "fortls",
           "--notify_init",
-          not has_self_install and "--disable_autoupdate" or nil,
+          not (system.has_self_install or system.is_nix) and "--disable_autoupdate" or nil,
           "--hover_signature",
           "--hover_language=fortran",
           "--use_signature_help",

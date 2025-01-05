@@ -10,7 +10,10 @@ vim.g.mapleader = " " -- Should be set before loading `lazy`
 
 local system = require("system")
 
-if not system.is_nix then
+-- # Lazy install
+
+-- Download Lazy if not installed by Nix or already found
+if not system.lazy_nix_installed then
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
   vim.opt.rtp:prepend(lazypath)
 
@@ -47,7 +50,26 @@ if not system.is_nix then
       os.exit(1)
     end
   end
-end -- `not system.is_nix`
+end
+
+-- # Lazy setup functions
+
+local lazy_dev_nix_setup = function()
+  -- Use `dev` for Nix installed plugins
+  local dev_ = {}
+  if system.nix_plugins_path ~= nil then
+    dev_ = {
+      path = os.getenv("NVIM_NIX_PLUGINS_PATH"),
+      -- TODO: read patterns from environment variable from Nix wrapper?
+      -- patterns = { "" },
+    }
+  else
+    dev_ = {}
+  end
+  return dev_
+end
+
+-- # Lazy setup
 
 require("lazy").setup({
   -- Base settings
@@ -67,8 +89,5 @@ require("lazy").setup({
   },
   checker = { enabled = system.has_self_install }, -- Automatically check for plugin updates
   install = { missing = system.has_self_install }, -- Automatically install missing plugins
-  dev = system.set_if_nix({
-    path = os.getenv("NVIM_NIX_PLUGINS_PATH"),
-    patterns = { "" },
-  }, {}),
+  dev = lazy_dev_nix_setup(),
 })

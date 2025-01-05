@@ -1,10 +1,14 @@
+local system = require("system")
+
 return {
   "iamcco/markdown-preview.nvim",
   cmd = { "MarkdownPreview", "MarkdownPreviewToggle", "MarkdownPreviewStop" },
   ft = { "markdown" },
   enabled = not require("system").is_ssh,
   build = function()
-    if require("system").has_self_install then
+    if system.has_self_install then
+      -- Plugin not loaded at this point, force load to build
+      require("lazy").load({ plugins = { "markdown-preview.nvim" } })
       vim.fn["mkdp#util#install"]()
     else
       vim.notify(
