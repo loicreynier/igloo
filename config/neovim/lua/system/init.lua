@@ -13,7 +13,7 @@ vim.g.system_options = options_list
 
 -- # Nix (stuff) detection
 
-M.is_nix = os.getenv("NVIM_NIX_WRAPPER") or vim.fn.executable("nix") and true or false
+M.is_nix = os.getenv("NVIM_NIX_WRAPPER") ~= nil or vim.fn.executable("nix") == 1
 if M.is_nix then
   M.nix_plugins_path = os.getenv("NVIM_NIX_PLUGINS_PATH")
       ---@diagnostic disable-next-line: undefined-field
