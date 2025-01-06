@@ -11,27 +11,8 @@ return {
   },
   config = function()
     local lspconfig = require("lspconfig")
-    local util = require("lspconfig.util")
     ---@diagnostic disable-next-line: undefined-field
     local fs_stat = (vim.loop or vim.uv).fs_stat
-
-    local ltex_path = function()
-      local path
-      ---@diagnostic disable-next-line: undefined-field
-      local git_root = util.find_git_ancestor(vim.loop.cwd())
-
-      if git_root then
-        if #vim.fn.glob(git_root .. "/.vscode" .. "/ltex.*", true, true) == 0 then
-          path = git_root .. "/.ltex"
-        else
-          path = git_root .. "/.vscode"
-        end
-      else
-        path = vim.fn.stdpath("data") .. "/ltex"
-      end
-
-      return path
-    end
 
     local servers = {
       clangd = {},
@@ -46,13 +27,7 @@ return {
           "--lowercase_intrinsics",
         },
       },
-      ltex = { -- FIXME: dictionaries don't load on startup
-        on_attach = function(_, _)
-          require("ltex_extra").setup({
-            init_check = true,
-            path = ltex_path(),
-          })
-        end,
+      ltex = {
         settings = {
           ltex = {
             checkFrequency = "save",
