@@ -76,9 +76,9 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    pulseaudio.enable = false; # For PipeWire setup
   };
 
-  hardware.pulseaudio.enable = false; # For PipeWire setup
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   security.rtkit.enable = true;
 }
