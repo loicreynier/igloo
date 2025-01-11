@@ -31,6 +31,8 @@ make_neovim() {
   make install
 }
 
+# shellcheck disable=SC2016
+# editorconfig-checker-disable
 print_usage() {
   echo "Usage: $0 [options]"
   echo
@@ -39,9 +41,9 @@ print_usage() {
   echo "  --repo <repo>         Specify the GitHub repository (default: 'neovim/neovim')"
   echo "  --src-dir <dir>       Specify the source (download) directory (default: '\$HOME/.local/src')"
   echo "  --install-dir <dir>   Specify the installation directory (default: '\$HOME/.local')"
-  echo "  --tmp-dir <dir>       Specify the temporary directory (default: \`mktemp\`)"
+  echo '  --tmp-dir <dir>       Specify the temporary directory (default: `mktemp`)'
   echo "  --version <version>   Specify the version to download (default: latest)"
-  echo "  --cc <cc>             Specify the C compiler to use (default: determined by \`cmake\`)"
+  echo '  --cc <cc>             Specify the C compiler to use (default: determined by `cmake`)'
   echo "  --tarball <path>      Specify the path to a local tarball to use instead of downloading"
   echo "  --help                Display this help message"
   echo
@@ -49,9 +51,10 @@ print_usage() {
   echo "  $0 --version 0.10.2 --install-dir \$HOME/.local/stow/neovim-0.10.2-olympe --cc gcc"
   exit_clean 0
 }
+# editorconfig-checker-enable
 
 # -- Argument parser
-while [[ "$#" -gt 0 ]]; do
+while [[ $# -gt 0 ]]; do
   case $1 in
   --dry-run) DRY_RUN=1 ;;
   --repo)
@@ -121,7 +124,7 @@ else
   src_dir="$DOWNLOAD_DIR/neovim-local"
 fi # [ `-z "$TARBALL` ]
 
-if [[ "$DRY_RUN" == "1" ]]; then
+if [[ $DRY_RUN == "1" ]]; then
   echo "-- Dry run info:"
   echo "REPO=$REPO"
   echo "TMP_DIR=$TMP_DIR"
@@ -134,7 +137,7 @@ if [[ "$DRY_RUN" == "1" ]]; then
   echo "src_dir=$src_dir"
 fi
 
-[[ "$DRY_RUN" == "1" ]] && exit_clean 0
+[[ $DRY_RUN == "1" ]] && exit_clean 0
 
 mkdir -p "$src_dir"
 

@@ -88,7 +88,8 @@ if command_exists "python3"; then
   alias python="python3"
   # NOTE: `no-build-isolation` doesn't seem to work with `--force-reinstall`
   alias pip-install-offline="python3 -m pip install --user --no-index --no-build-isolation"
-  alias pip-uninstall-all='pip freeze --user --exclude-editable | cut -d "@" -f1 | xargs pip uninstall -y'
+  # editorconfig-checker-disable-next-line
+  alias pip-uninstall-all='python3 -m pip freeze --user --exclude-editable | cut -d "@" -f1 | xargs pip uninstall -y'
 fi
 
 command_exists "stowsh" && alias stowsh-local='stowsh -t $HOME/.local'
