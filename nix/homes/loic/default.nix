@@ -12,6 +12,11 @@ in
     ./terminal
   ];
 
+  nix.nixPath = [
+    # Fixes "warning: Nix search path entry ..."
+    "$HOME/.nix-defexpr/channels"
+  ];
+
   home = rec {
     inherit username;
     homeDirectory = "/home/${config.home.username}";
