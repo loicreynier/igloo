@@ -8,7 +8,6 @@
 {
   xdg.configFile."nvim" = {
     source = "${self}/config/neovim";
-    recursive = true;
   };
 
   programs.neovim =
