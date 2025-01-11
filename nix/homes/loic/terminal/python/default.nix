@@ -4,38 +4,37 @@
   pkgs,
   self,
   ...
-}: let
+}:
+let
   # -- Shell scripts
-  pylab =
-    pkgs.writeShellScriptBin "pylab"
-    (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
-      (lib.fileContents "${self}/bin/pylab"));
-  ipylab =
-    pkgs.writeShellScriptBin "ipylab"
-    (builtins.replaceStrings ["#!/usr/bin/env bash\n"] [""]
-      (lib.fileContents "${self}/bin/ipylab"));
+  pylab = pkgs.writeShellScriptBin "pylab" (
+    builtins.replaceStrings [ "#!/usr/bin/env bash\n" ] [ "" ] (lib.fileContents "${self}/bin/pylab")
+  );
+  ipylab = pkgs.writeShellScriptBin "ipylab" (
+    builtins.replaceStrings [ "#!/usr/bin/env bash\n" ] [ "" ] (lib.fileContents "${self}/bin/ipylab")
+  );
 
   # -- Python scripts wrapper
-  writePythonBin = let
-    python = config.programs.python.package;
-  in
+  writePythonBin =
+    let
+      python = config.programs.python.package;
+    in
     name:
-      pkgs.writers.makePythonWriter
-      python
-      pkgs.python3Packages
-      pkgs.buildPackages.python3Packages
+    pkgs.writers.makePythonWriter python pkgs.python3Packages pkgs.buildPackages.python3Packages
       "/bin/${name}";
 
   # -- Python scripts
-  pyversion =
-    writePythonBin "pyversion" {}
-    (builtins.replaceStrings ["#!/usr/bin/env python\n"] [""]
-      (lib.fileContents "${self}/bin/pyversion"));
-in {
+  pyversion = writePythonBin "pyversion" { } (
+    builtins.replaceStrings [ "#!/usr/bin/env python\n" ] [ "" ] (
+      lib.fileContents "${self}/bin/pyversion"
+    )
+  );
+in
+{
   programs.python = {
     enable = true;
-    packages = pkgs:
-      with pkgs; [
+    packages =
+      pkgs: with pkgs; [
         matplotlib
         numpy
         pandas
@@ -47,12 +46,12 @@ in {
         rich
         pyfzf
       ];
-    config =
-      lib.strings.fileContents
-      (pkgs.substituteAll {
+    config = lib.strings.fileContents (
+      pkgs.substituteAll {
         src = "${self}/config/python/startup.py";
         state = "${config.xdg.stateHome}";
-      });
+      }
+    );
   };
 
   programs.fzf.enable = lib.mkDefault true; # Enable `fzf` for `pyfzf`
@@ -66,15 +65,18 @@ in {
   # IPython files
   # TODO: attribute set for IPython profile with startup files as list
   home.file = {
-    ".ipython/profile_default/ipython_config.py".source = "${self}/config/ipython/ipython_config_default.py";
+    ".ipython/profile_default/ipython_config.py".source =
+      "${self}/config/ipython/ipython_config_default.py";
     ".ipython/profile_default/startup/fzf-hist-search.py".text =
-      builtins.replaceStrings [
-        "bat_bin=\"bat\""
-        "sed_bin=\"sed\""
-      ] [
-        "bat_bin=\"${pkgs.bat}/bin/bat\""
-        "sed_bin=\"${pkgs.gnused}/bin/sed\""
-      ]
-      (lib.fileContents "${self}/config/ipython/startup/fzf-hist-search.py");
+      builtins.replaceStrings
+        [
+          "bat_bin=\"bat\""
+          "sed_bin=\"sed\""
+        ]
+        [
+          "bat_bin=\"${pkgs.bat}/bin/bat\""
+          "sed_bin=\"${pkgs.gnused}/bin/sed\""
+        ]
+        (lib.fileContents "${self}/config/ipython/startup/fzf-hist-search.py");
   };
 }

@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkOption types;
-in {
+in
+{
   options.igloo.device = {
     type = mkOption {
       type = types.enum [
@@ -27,7 +29,13 @@ in {
 
     gpu = {
       type = mkOption {
-        type = with types; nullOr (enum ["intel" "amd" "nvidia"]);
+        type =
+          with types;
+          nullOr (enum [
+            "intel"
+            "amd"
+            "nvidia"
+          ]);
         default = null;
         description = ''
           The manifacturer/type of the primary system GPU.

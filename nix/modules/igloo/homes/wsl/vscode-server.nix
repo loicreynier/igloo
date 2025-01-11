@@ -1,24 +1,24 @@
 /*
-Try to make VS Code server work on NixOS (especially NixOS-WSL)
+  Try to make VS Code server work on NixOS (especially NixOS-WSL)
 
-Uses the `server-env-setup` script by @sonowz to patch VS Code.
-Source: https://github.com/sonowz/vscode-remote-wsl-nixos
-Requires a NixOS system with `programs.nix-ld.enable = true`.
+  Uses the `server-env-setup` script by @sonowz to patch VS Code.
+  Source: https://github.com/sonowz/vscode-remote-wsl-nixos
+  Requires a NixOS system with `programs.nix-ld.enable = true`.
 
-Not tested for SSH connection.
-Might break on VS Code updates.
+  Not tested for SSH connection.
+  Might break on VS Code updates.
 
-Working with:
-- WSL 2.2.4.0
-- VS Code 1.90.0
-- nixpkgs 24.05
+  Working with:
+  - WSL 2.2.4.0
+  - VS Code 1.90.0
+  - nixpkgs 24.05
 
-Alternatives:
-- https://github.com/nix-community/nixos-vscode-server
-- https://discourse.nixos.org/t/14615
+  Alternatives:
+  - https://github.com/nix-community/nixos-vscode-server
+  - https://discourse.nixos.org/t/14615
 
-FIXME: this module is only needed if the system is running NixOS.
-It therefore should be moved to `hosts` instead of `homes.
+  FIXME: this module is only needed if the system is running NixOS.
+  It therefore should be moved to `hosts` instead of `homes.
 */
 {
   lib,
@@ -26,10 +26,12 @@ It therefore should be moved to `hosts` instead of `homes.
   config,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.igloo.wsl;
-in {
+in
+{
   options.igloo.wsl.vscodeServerFix.enable = mkEnableOption "VS Code server fix";
 
   config = mkIf (cfg.enable && cfg.vscodeServerFix.enable) {
@@ -41,9 +43,9 @@ in {
 
     home.file.".vscode-server/server-env-setup".text =
       builtins.replaceStrings
-      [''$(nixos-version | cut -d "." -f1,2)'']
-      ["${config.home.stateVersion}"]
-      (lib.fileContents "${inputs.nixos-vscode-remote-wsl}/server-env-setup");
+        [ ''$(nixos-version | cut -d "." -f1,2)'' ]
+        [ "${config.home.stateVersion}" ]
+        (lib.fileContents "${inputs.nixos-vscode-remote-wsl}/server-env-setup");
   };
 
   # -- Alternative using `nix-community/nixos-vscode-server`

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # -- WSL configuration
   wsl = {
     enable = true;
@@ -23,11 +24,13 @@
     };
 
     variables = with pkgs; {
-      NIX_LD_LIBRARY_PATH = lib.mkForce (lib.makeLibraryPath [
-        # Keep the default and NVIDIA driver
-        "/run/current-system/sw/share/nix-ld"
-        "/usr/lib/wsl" # Windows NVIDIA driver
-      ]);
+      NIX_LD_LIBRARY_PATH = lib.mkForce (
+        lib.makeLibraryPath [
+          # Keep the default and NVIDIA driver
+          "/run/current-system/sw/share/nix-ld"
+          "/usr/lib/wsl" # Windows NVIDIA driver
+        ]
+      );
       LD_LIBRARY_PATH = lib.makeLibraryPath [
         "/usr/lib/wsl"
       ];

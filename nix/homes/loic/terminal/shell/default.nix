@@ -4,7 +4,8 @@
   pkgs,
   self,
   ...
-}: {
+}:
+{
   imports = [
     ./atuin.nix
     ./bash.nix
@@ -47,18 +48,18 @@
     nix-direnv = {
       enable = true;
       # In case alternative `nix` package is used, such as `nix-super`
-      package =
-        lib.mkIf (config.nix.package != null)
-        (pkgs.nix-direnv.override {
+      package = lib.mkIf (config.nix.package != null) (
+        pkgs.nix-direnv.override {
           nix = config.nix.package;
-        });
+        }
+      );
     };
-    stdlib =
-      lib.strings.fileContents
-      (pkgs.substituteAll {
+    stdlib = lib.strings.fileContents (
+      pkgs.substituteAll {
         src = "${self}/config/direnv/direnvrc.sh";
         sha1sum = "${pkgs.perl}/bin/shasum";
-      });
+      }
+    );
   };
 
   home.file = {

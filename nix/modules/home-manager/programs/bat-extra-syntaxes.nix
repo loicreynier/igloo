@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.programs.bat;
-in {
+in
+{
   options.programs.bat.installExtraSyntaxes = lib.mkOption {
     type = lib.types.bool;
     description = "Whether to install extra syntaxes.";

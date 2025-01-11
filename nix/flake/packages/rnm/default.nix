@@ -22,6 +22,12 @@ stdenvNoCC.mkDerivation {
   '';
 
   postFixup = ''
-    wrapProgram "$out/bin/rnm" --prefix PATH : "${lib.makeBinPath [imagemagick ffmpeg poppler_utils]}"
+    wrapProgram "$out/bin/rnm" --prefix PATH : "${
+      lib.makeBinPath [
+        imagemagick
+        ffmpeg
+        poppler_utils
+      ]
+    }"
   '';
 }

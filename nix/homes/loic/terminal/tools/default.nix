@@ -3,10 +3,12 @@
   pkgs,
   self,
   ...
-}: let
+}:
+let
   rgConfigPath = "${config.xdg.configHome}/ripgreprc";
   rgConfigSrc = "${self}/config/ripgrep/ripgreprc";
-in {
+in
+{
   imports = [
     ./git.nix
     ./gpg.nix

@@ -4,21 +4,19 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkOption mkEnableOption types;
 
   cfg = config.programs.comma;
-in {
+in
+{
   options.programs.comma = {
-    enable =
-      mkEnableOption
-      "comma, a wrapper to run software without installing it";
+    enable = mkEnableOption "comma, a wrapper to run software without installing it";
 
     package = mkOption {
       type = types.package;
-      default =
-        pkgs.comma.override
-        {nix-index-unwrapped = config.programs.nix-index.package;};
+      default = pkgs.comma.override { nix-index-unwrapped = config.programs.nix-index.package; };
       description = "Package providing the `comma` tool.";
     };
   };

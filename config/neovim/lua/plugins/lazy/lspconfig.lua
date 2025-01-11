@@ -61,7 +61,13 @@ return {
         },
       },
       nil_ls = {
-        formatting = { command = { "alejandra", "--quiet", "--" } },
+        settings = {
+          ["nil"] = {
+            formatting = {
+              command = { "nixfmt", "--quiet" },
+            },
+          },
+        },
       },
       pylsp = {
         plugins = {

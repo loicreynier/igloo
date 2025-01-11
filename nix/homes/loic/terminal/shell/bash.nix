@@ -3,7 +3,8 @@
   config,
   self,
   ...
-}: {
+}:
+{
   programs.bash = {
     enable = true;
 

@@ -5,15 +5,17 @@
   pkgs,
   self,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nix-index-database.nixosModules.nix-index
   ];
 
   environment = {
-    defaultPackages = lib.mkForce [];
+    defaultPackages = lib.mkForce [ ];
 
-    systemPackages = with pkgs;
+    systemPackages =
+      with pkgs;
       [
         curl
         file
@@ -57,20 +59,24 @@
       };
     };
     loadInNixShell = true;
-    direnvrcExtra = lib.fileContents (pkgs.substituteAll {
-      src = "${self}/config/direnv/direnvrc.sh";
-      sha1sum = "${pkgs.perl}/bin/shasum";
-    });
+    direnvrcExtra = lib.fileContents (
+      pkgs.substituteAll {
+        src = "${self}/config/direnv/direnvrc.sh";
+        sha1sum = "${pkgs.perl}/bin/shasum";
+      }
+    );
   };
 
-  programs.nano = let
-    nanoConf = lib.strings.fileContents "${self}/config/nano/nanorc";
-  in {
-    enable = true;
-    nanorc = ''
-      include ${pkgs.nanorc}/share/*.nanorc # Extended syntax highlighting
+  programs.nano =
+    let
+      nanoConf = lib.strings.fileContents "${self}/config/nano/nanorc";
+    in
+    {
+      enable = true;
+      nanorc = ''
+        include ${pkgs.nanorc}/share/*.nanorc # Extended syntax highlighting
 
-      ${nanoConf}
-    '';
-  };
+        ${nanoConf}
+      '';
+    };
 }

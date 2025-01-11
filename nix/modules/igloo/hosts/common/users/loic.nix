@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   users.users.loic = {
     isNormalUser = true;
     description = "Loïc Reynier";

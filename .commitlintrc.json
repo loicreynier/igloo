@@ -42,7 +42,8 @@
         "pre-commit",
         "devshells",
         "devshells.default",
-        "direnv"
+        "direnv",
+        "nix"
       ]
     ]
   }

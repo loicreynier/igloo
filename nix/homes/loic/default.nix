@@ -3,9 +3,11 @@
   lib,
   self,
   ...
-}: let
+}:
+let
   username = "loic";
-in {
+in
+{
   imports = [
     ./terminal
   ];

@@ -4,7 +4,8 @@
   pkgs,
   self,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     fzf
     pet
@@ -16,7 +17,5 @@
     path = "${config.xdg.configHome}/pet/config.toml";
   };
 
-  programs.bash.initExtra =
-    lib.strings.fileContents
-    "${self}/config/bash/functions/pet-select.bash";
+  programs.bash.initExtra = lib.strings.fileContents "${self}/config/bash/functions/pet-select.bash";
 }

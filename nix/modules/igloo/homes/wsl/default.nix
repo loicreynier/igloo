@@ -3,10 +3,12 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.igloo.wsl;
-in {
+in
+{
   options.igloo.wsl = {
     enable = mkEnableOption "WSL home integration";
   };

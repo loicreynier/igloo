@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.igloo.system.virtualization;
-in {
+in
+{
   config = lib.mkIf cfg.distrobox.enable {
     environment.systemPackages = [
       pkgs.distrobox
@@ -14,7 +16,7 @@ in {
     systemd.user = {
       timers."distrobox-update" = {
         enable = true;
-        wantedBy = ["timers.target"];
+        wantedBy = [ "timers.target" ];
         timerConfig = {
           OnBootSec = "1h";
           OnUnitActiveSec = "1d";

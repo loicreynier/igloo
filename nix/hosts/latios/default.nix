@@ -3,7 +3,8 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   igloo = {
     device = {
       type = "laptop";
@@ -28,16 +29,18 @@
         "sd_mod"
         "rtsx_pci_sdmmc"
       ];
-      kernelModules = [];
+      kernelModules = [ ];
 
-      luks = let
-        uuid = "090ad507-d529-4490-af3f-db00c8a16f2a";
-      in {
-        devices."luks-${uuid}".device = "/dev/disk/by-uuid/${uuid}";
-      };
+      luks =
+        let
+          uuid = "090ad507-d529-4490-af3f-db00c8a16f2a";
+        in
+        {
+          devices."luks-${uuid}".device = "/dev/disk/by-uuid/${uuid}";
+        };
     };
-    kernelModules = ["kvm-intel"];
-    extraModulePackages = [];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
 
     loader = {
       systemd-boot.enable = true;
@@ -53,7 +56,10 @@
     "/boot" = {
       device = "/dev/disk/by-uuid/9FD6-DC88";
       fsType = "vfat";
-      options = ["fmask=0077" "dmask=0077"];
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+      ];
     };
   };
 

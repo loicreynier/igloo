@@ -1,8 +1,14 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   inherit (lib) mkEnableOption;
-in {
+in
+{
   options.igloo.system.virtualization = {
-    podman = {enable = mkEnableOption "Podman";};
-    distrobox = {enable = mkEnableOption "Distrobox";};
+    podman = {
+      enable = mkEnableOption "Podman";
+    };
+    distrobox = {
+      enable = mkEnableOption "Distrobox";
+    };
   };
 }

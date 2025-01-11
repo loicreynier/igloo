@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs = {
     firefox = {
       enable = true;
@@ -6,7 +7,7 @@
 
     browserpass = {
       enable = true;
-      browsers = ["firefox"];
+      browsers = [ "firefox" ];
     };
   };
 

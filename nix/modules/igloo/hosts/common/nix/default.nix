@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   nix = {
     settings = {
       trusted-users = [

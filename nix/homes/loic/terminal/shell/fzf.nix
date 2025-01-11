@@ -4,14 +4,16 @@
   pkgs,
   self,
   ...
-}: let
+}:
+let
   ezabin = "${config.programs.eza.package}/bin/eza";
   fdBin = "${config.programs.fd.package}/bin/fd";
   fdCmd = "${fdBin} --type f --hidden --follow --strip-cwd-prefix";
   fzfBin = "${config.programs.fzf.package}/bin/fzf";
   batBin = "${pkgs.bat}/bin/bat --theme=\\\"Visual Studio Dark+\\\""; # TODO: better theme handling
   justBin = "${pkgs.just}/bin/just";
-in {
+in
+{
   # -- Commands configurations
   programs.fzf = {
     enable = true;
@@ -47,15 +49,16 @@ in {
 
   # -- Custom commands/functions
   programs.bash.initExtra =
-    builtins.replaceStrings [
-      "bat_bin=\"bat\""
-      "fzf_bin=\"fzf\""
-    ]
-    [
-      "bat_bin=\"${batBin}\""
-      "fzf_bin=\"${fzfBin}\""
-    ]
-    (lib.strings.fileContents "${self}/config/bash/functions/fzf-v.bash");
+    builtins.replaceStrings
+      [
+        "bat_bin=\"bat\""
+        "fzf_bin=\"fzf\""
+      ]
+      [
+        "bat_bin=\"${batBin}\""
+        "fzf_bin=\"${fzfBin}\""
+      ]
+      (lib.strings.fileContents "${self}/config/bash/functions/fzf-v.bash");
 
   # -- Configuration for other tools using `fzf`
   home = {

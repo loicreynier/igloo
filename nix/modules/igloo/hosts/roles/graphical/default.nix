@@ -3,12 +3,13 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   # -- X configuration
   services = {
     xserver = {
       enable = lib.mkDefault true;
-      excludePackages = [pkgs.xterm];
+      excludePackages = [ pkgs.xterm ];
       desktopManager.gnome.enable = lib.mkDefault true;
       displayManager.gdm.enable = lib.mkDefault true;
     };
@@ -36,17 +37,18 @@
   # -- Programs
   programs.firefox.enable = true;
 
-  environment.systemPackages = let
-    gnomeEnabled = config.services.xserver.desktopManager.gnome.enable;
-  in
+  environment.systemPackages =
+    let
+      gnomeEnabled = config.services.xserver.desktopManager.gnome.enable;
+    in
     with pkgs;
-      [
-        vlc
-      ]
-      ++ lib.optionals gnomeEnabled [
-        celluloid
-        warp
-      ];
+    [
+      vlc
+    ]
+    ++ lib.optionals gnomeEnabled [
+      celluloid
+      warp
+    ];
 
   # -- Fonts
   fonts = {

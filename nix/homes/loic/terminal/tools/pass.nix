@@ -1,6 +1,8 @@
-{config, ...}: let
+{ config, ... }:
+let
   passDir = "${config.xdg.dataHome}/password-store";
-in {
+in
+{
   programs.password-store = {
     enable = true;
     settings = {

@@ -4,7 +4,8 @@
   pkgs,
   self,
   ...
-}: let
+}:
+let
   # -- Pubs and bibliography paths
   pubs = "${config.programs.pubs.package}/bin/pubs";
   pubsPathHome = ".pubs";
@@ -12,9 +13,8 @@
   bibPath = "${config.home.homeDirectory}/Code/Documents/bibliography";
 
   # -- Pubs scripts
-  fzfOpen =
-    pkgs.writeShellScriptBin "pubs-fzf-open"
-    (builtins.replaceStrings
+  fzfOpen = pkgs.writeShellScriptBin "pubs-fzf-open" (
+    builtins.replaceStrings
       [
         "#!/usr/bin/env sh\n"
         "pubs"
@@ -25,31 +25,34 @@
         pubs
         "${config.programs.fzf.package}/bin/fzf"
       ]
-      (lib.strings.fileContents "${self}/bin/pubs-fzf-open.sh"));
+      (lib.strings.fileContents "${self}/bin/pubs-fzf-open.sh")
+  );
 
-  fzfExport = let
-    fdBin = "${config.programs.fd.package}/bin/fd";
-    fzfBin = "${config.programs.fzf.package}/bin/fzf";
-    batBin = "${pkgs.bat}/bin/bat";
-  in
-    pkgs.writeShellScriptBin "pubs-fzf-export"
-    (builtins.replaceStrings [
-        "#!/usr/bin/env sh\n"
-        "fd_bin=\"fd\""
-        "bat_bin=\"bat\""
-        "fzf_bin=\"fzf\""
-      ]
-      [
-        ""
-        "fd_bin=\"${fdBin}\""
-        "bat_bin=\"${batBin}\""
-        "fzf_bin=\"${fzfBin}\""
-      ]
-      (lib.strings.fileContents "${self}/bin/pubs-fzf-export.sh"));
+  fzfExport =
+    let
+      fdBin = "${config.programs.fd.package}/bin/fd";
+      fzfBin = "${config.programs.fzf.package}/bin/fzf";
+      batBin = "${pkgs.bat}/bin/bat";
+    in
+    pkgs.writeShellScriptBin "pubs-fzf-export" (
+      builtins.replaceStrings
+        [
+          "#!/usr/bin/env sh\n"
+          "fd_bin=\"fd\""
+          "bat_bin=\"bat\""
+          "fzf_bin=\"fzf\""
+        ]
+        [
+          ""
+          "fd_bin=\"${fdBin}\""
+          "bat_bin=\"${batBin}\""
+          "fzf_bin=\"${fzfBin}\""
+        ]
+        (lib.strings.fileContents "${self}/bin/pubs-fzf-export.sh")
+    );
 
-  exportTag =
-    pkgs.writeShellScriptBin "pubs-export-tag"
-    (builtins.replaceStrings
+  exportTag = pkgs.writeShellScriptBin "pubs-export-tag" (
+    builtins.replaceStrings
       [
         "#!/usr/bin/env sh\n"
         "pubs list"
@@ -58,8 +61,10 @@
         ""
         "${pubs} list"
       ]
-      (lib.strings.fileContents "${self}/bin/pubs-export-tag.sh"));
-in {
+      (lib.strings.fileContents "${self}/bin/pubs-export-tag.sh")
+  );
+in
+{
   programs.pubs = {
     enable = true;
     extraConfig = ''

@@ -3,12 +3,22 @@
   config,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf mkOption mkEnableOption types literalExpression;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkOption
+    mkEnableOption
+    types
+    literalExpression
+    ;
   cfg = config.igloo.wsl;
-in {
+in
+{
   options.igloo.wsl.windowsClipboard = {
-    enable = mkEnableOption "Windows clipboard" // {default = true;};
+    enable = mkEnableOption "Windows clipboard" // {
+      default = true;
+    };
 
     commands = {
       copy = mkOption {
@@ -34,42 +44,45 @@ in {
 
   config = mkIf (cfg.enable && cfg.windowsClipboard.enable) {
     home.activation = {
-      checkWindowBinaries = let
-        # Check whether Windows clipboard binaries are in the expected path.
-        # Since activation is not run in the user shell,
-        # it is actually not possible to check if they are in `$PATH`.
-        # Therefore it only checks if they are in the expected path and prints a warning.
-        commands = {
-          "clip.exe" = "/mnt/c/Windows/System32/clip.exe";
+      checkWindowBinaries =
+        let
+          # Check whether Windows clipboard binaries are in the expected path.
+          # Since activation is not run in the user shell,
+          # it is actually not possible to check if they are in `$PATH`.
+          # Therefore it only checks if they are in the expected path and prints a warning.
+          commands = {
+            "clip.exe" = "/mnt/c/Windows/System32/clip.exe";
 
-          # Note that programs installed with WinGet are only symlinked to
-          # `%AppData%/Local/Microsoft/WinGet/Links`
-          # if "Developer Mode" is enabled or if the command is run from an admin shell.
-          # Source: https://github.com/microsoft/winget-cli/issues/3498
-          "win32yank.exe" = "/mnt/c/Users/Loic/AppData/Local/Microsoft/WinGet/Links/win32yank.exe";
-        };
-        check = name: path: ''
-          if  run --quiet command -v ${path}; then
-            echo "Windows binary '${name}' found in '${path}', check if it's in 'PATH'."
-          else
-            errorEcho '${name}' not found in '${path}'
-            exit 1
-          fi
-        '';
-      in
+            # Note that programs installed with WinGet are only symlinked to
+            # `%AppData%/Local/Microsoft/WinGet/Links`
+            # if "Developer Mode" is enabled or if the command is run from an admin shell.
+            # Source: https://github.com/microsoft/winget-cli/issues/3498
+            "win32yank.exe" = "/mnt/c/Users/Loic/AppData/Local/Microsoft/WinGet/Links/win32yank.exe";
+          };
+          check = name: path: ''
+            if  run --quiet command -v ${path}; then
+              echo "Windows binary '${name}' found in '${path}', check if it's in 'PATH'."
+            else
+              errorEcho '${name}' not found in '${path}'
+              exit 1
+            fi
+          '';
+        in
         with builtins;
-          lib.hm.dag.entryAfter ["reloadSystemd"]
-          (concatStringsSep "\n" (attrValues (mapAttrs check commands)));
+        lib.hm.dag.entryAfter [ "reloadSystemd" ] (
+          concatStringsSep "\n" (attrValues (mapAttrs check commands))
+        );
     };
 
     programs.password-store.package = pkgs.pass.withExtensions (_: [
-      (pkgs.callPackage ./pass-extension-wclip {})
+      (pkgs.callPackage ./pass-extension-wclip { })
     ]);
 
-    programs.nixvim.globals.clipboard = let
-      # Related: https://neovim.io/doc/user/provider.html#provider-clipboard
-      inherit (cfg.windowsClipboard) commands;
-    in
+    programs.nixvim.globals.clipboard =
+      let
+        # Related: https://neovim.io/doc/user/provider.html#provider-clipboard
+        inherit (cfg.windowsClipboard) commands;
+      in
       mkIf config.programs.nixvim.enable {
         name = "WSLClipboard";
         copy = {

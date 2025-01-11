@@ -2,18 +2,20 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.igloo.system.virtualization;
 
   enableNvidiaContainers = config.igloo.device.gpu.type == "nvidia";
-in {
+in
+{
   config = lib.mkIf cfg.podman.enable {
     virtualisation = {
       podman = {
         enable = true;
         autoPrune = {
           enable = true;
-          flags = ["--all"];
+          flags = [ "--all" ];
           dates = "weekly";
         };
       };
@@ -31,7 +33,7 @@ in {
 
     # Must be set because `nvidia-container-toolkit` force driver requirement
     hardware.nvidia.open = lib.mkIf enableNvidiaContainers false;
-    services.xserver.videoDrivers = lib.mkIf enableNvidiaContainers ["nvidia"];
+    services.xserver.videoDrivers = lib.mkIf enableNvidiaContainers [ "nvidia" ];
 
     wsl.useWindowsDriver = enableNvidiaContainers;
   };
