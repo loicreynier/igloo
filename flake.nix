@@ -103,6 +103,17 @@
         git-hooks.follows = "git-hooks";
       };
     };
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        git-hooks.follows = "git-hooks";
+        nixpkgs.follows = "nixpkgs";
+        hercules-ci-effects.follows = "";
+        treefmt-nix.follows = "";
+      };
+    };
 
     # -- Secrets
     agenix = {
