@@ -4,6 +4,7 @@
     ./python
     ./shell
     ./tools
-    ./neovim.nix
   ];
+
+  igloo.neovim.enable = true;
 }

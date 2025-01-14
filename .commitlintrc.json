@@ -6,6 +6,7 @@
       "always",
       [
         "homes",
+        "homes.neovim",
         "hosts",
         "hosts.wsl",
         "latios",
