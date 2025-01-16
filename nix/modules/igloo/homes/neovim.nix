@@ -179,6 +179,8 @@ in
               (pkgs.vimExtraPlugins.visual-whitespace-nvim.overrideAttrs (_: {
                 pname = "visual-whitespace.nvim";
               }))
+              nvim-spider
+              precognition-nvim
               yanky-nvim
               # -- UI
               alpha-nvim
