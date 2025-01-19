@@ -60,8 +60,7 @@
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
         flake-parts.follows = "flake-parts";
-        flake-schemas.follows = "flake-schemas";
-        pre-commit-hooks.follows = "";
+        git-hooks-nix.follows = "";
       };
     };
     nix-auto-follow = {

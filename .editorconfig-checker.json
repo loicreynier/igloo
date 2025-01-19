@@ -1,7 +1,7 @@
 {
   "Verbose": false,
-  "Format": "",
-  "SpacesAftertabs": false,
+  "Format": "default",
+  "SpacesAfterTabs": false,
   "Exclude": ["\\.python$", "\\.lua$"],
   "Disable": {
     "EndOfLine": false,
