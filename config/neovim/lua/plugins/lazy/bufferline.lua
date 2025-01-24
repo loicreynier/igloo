@@ -24,13 +24,19 @@ return {
           .. (diag.warning and icons.Warn .. diag.warning or "")
         return vim.trim(code)
       end,
-      always_show_bufferline = false,
+      always_show_bufferline = true,
       offsets = {
         {
           filetype = "neo-tree",
           text = "Neo-tree",
           highlight = "Directory",
-          text_align = "left",
+          text_align = "center",
+        },
+        {
+          filetype = "DiffviewFiles",
+          text = "Source Control",
+          highlight = "Directory",
+          text_align = "center",
         },
       },
     },
