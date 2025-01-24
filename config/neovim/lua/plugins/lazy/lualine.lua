@@ -21,7 +21,7 @@ return {
       options = {
         theme = "auto",
         disabled_filetypes = {
-          statusline = { "dashboard", "alpha", "ministarter " },
+          statusline = { "dashboard", "alpha", "ministarter", "DiffviewFiles" },
         },
       },
       sections = {
