@@ -23,6 +23,7 @@ opt.listchars = {
   nbsp = "␣",
   -- eol = "↲",
 }
+opt.fillchars:append { diff = "╱" }
 opt.inccommand = "split"
 
 -- # GUI
