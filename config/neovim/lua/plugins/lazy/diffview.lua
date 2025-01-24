@@ -14,7 +14,19 @@ return {
       end
     end, { desc = "Toggle Diffview", silent = true })
   end,
-  opts = {
-    use_icons = true,
-  },
+  opts = function()
+    local opt_ = {
+      use_icons = true,
+      show_help_hints = false,
+      diff_binaries = false,
+      file_panel = {
+        listing_style = "tree",
+        tree_options = {
+          flatten_dirs = true,
+          folder_statuses = "only_folded",
+        },
+      },
+    }
+    return opt_
+  end,
 }
