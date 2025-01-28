@@ -16,6 +16,7 @@ Keymaps are mainly inspired from [LazyVim's](https://www.lazyvim.org/keymaps).
 | `<Leader>f` | "find" (mostly Telescope)          |
 | `<Leader>s` | "search" (mostly Telescope)        |
 | `<Leader>c` | "code" related (LSP & diagnostics) |
+| `<Leader>g` | "git" related                      |
 | `<Leader>t` | "terminal" related (`ToggleTerm`)  |
 | `<Leader>u` | "UI" related                       |
 | `<Leader>x` | "eXtra" stuff (mostly Trouble)     |
