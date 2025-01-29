@@ -44,7 +44,7 @@
         config.allowUnfree = true;
         overlays = [
           inputs.nixpkgs-lor.overlays.default
-          inputs.nixneovimplugins.overlays.default
+          inputs.awesome-neovim-plugins.overlays.default
           flakePackages
           schemaOverlay # See `./schemas.nix`
           uwufetchFix

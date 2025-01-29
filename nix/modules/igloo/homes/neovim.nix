@@ -163,6 +163,7 @@ in
           ];
         plugins =
           with pkgs.vimPlugins;
+          with pkgs.awesomeNeovimPlugins;
           if !cfg.installPlugins then
             [ ]
           else
@@ -176,23 +177,17 @@ in
               persisted-nvim
               guess-indent-nvim
               smartcolumn-nvim
-              (pkgs.vimExtraPlugins.visual-whitespace-nvim.overrideAttrs (_: {
-                pname = "visual-whitespace.nvim";
-              }))
+              visual-whitespace-nvim
               nvim-spider
               precognition-nvim
               yanky-nvim
               # -- UI
               alpha-nvim
               bufferline-nvim
-              (pkgs.vimExtraPlugins.incline-nvim.overrideAttrs (_: {
-                pname = "incline.nvim";
-              }))
               lualine-nvim
+              incline-nvim
               neo-tree-nvim
-              (pkgs.vimExtraPlugins.noice-nvim.overrideAttrs (_: {
-                pname = "noice.nvim";
-              }))
+              noice-nvim
               nvim-notify
               telescope-nvim
               telescope-fzf-native-nvim

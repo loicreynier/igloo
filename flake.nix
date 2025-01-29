@@ -102,17 +102,6 @@
         git-hooks.follows = "git-hooks";
       };
     };
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks";
-        nixpkgs.follows = "nixpkgs";
-        hercules-ci-effects.follows = "";
-        treefmt-nix.follows = "";
-      };
-    };
 
     # -- Secrets
     agenix = {
@@ -139,6 +128,17 @@
     };
 
     # -- Neovim
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        git-hooks.follows = "git-hooks";
+        nixpkgs.follows = "nixpkgs";
+        hercules-ci-effects.follows = "";
+        treefmt-nix.follows = "";
+      };
+    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs = {
@@ -153,12 +153,13 @@
         nuschtosSearch.follows = "";
       };
     };
-    nixneovimplugins = {
-      url = "github:jooooscha/nixpkgs-vim-extra-plugins";
+    awesome-neovim-plugins = {
+      url = "github:m15a/flake-awesome-neovim-plugins";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
-        poetry2nix.follows = "poetry2nix";
+        flake-compat.follows = "";
+        treefmt-nix.follows = "";
       };
     };
   };

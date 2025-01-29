@@ -27,6 +27,31 @@
         "type": "github"
       }
     },
+    "awesome-neovim-plugins": {
+      "inputs": {
+        "flake-compat": [],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": []
+      },
+      "locked": {
+        "lastModified": 1738085045,
+        "narHash": "sha256-aDSwcx1XQK3pMvflGKpDtd6q9ggs/2+D4E0t93uU4ng=",
+        "owner": "m15a",
+        "repo": "flake-awesome-neovim-plugins",
+        "rev": "8076144f547af9b9d64b784c90ad83e6259317ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "m15a",
+        "repo": "flake-awesome-neovim-plugins",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "locked": {
         "lastModified": 1696426674,
@@ -280,32 +305,6 @@
         "type": "github"
       }
     },
-    "nixneovimplugins": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "poetry2nix": [
-          "poetry2nix"
-        ]
-      },
-      "locked": {
-        "lastModified": 1737037423,
-        "narHash": "sha256-Hyyt+3cv1tPVSRwoJbiCYinAhELRskrGDZQtdcPmKw8=",
-        "owner": "jooooscha",
-        "repo": "nixpkgs-vim-extra-plugins",
-        "rev": "96f519df991fde13988ba4e0bb55b7e8692d55bf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jooooscha",
-        "repo": "nixpkgs-vim-extra-plugins",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1736978406,
@@ -526,6 +525,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "awesome-neovim-plugins": "awesome-neovim-plugins",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-schemas": "flake-schemas",
@@ -537,7 +537,6 @@
         "nix-auto-follow": "nix-auto-follow",
         "nix-index-database": "nix-index-database",
         "nix-schema": "nix-schema",
-        "nixneovimplugins": "nixneovimplugins",
         "nixos-hardware": "nixos-hardware",
         "nixos-vscode-remote-wsl": "nixos-vscode-remote-wsl",
         "nixos-wsl": "nixos-wsl",

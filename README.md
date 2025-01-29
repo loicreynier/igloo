@@ -68,7 +68,7 @@ Also contains raw configuration files and scripts for ~~cringe~~ non-Nix systems
   to run software without installing it
 - ~~[NixVim](https://github.com/nix-community/nixvim)
   to configure Neovim using Nix~~
-- [NixNeovimPlugins](https://github.com/nixneovim/nixneovimplugins)
+- [`flake-awesome-neovim-plugins`](https://github.com/m15a/flake-awesome-neovim-plugins)
   to use Neovim plugins not available yet in `nixpkgs`
 - [NixOS Visual Studio Code `server-env-setup`](https://github.com/sonowz/vscode-remote-wsl-nixos)
   to connect to VS Code server running inside NixOS-WSL
