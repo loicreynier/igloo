@@ -36,6 +36,7 @@
         "config.starship",
         "config.windowsterminal",
         "config.xxh",
+        "bin",
         "unix.scripts",
         "windows",
         "flake",
