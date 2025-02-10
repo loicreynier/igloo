@@ -69,7 +69,12 @@ if command_exists "bat"; then
 fi
 
 if command_exists "eza"; then
-  alias eza="eza --group-directories-first --color=auto --icons=auto --git"
+  eza_flags="--git --color=auto --icons=auto"
+  if [[ $SYSTEM == "HPCC_Turpan" ]] && [[ -n "$VNCDESKTOP" ]]; then
+    eza_flags="--git --color=auto"
+  fi
+  # shellcheck disable=2139
+  alias eza="eza $eza_flags"
   alias ls="eza"
   alias l="ls -lba"
   alias l1="ls -1"
@@ -82,6 +87,7 @@ if command_exists "eza"; then
   alias llrt="ls -lbsnew"
   alias lt="ls --tree"
   alias tree="ls --tree"
+  unset eza_flags
 fi
 
 if command_exists "python3"; then
