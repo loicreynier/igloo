@@ -112,7 +112,13 @@ esac
 # -- Software setup
 
 command_exists "direnv" && eval "$(direnv hook bash)"
-command_exists "fzf" && eval "$(fzf --bash)"
+if command_exists "fzf"; then 
+  eval "$(fzf --bash)"
+  if [[ -f "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh" ]]; then
+    source "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh"
+    bind -x '"\t": fzf_bash_completion'
+  fi
+fi
 command_exists "pyenv" && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
 command_exists "starship" && eval "$(starship init bash --print-full-init)"
 command_exists "zoxide" && eval "$(zoxide init bash)"
