@@ -2,6 +2,8 @@
 
 # ~/.profile
 
+# shellcheck disable=SC1091
+
 command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
@@ -134,6 +136,7 @@ fi
 
 # -- Software configuration
 
+export BASH_COMPLETION_USER_DIR="$XDG_DATA_HOME/bash-completion/"
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
@@ -167,9 +170,14 @@ if [ "$0" = "-bash" ] ||
   [ "$0" = "/bin/bash" ] ||
   [ "$0" = "bash" ] &&
   [ -n "$PS1" ]; then
-  echo "Sourcing '${HOME}/.bashrc'"
-  # shellcheck disable=SC1091
-  . "${HOME}/.bashrc"
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    echo "Sourcing '/usr/share/bash-completion/bash_completion'"
+    . /usr/share/bash-completion/bash_completion
+  fi
+  if [ -f "${HOME}/.bashrc" ]; then
+    echo "Sourcing '${HOME}/.bashrc'"
+    . "${HOME}/.bashrc"
+  fi
 fi
 
 # Shell setups are stored as functions so then can be loaded manually

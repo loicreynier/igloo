@@ -2,8 +2,9 @@
 
 # ~/.bashrc
 
+# shellcheck disable=SC1091
+
 if [ -f /etc/bashrc ]; then
-  # shellcheck disable=SC1091
   . /etc/bashrc
 fi
 
@@ -70,7 +71,7 @@ fi
 
 if command_exists "eza"; then
   eza_flags="--git --color=auto --icons=auto"
-  if [[ $SYSTEM == "HPCC_Turpan" ]] && [[ -n "$VNCDESKTOP" ]]; then
+  if [[ $SYSTEM == "HPCC_Turpan" ]] && [[ -n $VNCDESKTOP ]]; then
     eza_flags="--git --color=auto"
   fi
   # shellcheck disable=2139
@@ -112,7 +113,14 @@ esac
 # -- Software setup
 
 command_exists "direnv" && eval "$(direnv hook bash)"
-command_exists "fzf" && eval "$(fzf --bash)"
+if command_exists "fzf"; then
+  eval "$(fzf --bash)"
+  if [[ -f "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh" ]]; then
+    #
+    source "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh"
+    bind -x '"\t": fzf_bash_completion'
+  fi
+fi
 command_exists "pyenv" && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
 command_exists "starship" && eval "$(starship init bash --print-full-init)"
 command_exists "zoxide" && eval "$(zoxide init bash)"
