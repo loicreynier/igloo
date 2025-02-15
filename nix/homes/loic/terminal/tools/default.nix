@@ -48,7 +48,7 @@ in
     jc
     jq
     grex
-    xsv
+    xan
     yq
 
     # -- Media processing tools

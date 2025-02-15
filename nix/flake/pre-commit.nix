@@ -63,7 +63,8 @@
                 nodeEnv = pkgs.nodePackages."@commitlint/config-conventional";
               in
               mkHook "commitlint" {
-                enable = true;
+                # FIXME: error: @commitlint/config-conventional has been dropped, as it is a library and your JS project should lock it instead
+                enable = false;
                 entry = "env NODE_PATH=${nodeEnv}/lib/node_modules ${pkgs.commitlint}/bin/commitlint -e";
                 stages = [ "commit-msg" ];
                 language = "system";

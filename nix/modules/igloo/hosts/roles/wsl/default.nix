@@ -3,7 +3,6 @@
   # -- WSL configuration
   wsl = {
     enable = true;
-    nativeSystemd = true;
     # Doc: https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconf
     wslConf = {
       automount.root = "/mnt"; # Mount Windows drives here
