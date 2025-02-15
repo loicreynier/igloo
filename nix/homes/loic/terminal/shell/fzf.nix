@@ -47,9 +47,9 @@ in
     ];
   };
 
-  # -- Custom commands/functions
+  # -- Custom commands/functions/completions
   programs.bash.initExtra =
-    builtins.replaceStrings
+    (builtins.replaceStrings
       [
         "bat_bin=\"bat\""
         "fzf_bin=\"fzf\""
@@ -58,7 +58,13 @@ in
         "bat_bin=\"${batBin}\""
         "fzf_bin=\"${fzfBin}\""
       ]
-      (lib.strings.fileContents "${self}/config/bash/functions/fzf-v.bash");
+      (lib.strings.fileContents "${self}/config/bash/functions/fzf-v.bash")
+    )
+    + ''
+
+      source ${pkgs.fzf-tab-completion}/share/fzf-tab-completion/bash/fzf-bash-completion.sh
+      bind -x '"\t": fzf_bash_completion'
+    '';
 
   # -- Configuration for other tools using `fzf`
   home = {
