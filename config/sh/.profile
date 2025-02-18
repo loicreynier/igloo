@@ -170,9 +170,13 @@ if [ "$0" = "-bash" ] ||
   [ "$0" = "/bin/bash" ] ||
   [ "$0" = "bash" ] &&
   [ -n "$PS1" ]; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    echo "Sourcing '/usr/share/bash-completion/bash_completion'"
-    . /usr/share/bash-completion/bash_completion
+  if [ -f "$HOME/.local/etc/profile.d/bash_completion.sh" ]; then
+    unset BASH_COMPLETION_VERSINFO # Unset if already loaded by `/etc/profile.d`
+    echo "Sourcing '~/.local/etc/profile.d/bash_completion.sh'"
+    . "$HOME/.local/etc/profile.d/bash_completion.sh"
+  elif [ -f /etc/profile.d/bash_completion.sh ]; then
+    echo "Sourcing '/etc/profile.d/bash_completion.sh'"
+    . /etc/profile.d/bash_completion.sh
   fi
   if [ -f "${HOME}/.bashrc" ]; then
     echo "Sourcing '${HOME}/.bashrc'"
