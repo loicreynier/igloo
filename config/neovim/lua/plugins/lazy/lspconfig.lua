@@ -27,6 +27,9 @@ return {
           "--lowercase_intrinsics",
         },
       },
+      jsonls = {
+        mason = system.has_self_install and vim.fn.executable("npm"),
+      },
       ltex = {
         settings = {
           ltex = {
