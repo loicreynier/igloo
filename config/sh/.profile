@@ -164,6 +164,10 @@ if [ -d "$HOME/.local/opt/rustup" ]; then
   export RUSTUP_HOME="$HOME/.local/opt/rustup"
 fi
 
+if [ -d "$HOME/.local/lib/perl5" ]; then
+  export PERL5LIB="$HOME/.local/lib/perl5"
+fi
+
 # == SHELL CONFIGURATION =======================================================
 
 if [ "$0" = "-bash" ] ||
