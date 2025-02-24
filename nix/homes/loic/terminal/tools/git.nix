@@ -80,6 +80,7 @@
       {
         "ch" = "!git checkout $(git branch --sort='-committerdate' | fzf --reverse --height 40%)";
         "log1" = "log --oneline";
+        "log1d" = "log --pretty='format:%Cblue%>(22)%ad %C(yellow)%h %Cred%d %Creset%s' --date=relative";
         "push-all" = "!git remote | xargs -L1 git push --all";
         "sf" = "!bash -c 'source ${fzfStage}/share/bash/fzf-git-stage.bash && __fzf_git_stage'";
         "stash-untracked" = ''
