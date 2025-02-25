@@ -1,0 +1,54 @@
+# vim: ft=ini
+
+[user]
+	name = Loïc Reynier
+	email = loic@loicreynier.fr
+	signingkey = loic@loicreynier.fr
+[core]
+	pager = cat
+	autocrlf = input
+[color]
+	ui = auto
+[advice]
+	skippedCherryPicks = false
+	forceDeleteBranch = false
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[diff]
+	algorithm = histogram
+[push]
+	default = current
+	autoSetupRemote = true
+	rebase = true
+[rere]
+	enabled = true
+[url "https://aur.archlinux.org/"]
+	insteadOf = "aur:"
+[url "https://codeberg.org/"]
+	insteadOf = "codeberg:"
+[url "https://git.sr.ht/"]
+	insteadOf = "srht:"
+[url "https://github.com/"]
+	insteadOf = "github:"
+[url "https://gitlab.com/"]
+	insteadOf = "gitlab:"
+[url "ssh://aur@aur.archlinux.org/"]
+	pushInsteadOf = "aur:"
+[url "ssh://git@codeberg.org/"]
+	pushInsteadOf = "codeberg:"
+[url "ssh://git@git.sr.ht/"]
+	pushInsteadOf = "srht:"
+[url "ssh://git@github.com/"]
+	pushInsteadOf = "github:"
+[url "ssh://git@gitlab.com/"]
+	pushInsteadOf = "gitlab:"
+[url "ssh://git@gitlab.in2p3.fr/"]
+	insteadOf = "in2p3:"
+	pushInsteadOf = "in2p3:"
+[alias]
+	log1 = "log --oneline"
+	log1d = "log --pretty='format:%Cblue%>(22)%ad %C(yellow)%h %Cred%d %Creset%s' --date=relative"
+	push-all = "!git remote | xargs -L1 git push --all"
+	stash-untracked = "!f() { git stash; git stash -u; git stash pop stash@{1}; }; f"

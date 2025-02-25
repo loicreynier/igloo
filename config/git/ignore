@@ -1,0 +1,18 @@
+# Cache
+.cache/
+.direnv/
+__pycache__/
+
+# Logs
+*.~lock
+debug.log
+
+# Builds
+result
+
+# Backups
+*.swp
+*.bak
+*.old
+
+# vim: ft=gitignore
