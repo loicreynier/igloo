@@ -115,6 +115,7 @@ esac
 command_exists "direnv" && eval "$(direnv hook bash)"
 if command_exists "fzf"; then
   eval "$(fzf --bash)"
+  export FZF_DEFAULT_OPTS="--prompt='❯ '"
   if [[ -f "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh" ]]; then
     source "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh"
     bind -x '"\t": fzf_bash_completion'

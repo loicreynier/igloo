@@ -3,41 +3,40 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[\u256D\u2574](fg:bright-black)\
 $username\
 $hostname\
 $directory\
 $git_branch$git_commit$git_state$git_metrics$git_status\
 $package\
 $python\
-$nix_shell\
-$cmd_duration\
-[ ](fg:bright-dark)\
-$fill\
-$fill\
-[ ](fg:bright-dark)\
+[| ](fg:bold bright-black)\
 $shell\
-$line_break\
-[\u2570\u2574](fg:bright-black)\
+$nix_shell\
 $jobs\
+$cmd_duration\
+$line_break\
 $character"""
 
 add_newline = true
 
-[fill]
-style = 'fg:bright-black'
-symbol = "\u2500"
-
 [username]
-detect_env_vars = ["WSL_DISTRO_NAME"]
+detect_env_vars = ["WSL_DISTRO_NAME", "SSH_CONNECTION"]
+format = "[$user]($style)"
+style_user = "bold green"
 
 [hostname]
 ssh_only = false
+ssh_symbol = "ssh://"
 detect_env_vars = ["WSL_DISTRO_NAME", "SSH_CONNECTION"]
+format = "[@$ssh_symbol$hostname]($style) in "
 style = "bold green"
 
 [shell]
 disabled = false
+bash_indicator = "bsh"
+
+[cmd_duration]
+format = "[$duration]($style)"
 
 [python]
 detect_extensions = []
