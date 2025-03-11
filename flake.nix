@@ -143,13 +143,7 @@
       url = "github:nix-community/nixvim";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        nix-darwin.follows = "";
-        home-manager.follows = "home-manager";
         flake-parts.follows = "flake-parts";
-        flake-compat.follows = "flake-compat";
-        git-hooks.follows = "git-hooks";
-        devshell.follows = "";
-        treefmt-nix.follows = "";
         nuschtosSearch.follows = "";
       };
     };
