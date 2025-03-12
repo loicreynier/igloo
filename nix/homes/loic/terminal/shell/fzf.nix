@@ -18,6 +18,9 @@ in
   programs.fzf = {
     enable = true;
     defaultCommand = fdCmd;
+    defaultOptions = [
+      "--prompt='❯ '"
+    ];
     historyWidgetOptions = [
       "--height 40%"
       "--preview 'echo {}'"
