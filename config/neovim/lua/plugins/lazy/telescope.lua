@@ -15,7 +15,7 @@ return {
   specs = {
     { "nvim-lua/plenary.nvim", lazy = true },
   },
-  Cmd = "Telescope",
+  cmd = "Telescope",
   keys = {
     -- "Main" actions
     {
@@ -40,8 +40,7 @@ return {
     },
     {
       "<Leader>/",
-      -- "<Cmd>Telescope live_grep<CR>",
-      require("plugins.config.telescope.live-rg-glob"),
+      "<Cmd>Telescope live_grep<CR>",
       desc = "Live grep (Telescope)",
     },
     -- "Find" actions
@@ -167,5 +166,13 @@ return {
 
     telescope.setup(opts)
     telescope.load_extension("fzf")
+
+    -- FIXME: doesn't work in Lazy's `keys` spec on `ONERA_workstation` -> requires Telescope to be loaded first
+    vim.keymap.set(
+      "n",
+      "<Leader>/",
+      require("plugins.config.telescope.live-rg-glob"),
+      { desc = "Live grep (Telescope)" }
+    )
   end,
 }
