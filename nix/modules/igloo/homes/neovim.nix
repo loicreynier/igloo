@@ -194,6 +194,7 @@ in
               telescope-manix
               telescope-undo-nvim
               toggleterm-nvim
+              beacon-nvim
               zen-mode-nvim
               twilight-nvim
               # -- Code/LSP
