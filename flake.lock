@@ -405,11 +405,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741720959,
-        "narHash": "sha256-EpiUO9KNR52muWq4WkGD5Y09d8wUqcASBPRzxgXIfn0=",
+        "lastModified": 1741894243,
+        "narHash": "sha256-/BCNqvn4yzWgOqe93S0lIQOPsOt+R6Xs1ul+wEUCTyA=",
         "owner": "loicreynier",
         "repo": "nixpkgs-lor",
-        "rev": "d875a0b3451fc11504df6edfdc6f8ab1f819789e",
+        "rev": "9ce04f46354f8fc509f340a21f176ac926c6d0c2",
         "type": "github"
       },
       "original": {

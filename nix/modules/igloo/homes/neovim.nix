@@ -231,6 +231,7 @@ in
               vim-syntax-vidir-ls
               # -- Memes
               duck-nvim
+              syntax-gaslighting-nvim
               # -- Dependencies
               plenary-nvim
               nvim-web-devicons
