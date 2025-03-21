@@ -160,6 +160,7 @@ in
             texlab
             tinymist
             yamllint
+            vscode-langservers-extracted # `jsonls`
           ];
         plugins =
           with pkgs.vimPlugins;
@@ -205,6 +206,7 @@ in
               nvim-lspconfig
               nvim-lint
               nvim-treesitter.withAllGrammars
+              hmts-nvim
               neoconf-nvim
               lsp_lines-nvim
               conform-nvim
@@ -218,6 +220,7 @@ in
               # -- Git
               gitsigns-nvim
               diffview-nvim
+              git-rebase-auto-diff-nvim
               # -- Markdown
               markdown-preview-nvim
               # -- Rice
