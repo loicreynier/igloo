@@ -5,6 +5,13 @@
       enable = true;
     };
 
+    password-store = {
+      package = pkgs.pass.override {
+        x11Support = true;
+        waylandSupport = true;
+      };
+    };
+
     browserpass = {
       enable = true;
       browsers = [ "firefox" ];
