@@ -1,5 +1,7 @@
+---@type LazySpec
 return {
   "m4xshen/smartcolumn.nvim",
+  enabled = require("system").is_slow,
   event = "VeryLazy",
   opts = {
     disabled_filetypes = require("utils").disabled_filetypes,

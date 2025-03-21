@@ -70,8 +70,6 @@ if [ -z "$SYSTEM" ]; then
       ;;
     turpan*)
       SYSTEM="HPCC_Turpan"
-      GPG_TTY="$(tty)"
-      export GPG_TTY
       ;;
     topaze*)
       SYSTEM="HPCC_Topaze"
@@ -98,6 +96,9 @@ if [ -z "$SYSTEM_OPTIONS" ]; then
   case "$SYSTEM" in
   "ONERA_workstation")
     SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}offline"
+    ;;
+  "HPCC_Topaze")
+    SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}hpcc:offline:slow"
     ;;
   "HPCC_"*)
     SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}hpcc"
@@ -210,6 +211,8 @@ _setup_shell_HPCC_Olympe() {
 }
 
 _setup_shell_HPCC_Turpan() {
+  GPG_TTY="$(tty)"
+  export GPG_TTY
   module -s load cmake/3.25.1
   module -s load gnu/12.2.0
   module -s load python/3.10.9

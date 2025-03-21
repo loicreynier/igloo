@@ -1,4 +1,5 @@
 local opt = vim.opt
+local system = require("system")
 
 -- # UI
 opt.mouse = "nv"
@@ -6,7 +7,7 @@ opt.title = true
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
-opt.cursorcolumn = true
+opt.cursorcolumn = not system.is_slow
 opt.foldmethod = "marker"
 opt.showmatch = true
 opt.splitright = true
