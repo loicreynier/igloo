@@ -69,7 +69,9 @@
 
             igloo
 
-            inputs.nix-auto-follow.packages.${system}.default
+            (inputs.nix-auto-follow.packages.${system}.default.overridePythonAttrs (_: {
+              doCheck = false;
+            }))
           ];
       };
     };
