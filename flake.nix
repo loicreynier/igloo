@@ -67,6 +67,15 @@
       url = "github:fzakaria/nix-auto-follow";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nps = {
+      url = "github:OleMussmann/nps";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        flake-compat.follows = "flake-compat";
+        naersk.follows = "";
+      };
+    };
 
     # -- Nix dependencies (not directly used)
     systems.url = "github:nix-systems/default";

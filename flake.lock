@@ -458,6 +458,33 @@
         "type": "github"
       }
     },
+    "nps": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "naersk": [],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1738483270,
+        "narHash": "sha256-q/PkigsNAI7MCmeDFBMGuZJFXVL95pQCNOVhNvBH9dc=",
+        "owner": "OleMussmann",
+        "repo": "nps",
+        "rev": "2d005f22a52a0bda19d1afd8736ad5bfcb1d38cf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OleMussmann",
+        "repo": "nps",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -531,6 +558,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-lor": "nixpkgs-lor",
         "nixvim": "nixvim",
+        "nps": "nps",
         "nur": "nur",
         "poetry2nix": "poetry2nix",
         "systems": "systems"

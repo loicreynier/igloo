@@ -28,6 +28,10 @@
         });
       };
 
+      thirdPartyPackages = _: _: {
+        nps = inputs.nps.packages.system.default;
+      };
+
       uwufetchFix = _: prev: {
         uwufetch = prev.uwufetch.overrideAttrs (old: {
           postFixup =
@@ -45,6 +49,7 @@
         overlays = [
           inputs.nixpkgs-lor.overlays.default
           inputs.awesome-neovim-plugins.overlays.default
+          thirdPartyPackages
           flakePackages
           schemaOverlay # See `./schemas.nix`
           uwufetchFix

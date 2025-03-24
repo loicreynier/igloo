@@ -63,5 +63,6 @@
 
   environment.systemPackages = with pkgs; [
     nh
+    nps
   ];
 }
