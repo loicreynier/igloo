@@ -118,6 +118,9 @@ if command_exists "fzf"; then
   export FZF_DEFAULT_OPTS="--prompt='❯ '"
   if [[ -f "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh" ]]; then
     source "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh"
+    export FZF_TAB_COMPLETION_PROMPT="❯ "
+    export FZF_COMPLETION_AUTO_COMMON_PREFIX=true
+    _fzf_bash_completion_loading_msg() { echo "❯ "; } # Override loading message
     bind -x '"\t": fzf_bash_completion'
   fi
 fi

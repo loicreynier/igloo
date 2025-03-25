@@ -66,6 +66,9 @@ in
     + ''
 
       source ${pkgs.fzf-tab-completion}/share/fzf-tab-completion/bash/fzf-bash-completion.sh
+      export FZF_TAB_COMPLETION_PROMPT="❯ "
+      export FZF_COMPLETION_AUTO_COMMON_PREFIX=true
+      _fzf_bash_completion_loading_msg() { echo "❯ "; }
       bind -x '"\t": fzf_bash_completion'
     '';
 
