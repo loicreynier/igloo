@@ -16,10 +16,6 @@ stdenv.mkDerivation {
 
   installPhase = ''
     install -D "./wclip.bash" "$out/lib/password-store/extensions/wclip.bash"
-  '';
-
-  # FIXME: completion file seems not sourced
-  postPatch = ''
-    installShellCompletion --bash "./pass-wclip.bash"
+    installShellCompletion "./pass-wclip.bash"
   '';
 }
