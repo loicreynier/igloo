@@ -192,6 +192,7 @@ in
               nvim-notify
               telescope-nvim
               telescope-fzf-native-nvim
+              telescope-all-recent-nvim
               telescope-manix
               telescope-undo-nvim
               toggleterm-nvim
