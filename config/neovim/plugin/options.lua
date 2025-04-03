@@ -42,10 +42,17 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- # Completion
+opt.completeopt = {
+  "menuone",
+  "noselect",
+  "noinsert",
+}
 opt.pumheight = 10
-opt.wildoptions = "pum"
+opt.wildoptions = {
+  "pum",
+}
 opt.wildmode = {
-  "longest",
+  "longest:full",
   "full",
 }
 opt.wildignore = {
@@ -54,6 +61,10 @@ opt.wildignore = {
   "*.pyc",
   "*.o",
 }
+if vim.fn.has("nvim-0.11") == 1 then
+  vim.opt.completeopt:append("fuzzy")
+  vim.opt.wildoptions:append("fuzzy")
+end
 
 -- # Memory
 opt.hidden = true
