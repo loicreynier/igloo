@@ -51,6 +51,10 @@ in
             "NVIM_NIX_WRAPPED"
             ":"
             "1"
+            "--prefix"
+            "NVIM_NIX_SQLITE_PATH"
+            ":"
+            "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
           ]
           ++ (
             if cfg.installPlugins then
@@ -241,6 +245,7 @@ in
               plenary-nvim
               nvim-web-devicons
               dressing-nvim
+              sqlite-lua
             ];
       };
   };
