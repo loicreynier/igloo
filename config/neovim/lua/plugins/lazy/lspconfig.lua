@@ -65,7 +65,7 @@ return {
         },
       },
       neocmake = {},
-      nil_ls = {
+      nil_ls = system.set_if_nix({
         mason = false,
         settings = {
           ["nil"] = {
@@ -74,7 +74,7 @@ return {
             },
           },
         },
-      },
+      }, nil),
       pylsp = {
         plugins = {
           ruff = {
