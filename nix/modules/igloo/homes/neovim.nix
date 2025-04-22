@@ -159,6 +159,7 @@ in
             checkmake
             hadolint
             just
+            neocmakelsp
             markdownlint-cli
             taplo
             texlab

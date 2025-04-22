@@ -63,6 +63,7 @@ return {
           Lua = {},
         },
       },
+      neocmake = {},
       nil_ls = {
         settings = {
           ["nil"] = {
