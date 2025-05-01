@@ -64,5 +64,6 @@
   environment.systemPackages = with pkgs; [
     nh
     nps
+    nix-output-monitor
   ];
 }

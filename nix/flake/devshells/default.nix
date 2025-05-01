@@ -68,6 +68,7 @@
             tree
 
             igloo
+            nix-output-monitor
 
             (inputs.nix-auto-follow.packages.${system}.default.overridePythonAttrs (_: {
               doCheck = false;

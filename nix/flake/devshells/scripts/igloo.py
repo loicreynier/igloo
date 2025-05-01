@@ -100,7 +100,7 @@ def run_home_manager(command: str, config: str, extra_args: List[str] | None) ->
 
     args = " ".join(extra_args) if extra_args else ""
 
-    cmd = f"home-manager {args} {command} -b bak --flake .#{home}"
+    cmd = f"home-manager {args} {command} -b bak --flake .#{home} |& nom"
     typer.echo(f"Running: {cmd}")
     subprocess.run(cmd, shell=True, check=True)
 
@@ -163,7 +163,7 @@ def run_nixos_rebuild(command: str, config: str, extra_args: List[str] | None) -
 
     args = " ".join(extra_args) if extra_args else ""
 
-    cmd = f"nixos-rebuild {command} {args} --flake .#{config}"
+    cmd = f"nixos-rebuild {command} {args} --flake .#{config} |& nom"
     if command == "switch":
         cmd = "sudo " + cmd
 
