@@ -17,7 +17,7 @@
         path = templatePath "flake-nixpkgs-lor";
       };
 
-      flakeVanila = {
+      flakeVanilla = {
         description = "Vanilla-flavored flake";
         path = templatePath "flake-vanilla";
       };
