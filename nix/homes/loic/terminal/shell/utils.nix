@@ -1,12 +1,16 @@
 {
+  lib,
   config,
   pkgs,
+  self,
   ...
 }:
 {
   programs = {
     zoxide.enable = true;
   };
+
+  programs.bash.initExtra = lib.strings.fileContents "${self}/config/bash/functions/zoxide-pushd.bash";
 
   home = {
     packages = with pkgs; [
