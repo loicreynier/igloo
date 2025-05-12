@@ -53,6 +53,18 @@ if M.is_wsl then
   }
 end
 
+if M.name == "HPCC_Turpan" and vim.fn.executable("rsclip") == 1 and os.getenv("DISPLAY") then
+  vim.g.clipboard = {
+    name = "SSHClipboard",
+    copy = {
+      ["+"] = "rsclip",
+    },
+    paste = {
+      ["+"] = "rsclip -p",
+    },
+  }
+end
+
 -- # Utility function/variables
 
 M.is_offline = vim.tbl_contains(vim.g.system_options, "offline")
