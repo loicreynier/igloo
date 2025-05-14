@@ -49,6 +49,7 @@ return {
         -- https://github.com/AstroNvim/AstroNvim/blob/main/lua/astronvim/plugins/cmp_luasnip.lua
       }),
       sources = cmp.config.sources({
+        { name = "lazydev" },
         { name = "nvim_lsp" },
         { name = "path" },
       }, {

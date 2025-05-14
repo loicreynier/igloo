@@ -214,6 +214,7 @@ in
               nvim-treesitter.withAllGrammars
               hmts-nvim
               neoconf-nvim
+              lazydev-nvim
               lsp_lines-nvim
               conform-nvim
               (comment-nvim.overrideAttrs (_: {
