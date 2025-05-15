@@ -24,20 +24,25 @@ return {
     },
   },
   opts = {
+    direction = "float",
     highlights = {
       Normal = { link = "Normal" },
       NormalNC = { link = "NormalNC" },
       NormalFloat = { link = "NormalFloat" },
-      FloatBorder = { link = "FloatBorder" },
+      FloatBorder = { link = "TelescopePromptBorder" },
       StatusLine = { link = "StatusLine" },
       StatusLineNC = { link = "StatusLineNC" },
       WinBar = { link = "WinBar" },
       WinBarNC = { link = "WinBarNC" },
     },
     --@param term Terminal
-    on_create = function()
+    on_create = function(term)
       vim.opt_local.foldcolumn = "0"
       vim.opt_local.signcolumn = "no"
+      -- if term.hidden then
+      --   local function toggle() term:toggle() end
+      --   vim.keymap.set({ "t", "n", "i" }, "<F7>", toggle, { desc = "Toggle terminal", buffer = t.bufnr })
+      -- end
     end,
     shading_factor = 2,
     float_opts = {
