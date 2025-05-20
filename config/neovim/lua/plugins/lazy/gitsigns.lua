@@ -4,7 +4,7 @@ return {
     on_attach = function(bufnr)
       local gs = require("gitsigns")
 
-      local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc }) end
+      local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc }) end
 
       -- Navigation
       map("n", "]h", function()
@@ -28,7 +28,6 @@ return {
       -- Staging
       map({ "n", "v" }, "<leader>ghs", "<Cmd>Gitsigns stage_hunk<CR>", "Git stage hunk")
       map({ "n", "v" }, "<leader>ghr", "<Cmd>Gitsigns reset_hunk<CR>", "Git reset hunk")
-      map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Git stage hunk")
       map("n", "<leader>ghS", gs.stage_buffer, "Git stage buffer")
       map("n", "<leader>ghR", gs.reset_buffer, "Git reset buffer")
 
