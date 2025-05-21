@@ -199,7 +199,9 @@ in
               telescope-fzf-native-nvim
               telescope-all-recent-nvim
               telescope-manix
+              telescope-toggle-term-nvim
               telescope-undo-nvim
+              telescope-zoxide
               toggleterm-nvim
               beacon-nvim
               zen-mode-nvim
@@ -245,6 +247,7 @@ in
               syntax-gaslighting-nvim
               # -- Dependencies
               plenary-nvim
+              popup-nvim
               nvim-web-devicons
               dressing-nvim
               sqlite-lua
