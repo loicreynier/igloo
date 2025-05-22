@@ -14,7 +14,7 @@ install_dir="$HOME/.local/stow/stow-$version"
 echo "Installing Stow version $version..."
 
 # Make
-[[ -d "$install_dir" ]] && rm -rf "$install_dir"
+[[ -d $install_dir ]] && rm -rf "$install_dir"
 cd "stow-$version" || exit 1
 ./configure --prefix "$install_dir"
 make install
