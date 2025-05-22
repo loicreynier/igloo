@@ -12,7 +12,7 @@ return {
     ---@module "telescope._extensions.lazy_plugins"
     ---@type TelescopeLazyPluginsUserConfig
     opts = {
-      lazy_config = vim.fn.stdpath("config") .. "/init.lua",
+      lazy_config = vim.fn.stdpath("config") .. "/lua/config/lazy.lua",
     }
     return { extensions = { lazy_plugins = opts } }
   end,
