@@ -64,7 +64,7 @@ return {
         },
       },
       neocmake = {},
-      nil_ls = {
+      nil_ls = system.set_if_nix({
         settings = {
           ["nil"] = {
             formatting = {
@@ -72,7 +72,7 @@ return {
             },
           },
         },
-      },
+      }, nil),
       pylsp = {
         plugins = {
           ruff = {
