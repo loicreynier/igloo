@@ -198,6 +198,7 @@ in
               telescope-nvim
               telescope-fzf-native-nvim
               telescope-all-recent-nvim
+              telescope-lazy-plugins-nvim
               telescope-manix
               telescope-toggle-term-nvim
               telescope-undo-nvim
