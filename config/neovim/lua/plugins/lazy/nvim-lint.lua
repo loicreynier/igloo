@@ -10,9 +10,13 @@
 
 --]]
 
+local system = require("system")
+local use_mason = system.has_self_install and not system.is_nix
+
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  dependencies = { "rshkarin/mason-nvim-lint", enabled = use_mason, dependencies = { "mason-org/mason.nvim" } },
   opts = {
     events = { "BufWritePost", "BufReadPost", "InsertLeave" },
     linters_by_ft = {
@@ -22,11 +26,11 @@ return {
       dockerfile = { "hadolint" },
       make = { "checkmake" },
       markdwon = { "markdownlint" },
-      nix = require("system").set_if_nix({ "nix", "deadnix", "statix" }, {}),
+      nix = system.set_if_nix({ "nix", "deadnix", "statix" }, {}),
       sh = { "shellcheck" },
       yaml = { "yamllint" },
       ["yaml.ghactions"] = { "actionlint", "yamllint" },
-      ["yaml.ansible"] = { "ansiblelint" },
+      ["yaml.ansible"] = { "ansible-lint" },
     },
     linters = {
       -- Use `selene` only when a `selene.toml` file is present
@@ -54,6 +58,24 @@ return {
       end
     end
     lint.linters_by_ft = opts.linters_by_ft
+
+    local linters_ignore_install = {
+      "bash",
+    }
+    if system.arch == "aarch64" then
+      table.insert(linters_ignore_install, "clangd")
+      table.insert(linters_ignore_install, "checkmake")
+    end
+    if not system.has_node then table.insert(linters_ignore_install, "markdownlint") end
+
+    if use_mason then
+      require("mason-nvim-lint").setup({
+        quiet_mode = false,
+        ensure_installed = {},
+        automatic_installation = true,
+        ignore_install = linters_ignore_install,
+      })
+    end
 
     -- Wrapper to unfreeze it linter is too slow
     -- Source: https://www.lazyvim.org/plugins/linting
