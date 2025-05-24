@@ -47,10 +47,7 @@ in
         pyfzf
       ];
     config = lib.strings.fileContents (
-      pkgs.substituteAll {
-        src = "${self}/config/python/startup.py";
-        state = "${config.xdg.stateHome}";
-      }
+      pkgs.replaceVars "${self}/config/python/startup.py" { state = "${config.xdg.stateHome}"; }
     );
   };
 

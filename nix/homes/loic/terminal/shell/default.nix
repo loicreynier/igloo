@@ -55,10 +55,7 @@
       );
     };
     stdlib = lib.strings.fileContents (
-      pkgs.substituteAll {
-        src = "${self}/config/direnv/direnvrc.sh";
-        sha1sum = "${pkgs.perl}/bin/shasum";
-      }
+      pkgs.replaceVars "${self}/config/direnv/direnvrc.sh" { sha1sum = "${pkgs.perl}/bin/shasum"; }
     );
   };
 

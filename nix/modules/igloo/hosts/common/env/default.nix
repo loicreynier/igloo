@@ -35,7 +35,7 @@
 
   environment.sessionVariables = {
     IGLOO = self; # Should I use the writable (Git repo) location instead?
-    FLAKE = self; # Some tooling use this variable, e.g. `nh`
+    NH_FLAKE = self; # Some tooling use this variable, e.g. `nh`
   };
 
   programs = {
@@ -60,10 +60,7 @@
     };
     loadInNixShell = true;
     direnvrcExtra = lib.fileContents (
-      pkgs.substituteAll {
-        src = "${self}/config/direnv/direnvrc.sh";
-        sha1sum = "${pkgs.perl}/bin/shasum";
-      }
+      pkgs.replaceVars "${self}/config/direnv/direnvrc.sh" { sha1sum = "${pkgs.perl}/bin/shasum"; }
     );
   };
 
