@@ -4,8 +4,8 @@
 
 ## About
 
-Most of the classic Vim stuff is in `./plugin` (see `./plugin/options`, e.g.)
-while (post-modern, jk) plugin configurations are in `./lua/lazy/plugins/<plugin-name>`.
+Most of the classic Vim stuff is in `./lua/config` (see `./lua/config/options`, e.g.)
+while (post-modern, jk) plugin configurations are in `./lua/plugins/lazy/<plugin-name>`.
 
 ## Keymaps logic
 
@@ -29,4 +29,5 @@ Keymaps are mainly inspired from [LazyVim's](https://www.lazyvim.org/keymaps).
 - [AstroNvim](https://astronvim.com)
 - [TJ's config](https://github.com/tjdevries/config.nvim)
 - [Prime's config](https://github.com/ThePrimeagen/init.lua)
+- [Dillon's config](>https://github.com/dmmulroy/.dotfiles/tree/main/home/.config/nvim)
 - [`lazy.nvim` on NixOS](https://nixalted.com/lazynvim-nixos.html)
