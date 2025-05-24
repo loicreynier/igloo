@@ -5,7 +5,7 @@ local set_api = vim.api.nvim_set_keymap
 local diag = vim.diagnostic
 local lsp = vim.lsp
 
-vim.g.mapleader = " " -- Should be set before loading Lazy
+M.leader = " "
 
 -- # Azerty keyboard
 -- TODO: add test if keyboard is Azerty
