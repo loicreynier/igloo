@@ -77,7 +77,19 @@ opt.undofile = true
 vim.g.netrw_home = vim.fn.stdpath("state") .. "/nvim"
 
 -- # Environment
-
 opt.exrc = true
 
 if vim.fn.executable("rg") == 1 then opt.grepprg = "rg --vimgrep" end
+
+-- # Diagnostics
+vim.diagnostic.config({
+  virtual_text = true,
+  virtual_lines = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+-- # TeX
+vim.g.tex_flavor = "latex"
