@@ -6,9 +6,9 @@
 
 --]]
 
-vim.g.mapleader = " " -- Should be set before loading `lazy`
-
 local system = require("system")
+
+require("config")
 
 -- # Lazy install
 
