@@ -204,6 +204,7 @@ in
               telescope-undo-nvim
               telescope-zoxide
               toggleterm-nvim
+              which-key-nvim
               beacon-nvim
               zen-mode-nvim
               twilight-nvim
