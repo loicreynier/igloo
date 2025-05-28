@@ -6,6 +6,7 @@ local diag = vim.diagnostic
 local lsp = vim.lsp
 
 M.leader = " "
+vim.g.mapleader = M.leader
 
 -- # Azerty keyboard
 -- TODO: add test if keyboard is Azerty
