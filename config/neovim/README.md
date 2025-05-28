@@ -18,7 +18,7 @@ Keymaps are mainly inspired from [LazyVim's](https://www.lazyvim.org/keymaps).
 | `<Leader>c` | "code" related (LSP & diagnostics) |
 | `<Leader>g` | "git" related                      |
 | `<Leader>t` | "terminal" related (`ToggleTerm`)  |
-| `<Leader>u` | "UI" related                       |
+| `<Leader>u` | "UI" related and misc toggles      |
 | `<Leader>x` | "eXtra" stuff (mostly Trouble)     |
 | `<Leader>b` | "buffer" related                   |
 | `<Leader>q` | "session" related                  |
