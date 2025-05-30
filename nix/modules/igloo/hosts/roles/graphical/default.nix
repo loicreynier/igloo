@@ -5,6 +5,7 @@
   ...
 }:
 {
+
   # -- X configuration
   services = {
     xserver = {

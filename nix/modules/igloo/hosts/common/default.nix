@@ -1,6 +1,7 @@
 {
   imports = [
     ./env
+    ./hardware
     ./nix
     ./system
     ./users
