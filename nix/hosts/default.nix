@@ -102,6 +102,15 @@ in
         roles.wsl
       ];
     };
+
+    iso-gnome = mkNixosSystem {
+      name = "iso-gnome";
+      inherit withSystem;
+      system = "x86_64-linux";
+      modules = [
+        roles.graphical
+      ];
+    };
   };
 
   # -- Checks & TODO: run packages

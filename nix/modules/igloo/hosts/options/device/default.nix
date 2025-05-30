@@ -15,6 +15,7 @@ in
         "server"
         "workstation"
         "wsl"
+        "iso"
       ];
       default = "";
       description = ''
