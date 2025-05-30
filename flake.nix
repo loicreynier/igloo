@@ -27,6 +27,10 @@
     # -- NixOS
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # -- Nix utilities & dependencies
     flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";

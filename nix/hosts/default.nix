@@ -8,6 +8,7 @@
 let
   # -- Flake inputs
   inherit (inputs.home-manager.nixosModules) home-manager;
+  inherit (inputs.disko.nixosModules) disko;
   inherit (inputs.nixos-wsl.nixosModules) wsl;
   agenix = inputs.agenix.nixosModules.default;
 
@@ -18,6 +19,7 @@ let
   sharedModules = [
     nixosModules
     home-manager
+    disko
     agenix
     wsl
     (iglooModules + /hosts/options)

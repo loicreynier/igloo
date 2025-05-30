@@ -1,6 +1,7 @@
 {
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 {
@@ -40,4 +41,10 @@
   users.extraUsers.root.password = lib.mkForce "nixos"; # S/O to DT
 
   time.hardwareClockInLocalTime = true;
+
+  environment.systemPackages = with pkgs; [
+    git
+    gum
+    (writeShellScriptBin "igloo-nix-installer" (lib.fileContents ./install.bash))
+  ];
 }
