@@ -78,6 +78,12 @@ in
 {
   # -- Actual hosts configurations
   flake.nixosConfigurations = {
+    smaug = mkNixosSystem {
+      name = "smaug";
+      inherit withSystem;
+      system = "x86_64-linux";
+    };
+
     smaug-wsl = mkNixosSystem {
       name = "smaug-wsl";
       inherit withSystem;
