@@ -22,5 +22,7 @@
     discord
     spotify
     thunderbird # Don't configure profiles with HM, yet
+
+    nur.repos.wingej0.nordvpn
   ];
 }

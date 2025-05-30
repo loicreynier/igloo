@@ -49,6 +49,7 @@
         overlays = [
           inputs.nixpkgs-lor.overlays.default
           inputs.awesome-neovim-plugins.overlays.default
+          inputs.nur.overlays.default
           thirdPartyPackages
           flakePackages
           schemaOverlay # See `./schemas.nix`
