@@ -31,21 +31,24 @@
       ExecStart = ''
         ${pkgs.writeShellScript "mount-loot" ''
           #!${pkgs.stdenv.shell}
-          gsudo="/mnt/c/Program Files/gsudo/2.6.0/gsudo.exe"
 
-          if [ ! -x "$gsudo" ]; then
-            echo "Error: \`gsudo.exe\` not found or not executable at \`$gsudo\`"
-            exit 1
+          if findmnt -rno TARGET "/mnt/wsl/loot" >/dev/null; then
+            gsudo="/mnt/c/Program Files/gsudo/2.6.0/gsudo.exe"
+            if [ ! -x "$gsudo" ]; then
+              echo "Error: \`gsudo.exe\` not found or not executable at \`$gsudo\`"
+              exit 1
+            fi
+
+            # NOTE: output is broken through systemd journal
+            "$gsudo" wsl --mount '\\.\PHYSICALDRIVE2' --partition 1 --name loot --type ext4
           fi
-
-          # NOTE: output is broken through systemd journal
-          "$gsudo" wsl --mount '\\.\PHYSICALDRIVE2' --partition 1 --name loot --type ext4
         ''}
       '';
       Type = "oneshot";
+      Restart = "no";
       RemainAfterExit = true;
-      StandardOutput = "journal";
-      StandardError = "journal";
+      StandardOutput = "journal+console";
+      StandardError = "journal+console";
     };
   };
 }
