@@ -32,7 +32,7 @@
         ${pkgs.writeShellScript "mount-loot" ''
           #!${pkgs.stdenv.shell}
 
-          if findmnt -rno TARGET "/mnt/wsl/loot" >/dev/null; then
+          if ! findmnt -rno TARGET "/mnt/wsl/loot" >/dev/null; then
             gsudo="/mnt/c/Program Files/gsudo/2.6.0/gsudo.exe"
             if [ ! -x "$gsudo" ]; then
               echo "Error: \`gsudo.exe\` not found or not executable at \`$gsudo\`"
