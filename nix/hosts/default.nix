@@ -10,6 +10,7 @@ let
   inherit (inputs.home-manager.nixosModules) home-manager;
   inherit (inputs.nixos-wsl.nixosModules) wsl;
   agenix = inputs.agenix.nixosModules.default;
+  chaotic = inputs.chaotic.nixosModules.default;
 
   # -- Custom modules
   modulesPath = ../modules;
@@ -18,6 +19,7 @@ let
   sharedModules = [
     nixosModules
     home-manager
+    chaotic
     agenix
     wsl
     (iglooModules + /hosts/options)

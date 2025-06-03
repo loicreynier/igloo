@@ -7,6 +7,7 @@
       "wheel"
       "nix"
       "networkmanager"
+      "nordvpn"
     ];
     # uid = 1001;
     shell = pkgs.bash;

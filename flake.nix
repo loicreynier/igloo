@@ -94,8 +94,24 @@
         treefmt-nix.follows = "";
       };
     };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
 
     # -- Packages
+    chaotic = {
+      url = "github:chaotic-cx/nyx";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+        fenix.follows = "fenix";
+        jovian.follows = "";
+        flake-schemas.follows = "";
+      };
+    };
     nur = {
       url = "github:nix-community/nur";
       inputs = {

@@ -5,6 +5,7 @@
     ./nix
     ./system
     ./users
+    ./networking
     ./virtualization
   ];
 
