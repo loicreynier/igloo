@@ -27,4 +27,26 @@ return {
     priority = 1000,
     -- config = function() vim.cmd.colorscheme("tokyonight-night") end,
   },
+
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      flavour = "auto",
+      transparent_background = false,
+    },
+    -- config = function() vim.cmd.colorscheme("tokyonight-night") end,
+  },
+
+  {
+    "webhooked/kanso.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = false,
+      theme = "zen",
+    },
+    -- config = function() vim.cmd.colorscheme("kanso") end,
+  },
 }
