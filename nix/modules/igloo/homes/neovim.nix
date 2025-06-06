@@ -191,6 +191,7 @@ in
               # -- UI
               alpha-nvim
               bufferline-nvim
+              dropbar-nvim
               lualine-nvim
               incline-nvim
               neo-tree-nvim
