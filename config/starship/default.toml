@@ -14,6 +14,8 @@ $shell\
 $nix_shell\
 $jobs\
 $cmd_duration\
+[| ](fg:bold bright-black)\
+$time\
 $line_break\
 $character"""
 
@@ -36,7 +38,12 @@ disabled = false
 bash_indicator = "bsh"
 
 [cmd_duration]
-format = "[$duration]($style)"
+format = "[$duration]($style) "
+
+[time]
+disabled = false
+format = "[$time]($style) "
+style = "bold"
 
 [python]
 detect_extensions = []
