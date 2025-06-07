@@ -100,15 +100,15 @@ function Uninstall-Script {
 # editorconfig-checker-disable
 if ($Action -eq "Install") {
     Install-Script `
-        -SourceUrl "https://raw.githubusercontent.com/loicreynier/igloo/main/windows/scripts/RestartExplorer.ps1" `
+        -SourceUrl "https://raw.githubusercontent.com/loicreynier/igloo/main/windows/scripts/Restart-Explorer.ps1" `
         -ShortcutName "Restart Explorer"
 
     Install-Script `
-        -SourceUrl "https://raw.githubusercontent.com/loicreynier/igloo/main/windows/scripts/RestartToggleHyperV.ps1" `
-        -ShortcutName "Restart and Toggle Hyper-V" `
+        -SourceUrl "https://raw.githubusercontent.com/loicreynier/igloo/main/windows/scripts/Reboot-HyperVToggle.ps1" `
+        -ShortcutName "Reboot and Toggle Hyper-V" `
         -AdminFlag
 }
 elseif ($Action -eq "Uninstall") {
-    Uninstall-Script -ScriptFileName "RestartExplorer.ps1" -ShortcutName "Restart Explorer"
-    Uninstall-Script -ScriptFileName "RestartToggleHyperV.ps1" -ShortcutName "Restart and Toggle Hyper-V"
+    Uninstall-Script -ScriptFileName "Restart-Explorer.ps1" -ShortcutName "Restart Explorer"
+    Uninstall-Script -ScriptFileName "Reboot-HyperVToggle.ps1" -ShortcutName "Reboot and Toggle Hyper-V"
 }
