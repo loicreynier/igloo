@@ -1,3 +1,7 @@
+param (
+    [ValidateSet("Install", "Uninstall")]
+    [string]$Action = "Install"
+)
 function Add-AdminShortcutFlag {
     # Source: https://stackoverflow.com/q/28997799
 
@@ -69,12 +73,42 @@ function Install-Script {
     Write-Host "Shortcut created at '$shortcutFullPath'"
 }
 
-# editorconfig-checker-disable
-Install-Script `
-    -SourceUrl "https://raw.githubusercontent.com/loicreynier/igloo/main/windows/scripts/RestartExplorer.ps1" `
-    -ShortcutName "Restart Explorer"
+function Uninstall-Script {
+    param (
+        [string]$ScriptFileName,
+        [string]$ShortcutName
+    )
 
-Install-Script `
-    -SourceUrl "https://raw.githubusercontent.com/loicreynier/igloo/main/windows/scripts/RestartToggleHyperV.ps1" `
-    -ShortcutName "Restart and Toggle Hyper-V" `
-    -AdminFlag
+    $appDataPath = [System.Environment]::GetFolderPath("ApplicationData")
+    $scriptPath = Join-Path $appDataPath "PowerShell\Scripts"
+    $scriptFullPath = Join-Path $scriptPath $ScriptFileName
+    $startMenuPath = [System.Environment]::GetFolderPath("StartMenu")
+    $shortcutPath = Join-Path $startMenuPath "Programs\PowerShell Scripts"
+    $shortcutFullPath = Join-Path $shortcutPath "$ShortcutName.lnk"
+
+    if (Test-Path $scriptFullPath) {
+        Remove-Item $scriptFullPath -Force
+        Write-Host "Removed script: $scriptFullPath"
+    }
+
+    if (Test-Path $shortcutFullPath) {
+        Remove-Item $shortcutFullPath -Force
+        Write-Host "Removed shortcut: $shortcutFullPath"
+    }
+}
+
+# editorconfig-checker-disable
+if ($Action -eq "Install") {
+    Install-Script `
+        -SourceUrl "https://raw.githubusercontent.com/loicreynier/igloo/main/windows/scripts/RestartExplorer.ps1" `
+        -ShortcutName "Restart Explorer"
+
+    Install-Script `
+        -SourceUrl "https://raw.githubusercontent.com/loicreynier/igloo/main/windows/scripts/RestartToggleHyperV.ps1" `
+        -ShortcutName "Restart and Toggle Hyper-V" `
+        -AdminFlag
+}
+elseif ($Action -eq "Uninstall") {
+    Uninstall-Script -ScriptFileName "RestartExplorer.ps1" -ShortcutName "Restart Explorer"
+    Uninstall-Script -ScriptFileName "RestartToggleHyperV.ps1" -ShortcutName "Restart and Toggle Hyper-V"
+}
