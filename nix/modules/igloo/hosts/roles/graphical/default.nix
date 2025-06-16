@@ -40,7 +40,7 @@
 
   environment.systemPackages =
     let
-      gnomeEnabled = config.services.xserver.desktopManager.gnome.enable;
+      gnomeEnabled = config.services.desktopManager.gnome.enable;
     in
     with pkgs;
     [
