@@ -20,7 +20,7 @@
 
   home.packages = with pkgs; [
     discord
-    spotify
+    spotify-adblock
     thunderbird # Don't configure profiles with HM, yet
   ];
 }
