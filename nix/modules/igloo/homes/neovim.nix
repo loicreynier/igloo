@@ -187,6 +187,7 @@ in
               nvim-spider
               precognition-nvim
               yanky-nvim
+              hardtime-nvim
               # -- UI
               alpha-nvim
               bufferline-nvim
