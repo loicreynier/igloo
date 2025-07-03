@@ -29,5 +29,5 @@ Keymaps are mainly inspired from [LazyVim's](https://www.lazyvim.org/keymaps).
 - [AstroNvim](https://astronvim.com)
 - [TJ's config](https://github.com/tjdevries/config.nvim)
 - [Prime's config](https://github.com/ThePrimeagen/init.lua)
-- [Dillon's config](>https://github.com/dmmulroy/.dotfiles/tree/main/home/.config/nvim)
+- [Dillon's config](https://github.com/dmmulroy/.dotfiles/tree/main/home/.config/nvim)
 - [`lazy.nvim` on NixOS](https://nixalted.com/lazynvim-nixos.html)
