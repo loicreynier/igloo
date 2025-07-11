@@ -3,6 +3,7 @@ local function is_visible(cmp) return cmp.core.view:visible() or vim.fn.pumvisib
 return {
   "hrsh7th/nvim-cmp",
   version = false, -- Last version is old
+  enabled = false,
   dependencies = {
     { "hrsh7th/cmp-buffer", lazy = true },
     { "hrsh7th/cmp-path", lazy = true },

@@ -2,8 +2,15 @@
 
 return {
   "saghen/blink.cmp",
-  enabled = false,
+  enabled = true,
+  version = "1.4.1", -- Use released tag to download pre-built binaries
+  ---@module "blink.cmp"
+  ---@type blink.cmp.Config
   opts = {
+    keymap = { preset = "default" },
+    -- (Default) Only show documentation popup when manuall triggered
+    completion = { documentation = { auto_show = false } },
+    fuzzy = { implementation = "prefer_rust_with_warning" },
     sources = {
       default = {
         "lazydev",
