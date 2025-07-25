@@ -1,11 +1,16 @@
 --[[-- conform.nvim
 
-  Lightweight formatter with LSP integration
+  Lightweight formatter with LSP integration and support for injected languages/code blocks.
 
 --]]
 
+local use_mason = require("system").use_mason == true
+
+---@type  LazySpec
 return {
   "stevearc/conform.nvim",
+  event = { "BufWritePre" },
+  dependencies = { "LittleEndianRoot/mason-conform", enabled = use_mason, dependencies = { "mason-org/mason.nvim" } },
   cmd = "ConformInfo",
   keys = {
     {
@@ -21,6 +26,8 @@ return {
       desc = "Format injected languages/code blocks (Conform)",
     },
   },
+  ---@module "conform"
+  ---@type conform.setupOpts
   opts = {
     default_format_opts = {
       timeout_ms = 3000,
@@ -39,6 +46,7 @@ return {
       fortran = { "fprettify" },
       just = { "just" },
       lua = { "stylua" },
+      python = { "ruff_format" }, -- Ruff subcommand
       sh = { "shfmt" },
     },
     formatters = {
@@ -51,4 +59,9 @@ return {
       },
     },
   },
+  init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
+  config = function(_, opts)
+    require("conform").setup(opts)
+    require("mason-conform").setup({})
+  end,
 }
