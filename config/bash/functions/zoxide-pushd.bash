@@ -20,6 +20,11 @@ function __igloo_pushz_print_help() {
 }
 
 function pushz() {
+  if [[ $# -eq 0 ]]; then
+    builtin pushd || return 1
+    return $?
+  fi
+
   local origin="$PWD"
   local target=""
   local pushd_flags=()
