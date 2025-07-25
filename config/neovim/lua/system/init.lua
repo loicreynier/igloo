@@ -68,11 +68,13 @@ end
 -- # Utility function/variables
 
 M.is_offline = vim.tbl_contains(vim.g.system_options, "offline")
+M.is_hpcc = vim.tbl_contains(vim.g.system_options, "hpcc")
 M.has_self_install = not M.is_offline
 M.is_slow = vim.tbl_contains(vim.g.system_options, "slow")
 
 M.is_ssh = os.getenv("SSH_CONNECTION") and true or false
 
+M.use_mason = M.has_self_install and not M.is_nix
 M.has_node = vim.fn.executable("node")
 
 ---@diagnostic disable-next-line: param-type-mismatch

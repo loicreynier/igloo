@@ -2,7 +2,7 @@
 
   "Gaze deeply into unknown regions using the power of the moon"
 
-  Telescope's LSP related action keymaps are defined in `lsp.lua`
+  Telescope's LSP related action keymaps are defined in `config.keymaps`
 
 --]]
 
