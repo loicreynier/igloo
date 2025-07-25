@@ -68,6 +68,7 @@ end
 -- # Utility function/variables
 
 M.is_offline = vim.tbl_contains(vim.g.system_options, "offline")
+M.is_hpcc = vim.tbl_contains(vim.g.system_options, "hpcc")
 M.has_self_install = not M.is_offline
 M.is_slow = vim.tbl_contains(vim.g.system_options, "slow")
 

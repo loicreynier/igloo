@@ -39,6 +39,7 @@ return {
         mason = use_mason and vim.fn.executable("npm"),
       },
       ltex = {
+        mason = false,
         settings = {
           ltex = {
             checkFrequency = "save",
@@ -72,7 +73,9 @@ return {
           Lua = {},
         },
       },
-      neocmake = {},
+      neocmake = {
+        mason = false,
+      },
       nil_ls = system.set_if_nix({
         mason = false,
         settings = {
@@ -104,6 +107,7 @@ return {
       --   },
       -- },
       texlab = {
+        mason = system.name ~= "HPCC_Turpan",
         settings = {
           latexFormatter = "texlab", -- Not implemented yet
         },

@@ -61,6 +61,9 @@ return {
 
     local linters_ignore_install = {
       "bash",
+      "actionlint",
+      "hadolint",
+      "markdownlint",
     }
     if system.arch == "aarch64" then
       table.insert(linters_ignore_install, "clangd")
