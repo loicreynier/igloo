@@ -5,7 +5,17 @@ M.icons = {
     prefix = " ",
     selection = " ",
   },
-  -- Nerd Fonts icons (stolen from LazyVim)
+  actions = {
+    new_file = " ",
+    find_files = " ",
+    find_text = " ",
+    recent_files = " ",
+    config_files = " ",
+    restore_session = " ",
+    quit = " ",
+    keymaps = " ",
+    projects = " ",
+  },
   diagnostics = {
     Error = " ",
     Warn = " ",
@@ -13,6 +23,7 @@ M.icons = {
     Info = " ",
   },
   git = {
+    logo = " ",
     added = " ",
     modified = " ",
     removed = " ",
@@ -58,6 +69,23 @@ M.icons = {
     Value = " ",
     Variable = "󰀫 ",
   },
+  plugins = {
+    Lazy = "󰒲 ",
+    Mason = "󱌣 ",
+  },
+}
+
+M.header = {
+  -- Source: https://github.com/PraveenGongada/dotfiles
+  width = 70,
+  string = "                                                                     \n"
+    .. "       ████ ██████           █████      ██                     \n"
+    .. "      ███████████             █████                             \n"
+    .. "      █████████ ███████████████████ ███   ███████████   \n"
+    .. "     █████████  ███    █████████████ █████ ██████████████   \n"
+    .. "    █████████ ██████████ █████████ █████ █████ ████ █████   \n"
+    .. "  ███████████ ███    ███ █████████ █████ █████ ████ █████  \n"
+    .. " ██████  █████████████████████ ████ █████ █████ ████ ██████ \n",
 }
 
 return M

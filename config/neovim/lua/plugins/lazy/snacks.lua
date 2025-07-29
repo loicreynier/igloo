@@ -12,6 +12,7 @@ return {
     toggle = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
+    dashboard = vim.tbl_deep_extend("force", require("plugins.config.snacks.dashboard"), { enabled = true }),
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
