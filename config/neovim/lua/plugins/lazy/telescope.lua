@@ -9,8 +9,8 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
-    { "stevearc/dressing.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-ui-select.nvim" },
   },
   specs = {
     { "nvim-lua/plenary.nvim", lazy = true },
@@ -118,6 +118,7 @@ return {
   },
   opts = function()
     local actions = require("telescope.actions")
+    local themes = require("telescope.themes")
     local os_sep = require("plenary.path").path.sep
     local icons = require("rice").icons
 
@@ -149,6 +150,9 @@ return {
       },
       extensions = {
         fzf = {},
+        ["ui-select"] = {
+          themes.get_dropdown()
+        },
       },
     }
   end,
@@ -166,6 +170,7 @@ return {
 
     telescope.setup(opts)
     telescope.load_extension("fzf")
+    telescope.load_extension("ui-select")
 
     -- FIXME: doesn't work in Lazy's `keys` spec on `ONERA_workstation` -> requires Telescope to be loaded first
     vim.keymap.set(

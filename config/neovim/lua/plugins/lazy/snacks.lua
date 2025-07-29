@@ -5,10 +5,13 @@ return {
   lazy = false,
   keys = {
     { "<Leader>cd", "<Cmd>ToggleDiagnostics<CR>", desc = "Toggle diagnostics (Snacks)" },
+    { "<Leader>ui", "<Cmd>ToggleIndentGuides<CR>", desc = "Toggle indent guides (Snacks)" },
   },
   --- @type snacks.Config
   opts = {
     toggle = { enabled = true },
+    indent = { enabled = true },
+    input = { enabled = true },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
@@ -21,5 +24,6 @@ return {
     })
 
     vim.api.nvim_create_user_command("ToggleDiagnostics", function() Snacks.toggle.diagnostics():toggle() end, {})
+    vim.api.nvim_create_user_command("ToggleIndentGuides", function() Snacks.toggle.indent():toggle() end, {})
   end,
 }

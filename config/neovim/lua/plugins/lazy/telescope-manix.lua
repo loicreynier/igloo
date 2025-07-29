@@ -3,10 +3,6 @@ return {
   dependencies = {
     {
       "nvim-telescope/telescope.nvim",
-      dependencies = {
-        { "nvim-lua/plenary.nvim" },
-        { "stevearc/dressing.nvim" },
-      },
     },
   },
   enabled = require("system").is_nix,

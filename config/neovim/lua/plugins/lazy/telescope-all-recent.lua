@@ -11,7 +11,6 @@ return {
         end
       end,
     },
-    "stevearc/dressing.nvim",
   },
   opts = {
     database = {
