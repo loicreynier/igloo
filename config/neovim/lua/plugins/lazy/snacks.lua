@@ -4,6 +4,13 @@ return {
   priority = 1000,
   lazy = false,
   keys = {
+    { "<Leader>bd", function() Snacks.bufdelete.delete() end, desc = "Delete current buffer (Snacks)" },
+    {
+      "<Leader>bD",
+      function() Snacks.bufdelete.other() end,
+      desc = "Delete all buffers except the current one (Snacks)",
+    },
+    { "<Leader>bX", function() Snacks.bufdelete.all() end, desc = "Delete all buffers (Snacks)" },
     { "<Leader>cd", "<Cmd>ToggleDiagnostics<CR>", desc = "Toggle diagnostics (Snacks)" },
     { "<Leader>ui", "<Cmd>ToggleIndentGuides<CR>", desc = "Toggle indent guides (Snacks)" },
   },
