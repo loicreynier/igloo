@@ -13,6 +13,7 @@ return {
     { "<Leader>bX", function() Snacks.bufdelete.all() end, desc = "Delete all buffers (Snacks)" },
     { "<Leader>cd", "<Cmd>ToggleDiagnostics<CR>", desc = "Toggle diagnostics (Snacks)" },
     { "<Leader>ui", "<Cmd>ToggleIndentGuides<CR>", desc = "Toggle indent guides (Snacks)" },
+    { "<Leader>uz", "<Cmd>ToggleZenMode<CR>", desc = "Toggle zen mode (Snacks)" },
   },
   --- @type snacks.Config
   opts = {
@@ -20,6 +21,22 @@ return {
     indent = { enabled = true },
     input = { enabled = true },
     dashboard = vim.tbl_deep_extend("force", require("plugins.config.snacks.dashboard"), { enabled = true }),
+    zen = {
+      toggles = {
+        dim = false,
+      },
+      win = {
+        backdrop = {
+          transparent = false,
+          blend = 95,
+        },
+        width = 0.60,
+      },
+      show = {
+        statusline = false,
+        tabline = false,
+      },
+    },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
@@ -33,5 +50,6 @@ return {
 
     vim.api.nvim_create_user_command("ToggleDiagnostics", function() Snacks.toggle.diagnostics():toggle() end, {})
     vim.api.nvim_create_user_command("ToggleIndentGuides", function() Snacks.toggle.indent():toggle() end, {})
+    vim.api.nvim_create_user_command("ToggleZenMode", function() Snacks.toggle.zen():toggle() end, {})
   end,
 }
