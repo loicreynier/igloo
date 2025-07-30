@@ -15,6 +15,7 @@ return {
     "Mofiqul/vscode.nvim",
     lazy = false,
     priority = 1000,
+    dev = true,
     opts = {
       transparent = false,
     },
@@ -35,6 +36,7 @@ return {
     opts = {
       flavour = "auto",
       transparent_background = false,
+      integrations = { blink_cmp = true },
     },
     -- config = function() vim.cmd.colorscheme("tokyonight-night") end,
   },

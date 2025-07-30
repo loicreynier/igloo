@@ -1,9 +1,19 @@
--- TODO: install Blink, only the LazyDev options have been set up
-
+---@type LazySpec
 return {
   "saghen/blink.cmp",
-  enabled = false,
+  enabled = true,
+  version = "1.4.1", -- Use released tag to download pre-built binaries
+  dependencies = {
+    { "saghen/blink.compat", version = "2.*", lazy = true, opts = {} },
+    { "rafamadriz/friendly-snippets" },
+  },
+  ---@module "blink.cmp"
+  ---@type blink.cmp.Config
   opts = {
+    keymap = { preset = "default" },
+    -- (Default) Only show documentation popup when manual triggered
+    completion = { documentation = { auto_show = false } },
+    fuzzy = { implementation = "prefer_rust_with_warning" },
     sources = {
       default = {
         "lazydev",
@@ -20,6 +30,9 @@ return {
           score_offset = 100,
         },
       },
+    },
+    appearance = {
+      kind_icons = require("rice").icons.kinds,
     },
   },
 }
