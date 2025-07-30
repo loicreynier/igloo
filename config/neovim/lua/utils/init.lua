@@ -16,6 +16,7 @@ M.disabled_filetypes = {
   "lspinfo",
   "lazy",
   "alpha",
+  "snacks_dashboard",
   "noice",
   "Trouble",
   "neo-tree",
