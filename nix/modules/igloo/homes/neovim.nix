@@ -208,10 +208,9 @@ in
               zen-mode-nvim
               twilight-nvim
               # -- Code/LSP
-              nvim-cmp
-              cmp-buffer
-              cmp-path
-              cmp-nvim-lsp
+              blink-cmp
+              blink-compat
+              friendly-snippets
               nvim-lspconfig
               nvim-lint
               nvim-treesitter.withAllGrammars
