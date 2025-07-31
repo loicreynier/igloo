@@ -19,23 +19,37 @@ return function(opts)
   opts = opts or {}
   ---@diagnostic disable-next-line: undefined-field
   opts.cwd = opts.cwd or vim.uv.cwd()
-  -- TODO: stole shortcut option from TJ's
+  opts.shortcuts = opts.shortcuts
+    or {
+      ["l"] = "*.lua",
+      ["v"] = "*.vim",
+      ["n"] = "*.{vim,lua}",
+      ["c"] = "*.c",
+    }
 
   local finder = finders.new_async_job({
     command_generator = function(prompt)
       if not prompt or prompt == "" then return nil end
 
-      local pieces = vim.split(prompt, "  ")
+      local prompt_splits = vim.split(prompt, "  ")
       local args = { "rg" }
 
-      if pieces[1] then
+      if prompt_splits[1] then
         table.insert(args, "-e")
-        table.insert(args, pieces[1])
+        table.insert(args, prompt_splits[1])
       end
 
-      if pieces[2] then
+      if prompt_splits[2] then
         table.insert(args, "-g") -- "glob" files
-        table.insert(args, pieces[2])
+
+        local pattern
+        if opts.shortcuts[prompt_splits[2]] then
+          pattern = opts.shortcuts[prompt_splits[2]]
+        else
+          pattern = prompt_splits[2]
+        end
+
+        table.insert(args, string.format("%s", pattern))
       end
 
       return vim
