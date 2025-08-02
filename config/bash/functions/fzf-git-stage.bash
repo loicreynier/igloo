@@ -54,26 +54,26 @@ function __fzf_git_stage() {
 
   local -r fzf_header=$(
     cat <<-EOF
-		> <CTRL-s> to switch between Add Mode and Reset mode
-		> <CTRL-t> to switch between Status and Diff preview
-		> <ALT-e> to open files in the editor
-		> <ALT-c> to commit | <ALT-a> to append to the last commit
+			> <CTRL-s> to switch between Add Mode and Reset mode
+			> <CTRL-t> to switch between Status and Diff preview
+			> <ALT-e> to open files in the editor
+			> <ALT-c> to commit | <ALT-a> to append to the last commit
 		EOF
   )
 
   local -r fzf_add_header=$(
     cat <<-EOF
-		$fzf_header
-		> <ENTER> to add files
-		> ALT-P to add patch
+			$fzf_header
+			> <ENTER> to add files
+			> ALT-P to add patch
 		EOF
   )
 
   local -r fzf_reset_header=$(
     cat <<-EOF
-		$fzf_header
-		> <ENTER> to reset files
-		> <ALT-x> to reset and checkout files
+			$fzf_header
+			> <ENTER> to reset files
+			> <ALT-x> to reset and checkout files
 		EOF
   )
 

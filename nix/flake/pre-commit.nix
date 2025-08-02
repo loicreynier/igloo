@@ -92,7 +92,12 @@
             commitizen = mkHook "commitizen" { enable = false; };
             markdownlint = mkHook "markdownlint" { enable = true; };
             shellcheck = mkHook "shellcheck" { enable = true; };
-            shfmt = mkHook "shfmt" { enable = true; };
+            shfmt = mkHook "shfmt" {
+              enable = true;
+              settings = {
+                simplify = false;
+              };
+            };
             ruff = mkHook "Ruff" { enable = true; };
             stylua = mkHook "stylua" { enable = true; };
             taplo = mkHook "taplo" { enable = true; };
