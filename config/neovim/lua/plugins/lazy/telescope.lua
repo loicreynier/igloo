@@ -151,7 +151,7 @@ return {
       extensions = {
         fzf = {},
         ["ui-select"] = {
-          themes.get_dropdown()
+          themes.get_dropdown(),
         },
       },
     }

@@ -17,9 +17,7 @@ local remove_comments = function()
 
   local ranges = {}
   for _, node in query:iter_captures(root, bufnr, 0, -1) do
-    if node:type() == "comment" then
-      table.insert(ranges, { node:range() })
-    end
+    if node:type() == "comment" then table.insert(ranges, { node:range() }) end
   end
 
   if #ranges == 0 then
