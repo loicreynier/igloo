@@ -94,8 +94,8 @@
         treefmt-nix.follows = "";
       };
     };
-    fenix = {
-      url = "github:nix-community/fenix";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
@@ -107,7 +107,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
-        fenix.follows = "fenix";
+        rust-overlay.follows = "rust-overlay";
         jovian.follows = "";
         flake-schemas.follows = "";
       };
