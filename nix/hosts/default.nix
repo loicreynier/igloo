@@ -55,14 +55,13 @@ let
       }:
       inputs.nixpkgs.lib.nixosSystem {
         inherit system;
-        modules =
-          [
-            ./${name}
-          ]
-          ++ lib.concatLists [
-            args.modules
-            sharedModules
-          ];
+        modules = [
+          ./${name}
+        ]
+        ++ lib.concatLists [
+          args.modules
+          sharedModules
+        ];
         specialArgs = {
           inherit
             lib
@@ -71,7 +70,8 @@ let
             inputs'
             self'
             ;
-        } // args.specialArgs or { };
+        }
+        // args.specialArgs or { };
       }
     );
 in

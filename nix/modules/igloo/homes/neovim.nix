@@ -44,29 +44,28 @@ in
         viAlias = true;
         vimAlias = true;
         vimdiffAlias = true;
-        extraWrapperArgs =
-          [
-            # See `config/neovim/init.lua`
-            "--prefix"
-            "NVIM_NIX_WRAPPED"
-            ":"
-            "1"
-            "--prefix"
-            "NVIM_NIX_SQLITE_PATH"
-            ":"
-            "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
-          ]
-          ++ (
-            if cfg.installPlugins then
-              [
-                "--prefix"
-                "NVIM_NIX_PLUGINS_PATH"
-                ":"
-                pluginsPath
-              ]
-            else
-              [ ]
-          );
+        extraWrapperArgs = [
+          # See `config/neovim/init.lua`
+          "--prefix"
+          "NVIM_NIX_WRAPPED"
+          ":"
+          "1"
+          "--prefix"
+          "NVIM_NIX_SQLITE_PATH"
+          ":"
+          "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
+        ]
+        ++ (
+          if cfg.installPlugins then
+            [
+              "--prefix"
+              "NVIM_NIX_PLUGINS_PATH"
+              ":"
+              pluginsPath
+            ]
+          else
+            [ ]
+        );
         withPython3 = true;
         extraPackages =
           with pkgs;
@@ -100,11 +99,9 @@ in
                     #     '';
                     # });
                     ruff = python-lsp-ruff.overridePythonAttrs (old: {
-                      postPatch =
-                        old.postPatch or ''''
-                        + ''
-                          sed -i '/python-lsp-server/d' pyproject.toml
-                        '';
+                      postPatch = old.postPatch or '''' + ''
+                        sed -i '/python-lsp-server/d' pyproject.toml
+                      '';
 
                       build-system = [ setuptools ] ++ (old.build-system or [ ]);
                     });

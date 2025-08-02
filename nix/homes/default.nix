@@ -22,10 +22,12 @@ let
         ../modules/igloo/homes
         ../modules/home-manager
         ./${username}
-      ] ++ args.modules or [ ];
+      ]
+      ++ args.modules or [ ];
       extraSpecialArgs = {
         inherit inputs self;
-      } // args.extraSpecialArgs or { };
+      }
+      // args.extraSpecialArgs or { };
     };
 
   # -- Me, myself, and I
