@@ -20,8 +20,7 @@ HELP_NIXOS_CONFIG = (
     "NixOS configuration to build. "
     "If not specified, it will be guessed from `$HOSTNAME`."
 )
-HELP_HOME_ARGS = "Additional arguments passed to `home-manager`."
-HELP_NIXOS_ARGS = "Additional arguments passed to `nixos-rebuild`"
+HELP_EXTRA_ARGS = "Additional arguments passed to `nix build`"
 HELP_UPDATE_CHECK = "Skip running checks after flake inputs update"
 HELP_UPDATE_COMMIT = "Skip commit after flake inputs update"
 HELP_UPDATE_INPUTS = "List of flake inputs to update"
@@ -30,7 +29,7 @@ HELP_UPDATE_INPUTS = "List of flake inputs to update"
 @build_app.command("home")
 def build_home(
     config: str = typer.Option(None, "--config", help=HELP_HOME_CONFIG),
-    extra_args: List[str] = typer.Argument(None, help=HELP_HOME_ARGS),
+    extra_args: List[str] = typer.Argument(None, help=HELP_EXTRA_ARGS),
 ):
     run_home_manager("build", config, extra_args=extra_args)
 
@@ -38,7 +37,7 @@ def build_home(
 @switch_app.command("home")
 def switch_home(
     config: str = typer.Option(None, "--config", help=HELP_HOME_CONFIG),
-    extra_args: List[str] = typer.Argument(None, help=HELP_HOME_ARGS),
+    extra_args: List[str] = typer.Argument(None, help=HELP_EXTRA_ARGS),
 ):
     run_home_manager("switch", config, extra_args=extra_args)
 
@@ -46,7 +45,7 @@ def switch_home(
 @build_app.command("nixos")
 def build_nixos(
     config: str = typer.Option(None, "--config", help=HELP_NIXOS_CONFIG),
-    extra_args: List[str] = typer.Argument(None, help=HELP_NIXOS_ARGS),
+    extra_args: List[str] = typer.Argument(None, help=HELP_EXTRA_ARGS),
 ):
     run_nixos_rebuild("build", config, extra_args=extra_args)
 
@@ -54,7 +53,7 @@ def build_nixos(
 @switch_app.command("nixos")
 def switch_nixos(
     config: str = typer.Option(None, "--config", help=HELP_NIXOS_CONFIG),
-    extra_args: List[str] = typer.Argument(None, help=HELP_NIXOS_ARGS),
+    extra_args: List[str] = typer.Argument(None, help=HELP_EXTRA_ARGS),
 ):
     run_nixos_rebuild("switch", config, extra_args=extra_args)
 
@@ -98,9 +97,10 @@ def run_home_manager(command: str, config: str, extra_args: List[str] | None) ->
     else:
         home = home_manager_config()
 
-    args = " ".join(extra_args) if extra_args else ""
+    args = "--" + " ".join(extra_args) if extra_args else ""
 
-    cmd = f"home-manager {args} {command} -b bak --flake .#{home} |& nom"
+    cmd = f"nh home {command} -b bak #{home}"
+
     typer.echo(f"Running: {cmd}")
     subprocess.run(cmd, shell=True, check=True)
 
@@ -161,11 +161,9 @@ def run_nixos_rebuild(command: str, config: str, extra_args: List[str] | None) -
     else:
         config = os.uname().nodename
 
-    args = " ".join(extra_args) if extra_args else ""
+    args = "--" + " ".join(extra_args) if extra_args else ""
 
-    cmd = f"nixos-rebuild {command} {args} --flake .#{config} |& nom"
-    if command == "switch":
-        cmd = "sudo " + cmd
+    cmd = f"nh os {command} #{config} {args}"
 
     typer.echo(f"Running: {cmd}")
     subprocess.run(cmd, shell=True, check=True)

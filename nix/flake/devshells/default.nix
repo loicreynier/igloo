@@ -43,7 +43,6 @@
         packages =
           with pkgs;
           let
-            scriptsDir = "${self}/nix/flake/devshells/scripts";
             # mkScript = name:
             #   pkgs.writeShellApplication {
             #     inherit name;
@@ -51,7 +50,7 @@
             #   };
             pythonForIgloo = python3.withPackages (ps: with ps; [ typer ]);
             igloo = pkgs.writeScriptBin "igloo" ''
-              ${pythonForIgloo}/bin/python3 ${scriptsDir}/igloo.py "$@"
+              ${pythonForIgloo}/bin/python3 ${self}/bin/igloo.py "$@"
             '';
           in
           [
@@ -68,7 +67,6 @@
             tree
 
             igloo
-            nix-output-monitor
 
             (inputs.nix-auto-follow.packages.${system}.default.overridePythonAttrs (_: {
               doCheck = false;
