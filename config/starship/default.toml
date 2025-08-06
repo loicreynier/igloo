@@ -3,6 +3,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
+$os\
 $username\
 $hostname\
 $directory\
@@ -54,3 +55,6 @@ detect_extensions = []
 format = "via [$symbol(\\($name\\))]($style) "
 # Trailing space removed
 symbol = "❄️ "
+
+[directory]
+format = " [](fg:bright-black)[$path](bg:bright-black fg:white)[](fg:bright-black) [$read_only](fg:yellow)"

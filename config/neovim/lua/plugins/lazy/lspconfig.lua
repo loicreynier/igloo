@@ -130,7 +130,7 @@ return {
         --   },
         -- },
         texlab = {
-          mason = system.is_hpcc == true,
+          mason = system.is_hpcc == false,
           ettings = {
             latexFormatter = "texlab", -- NOTE: not implemented yet
           },
