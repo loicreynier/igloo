@@ -31,6 +31,7 @@ opt.inccommand = "split"
 opt.termguicolors = true
 
 -- # Indentation
+opt.shiftwidth = 2
 opt.expandtab = true
 opt.smarttab = true
 opt.autoindent = true
