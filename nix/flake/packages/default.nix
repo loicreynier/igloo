@@ -34,6 +34,17 @@
         inherit (final.nur.repos.nltch) spotify-adblock;
       };
 
+      manixHMFlakeFix = _: prev: {
+        manix = prev.manix.overrideAttrs (_: {
+          patches = [
+            (prev.fetchpatch {
+              url = "https://github.com/nix-community/manix/pull/20.diff";
+              sha256 = "sha256-nAzdLk+9LDMWpto0phsYYNcOVw1tdg9wixDJtohKIhg=";
+            })
+          ];
+        });
+      };
+
       uwufetchFix = _: prev: {
         uwufetch = prev.uwufetch.overrideAttrs (old: {
           postFixup = old.postFixup + ''
@@ -53,6 +64,7 @@
           thirdPartyPackages
           flakePackages
           schemaOverlay # See `./schemas.nix`
+          manixHMFlakeFix
           uwufetchFix
           spotifyAdblock
         ];

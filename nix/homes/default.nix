@@ -19,6 +19,12 @@ let
         inputs.agenix.homeManagerModules.default
         { home.packages = [ inputs.agenix.packages."${system}".default ]; }
         { news.display = "silent"; }
+        {
+          manual = {
+            manpages.enable = true;
+            json.enable = true;
+          };
+        }
         ../modules/igloo/homes
         ../modules/home-manager
         ./${username}
