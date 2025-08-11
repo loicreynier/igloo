@@ -2,7 +2,12 @@
 
 # ~/.bashrc
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
+
+if [ -n "$__HOME_BASHRC_SOURCED" ]; then return; fi
+__HOME_BASHRC_SOURCED=1
+
+[[ $- == *i* ]] || return
 
 if [ -f /etc/bashrc ]; then
   . /etc/bashrc
@@ -16,6 +21,15 @@ command_exists() {
 
 config_dir="${XDG_CONFIG_HOME:-$HOME/.config}"
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}"
+data_dirs=(
+  "$HOME/.nix-profile/share"
+  "${XDG_STATE_HOME-$HOME/.local/state}/nix/profiles/profile/share"
+  "${XDG_DATA_HOME-$HOME/.local/share}"
+)
+profile_dirs=(
+  "$HOME/.nix-profile/etc/profile.d"
+  "$HOME/.local/etc/profile.d"
+)
 
 # -- TurboVNC hack
 
@@ -59,6 +73,12 @@ alias lrt="ls -rt"
 alias llrt="ls -lhrt"
 alias lt="tree"
 
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+alias ..5="cd ../../../../.."
+alias ..6="cd ../../../../../.."
+
 command_exists "git" && alias groot='cd $(git rev-parse --show-toplevel)'
 
 command_exists "vim" && alias vi="vim"
@@ -67,6 +87,10 @@ command_exists "nvim" && alias vim="nvim"
 if command_exists "bat"; then
   alias bat='bat --theme=${BAT_THEME:-base16}'
   alias cat='bat --style=plain --paging=never'
+fi
+
+if command_exists "fd"; then
+  alias fd="fd --hidden --follow" # Can be ignored with `--no-hidden` and `--no-follow`
 fi
 
 if command_exists "eza"; then
@@ -101,6 +125,11 @@ fi
 
 command_exists "stowsh" && alias stowsh-local='stowsh -t $HOME/.local'
 
+if command_exists "just"; then
+  alias j="just"
+  alias ji="just --choose"
+fi
+
 case "$SYSTEM" in
 "ONERA_workstation")
   if command_exists "pass"; then
@@ -110,33 +139,67 @@ case "$SYSTEM" in
   ;;
 esac
 
-# -- Software setup
-
-command_exists "direnv" && eval "$(direnv hook bash)"
-if command_exists "fzf"; then
-  eval "$(fzf --bash)"
-  export FZF_DEFAULT_OPTS="--prompt='❯ '"
-  if [[ -f "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh" ]]; then
-    source "$XDG_DATA_HOME/fzf-tab-completion/bash/fzf-bash-completion.sh"
-    export FZF_TAB_COMPLETION_PROMPT="❯ "
-    export FZF_COMPLETION_AUTO_COMMON_PREFIX=true
-    _fzf_bash_completion_loading_msg() { echo "❯ "; } # Override loading message
-    bind -x '"\t": fzf_bash_completion'
-  fi
-fi
-command_exists "pyenv" && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
-command_exists "mise" && eval "$(mise activate bash)"
-command_exists "starship" && eval "$(starship init bash --print-full-init)"
-command_exists "zoxide" && eval "$(zoxide init bash)"
-
 # -- Custom functions
 
 for file in "$config_dir/bash/functions"/*.bash; do
-  # shellcheck disable=SC1090
   [ -f "$file" ] && source "$file"
 done
 
+# -- Software setup
+
+if [[ ! -v BASH_COMPLETION_VERSINFO ]]; then
+  for profile_dir in "${profile_dirs[@]}"; do
+    source="$profile_dir/bash_completion.sh"
+    [[ -f $source ]] && source "$source"
+    break
+  done
+fi
+
+for profile_dir in "${profile_dirs[@]}"; do
+  source="$profile_dir/command-not-found.sh"
+  [[ -f $source ]] && source "$source"
+  if command_exists "comma"; then
+    source="$profile_dir/comma-command-not-found.sh"
+    [[ -f $source ]] && source "$source"
+  fi
+  break
+done
+
+command_exists "direnv" && eval "$(direnv hook bash)"
+if command_exists "fzf"; then
+  if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
+    eval "$(fzf --bash)"
+  fi
+  for data_dir in "${data_dirs[@]}"; do
+    source="$data_dir/fzf-tab-completion/bash/fzf-bash-completion.sh"
+    if [[ -f $source ]]; then
+      source "$source"
+      _fzf_bash_completion_loading_msg() { echo "$FZF_TAB_COMPLETION_PROMPT"; }
+      bind -x '"\t": fzf_bash_completion'
+      break
+    fi
+  done
+fi
+command_exists "pyenv" && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
+command_exists "mise" && eval "$(mise activate bash)"
+command_exists "starship" && [[ $TERM != "dumb" ]] && eval "$(starship init bash --print-full-init)"
+command_exists "zoxide" && eval "$(zoxide init bash)"
+if command_exists "atuin"; then
+  for data_dir in "${data_dirs[@]}"; do
+    source="$data_dir/bash/bash-preexec.sh"
+    if [[ -f $source ]]; then
+      source "$source"
+      eval "$(ATUIN_NOBIND=1 atuin init "bash")"
+      bind -x '"\C-x\C-a": __atuin_history'
+      if declare -F __fzf_atuin_hist_widget >/dev/null; then
+        bind -x '"\C-x\C-r": __fzf_atuin_hist_widget'
+      fi
+      break
+    fi
+  done
+fi
+
 # -- Cleaning
 
-unset state_dir config_dir
+unset state_dir config_dir data_dirs data_dir profile_dirs profile_dir source
 unset -f command_exists

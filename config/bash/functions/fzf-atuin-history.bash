@@ -8,19 +8,17 @@ __fzf_atuin_hist_widget() {
   local ret
 
   local atuin_opts="--cmd-only"
+  # shellcheck disable=SC2206
   local fzf_opts=(
-    "--height=40%"
+    $FZF_DEFAULT_OPTS
     "--reverse"
     "--no-multi"
     "--tac"            # Reverse input order
     "--tiebreak=index" # Prefer line that appeared earlier in the input stream
-    "--nth=2.."        # Search from the second field onward, is it necessary?
     "--query=${READLINE_LINE}"
     "--preview='echo {}'"
     "--preview-window=down:3:hidden:wrap"
-    "--bind=ctrl-space:toggle-preview"
-    "--color=header:italic"
-    "--header='Press <CTRL-Space> to preview command'"
+    "--header 'Command history'"
   )
 
   cmd=$(eval "atuin search ${atuin_opts} | fzf ${fzf_opts[*]}")
@@ -32,12 +30,4 @@ __fzf_atuin_hist_widget() {
   fi
 
   return $ret
-}
-
-__atuin_fzf_history_setup() {
-  if ! command -v atuin &>/dev/null; then return 1; fi
-  export ATUIN_NOBIND="true"
-  eval "$(atuin init "bash")"
-  bind -x '"\C-r": __fzf_atuin_hist_widget'
-  bind -x '"\C-x\C-r": __atuin_history'
 }

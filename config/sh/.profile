@@ -4,6 +4,9 @@
 
 # shellcheck disable=SC1091
 
+if [ -n "$__HOME_PROFILE_SOURCED" ]; then return; fi
+__HOME_PROFILE_SOURCED=1
+
 command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
@@ -27,7 +30,7 @@ if [ -z "$SYSTEM" ]; then
 
     case "$system_id" in
     "6b1a62a469cfe86e197f5a04746504696971733f8ad47978a04dcbf26cad1cd2")
-      SYSTEM="ONERA_workstation"
+      SYSTEM="workstation_ONERA"
       ;;
     *)
       SYSTEM="unknown"
@@ -51,7 +54,7 @@ if [ -z "$SYSTEM" ]; then
 
     case "$hostname_sha" in
     "120d48ac77121271bd444cf4c93769ba6d6f36b3c6228c61949c5a25a40f1b5a")
-      SYSTEM="ONERA_workstation"
+      SYSTEM="workstation_ONERA"
       ;;
     *)
       SYSTEM="unknown"
@@ -59,8 +62,11 @@ if [ -z "$SYSTEM" ]; then
     esac
 
     case "$HOSTNAME" in
+    latios)
+      SYSTEM="laptop_Latios"
+      ;;
     ldmpe*)
-      SYSTEM="ONERA_workstation"
+      SYSTEM="workstation_ONERA"
       ;;
     olympe*)
       SYSTEM="HPCC_Olympe"
@@ -94,8 +100,11 @@ fi
 if [ -z "$SYSTEM_OPTIONS" ]; then
   # Set system options depending on the value of `SYSTEM`
   case "$SYSTEM" in
-  "ONERA_workstation")
-    SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}offline"
+  "laptop_Latios")
+    SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}laptop:nix"
+    ;;
+  "workstation_ONERA")
+    SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}workstation:offline"
     ;;
   "HPCC_Topaze")
     SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}hpcc:offline:slow"
@@ -107,6 +116,16 @@ if [ -z "$SYSTEM_OPTIONS" ]; then
 
   export SYSTEM_OPTIONS
 fi
+
+# == RICING ====================================================================
+
+[ -z "$SYSTEM_THEME" ] && export SYSTEM_THEME="base16"
+
+case "$SYSTEM_THEME" in
+"base16")
+  export BAT_THEME=base16
+  ;;
+esac
 
 # == ENVIRONMENT VARIABLES =====================================================
 
@@ -130,24 +149,80 @@ elif command_exists "vim"; then
 fi
 
 [ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="$HOME/.local/share"
-[ -z "$XDG_SATE_HOME" ] && export XDG_STATE_HOME="$HOME/.local/state"
+[ -z "$XDG_STATE_HOME" ] && export XDG_STATE_HOME="$HOME/.local/state"
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
 [ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="$HOME/.cache"
 [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$UID"
 
 # -- Software configuration
 
+if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+  . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
+
 export BASH_COMPLETION_USER_DIR="$XDG_DATA_HOME/bash-completion/"
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 
+export GNUPGHOME="$HOME/.gnupg"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export TEXMFHOME="$XDG_DATA_HOME/texmf"
+
+export FZF_DEFAULT_OPTS="--prompt='❯ '
+  --height 40%
+  --bind='f1:toggle-header'
+  --bind='f2:toggle-preview'
+  --bind 'alt-u:preview-page-up,alt-d:preview-page-down'
+  --color header:italic"
+if command_exists "fd"; then
+  export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --strip-cwd-prefix"
+  export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
+  export FZF_CTRL_T_COMMAND="fd --type f --hidden --follow --strip-cwd-prefix"
+fi
+if command_exists "bat"; then
+  fzf_preview_files="bat --color=always --style=plain"
+else
+  fzf_preview_files="head -n 50"
+fi
+if command_exists "eza"; then
+  fzf_preview_dirs="eza -a
+    --icons --no-quotes --group-directories-first
+    --color=always --color-scale-mode=fixed"
+else
+  fzf_preview_dirs="ls -al"
+fi
+export FZF_CTRL_T_OPTS="--reverse --multi --preview '${fzf_preview_files} {}'"
+export FZF_ALT_C_OPTS="--reverse --preview '${fzf_preview_dirs} {}'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}'
+  --preview-window down:3:hidden:wrap
+  --reverse
+  --header 'Command history'"
+# TODO: add yank binding
+# "--bind 'ctrl-y:execute-silent(echo -n {2..} | win32yank.exe -i)+abort'"
+export FZF_TAB_COMPLETION_PROMPT="❯ "
+export FZF_COMPLETION_AUTO_COMMON_PREFIX=true
+
+export _ZO_DATA_DIR="$XDG_STATE_HOME"
+export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS
+  --no-multi --no-sort --scheme=path --exit-0 --select-1
+  --preview '${fzf_preview_dirs} {2..}'"
+
+if command_exists "bat"; then
+  fzf_preview_cmd="just --show {} | ${fzf_preview_files} --language=Just"
+else
+  fzf_preview_cmd="just --show {}"
+fi
+export JUST_CHOOSER="fzf --reverse --preview '${fzf_preview_cmd}' || false"
+
+unset fzf_preview_dirs fzf_preview_files fzf_preview_cmd
 
 export LESSHISTFILE="$XDG_STATE_HOME/lesshst"
 
 export MYPY_CACHE_DIR="$XDG_CACHE_HOME/mypy"
+export GOPATH="$XDG_DATA_HOME/go"
+export GOCACHE="$XDG_CACHE_HOME/go/build"
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 
@@ -192,7 +267,7 @@ fi
 # Shell setups are stored as functions so then can be loaded manually
 # if system is not automatically recognized
 
-_setup_shell_ONERA_workstation() {
+_setup_shell_workstation_ONERA() {
   export PATH="$HOME/.bin":"$PATH"
 
   module -s purge
@@ -229,21 +304,11 @@ _setup_shell_HPCC_Topaze() {
 }
 
 case "$SYSTEM" in
-"ONERA_workstation") _setup_shell_ONERA_workstation ;;
+"workstation_ONERA") _setup_shell_ONERA_workstation ;;
 "HPCC_Olympe") _setup_shell_HPCC_Olympe ;;
 "HPCC_Turpan") _setup_shell_HPCC_Turpan ;;
 "HPCC_Turpan_visu") _setup_shell_HPCC_Turpan_visu ;;
 "HPCC_Topaze") _setup_shell_HPCC_Topaze ;;
-esac
-
-# == RICING ====================================================================
-
-[ -z "$SYSTEM_THEME" ] && export SYSTEM_THEME="base16"
-
-case "$SYSTEM_THEME" in
-"base16")
-  export BAT_THEME=base16
-  ;;
 esac
 
 # == CLEANING ==================================================================

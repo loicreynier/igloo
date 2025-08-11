@@ -27,10 +27,6 @@ in
       "devdoc"
     ];
 
-    sessionPath = [
-      "${homeDirectory}/.local/bin"
-    ];
-
     file = {
       ".igloo".source = config.lib.file.mkOutOfStoreSymlink self;
       ".editorconfig".source = "${self}/config/editorconfig/dot-editorconfig";

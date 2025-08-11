@@ -3,27 +3,20 @@
 # editorconfig-checker-disable-file
 
 if ! command -v fzf >/dev/null 2>&1 ||
-  ! command -v git >/dev/null 2>&1; then
+  ! command -v git >/dev/null 2>&1 ||
+  ! command -v difft >/dev/null 2>&1; then
   return 1
 fi
 
 function __fzf_git_stage() {
-  local -r fzf_bin="fzf"
-  local -r difft_bin="difft"
-
-  if ! command -v $fzf_bin &>/dev/null; then
-    echo "Error: '$fzf_bin'" is not installed
-    return 1
-  fi
-
   # `fzf --version` output example:
   #
-  #     0.50.0 (0.50.0)
+  #     0.50.0 (v0.50.0)
   #
   local -r fzf_version=$(fzf --version | awk '{print $1;}')
   local -r fzf_version_req="0.49.0" # Required for `$FZF_PREVIEW_LABEL`
   if ! [[ "$(printf '%s\n' "$fzf_version_req" "$fzf_version" | sort -V | head -n1)" == "0.49.0" ]]; then
-    echo "Error: '$fzf_bin' version $fzf_version is not compatible."
+    echo "Error: 'fzf' version $fzf_version is not compatible."
     echo "Please upgrade to at least version 0.49.0."
     return 1
   fi
@@ -65,7 +58,7 @@ function __fzf_git_stage() {
     cat <<-EOF
 			$fzf_header
 			> <ENTER> to add files
-			> ALT-P to add patch
+			> <ALT-p> to add patch
 		EOF
   )
 
@@ -84,7 +77,7 @@ function __fzf_git_stage() {
   local -r fzf_preview_status_label=" Status "
 
   # TODO: make it work for staged files
-  local -r fzf_preview_diff="GIT_EXTERNAL_DIFF=\"$difft_bin --color always\" git diff -- \{}"
+  local -r fzf_preview_diff="GIT_EXTERNAL_DIFF=\"difft --color always\" git diff -- \{}"
   local -r fzf_preview_diff_label=" Diff "
 
   # Unbind `<ALT-p>` (add patch) in reset mode
@@ -94,11 +87,10 @@ function __fzf_git_stage() {
   local -r fzf_mode_add="change-prompt($fzf_prompt_add)+reload($git_unstaged_files)+change-header($fzf_add_header)+rebind(alt-p)+unbind(alt-x)"
 
   # shellcheck disable=SC2016 # Expansion is done by `fzf`, single quotes are fine here
-  eval "$git_unstaged_files" | $fzf_bin \
+  eval "$git_unstaged_files" | fzf \
     --multi \
     --reverse \
     --no-sort \
-    --height=40% \
     --prompt="Add > " \
     --preview-label="$fzf_preview_status_label" \
     --preview="$fzf_preview_status" \
@@ -119,9 +111,5 @@ function __fzf_git_stage() {
     --bind="alt-x:+reload($git_staged_files)" \
     --bind='alt-c:execute(git commit)+abort' \
     --bind='alt-a:execute(git commit --amend)+abort' \
-    --bind='alt-e:execute(${EDITOR:-vim} {+})' \
-    --bind='f1:toggle-header' \
-    --bind='f2:toggle-preview' \
-    --bind='alt-u:preview-page-up' \
-    --bind='alt-d:preview-page-down'
+    --bind='alt-e:execute(${EDITOR:-vim} {+})'
 }
