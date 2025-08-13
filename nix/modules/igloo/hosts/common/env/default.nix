@@ -33,11 +33,6 @@
       ];
   };
 
-  environment.sessionVariables = {
-    IGLOO = self; # Should I use the writable (Git repo) location instead?
-    NH_FLAKE = self; # Some tooling use this variable, e.g. `nh`
-  };
-
   programs = {
     less.enable = true;
     starship.enable = true;

@@ -244,6 +244,12 @@ if [ -d "$HOME/.local/lib/perl5" ]; then
   export PERL5LIB="$HOME/.local/lib/perl5"
 fi
 
+# -- User environment variables
+
+if [ -d "$HOME/git/config/igloo" ]; then
+  export NH_FLAKE="$HOME/git/config/igloo"
+fi
+
 # == SHELL CONFIGURATION =======================================================
 
 if [ "$0" = "-bash" ] ||
