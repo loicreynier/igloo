@@ -1,5 +1,6 @@
 {
   pkgs,
+  self,
   ...
 }:
 {
@@ -72,6 +73,10 @@
     # -- Misc
     when-cli
   ];
+
+  xdg.configFile = {
+    "ripgreprc".source = "${self}/config/ripgrep/ripgreprc";
+  };
 
   services = {
     # -- `pueue`
