@@ -161,9 +161,7 @@ return {
   end,
   config = function(_, opts)
     vim.api.nvim_create_autocmd("LspAttach", {
-      callback = function(event)
-        map_lsp_keybinds(event.buf)
-      end
+      callback = function(event) map_lsp_keybinds(event.buf) end,
     })
 
     local has_blink, blink = pcall(require, "blink.cmp")

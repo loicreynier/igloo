@@ -6,17 +6,11 @@
 }:
 {
 
-  # -- X configuration
-  services = {
-    xserver = {
-      enable = lib.mkDefault true;
-      excludePackages = [ pkgs.xterm ];
-      desktopManager.gnome.enable = lib.mkDefault true;
-      displayManager.gdm.enable = lib.mkDefault true;
-    };
-  };
-
   # -- GNOME configuration
+  services = {
+    desktopManager.gnome.enable = lib.mkDefault true;
+    displayManager.gdm.enable = lib.mkDefault true;
+  };
   # Remove default GNOME applications
   # Sources:
   # - https://discourse.nixos.org/t/howto-disable-most-gnome-default-applications-and-what-they-are

@@ -99,7 +99,7 @@ def run_home_manager(command: str, config: str, extra_args: List[str] | None) ->
 
     args = "--" + " ".join(extra_args) if extra_args else ""
 
-    cmd = f"nh home {command} -b bak #{home}"
+    cmd = f"nh home {command} -b bak #{home} ${args}"
 
     typer.echo(f"Running: {cmd}")
     subprocess.run(cmd, shell=True, check=True)
