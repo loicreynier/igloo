@@ -115,6 +115,16 @@ return {
       "<Cmd>Telescope loclist<CR>",
       desc = "Search location list (Telescope)",
     },
+    {
+      "<Leader>sw",
+      function() require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") }) end,
+      desc = "Search current word (<cword>) under cursor (Telescope)",
+    },
+    {
+      "<Leader>sW",
+      function() require("telescope.builtin").grep_string({ search = vim.fn.expand("<cWORD>") }) end,
+      desc = "Search current word (<cWORD>) under cursor (Telescope)",
+    },
   },
   opts = function()
     local actions = require("telescope.actions")

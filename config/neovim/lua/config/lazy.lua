@@ -59,23 +59,30 @@ if not system.lazy_nix_installed then
 end
 
 -- Lazy setup
-require("lazy").setup({
-  -- Base settings
-  spec = {
-    { import = "plugins.lazy" },
-  },
-  ui = {
-    border = "rounded",
-  },
-  change_detection = { notify = false },
-  lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
+require("lazy").setup(
+  ---@type LazyConfig
+  {
+    -- Base settings
+    spec = {
+      { import = "plugins.lazy" },
+    },
+    ui = {
+      size = { width = 0.8, length = 0.8 },
+      wrap = true,
+      title = " Lazy ",
+      border = "rounded",
+      backdrop = 100,
+    },
+    change_detection = { notify = false },
+    lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
 
-  -- System specific
-  performance = {
-    reset_packpath = not system.is_nix,
-    rtp = { reset = not system.is_nix },
-  },
-  checker = { enabled = system.has_self_install }, -- Automatically check for plugin updates
-  install = { missing = system.has_self_install }, -- Automatically install missing plugins
-  dev = lazy_dev_nix_setup(),
-})
+    -- System specific
+    performance = {
+      reset_packpath = not system.is_nix,
+      rtp = { reset = not system.is_nix },
+    },
+    checker = { enabled = system.has_self_install }, -- Automatically check for plugin updates
+    install = { missing = system.has_self_install }, -- Automatically install missing plugins
+    dev = lazy_dev_nix_setup(),
+  }
+)

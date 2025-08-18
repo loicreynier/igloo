@@ -10,44 +10,84 @@
   to make sure they are loaded during startup we want them available asap.
 --]]
 
+local priority_ = 1000
+
 return {
   {
     "Mofiqul/vscode.nvim",
     lazy = false,
-    priority = 1000,
+    priority = priority_,
     opts = {
-      transparent = false,
+      transparent = true,
+      italic_inlayhints = true,
     },
-    config = function() vim.cmd.colorscheme("vscode") end,
+  },
+
+  {
+    "Mofiqul/adwaita.nvim",
+    lazy = false,
+    priority = priority_,
+    config = function() end,
   },
 
   {
     "folke/tokyonight.nvim",
     lazy = false,
-    priority = 1000,
-    -- config = function() vim.cmd.colorscheme("tokyonight-night") end,
+    priority = priority_,
   },
 
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000,
+    priority = priority_,
     opts = {
       flavour = "auto",
       transparent_background = false,
       integrations = { blink_cmp = true },
     },
-    -- config = function() vim.cmd.colorscheme("tokyonight-night") end,
+  },
+
+  {
+    "projekt0n/github-nvim-theme",
+    name = "github-theme",
+    lazy = false,
+    priority = priority_,
+    opts = {},
   },
 
   {
     "webhooked/kanso.nvim",
     lazy = false,
-    priority = 1000,
+    priority = priority_,
     opts = {
       transparent = false,
       theme = "zen",
     },
-    -- config = function() vim.cmd.colorscheme("kanso") end,
+  },
+
+  {
+    "mcauley-penney/techbase.nvim",
+    lazy = false,
+    priority = priority_,
+    opts = {
+      transparent = false,
+      italic_comments = false,
+      plugin_support = {
+        blink = true,
+        gitsigns = true,
+        lazy = true,
+        mason = true,
+        visual_whitespace = true,
+      },
+    },
+  },
+
+  {
+    "aktersnurra/no-clown-fiesta.nvim",
+    lazy = false,
+    priority = priority_,
+    opts = {
+      transparent = false,
+    },
   },
 }
