@@ -33,7 +33,7 @@ max_line_length = 88
 indent_size = 2
 max_line_length = 120
 
-[{*.bash,*.sh,.bashrc}]
+[{*.bash,*.sh,.bashrc,bin/rnm}]
 max_line_length = 100
 simplify = true
 

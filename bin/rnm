@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
-the_name="rnm"
+name="rnm"
 
 print_usage() {
-  echo "Usage: $the_name [-h | --help] [-f | --force] <file> <new-filename>"
+  echo "Usage: $name [-h | --help] [-f | --force] [-c | --copy] <file> <new-filename>"
   echo
   echo "OPTIONS"
   echo "  -h, --help     Display this help message"
   echo "  -f, --force    Force rename if the new filename already exists"
+  echo "  -c, --copy     Copy instead of renaming"
 }
 
 # Transform long options to short ones for `getopts`
@@ -27,17 +28,21 @@ for arg in "$@"; do
 done
 
 # Default behavior
-force_rename=false
-mvflags="-v"
+force=false
+copy=false
+cmd_flags="-v"
 
-while getopts ":hf" opt; do
+while getopts ":hfc" opt; do
   case ${opt} in
   h)
     print_usage
     exit 0
     ;;
   f)
-    force_rename=true
+    force=true
+    ;;
+  c)
+    copy=true
     ;;
   *)
     echo "Invalid option: $opt"
@@ -67,9 +72,18 @@ if [ ! -e "$old_filename" ]; then
 fi
 
 if git ls-files --error-unmatch "$old_filename" &>/dev/null; then
-  git mv $mvflags "$old_filename" "$new_filename"
+  if [ $copy == true ]; then
+    cp $cmd_flags "$old_filename" "$new_filename"
+    git add "$new_filename"
+  else
+    git mv $cmd_flags "$old_filename" "$new_filename"
+  fi
 
 else
-  [ $force_rename == true ] && mvflags="-v"
-  mv $mvflags "$old_filename" "$new_filename"
+  [ $force == true ] && cmd_flags="$cmd_flags -f"
+  if [ $copy == true ]; then
+    cp "$cmd_flags" "$old_filename" "$new_filename"
+  else
+    mv "$cmd_flags" "$old_filename" "$new_filename"
+  fi
 fi
