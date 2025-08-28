@@ -48,6 +48,7 @@ return {
       lua = { "stylua" },
       python = { "ruff_format" }, -- Ruff subcommand
       sh = { "shfmt" },
+      tex = { "tex-fmt" },
     },
     formatters = {
       clang_format = { args = { "--style=file", "--fallback-style=LLVM" } },

@@ -160,6 +160,7 @@ in
             markdownlint-cli
             taplo
             texlab
+            tex-fmt
             tinymist
             yamllint
             vscode-langservers-extracted # `jsonls`
