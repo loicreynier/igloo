@@ -8,7 +8,7 @@ return {
   enabled = require("system").is_nix,
   keys = {
     {
-      "<Leader>sn",
+      "<Leader>sN",
       "<Cmd>Telescope manix<CR>",
       desc = "Search Nix (Telescope Manix)",
     },

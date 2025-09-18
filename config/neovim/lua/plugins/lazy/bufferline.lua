@@ -1,7 +1,9 @@
+---@type LazySpec
 return {
   "akinsho/bufferline.nvim",
   event = "VeryLazy",
   dependencies = "nvim-tree/nvim-web-devicons",
+  enabled = false,
   keys = {
     { "[b", "<Cmd>BufferLineCyclePrev<CR>", desc = "Switch to previous buffer (BufferLine)" },
     { "]b", "<Cmd>BufferLineCycleNext<CR>", desc = "Switch to next buffer (BufferLine)" },

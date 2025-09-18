@@ -53,6 +53,11 @@ return {
     formatters = {
       clang_format = { args = { "--style=file", "--fallback-style=LLVM" } },
       fprettify = { args = { "--indent=4", "--line-length=100" } },
+      latexindent = {
+        condition = function(ctx)
+          return vim.fs.find({ ".latexindent.yaml" }, { path = ctx.filename, upward = true })[1]
+        end,
+      },
       stylua = {
         condition = function(ctx)
           return vim.fs.find({ "stylua.toml", ".stylua.toml" }, { path = ctx.filename, upward = true })[1]

@@ -130,9 +130,18 @@ return {
         --   },
         -- },
         texlab = {
-          mason = system.is_hpcc == true,
-          ettings = {
-            latexFormatter = "texlab", -- NOTE: not implemented yet
+          mason = system.is_hpcc ~= true,
+          settings = {
+            texlab = {
+              latexFormatter = "tex-fmt",
+              bibtexFormatter = "tex-fmt",
+              build = {
+                args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
+                executable = "latexmk",
+                forwardSearchAfter = false,
+                onSave = true,
+              },
+            },
           },
         },
         typos_lsp = {

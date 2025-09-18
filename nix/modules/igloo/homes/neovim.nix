@@ -67,6 +67,7 @@ in
             [ ]
         );
         withPython3 = true;
+        withNodeJs = true;
         extraPackages =
           with pkgs;
           let
@@ -122,6 +123,7 @@ in
             # -- Build stuff
             gcc
             gnumake
+            tree-sitter
             # -- General linters and spelling
             editorconfig-checker
             ltex-ls
@@ -149,6 +151,10 @@ in
             # -- Fortran
             fortls
             fprettify
+            # -- LaTeX
+            texliveFull
+            texlab
+            tex-fmt
             # -- Misc
             actionlint
             bash
@@ -159,8 +165,6 @@ in
             neocmakelsp
             markdownlint-cli
             taplo
-            texlab
-            tex-fmt
             tinymist
             yamllint
             vscode-langservers-extracted # `jsonls`
