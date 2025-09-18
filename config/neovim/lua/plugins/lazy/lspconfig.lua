@@ -130,47 +130,7 @@ return {
         --   },
         -- },
         texlab = {
-          mason = system.is_hpcc ~= true,
-          settings = {
-            texlab = {
-              latexFormatter = "tex-fmt",
-              bibtexFormatter = "tex-fmt",
-              build = {
-                args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
-                executable = "latexmk",
-                forwardSearchAfter = false,
-                onSave = true,
-              },
-            },
-          },
-          on_attach = function(client, _)
-            local function toggle_buildOnSave(state)
-              state = state or not client.config.settings.texlab.build.onSave
-              vim.lsp.config("texlab", {
-                settings = {
-                  texlab = {
-                    build = {
-                      onSave = state,
-                    },
-                  },
-                },
-              })
-              vim.cmd("LspRestart texlab")
-            end
-
-            Snacks.toggle.new({
-              id = "texlab_buildOnSave",
-              name = "Toggle Texlab build on save",
-              get = function() return client.config.settings.texlab.build.onSave end,
-              set = function(state) return toggle_buildOnSave(state) end,
-            })
-
-            vim.api.nvim_create_user_command(
-              "LspTexlabToggleBuildOnSave",
-              function() Snacks.toggle.toggles.texlab_buildOnSave:toggle() end,
-              {}
-            )
-          end,
+          extra_config = true,
         },
         typos_lsp = {
           mason = system.name ~= "HPCC_Olympe" and system.name ~= "HPCC_Turpan", -- GLIBC issue
@@ -215,6 +175,7 @@ return {
     for server, config in pairs(servers) do
       config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
       vim.lsp.config(server, config)
+      if config.extra_config then vim.lsp.config(server, require("plugins.config.lsp." .. server)) end
       vim.lsp.enable(server)
       if config.mason ~= false then ensure_installed[#ensure_installed + 1] = server end
     end
