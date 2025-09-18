@@ -143,6 +143,34 @@ return {
               },
             },
           },
+          on_attach = function(client, _)
+            local function toggle_buildOnSave(state)
+              state = state or not client.config.settings.texlab.build.onSave
+              vim.lsp.config("texlab", {
+                settings = {
+                  texlab = {
+                    build = {
+                      onSave = state,
+                    },
+                  },
+                },
+              })
+              vim.cmd("LspRestart texlab")
+            end
+
+            Snacks.toggle.new({
+              id = "texlab_buildOnSave",
+              name = "Toggle Texlab build on save",
+              get = function() return client.config.settings.texlab.build.onSave end,
+              set = function(state) return toggle_buildOnSave(state) end,
+            })
+
+            vim.api.nvim_create_user_command(
+              "LspTexlabToggleBuildOnSave",
+              function() Snacks.toggle.toggles.texlab_buildOnSave:toggle() end,
+              {}
+            )
+          end,
         },
         typos_lsp = {
           mason = system.name ~= "HPCC_Olympe" and system.name ~= "HPCC_Turpan", -- GLIBC issue
