@@ -189,5 +189,11 @@ return {
       require("plugins.config.telescope.live-rg-glob"),
       { desc = "Live grep (Telescope)" }
     )
+
+    vim.api.nvim_create_user_command(
+      "InsertBufferName",
+      require("plugins.config.telescope.insert-buffer-name"),
+      { bang = true }
+    )
   end,
 }
