@@ -23,11 +23,13 @@
 --]]
 
 local system = require("system")
+local icons = require("rice").icons
 local use_mason = system.use_mason == true
 local map_lsp_keybinds = require("config.keymaps").map_lsp_keybinds
 
 return {
   "neovim/nvim-lspconfig",
+  event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   dependencies = {
     {
       "mason-org/mason-lspconfig.nvim",
@@ -42,6 +44,30 @@ return {
     local fs_stat = (vim.loop or vim.uv).fs_stat
 
     local opts = {
+      ---@type vim.diagnostic.Opts
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          current_line = false,
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+        },
+        virtual_lines = {
+          current_line = true,
+        },
+        severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+          },
+        },
+      },
+      ---@type vim.lsp.Config|{mason?:boolean, extra_config?:boolean}
       servers = {
         clangd = {
           mason = system.arch ~= "aarch64",
@@ -156,24 +182,18 @@ return {
     }
     return opts
   end,
-  config = function(_, opts)
+  config = vim.schedule_wrap(function(_, opts)
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(event) map_lsp_keybinds(event.buf) end,
     })
 
-    local has_blink, blink = pcall(require, "blink.cmp")
-    local capabilities = vim.tbl_deep_extend(
-      "force",
-      {},
-      vim.lsp.protocol.make_client_capabilities(),
-      has_blink and blink.get_lsp_capabilities() or {},
-      opts.capabilities or {}
-    )
+    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+
+    if opts.capabilities then vim.lsp.config("*", { capabilities = opts.capabilities }) end
 
     local servers = opts.servers
     local ensure_installed = {}
     for server, config in pairs(servers) do
-      config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
       vim.lsp.config(server, config)
       if config.extra_config then vim.lsp.config(server, require("plugins.config.lsp." .. server)) end
       vim.lsp.enable(server)
@@ -186,5 +206,5 @@ return {
         ensure_installed = ensure_installed,
       })
     end
-  end,
+  end),
 }

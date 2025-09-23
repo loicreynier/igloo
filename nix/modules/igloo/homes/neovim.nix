@@ -222,7 +222,6 @@ in
               hmts-nvim
               neoconf-nvim
               lazydev-nvim
-              lsp_lines-nvim
               conform-nvim
               (comment-nvim.overrideAttrs (_: {
                 pname = "Comment.nvim";
