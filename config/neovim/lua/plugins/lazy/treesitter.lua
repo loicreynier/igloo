@@ -1,50 +1,63 @@
 local system = require("system")
--- local parsers_base = { "c", "lua", "markdown", "markdown_inline", "vim", "vimdoc", "query" }
-local parsers_ensure_installed = system.has_self_install and "all" or {}
----@diagnostic disable-next-line: param-type-mismatch
-local parsers_install_dir = vim.fs.joinpath(system.site_dir, "treesitter")
 
 ---@type LazySpec
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    cmd = {
-      "TSBufDisable",
-      "TSBufEnable",
-      "TSBufToggle",
-      "TSDisable",
-      "TSEnable",
-      "TSToggle",
-      "TSInstall",
-      "TSInstallInfo",
-      "TSInstallSync",
-      "TSModuleInfo",
-      "TSUninstall",
-      "TSUpdate",
-      "TSUpdateSync",
-    },
-    event = { "BufReadPre", "BufNewFile" },
-    init = function(plugin)
-      -- PERF: add `nvim-treesitter` queries to the `rtp`.
-      -- This is needed because bunch of plugins no longer requires it, which
-      -- no longer trigger the module to be loaded in time.
-      -- However, the only things that those plugins need are the custom queries,
-      -- which is made available with this.
-      -- Source:
-      -- https://github.com/AstroNvim/AstroNvim/blob/main/lua/astronvim/plugins/treesitter.lua
-      require("lazy.core.loader").add_to_rtp(plugin)
-      pcall(require, "nvim-treesitter.query_predicates")
+    branch = "main",
+    version = false,
+    build = function()
+      local ts = require("nvim-treesitter")
+      if not ts.get_installed then
+        vim.notify(
+          "Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.",
+          "error",
+          { title = "Treesitter update" }
+        )
+        return
+      end
     end,
-    opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      ensure_installed = parsers_ensure_installed,
-      auto_install = system.has_self_install,
-      parser_install_dir = parsers_install_dir,
+    lazy = vim.fn.argc(-1) == 0, -- Load early when opening a file from cmdline
+    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
+    cmd = {
+      "TSUpdate",
+      "TSInstall",
+      "TSLog",
+      "TSUninstall",
     },
+    opts = {
+      indent = { enable = true },
+      highlight = { enable = true },
+      auto_install = system.has_self_install,
+      ensure_installed = system.treesitter_parsers_ensure_installed,
+      install_dir = system.treesitter_install_dir,
+    },
+    ---@param opts TSConfig
     config = function(_, opts)
-      vim.opt.runtimepath:prepend(parsers_install_dir)
-      require("nvim-treesitter.configs").setup(opts)
+      if vim.fn.executable("tree-sitter") == 0 then
+        vim.notify(
+          "`nvim-treesitter` requires the `tree-sitter` executable to be installed",
+          "err",
+          { title = "Treesitter setup" }
+        )
+        return
+      end
+
+      local ts = require("nvim-treesitter")
+      if not ts.get_installed then
+        vim.notify("Please update `nvim-treesitter`", "err", { title = "Treesitter update" })
+      end
+      ts.setup(opts)
+
+      system.treesitter_parsers_installed = ts.get_installed("parsers")
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          if vim.tbl_contains(system.treesitter_parsers_installed, vim.bo[args.buf].filetype) then
+            vim.treesitter.start()
+          end
+        end,
+      })
     end,
   },
   { "calops/hmts.nvim" },

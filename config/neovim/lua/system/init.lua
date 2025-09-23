@@ -80,4 +80,8 @@ M.has_node = vim.fn.executable("node")
 ---@diagnostic disable-next-line: param-type-mismatch
 M.site_dir = vim.fs.joinpath(vim.fn.stdpath("data"), "site")
 
+M.treesitter_install_dir = vim.fs.joinpath(M.site_dir, "treesitter")
+M.treesitter_parsers_ensure_installed = M.has_self_install and "all" or {}
+M.treesitter_parsers_installed = {}
+
 return M
