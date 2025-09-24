@@ -204,10 +204,8 @@ in
               telescope-all-recent-nvim
               telescope-lazy-plugins-nvim
               telescope-manix
-              telescope-toggle-term-nvim
               telescope-undo-nvim
               telescope-zoxide
-              toggleterm-nvim
               which-key-nvim
               beacon-nvim
               zen-mode-nvim
