@@ -13,7 +13,7 @@ local function lspconfig()
           args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
           executable = "latexmk",
           forwardSearchAfter = false,
-          onSave = true,
+          onSave = false,
         },
       },
     },
