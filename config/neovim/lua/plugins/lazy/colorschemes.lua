@@ -11,8 +11,10 @@
 --]]
 
 local priority_ = 1000
+local install_all = not require("system").is_hpcc
+local spec
 
-return {
+local themes = {
   {
     "Mofiqul/vscode.nvim",
     lazy = false,
@@ -91,3 +93,11 @@ return {
     },
   },
 }
+
+if install_all then
+  spec = themes
+else
+  spec = { themes[1] }
+end
+
+return spec

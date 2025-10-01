@@ -1,11 +1,13 @@
-return {
+---@type LazySpec
+local spec = {}
+
+if require("system").is_nix then spec = {
   "MrcJkb/telescope-manix",
   dependencies = {
     {
       "nvim-telescope/telescope.nvim",
     },
   },
-  enabled = require("system").is_nix,
   keys = {
     {
       "<Leader>sN",
@@ -21,3 +23,6 @@ return {
     telescope.load_extension("manix")
   end,
 }
+end
+
+return spec
