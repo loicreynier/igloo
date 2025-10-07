@@ -25,5 +25,13 @@
         file = "${secretsPath}/key-ssh-bdp@p2chpd.age";
         path = "${sshHomePath}/id_rsa_bdp@p2chpd";
       };
+      "key-ssh-onera-ed25519" = {
+        file = "${secretsPath}/key-ssh-onera-ed25519.age";
+        path = "${sshHomePath}/id_ed25519-onera";
+      };
+      "key-ssh-onera-rsa" = {
+        file = "${secretsPath}/key-ssh-onera-rsa.age";
+        path = "${sshHomePath}/id_rsa-onera";
+      };
     };
 }
