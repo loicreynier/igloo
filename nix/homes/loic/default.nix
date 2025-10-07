@@ -17,7 +17,7 @@ in
     "$HOME/.nix-defexpr/channels"
   ];
 
-  home = rec {
+  home = {
     inherit username;
     homeDirectory = "/home/${config.home.username}";
     stateVersion = lib.mkDefault "24.11";

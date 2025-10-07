@@ -53,6 +53,7 @@
     imagemagick
     pdftk
     poppler_utils
+    yt-dlp
 
     # -- Networking
     wormhole-rs

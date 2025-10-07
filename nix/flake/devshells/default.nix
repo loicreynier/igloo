@@ -63,6 +63,7 @@
             nixfmt-rfc-style
             # nix-schema # FIXME
             magic-wormhole-rs
+            pre-commit
             statix
             tree
 

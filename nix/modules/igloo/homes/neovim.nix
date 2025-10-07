@@ -155,6 +155,9 @@ in
             texliveFull
             texlab
             tex-fmt
+            # -- Typst
+            typst
+            tinymist
             # -- Misc
             actionlint
             bash
@@ -165,7 +168,6 @@ in
             neocmakelsp
             markdownlint-cli
             taplo
-            tinymist
             yamllint
             vscode-langservers-extracted # `jsonls`
           ];

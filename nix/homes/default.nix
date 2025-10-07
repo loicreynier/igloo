@@ -10,12 +10,13 @@ let
     {
       system,
       username,
+      # deadnix: skip
       modules,
     }@args:
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = withSystem system ({ pkgs, ... }: pkgs);
       modules = [
-        inputs.nixvim.homeManagerModules.nixvim
+        inputs.nixvim.homeModules.nixvim
         inputs.agenix.homeManagerModules.default
         { home.packages = [ inputs.agenix.packages."${system}".default ]; }
         { news.display = "silent"; }
@@ -54,7 +55,7 @@ in
     ];
 
     "loic@latios" = mkHomeLoic "x86_64-linux" [
-      ./loic/desktop.nix
+      ./loic/desktop
     ];
   };
 

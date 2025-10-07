@@ -29,6 +29,7 @@ let
     let
       rolesOptions = [
         "graphical"
+        "gaming"
         "wsl"
       ];
     in
@@ -43,6 +44,7 @@ let
   mkNixosSystem =
     {
       name,
+      # deadnix: skip
       modules,
       system,
       withSystem,
@@ -93,6 +95,7 @@ in
       system = "x86_64-linux";
       modules = [
         roles.graphical
+        roles.gaming
       ];
     };
 
@@ -118,6 +121,7 @@ in
   # -- Checks & TODO: run packages
   perSystem =
     {
+      # deadnix: skip
       pkgs,
       lib,
       system,
