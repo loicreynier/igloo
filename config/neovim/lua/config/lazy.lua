@@ -66,6 +66,9 @@ require("lazy").setup(
     spec = {
       { import = "plugins.lazy" },
     },
+    rocks = {
+      enabled = false,
+    },
     ui = {
       size = { width = 0.8, length = 0.8 },
       wrap = true,
