@@ -17,6 +17,7 @@ return {
     linters_by_ft = {
       bash = { "bash" },
       editorconfig = { "editorconfig-checker" }, -- TODO: run on all filetypes?
+      fortran = { "fortitude" },
       gitcommit = { "gitlint" },
       dockerfile = { "hadolint" },
       make = { "checkmake" },

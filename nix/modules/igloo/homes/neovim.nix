@@ -124,6 +124,8 @@ in
             gcc
             gnumake
             tree-sitter
+            jq
+            yq-go
             # -- General linters and spelling
             editorconfig-checker
             ltex-ls
@@ -150,6 +152,7 @@ in
             statix
             # -- Fortran
             fortls
+            inputs.nixpkgs-master.legacyPackages.${pkgs.system}.fortitude
             fprettify
             # -- LaTeX
             texliveFull

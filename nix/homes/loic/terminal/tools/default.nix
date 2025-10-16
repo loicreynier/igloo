@@ -44,7 +44,7 @@
     jq
     grex
     xan
-    yq
+    yq-go
 
     # -- Media processing tools
     exiftool
