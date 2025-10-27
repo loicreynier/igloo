@@ -1,4 +1,4 @@
-# vim: ft=ini
+# vim: ft=gitconfig
 
 [user]
 	name = Loïc Reynier
