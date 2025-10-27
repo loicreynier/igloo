@@ -32,5 +32,6 @@ These configurations files do not contain Nix expressions and can be imported in
 - [`ripgrep`](./ripgrep): default `rg` CLI arguments
 - [`sh`](./sh): minimal shell profile for non-Nix systems
 - [`starship`](./starship): mostly Starship default config, just a little more verbose
+- [`tmux`](./tmux): minimal `tmux` configuration to work on SSH remotes
 - [`windowsterminal`](./windowsterminal): Windows Terminal keybindings, profiles and color schemes
 - [`xxh`](./xxh): `xxh` config for a portable Bash shell with zoxide and Starship
