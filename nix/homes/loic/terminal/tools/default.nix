@@ -21,6 +21,7 @@
     just
     ripgrep
     ripgrep-all
+    sig
     sd
 
     # -- File manipulation
@@ -32,7 +33,7 @@
     viddy
 
     # -- TUIS
-    du-dust
+    dust
     duf
     fx
     glow
@@ -52,7 +53,7 @@
     libwebp
     imagemagick
     pdftk
-    poppler_utils
+    poppler-utils
     yt-dlp
 
     # -- Networking

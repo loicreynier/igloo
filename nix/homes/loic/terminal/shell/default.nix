@@ -37,7 +37,7 @@
       enable = true;
       installExtraSyntaxes = true;
       extraPackages = with pkgs.bat-extras; [
-        batgrep
+        # batgrep # FIXME: tests are failing
         batman
         batpipe
         batwatch

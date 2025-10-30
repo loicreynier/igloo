@@ -5,7 +5,7 @@
   makeWrapper,
   imagemagick,
   ffmpeg,
-  poppler_utils,
+  poppler-utils,
 }:
 stdenvNoCC.mkDerivation {
   pname = "x2y";
@@ -26,7 +26,7 @@ stdenvNoCC.mkDerivation {
       lib.makeBinPath [
         imagemagick
         ffmpeg
-        poppler_utils
+        poppler-utils
       ]
     }"
   '';
