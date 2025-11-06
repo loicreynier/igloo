@@ -7,6 +7,11 @@
     rec {
       default = flakeDefault;
 
+      flakeMini = {
+        description = "Default flake with `flake-utils` and no extra fluff";
+        path = templatePath "flake-mini";
+      };
+
       flakeDefault = {
         description = "Default flake with `flake-utils` and pre-commit hooks";
         path = templatePath "flake-default";
