@@ -4,10 +4,8 @@ return {
   ft = { "markdown", "tex" },
   dependencies = { "neovim/nvim-lspconfig" },
   opts = function()
-    local util = require("lspconfig.util")
     local path_
-    ---@diagnostic disable-next-line: undefined-field
-    local git_root = util.find_git_ancestor(vim.loop.cwd())
+    local git_root = vim.fs.dirname(vim.fs.find(".git", { path = vim.loop.cwd(), upward = true })[1])
 
     if git_root then
       if #vim.fn.glob(git_root .. "/.vscode" .. "/ltex.*", true, true) == 0 then
