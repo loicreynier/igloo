@@ -99,7 +99,7 @@ def run_home_manager(command: str, config: str, extra_args: List[str] | None) ->
 
     args = "--" + " ".join(extra_args) if extra_args else ""
 
-    cmd = f"nh home {command} -b bak #{home} ${args}"
+    cmd = f"nh home {command} -b bak --configuration {home} {args}"
 
     typer.echo(f"Running: {cmd}")
     subprocess.run(cmd, shell=True, check=True)
@@ -163,7 +163,7 @@ def run_nixos_rebuild(command: str, config: str, extra_args: List[str] | None) -
 
     args = "--" + " ".join(extra_args) if extra_args else ""
 
-    cmd = f"nh os {command} #{config} {args}"
+    cmd = f"nh os {command} --hostname {config} {args}"
 
     typer.echo(f"Running: {cmd}")
     subprocess.run(cmd, shell=True, check=True)
