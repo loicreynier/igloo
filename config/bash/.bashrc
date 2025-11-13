@@ -79,6 +79,12 @@ alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
 alias ..6="cd ../../../../../.."
 
+alias +="pushd"
+alias -- -="popd"
+alias +1="pushd +1"
+alias +2="pushd +2"
+alias +3="pushd +3"
+
 command_exists "git" && alias groot='cd $(git rev-parse --show-toplevel)'
 
 command_exists "vim" && alias vi="vim"
