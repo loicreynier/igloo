@@ -42,25 +42,36 @@ in
 
   home = {
     packages = with pkgs; [
+      # -- System
+      wl-clipboard
+      parsec-bin
+      lan-mouse
+
+      # -- Messaging
       discord
       thunderbird
 
-      parsec-bin
-      spotify
-      # spotify-adblock
+      # -- Coding
+      vscodium-fhs
 
-      eyedropper
-      gimp
+      # -- Documents
       libreoffice
-      meld
       pdfarranger
-      picard
       pympress
 
+      # -- Music
+      # spotify
+      spotify-adblock
+      picard
+
+      # -- Pictures
+      gimp
+
+      # -- Data
       qbittorrent
+      meld
 
-      wl-clipboard
-
+      # -- Nix
       dconf2nix
     ];
 

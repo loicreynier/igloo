@@ -10,6 +10,11 @@
 
     adwsteamgtk
     addwater
+
+    eyedropper
+    tagger
+
+    dissent
   ];
 
   gtk = {
