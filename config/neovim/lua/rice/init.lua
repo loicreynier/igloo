@@ -11,6 +11,7 @@ M.icons = {
     find_text = " ",
     recent_files = " ",
     config_files = " ",
+    sessions = "󰆓 ",
     restore_session = " ",
     quit = " ",
     keymaps = " ",

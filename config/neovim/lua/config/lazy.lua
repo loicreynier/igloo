@@ -1,3 +1,14 @@
+if vim.fn.has("nvim-0.11.2") == 0 then
+  vim.api.nvim_echo({
+    { "Neovim configuration requires Neovim >= 0.11.2\n", "ErrorMsg" },
+    { "Use `nvim --clean` to start Neovim with vanilla settings\n", "Comment" },
+    { "Press any key to exit", "MoreMsg" },
+  }, true, {})
+  vim.fn.getchar()
+  vim.cmd([[quit]])
+  return {}
+end
+
 local system = require("system")
 
 -- Lazy on Nix setup function
@@ -65,6 +76,7 @@ require("lazy").setup(
     -- Base settings
     spec = {
       { import = "plugins.lazy" },
+      { import = "plugins.lazy.lang" },
     },
     rocks = {
       enabled = false,

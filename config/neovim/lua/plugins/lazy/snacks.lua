@@ -1,4 +1,4 @@
---- @type LazySpec
+---@type LazySpec
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -15,12 +15,11 @@ return {
     { "<Leader>ui", "<Cmd>ToggleIndentGuides<CR>", desc = "Toggle indent guides (Snacks)" },
     { "<Leader>uz", "<Cmd>ToggleZenMode<CR>", desc = "Toggle zen mode (Snacks)" },
   },
-  --- @type snacks.Config
+  ---@type snacks.Config
   opts = {
     toggle = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
-    dashboard = vim.tbl_deep_extend("force", require("plugins.config.snacks.dashboard"), { enabled = true }),
     zen = {
       toggles = {
         dim = false,

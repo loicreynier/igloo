@@ -2,6 +2,7 @@ local system = require("system")
 
 ---@type LazySpec
 return {
+  -- Treesitter Neovim configuration
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
@@ -60,5 +61,28 @@ return {
       })
     end,
   },
+
+  -- Show Treesitter context
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
+    opts = function()
+      local tsc = require("treesitter-context")
+      Snacks.toggle({
+        name = "Treesitter context",
+        get = tsc.enabled,
+        set = function(state)
+          if state then
+            tsc.enable()
+          else
+            tsc.disable()
+          end
+        end,
+      }):map("<Leader>ut")
+      return { mode = "cursor", max_lines = 3 }
+    end,
+  },
+
+  -- Nix Home Manager queries
   { "calops/hmts.nvim" },
 }
