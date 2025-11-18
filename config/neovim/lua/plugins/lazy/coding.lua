@@ -6,9 +6,11 @@ return {
   {
     "saghen/blink.cmp",
     event = { "InsertEnter" }, --  Add "CmdLineEnter" when enabling command line completion
-    version = "1.4.1", -- Use released tag to download pre-built binaries
+    version = "1.*", -- Use released tag to download pre-built binaries
     dependencies = {
       { "saghen/blink.compat", version = "2.*", lazy = true, opts = {} },
+      { "bydlw98/blink-cmp-env" },
+      { "moyiz/blink-emoji.nvim" },
       { "rafamadriz/friendly-snippets" },
     },
     ---@module "blink.cmp"
@@ -16,6 +18,9 @@ return {
     opts = {
       keymap = {
         preset = "default",
+        ["<C-u>"] = { "scroll_signature_up", "fallback" },
+        ["<C-d>"] = { "scroll_signature_down", "fallback" },
+        ["<C-k>"] = { "show_signature", "fallback" },
       },
       completion = {
         accept = {
@@ -33,6 +38,9 @@ return {
           auto_show_delay_ms = 200,
         },
       },
+      signature = {
+        enabled = true,
+      },
       fuzzy = { implementation = "prefer_rust_with_warning" },
       sources = {
         default = {
@@ -40,6 +48,8 @@ return {
           "path",
           "snippets",
           "buffer",
+          "env",
+          "emoji",
         },
         per_filetype = {
           lua = { inherit_defaults = true, "lazydev" },
@@ -50,6 +60,24 @@ return {
             module = "lazydev.integrations.blink",
             -- Make LazyDev completions top priority (see `:h blink.cmp`)
             score_offset = 100,
+          },
+          env = {
+            name = "Env",
+            module = "blink-cmp-env",
+            opts = {
+              show_braces = false, -- "$PATH" --> "${PATH}" if true
+              show_documentation_window = true, -- Show window with variable value
+            },
+          },
+          emoji = {
+            name = "Emoji",
+            module = "blink-emoji",
+            opts = {
+              insert = true,
+              ---@type string|table|fun():table
+              trigger = function() return { ":" } end,
+            },
+            should_show_items = function() return vim.tbl_contains({ "gitcommit", "markdown" }, vim.o.filetype) end,
           },
         },
       },
