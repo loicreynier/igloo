@@ -3,6 +3,18 @@ return {
   -- Git signs
   {
     "lewis6991/gitsigns.nvim",
+    events = { "BufWinEnter", "BufNewFile" },
+    init = function()
+      require("which-key").add({
+        "<Leader>g",
+        mode = { "n", "v" },
+        group = "Git",
+        icon = require("rice").icons.git.logo,
+      })
+    end,
+    ---@module "gitsigns.config"
+    ---@type Gitsigns.Config
+    ---@diagnostic disable-next-line: missing-fields
     opts = {
       on_attach = function(bufnr)
         local gs = require("gitsigns")
@@ -39,6 +51,9 @@ return {
         map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Git blame line")
         map("n", "<leader>ghB", function() gs.blame() end, "Git blame buffer")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select Git hunk (Gitsigns)")
+
+        -- Load `git-conhflict` (lazy-loaded on `GitConflictRefresh` trigger)
+        vim.cmd("GitConflictRefresh")
       end,
     },
   },
@@ -51,6 +66,55 @@ return {
         set = function(state) require("gitsigns").toggle_signs(state) end,
       }):map("<leader>uG")
     end,
+  },
+
+  {
+    "akinsho/git-conflict.nvim",
+    cmd = "GitConflictRefresh",
+    init = function() require("which-key").add({ { "<Leader>gx", group = "Conflict" } }) end,
+    keys = {
+      {
+        "<Leader>gxo",
+        "<Plug>(git-conflict-ours)",
+        desc = "Pick ours branch (GitConflict)",
+      },
+      {
+        "<Leader>gxt",
+        "<Plug>(git-conflict-theirs)",
+        desc = "Pick theirs branch (GitConflict)",
+      },
+      {
+        "<Leader>gxa",
+        "<Plug>(git-conflict-both)",
+        desc = "Pick both branch (GitConflict)",
+      },
+      {
+        "<Leader>gx0",
+        "<Plug>(git-conflict-none)",
+        desc = "Pick none (GitConflict)",
+      },
+      {
+        "[x",
+        "<Plug>(git-conflict-prev-conflict)",
+        desc = "Previous Git conflict",
+      },
+      {
+        "]x",
+        "<Plug>(git-conflict-next-conflict)",
+        desc = "Next Git conflict",
+      },
+    },
+    ---@module "git-conflict"
+    ---@type GitConflictUserConfig
+    opts = {
+      disable_diagnostics = false,
+      default_commands = true, -- Required for `GitConflictRefresh`
+      default_mappings = true,
+      highlights = {
+        incoming = "DiffAdd",
+        current = "DiffText",
+      },
+    },
   },
 
   {
