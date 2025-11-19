@@ -53,9 +53,9 @@ if M.is_wsl then
   }
 end
 
-if M.name == "HPCC_Turpan" and vim.fn.executable("rsclip") == 1 and os.getenv("DISPLAY") then
+if os.getenv("SSH_CONNECTION") and vim.fn.executable("rsclip") == 1 and os.getenv("DISPLAY") then
   vim.g.clipboard = {
-    name = "SSHClipboard",
+    name = "SSHClipboard_rsclip",
     copy = {
       ["+"] = "rsclip",
     },
