@@ -13,6 +13,17 @@ for option in string.gmatch(system_options, "([^:]+)") do
 end
 vim.g.system_options = options_list
 
+-- # GLIBC version detection (async)
+
+vim.system({ "ldd", "--version" }, { text = true }, function(obj)
+  if obj.code == 0 then
+    local version = obj.stdout:match("GNU libc%)%s*(%d+%.%d+)")
+    if version then M.glibc = version end
+  else
+    M.glibc = "2.17" -- Default to old version
+  end
+end)
+
 -- # Nix (stuff) detection
 
 M.is_nix = os.getenv("NVIM_NIX_WRAPPER") ~= nil or vim.fn.executable("nix") == 1
