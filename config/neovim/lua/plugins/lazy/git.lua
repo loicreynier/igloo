@@ -155,4 +155,12 @@ return {
       },
     },
   },
+
+  -- GitHub actions tree-sitter highlighting
+  {
+    "Hdoc1509/gh-actions.nvim",
+    dev = true,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function() require("gh-actions.tree-sitter").setup({ fromGrammar = true }) end,
+  },
 }
