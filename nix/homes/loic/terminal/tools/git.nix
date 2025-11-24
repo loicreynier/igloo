@@ -14,7 +14,7 @@
       enable = true;
 
       signing = {
-        key = "loic@loicreynier.fr";
+        key = "contact@loicreynier.fr";
         signByDefault = true;
       };
 
@@ -33,8 +33,8 @@
       settings = {
         user = {
           name = "Loïc Reynier";
-          email = "loic@loicreynier.fr";
-          signingKey = "loic@loicreynier.fr";
+          email = "contact@loicreynier.fr";
+          signingKey = "contact@loicreynier.fr";
         };
         color.ui = "auto";
         core.autocrlf = "input";
