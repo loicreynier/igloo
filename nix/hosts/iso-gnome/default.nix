@@ -24,7 +24,7 @@
   services = {
     qemuGuest.enable = true;
     openssh.settings.PermitRootLogin = lib.mkForce "yes";
-    xserver.displayManager.gdm.autoSuspend = false;
+    displayManager.gdm.autoSuspend = false;
   };
 
   systemd = {

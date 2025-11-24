@@ -1,5 +1,5 @@
 return {
-  { "vim-scripts/bbcode",      ft = "bbcode" },
+  { "vim-scripts/bbcode", ft = "bbcode" },
   { "manicmaniac/coconut.vim", ft = "coconut" },
   -- { "kaarmu/typst.vim", ft = "typst" },
   {
