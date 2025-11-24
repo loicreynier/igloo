@@ -155,4 +155,20 @@ return {
       },
     },
   },
+
+  -- GitHub actions tree-sitter highlighting
+  {
+    "Hdoc1509/gh-actions.nvim",
+    config = function()
+      -- NOTE: register parser before installation
+      require("gh-actions.tree-sitter").setup()
+
+      require("nvim-treesitter").install({
+        "gh_actions_expressions", -- required
+        "gitignore", -- optional
+        "json", -- optional
+        "yaml", -- required
+      })
+    end,
+  },
 }
