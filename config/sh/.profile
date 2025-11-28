@@ -80,6 +80,9 @@ if [ -z "$SYSTEM" ]; then
     topaze*)
       SYSTEM="HPCC_Topaze"
       ;;
+    hpc-vesta*)
+      SYSTEM="HPCC_Vesta"
+      ;;
     *)
       SYSTEM="unknown"
       ;;
@@ -309,12 +312,18 @@ _setup_shell_HPCC_Topaze() {
   module -s load python/3.11.4
 }
 
+_setup_shel_HPCC_Vesta() {
+  GPG_TTY="$(tty)"
+  export GPG_TTY
+}
+
 case "$SYSTEM" in
 "workstation_ONERA") _setup_shell_ONERA_workstation ;;
 "HPCC_Olympe") _setup_shell_HPCC_Olympe ;;
 "HPCC_Turpan") _setup_shell_HPCC_Turpan ;;
 "HPCC_Turpan_visu") _setup_shell_HPCC_Turpan_visu ;;
 "HPCC_Topaze") _setup_shell_HPCC_Topaze ;;
+"HPCC_Vesta") _setup_shel_HPCC_Vesta ;;
 esac
 
 # == CLEANING ==================================================================
