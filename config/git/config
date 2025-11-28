@@ -2,8 +2,8 @@
 
 [user]
 	name = Loïc Reynier
-	email = loic@loicreynier.fr
-	signingkey = loic@loicreynier.fr
+	email = contact@loicreynier.fr
+	signingkey = contact@loicreynier.fr
 [core]
 	pager = cat
 	autocrlf = input
