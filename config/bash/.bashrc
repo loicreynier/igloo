@@ -9,8 +9,16 @@ __HOME_BASHRC_SOURCED=1
 
 [[ $- == *i* ]] || return
 
-if [ -f /etc/bashrc ]; then
-  . /etc/bashrc
+if [[ -f "/etc/bashrc" ]]; then
+  echo "Sourcing '/etc/bashrc'"
+  source "/etc/bashrc"
+fi
+
+if [[ $SYSTEM == "HPCC_Vesta" ]]; then
+  if [[ -f "/nfs/mesonet/sw/profile/bashrc.default" ]]; then
+    echo "Sourcing '/nfs/mesonet/sw/profile/bashrc.default'"
+    source "/nfs/mesonet/sw/profile/bashrc.default"
+  fi
 fi
 
 # -- Utility functions and variables
@@ -142,6 +150,10 @@ case "$SYSTEM" in
     alias ssh-olympe="pass -c srv/olympe && ssh -X olympe"
     alias ssh-topaze="PASSWORD_STORE_CLIP_TIME=60 pass -c srv/topaze && ssh -X topaze"
   fi
+  ;;
+"HPCC_Vesta")
+  alias salloc="salloc -A m23003 -p mn-grant"
+  alias salloc2g="salloc --gres=gpu:2"
   ;;
 esac
 
