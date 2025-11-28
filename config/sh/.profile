@@ -234,13 +234,10 @@ if [ -d "$HOME/.local/opt/pyenv" ]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
 fi
 
+export CARGO_HOME="$HOME/.local/opt/cargo"
+export RUSTUP_HOME="$HOME/.local/opt/rustup"
 if [ -d "$HOME/.local/opt/cargo" ]; then
-  export CARGO_HOME="$HOME/.local/opt/cargo"
   export PATH="$CARGO_HOME/bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/opt/rustup" ]; then
-  export RUSTUP_HOME="$HOME/.local/opt/rustup"
 fi
 
 if [ -d "$HOME/.local/lib/perl5" ]; then
