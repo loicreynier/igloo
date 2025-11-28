@@ -18,6 +18,7 @@ curl -s "https://raw.githubusercontent.com/$repo/$sha/$file" -o "$dest"
 chmod +x "$dest"
 echo "\`stowsh\` installed in $dest"
 
+mkdir -p "$HOME/.local/bin"
 ln -s "$dest" "$HOME/.local/bin" && echo "\`stowsh\` linked in $HOME/.local/bin"
 
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
