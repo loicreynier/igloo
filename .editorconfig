@@ -33,8 +33,12 @@ max_line_length = 88
 indent_size = 2
 max_line_length = 120
 
-[{*.bash,*.sh,.bashrc,bin/rnm}]
-max_line_length = 100
+[*.{bash,sh}]
+max_line_length = 120
+simplify = true
+
+[.bashrc]
+max_line_length = 120
 simplify = true
 
 [*.{yaml,json}]

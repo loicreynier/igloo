@@ -12,8 +12,8 @@
     }:
     let
       flakePackages = final: _: {
-        x2y = final.callPackage ./x2y { srcPath = "${self}/bin/x2y"; };
-        rnm = final.callPackage ./rnm { srcPath = "${self}/bin/rnm"; };
+        x2y = final.callPackage ./x2y { srcPath = "${self}/bin/x2y.bash"; };
+        rnm = final.callPackage ./rnm { srcPath = "${self}/bin/rnm.bash"; };
       };
 
       schemaOverlay = _: _: {

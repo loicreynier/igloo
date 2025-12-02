@@ -87,6 +87,7 @@ alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
 alias ..6="cd ../../../../../.."
 
+# shellcheck disable=SC2290,2285
 alias +="pushd"
 alias -- -="popd"
 alias +1="pushd +1"

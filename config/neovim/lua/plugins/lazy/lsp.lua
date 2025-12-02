@@ -167,8 +167,7 @@ return {
           stylua = {
             mason = versions.version_ge(glibc_version, "2.34"),
           },
-          taplo = {
-          },
+          taplo = {},
           -- tinymist = {
           --   settings = {
           --     formatterMode = "typstyle",
