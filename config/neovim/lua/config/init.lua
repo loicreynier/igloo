@@ -1,5 +1,7 @@
+require("system").setup()
 require("config.options")
 require("config.keymaps")
+require("config.clipboard")
 require("config.lazy")
 require("config.filetypes")
 require("config.autocmds")

@@ -18,8 +18,7 @@ return {
         return
       end
     end,
-    lazy = vim.fn.argc(-1) == 0, -- Load early when opening a file from cmdline
-    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
+    lazy = false,
     cmd = {
       "TSUpdate",
       "TSInstall",
@@ -30,8 +29,8 @@ return {
       indent = { enable = true },
       highlight = { enable = true },
       auto_install = system.has_self_install,
-      ensure_installed = system.treesitter_parsers_ensure_installed,
-      install_dir = system.treesitter_install_dir,
+      ensure_installed = system.has_self_install and "all" or {},
+      install_dir = vim.fs.joinpath(system.site_dir, "treesitter"),
     },
     ---@param opts TSConfig
     config = function(_, opts)
@@ -50,13 +49,9 @@ return {
       end
       ts.setup(opts)
 
-      system.treesitter_parsers_installed = ts.get_installed("parsers")
-
       vim.api.nvim_create_autocmd("FileType", {
         callback = function(args)
-          if vim.tbl_contains(system.treesitter_parsers_installed, vim.bo[args.buf].filetype) then
-            vim.treesitter.start()
-          end
+          if vim.tbl_contains(ts.get_installed("parsers"), vim.bo[args.buf].filetype) then vim.treesitter.start() end
         end,
       })
     end,
