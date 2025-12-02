@@ -42,8 +42,9 @@ return {
   -- Smart visual whitespace
   {
     "mcauley-penney/visual-whitespace.nvim",
+    event = "ModeChanged *:[vV\22]", -- Lazy load when entering visual mode
     opts = {
-      excluded = {
+      ignore = {
         filetypes = utils.disabled_filetypes,
         buftypes = utils.disabled_buftypes,
       },
