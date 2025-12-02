@@ -1,3 +1,5 @@
+local icons = require("rice").icons
+
 ---@type LazySpec
 return {
   -- Git signs
@@ -9,7 +11,7 @@ return {
         "<Leader>g",
         mode = { "n", "v" },
         group = "Git",
-        icon = require("rice").icons.git.logo,
+        icon = icons.git.logo,
       })
     end,
     ---@module "gitsigns.config"
@@ -132,28 +134,41 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
     },
-    event = "BufReadPost",
+    cmd = { "DiffviewOpen", "DiffviewFileHistory", "DiffviewClose" },
     init = function()
-      vim.keymap.set("n", "<Leader>gd", function()
-        if next(require("diffview.lib").views) == nil then
-          vim.cmd("DiffviewOpen")
-        else
-          vim.cmd("DiffviewClose")
-        end
-      end, { desc = "Toggle Diffview", silent = true })
-    end,
-    opts = {
-      use_icons = true,
-      show_help_hints = false,
-      diff_binaries = false,
-      file_panel = {
-        listing_style = "tree",
-        tree_options = {
-          flatten_dirs = true,
-          folder_statuses = "only_folded",
+      require("which-key").add({
+        {
+          "<Leader>gd",
+          group = "Diffview",
+          icon = icons.git.diff,
         },
+      })
+    end,
+
+    keys = {
+      {
+        "<Leader>gdr",
+        function()
+          vim.ui.input({ prompt = "Diffview Revision" }, function(revision)
+            local cmd = "DiffviewOpen"
+            if revision then cmd = cmd .. " " .. revision end
+            vim.cmd(cmd)
+          end)
+        end,
+        desc = "Open Diffview revision",
+      },
+      {
+        "<Leader>gdq",
+        "<Cmd>DiffviewClose<CR>",
+        desc = "Close Diffview",
+      },
+      {
+        "<Leader>gdf",
+        "<Cmd>DiffviewFileHistory %<CR>",
+        desc = "Open Diffview file history",
       },
     },
+    opts = function() return require("plugins.config.diffview") end,
   },
 
   -- GitHub actions tree-sitter highlighting

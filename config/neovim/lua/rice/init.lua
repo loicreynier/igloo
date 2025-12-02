@@ -28,6 +28,7 @@ M.icons = {
     added = " ",
     modified = " ",
     removed = " ",
+    diff = "",
   },
   kinds = {
     Array = " ",
