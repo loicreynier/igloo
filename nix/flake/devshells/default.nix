@@ -50,7 +50,7 @@
             #   };
             pythonForIgloo = python3.withPackages (ps: with ps; [ typer ]);
             igloo = pkgs.writeScriptBin "igloo" ''
-              ${pythonForIgloo}/bin/python3 ${self}/bin/igloo.py "$@"
+              ${pythonForIgloo}/bin/python3 ${self}/scripts/igloo.py "$@"
             '';
           in
           [

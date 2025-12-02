@@ -8,10 +8,14 @@
 let
   # -- Shell scripts
   pylab = pkgs.writeShellScriptBin "pylab" (
-    builtins.replaceStrings [ "#!/usr/bin/env bash\n" ] [ "" ] (lib.fileContents "${self}/bin/pylab")
+    builtins.replaceStrings [ "#!/usr/bin/env bash\n" ] [ "" ] (
+      lib.fileContents "${self}/scripts/pylab.sh"
+    )
   );
   ipylab = pkgs.writeShellScriptBin "ipylab" (
-    builtins.replaceStrings [ "#!/usr/bin/env bash\n" ] [ "" ] (lib.fileContents "${self}/bin/ipylab")
+    builtins.replaceStrings [ "#!/usr/bin/env bash\n" ] [ "" ] (
+      lib.fileContents "${self}/scripts/ipylab.sh"
+    )
   );
 
   # -- Python scripts wrapper
@@ -26,7 +30,7 @@ let
   # -- Python scripts
   pyversion = writePythonBin "pyversion" { } (
     builtins.replaceStrings [ "#!/usr/bin/env python\n" ] [ "" ] (
-      lib.fileContents "${self}/bin/pyversion"
+      lib.fileContents "${self}/scripts/pyversion.py"
     )
   );
 in

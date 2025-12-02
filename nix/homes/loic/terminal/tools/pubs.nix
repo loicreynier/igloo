@@ -25,7 +25,7 @@ let
         pubs
         "${config.programs.fzf.package}/bin/fzf"
       ]
-      (lib.strings.fileContents "${self}/bin/pubs-fzf-open.sh")
+      (lib.strings.fileContents "${self}/scripts/pubs-fzf-open.sh")
   );
 
   fzfExport =
@@ -48,7 +48,7 @@ let
           "bat_bin=\"${batBin}\""
           "fzf_bin=\"${fzfBin}\""
         ]
-        (lib.strings.fileContents "${self}/bin/pubs-fzf-export.sh")
+        (lib.strings.fileContents "${self}/scripts/pubs-fzf-export.sh")
     );
 
   exportTag = pkgs.writeShellScriptBin "pubs-export-tag" (
@@ -61,7 +61,7 @@ let
         ""
         "${pubs} list"
       ]
-      (lib.strings.fileContents "${self}/bin/pubs-export-tag.sh")
+      (lib.strings.fileContents "${self}/scripts/pubs-export-tag.sh")
   );
 in
 {

@@ -12,8 +12,9 @@
     }:
     let
       flakePackages = final: _: {
-        x2y = final.callPackage ./x2y { srcPath = "${self}/bin/x2y.bash"; };
-        rnm = final.callPackage ./rnm { srcPath = "${self}/bin/rnm.bash"; };
+        x2y = final.callPackage ./x2y.nix { srcPath = "${self}/scripts/x2y.bash"; };
+        rnm = final.callPackage ./rnm.nix { srcPath = "${self}/scripts/rnm.bash"; };
+        manixi = final.callPackage ./manixi.nix { srcPath = "${self}/scripts/manixi.bash"; };
       };
 
       schemaOverlay = _: _: {
@@ -71,7 +72,7 @@
       };
 
       packages = {
-        inherit (pkgs) x2y rnm;
+        inherit (pkgs) x2y rnm manixi;
       };
     };
 }
