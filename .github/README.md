@@ -36,7 +36,7 @@ Also contains raw configuration files and scripts for ~~cringe~~ non-Nix systems
 
 ## Layout
 
-- [`bin`](../bin): raw executable/script files (not generated using Nix)
+- [`scripts`](../scripts): raw script files (not generated using Nix)
 - [`config`](../config): raw configuration files (not generated using Nix)
 - [`flake.nix`](../flake.nix): Entry point of the Igloo
 - [`nix`](../nix): Nix part of Igloo
@@ -49,7 +49,6 @@ Also contains raw configuration files and scripts for ~~cringe~~ non-Nix systems
     - [`nixos`](../modules/nixos): Nix OS custom modules
   - [`templates`](../templates): Nix flake templates
 - [`secrets`](../secrets): `age`-encrypted secrets such as passwords and private keys
-- [`unix`](../unix): Linux/Unix related fluff
 - [`windows`](../windows): Windows related fluff
   such as setup AutoHotkey and PowerShell scripts
 
