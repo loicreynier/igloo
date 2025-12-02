@@ -92,6 +92,16 @@ local themes = {
       transparent = false,
     },
   },
+
+  -- TODO: configure on GNOME only
+  -- {
+  --   "itsfernn/auto-gnome-theme.nvim",
+  --   lazy = false,
+  --   opts = {
+  --     dark_theme = "github_dark",
+  --     light_theme = "github_light",
+  --   },
+  -- },
 }
 
 if install_all then
