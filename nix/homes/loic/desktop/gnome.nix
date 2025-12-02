@@ -8,13 +8,16 @@
     gnomeExtensions.just-perfection
     gnomeExtensions.burn-my-windows
 
+    adwaita-qt
     adwsteamgtk
     addwater
 
     eyedropper
     tagger
+    tangram
 
     dissent
+    xfce.thunar # Sometimes Nautilus is too slow
   ];
 
   gtk = {
