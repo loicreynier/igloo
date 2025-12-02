@@ -23,9 +23,10 @@
 --]]
 
 local system = require("system")
-local icons = require("rice").icons
 local use_mason = system.use_mason == true
 local map_lsp_keybinds = require("config.keymaps").map_lsp_keybinds
+local versions = require("utils.versions")
+local icons = require("rice").icons
 
 return {
   -- Mason installer
@@ -60,6 +61,7 @@ return {
     opts = function()
       ---@diagnostic disable-next-line: undefined-field
       local fs_stat = (vim.loop or vim.uv).fs_stat
+      local glibc_version = require("system").glibc
 
       local opts = {
         ---@type vim.diagnostic.Opts
@@ -91,7 +93,6 @@ return {
             mason = system.arch ~= "aarch64",
           },
           fortls = {
-            mason = system.name ~= "HPCC_Olympe",
             cmd = {
               "fortls",
               "--notify_init",
@@ -114,7 +115,7 @@ return {
             },
           },
           lua_ls = {
-            mason = system.name ~= "HPCC_Turpan" and system.name ~= "HPCC_Olympe", -- GLIBC issue
+            mason = versions.version_ge(glibc_version, "2.29"), -- Last checked version 3.13.5
             -- Recommended configuration for Neovim code linting:
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
             on_init = function(client)
@@ -141,7 +142,7 @@ return {
             },
           },
           neocmake = {
-            mason = system.name ~= "HPCC_Turpan" and system.name ~= "HPCC_Olympe", -- GLIBC issue
+            mason = versions.version_ge(glibc_version, "2.18"),
           },
           nil_ls = system.set_if_nix({
             mason = false,
@@ -154,7 +155,6 @@ return {
             },
           }, nil),
           pylsp = {
-            mason = system ~= "HPCC_Olympe",
             settings = {
               plugins = {
                 ruff = {
@@ -164,8 +164,10 @@ return {
               },
             },
           },
+          stylua = {
+            mason = versions.version_ge(glibc_version, "2.34"),
+          },
           taplo = {
-            mason = system ~= "HPCC_Olympe",
           },
           -- tinymist = {
           --   settings = {
@@ -177,7 +179,7 @@ return {
             extra_config = true,
           },
           typos_lsp = {
-            mason = system.name ~= "HPCC_Olympe" and system.name ~= "HPCC_Turpan", -- GLIBC issue
+            mason = versions.version_ge(glibc_version, "2.29"), -- Last checked version 0.1.45
             init_options = {
               diagnosticSeverity = "Hint",
             },

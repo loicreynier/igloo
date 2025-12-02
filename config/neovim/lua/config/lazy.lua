@@ -1,4 +1,4 @@
-if vim.fn.has("nvim-0.11.2") == 0 then
+if vim.fn.has("nvim-0.11.1") == 0 then
   vim.api.nvim_echo({
     { "Neovim configuration requires Neovim >= 0.11.2\n", "ErrorMsg" },
     { "Use `nvim --clean` to start Neovim with vanilla settings\n", "Comment" },

@@ -7,7 +7,6 @@ return {
   {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
-    dependencies = { "LittleEndianRoot/mason-conform", enabled = use_mason, dependencies = { "mason-org/mason.nvim" } },
     cmd = "ConformInfo",
     keys = {
       {
@@ -63,9 +62,32 @@ return {
       },
     },
     init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
-    config = function(_, opts)
-      require("conform").setup(opts)
-      if use_mason then require("mason-conform").setup({}) end
+  },
+
+  -- Only format modified code with `FormatModified` from LSP capabilities
+  {
+    "joechrisellis/lsp-format-modifications.nvim",
+    lazy = true,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    init = function()
+      vim.api.nvim_create_user_command("FormatModified", function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local clients = vim.lsp.get_clients({
+          bufnr = bufnr,
+          method = "textDocument/rangeFormatting",
+        })
+
+        if #clients == 0 then
+          Snacks.notify.error(
+            "Format request failed, no matching language servers",
+            { title = "LSP format modified only" }
+          )
+        end
+
+        for _, client in pairs(clients) do
+          require("lsp-format-modifications").format_modifications(client, bufnr)
+        end
+      end, {})
     end,
   },
 }
