@@ -1,0 +1,13 @@
+# ripgrep (`rg`) configuration file, must be set by `$RIPGREP_CONFIG_PATH`
+
+# Who cares about case!?
+--smart-case
+
+# Sort output
+--sort=path
+
+# Don't vomit really long lines, and show a preview
+--max-columns=150
+--max-columns-preview
+
+# vim: ft=cfg

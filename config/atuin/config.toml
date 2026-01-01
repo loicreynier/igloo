@@ -1,0 +1,22 @@
+search_mode = "fuzzy"
+search_mode_shell_up_key_binding = "fuzzy"
+filter_mode = "global"
+filter_mode_shell_up_key_binding = "session"
+workspaces = true
+
+style = "auto"
+inline_height = 40
+invert = true
+show_preview = true
+max_preview_height = 4
+show_help = true
+show_tabs = true
+
+exit_mode = "return-original"
+history_format = "{time}\t{command}\t{duration}"
+history_filter = ["^pass"]
+cwd_filter = [".*password-store.*"]
+
+
+enter_accept = false
+word_jump_mode = "emacs"

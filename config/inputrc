@@ -1,0 +1,43 @@
+# ~/.inputrc
+
+# Vim > Emacs
+# set editing-mode vi # TODO: configure keymaps
+
+# Keymaps
+# Necessary to bind stty special characters
+# Source:
+# https://stackoverflow.com/questions/23349325/inputrc-override-controlw
+set bind-tty-special-chars off
+
+"\C-w": unix-filename-rubout
+"\C-n": history-search-forward
+"\C-p": history-search-backward
+
+# 8bit input
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Smart case handling
+set completion-ignore-case on
+set completion-map-case on
+
+# Smart completion
+set skip-completed-text on
+set match-hidden-files off # Don't match dotfile if not specified
+set mark-symlinked-directories off
+
+# Menu completion on repeated "<Tab>" key press
+set menu-complete-display-prefix on
+set show-all-if-ambiguous on
+
+# Interpret pasted command as a single input
+set enable-bracketed-paste on
+
+# Make it sexy
+# set show-mode-in-prompt on # TODO: integration with Starship
+set colored-stats on
+set colored-completion-prefix on
+set blink-matching-paren on
+
+# vim: ft=readline

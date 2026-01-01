@@ -1,0 +1,42 @@
+# vim: ft=gitconfig
+
+[user]
+	name = Loïc Reynier
+	email = contact@loicreynier.fr
+	signingkey = contact@loicreynier.fr
+[core]
+	pager = cat
+	autocrlf = input
+[color]
+	ui = auto
+[advice]
+	skippedCherryPicks = false
+	forceDeleteBranch = false
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[diff]
+	algorithm = histogram
+	external = difft
+[log]
+	data = iso
+[push]
+	default = current
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[rere]
+	enabled = true
+[alias]
+	log1 = "log --oneline"
+	log1d = "log --pretty='format:%Cblue%>(22)%ad %C(yellow)%h %Cred%d %Creset%s' --date=relative"
+	push-all = "!git remote | xargs -L1 git push --all"
+	stash-untracked = "!f() { git stash; git stash -u; git stash pop stash@{1}; }; f"
+	ch = "!git checkout $(git branch --sort='-committerdate' | fzf --reverse)"
+	sf = "!bash -c ' \
+		source \"$HOME/.config/bash/functions/fzf-git-stage2.bash\" || exit 1; \
+		declare -F __fzf_git_stage >/dev/null \
+			|| { echo \"Error: '__fzf_git_stage' Bash function not found\" >&2; exit 1; }; \
+		__fzf_git_stage \
+	'"

@@ -1,0 +1,7 @@
+--map-syntax '*.cuf:Fortran (Modern)'
+--map-syntax '.ecrc:JSON'
+--map-syntax '.latexmkrc:Perl'
+--map-syntax '.yamllint:YAML'
+--map-syntax 'config.xxhc:YAML'
+
+# vim: ft=bash
