@@ -18,14 +18,25 @@ command_exists() {
 
 # This script uses the `SYSTEM` variable to recognize different systems.
 # Bash (and other software) configuration depend on the value of `SYSTEM`,
-# which is determined based on the hashed machine ID from `hostnamectl`,
-# or the hashed hostname if recognized.
+# which is determined based on the hashed machine ID from `/etc/machine-id`
+# or `hostnamectl`, or the hashed hostname if recognized.
 # Once the system if recognized, a list of options `SYSTEM_OPTIONS` is set up.
 
 if [ -z "$SYSTEM" ]; then
-  # Try to determine system from `hostnamectl`'s machine ID
-  if command -v hostnamectl >/dev/null 2>&1; then
-    system_id=$(hostnamectl | grep 'Machine ID' | awk '{print $3}')
+  SYSTEM="unknown"
+  system_id=""
+
+  # First try to determine system from `/etc/machine-id`
+  if [ -r /etc/machine-id ]; then
+    system_id=$(cat /etc/machine-id)
+  fi
+
+  # ... then try from `hostnamectl`'s machine ID (slower)
+  if [ "$SYSTEM" = "unknown" ] && command_exists "hostnamectl"; then
+    system_id=$(hostnamectl 2>/dev/null | awk -F': ' '/Machine ID/{print $2}')
+  fi
+
+  if [ -n "$system_id" ]; then
     system_id=$(printf "%s" "$system_id" | sha256sum | awk '{print $1}')
 
     case "$system_id" in
@@ -45,7 +56,8 @@ if [ -z "$SYSTEM" ]; then
 
     unset system_id
   else
-    echo "System not recognized from hardware: 'hostnamectl' not found"
+    echo "System not recognized from hardware:" \
+      "'/etc/machine-id' or 'hostnamectl' not found"
   fi
 
   # Automatically determine system based on hostname if not recognized
@@ -116,6 +128,9 @@ if [ -z "$SYSTEM_OPTIONS" ]; then
     SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}hpcc"
     ;;
   esac
+
+  grep -qi microsoft /proc/version 2>/dev/null &&
+    SYSTEM_OPTIONS="${SYSTEM_OPTIONS:+$SYSTEM_OPTIONS:}wsl"
 
   export SYSTEM_OPTIONS
 fi
