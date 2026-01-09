@@ -4,18 +4,23 @@
 
 name="glibexec"
 
-GLIBC_PREFIX="$HOME/.local/opt/glibc"
+GLIBC_PREFIX="${GLIBC_PREFIX:-$HOME/.local/opt/glibc}"
+PRINT_CMD="${PRINT_CMD:-0}"
 
 print_usage() {
   echo "Usage: glibexec [--glibc-path </path/to/glibc>] command [args...]"
   echo
   echo "Options:"
   echo "  --glibc-path PATH   Specify custom glibc installation directory"
+  echo "  --print-cmd         Print full path of the resolve command and exit"
   echo "                      (default: $HOME/.local/opt/glibc)"
   echo "  -h, --help          Show this help message and exit"
   echo
   echo "Example:"
   echo "  $name --glibc-path ~/.local/stow/glibc-2.30 mise --flag arg"
+  echo "  GLIBC_PREFIX=$HOME/.local/stow/glibc-2.30 mise --flarg arg"
+  echo "  $name --print-cmd mise"
+  echo "  PRINT_CMD=1 $name mise"
 }
 
 while [[ $1 =~ ^- ]]; do
@@ -23,6 +28,9 @@ while [[ $1 =~ ^- ]]; do
   --glibc-path)
     shift
     GLIBC_PREFIX="$1"
+    ;;
+  --print-cmd)
+    PRINT_CMD=1
     ;;
   -h | --help)
     print_usage
@@ -49,6 +57,11 @@ cmd=$(command -v "$1") || {
   exit 1
 }
 shift
+
+if [[ $PRINT_CMD -eq 1 ]]; then
+  echo "$cmd"
+  exit 0
+fi
 
 arch=$(uname -m)
 case "$arch" in
