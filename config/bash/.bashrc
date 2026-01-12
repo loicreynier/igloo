@@ -27,6 +27,8 @@ if [[ $SYSTEM == "HPCC_Turpan" ]]; then
   if [[ -n $VNCDESKTOP ]]; then
     export PATH="$HOME/.local/binx86":"$PATH"
   fi
+
+  __mise_wrapper=1
 fi
 
 # == UTILITY FUNCTIONS AND VARIABLES ===============================================================
@@ -291,7 +293,11 @@ _setup_bash_pyenv() {
 }
 
 _setup_bash_mise() {
-  eval "$(command mise activate bash)"
+  if [[ ${__mise_wrapper:-0} -eq 1 ]] && declare -F __mise_activate_wrapper >/dev/null; then
+    __mise_activate_wrapper
+  else
+    eval "$(command mise activate bash)"
+  fi
 }
 
 _setup_bash_starship() {
