@@ -224,6 +224,8 @@ if [ -d "$HOME/.local/opt/pyenv" ]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
 fi
 
+export MISE_DATA_DIR="$HOME/.local/opt/mise"
+
 export CARGO_HOME="$HOME/.local/opt/cargo"
 export RUSTUP_HOME="$HOME/.local/opt/rustup"
 if [ -d "$HOME/.local/opt/cargo" ]; then

@@ -27,8 +27,6 @@ if [[ $SYSTEM == "HPCC_Turpan" ]]; then
   if [[ -n $VNCDESKTOP ]]; then
     export PATH="$HOME/.local/binx86":"$PATH"
   fi
-
-  __mise_wrapper=1
 fi
 
 # == UTILITY FUNCTIONS AND VARIABLES ===============================================================
