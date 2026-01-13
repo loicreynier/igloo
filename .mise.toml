@@ -1,0 +1,6 @@
+[tools]
+just = "latest"
+prek = "latest"
+rg = "latest"
+shellcheck = "latest"
+shfmt = "latest"

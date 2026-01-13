@@ -1,0 +1,60 @@
+---
+exclude: "(flake.lock)"
+repos:
+  - repo: builtin
+    hooks:
+      - id: end-of-file-fixer
+        name: "Format >> End of line fixer (end-of-file-fixer)"
+        priority: 1
+      - id: check-added-large-files
+        name: "Check  >> Added large files (check-added-large-files)"
+        priority: 10
+      - id: check-symlinks
+        name: "Check  >> Symlinks (check-symlinks)"
+        priority: 10
+      - id: check-toml
+        name: "Check  >> TOML files (check-toml)"
+        priority: 10
+      - id: check-yaml
+        name: "Check  >> YAML files (check-yaml)"
+        priority: 10
+  - repo: "https://github.com/crate-ci/typos"
+    rev: v1.42.0
+    hooks:
+      - id: typos
+        name: "Check  >> Typos (typos)"
+        priority: 10
+  - repo: "https://github.com/editorconfig-checker/editorconfig-checker"
+    rev: v3.4.0
+    hooks:
+      - id: editorconfig-checker
+        name: "Check  >> EditorConfig compliance (editorconfig-checker)"
+        priority: 10
+  - repo: local
+    hooks:
+      - id: shellcheck-system
+        name: "Lint   >> Shell files (shellcheck-system)"
+        entry: shellcheck
+        types:
+          - shell
+        language: system
+        priority: 10
+  - repo: local
+    hooks:
+      - id: shfmt-system
+        name: "Format >> Shell files (shfmt-system)"
+        entry: "shfmt -w"
+        types:
+          - shell
+        language: system
+        priority: 0
+  - repo: "https://github.com/astral-sh/ruff-pre-commit"
+    rev: v0.14.11
+    hooks:
+      - id: ruff-format
+        name: "Format >> Python files (ruff-format)"
+        priority: 0
+      - id: ruff-check
+        args: [--fix]
+        name: "Lint   >> Python files (ruff-check)"
+        priority: 10
