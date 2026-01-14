@@ -10,6 +10,7 @@ now hosted on [Codeberg](https://codeberg.org/loicreynier/igloo) as a true igloo
 
 ## Cool stuff
 
+- [`.bashrc` with lazy loading](./config/bash/.bashrc)
 - [Custom `glibc` install wrapper script](./scripts/glibexec.bash)
 - [`fzf`-based Git staging menu](./config/bash/functions/fzf-git-stage.bash)
 - [`fzf`-history search in IPython](./config/ipython/startup/fzf-hist-search.py)

@@ -290,6 +290,39 @@ _setup_bash_pyenv() {
   eval "$(command pyenv init -)" && eval "$(command pyenv virtualenv-init -)"
 }
 
+_setup_bash_pyenv_from_lazy() {
+  unset -f pyenv python python3 pip pip3
+  _setup_bash_pyenv
+}
+
+_setup_bash_pyenv_lazy() {
+  # Unfortunately `shfmt` doesn't let me write them as one-liners...
+  pyenv() {
+    _setup_bash_pyenv_from_lazy
+    pyenv "$@"
+  }
+
+  python() {
+    _setup_bash_pyenv_from_lazy
+    python "$@"
+  }
+
+  python3() {
+    _setup_bash_pyenv_from_lazy
+    python3 "$@"
+  }
+
+  pip() {
+    _setup_bash_pyenv_from_lazy
+    pip "$@"
+  }
+
+  pip3() {
+    _setup_bash_pyenv_from_lazy
+    pip3 "$@"
+  }
+}
+
 _setup_bash_mise() {
   if [[ ${__mise_wrapper:-0} -eq 1 ]] && declare -F __mise_activate_wrapper >/dev/null; then
     __mise_activate_wrapper
@@ -300,6 +333,19 @@ _setup_bash_mise() {
 
 _setup_bash_starship() {
   [[ $TERM != "dumb" ]] && eval "$(command starship init bash)"
+}
+
+_setup_bash_starship_from_lazy() {
+  # Starship init overrides `$PROMPT_COMMAND`
+  PROMPT_COMMAND="${PROMPT_COMMAND/_setup_bash_starship_from_lazy;/}"
+  PROMPT_COMMAND="${PROMPT_COMMAND//_setup_bash_starship_from_lazy/}"
+  local prompt_cmd_bak=$PROMPT_COMMAND
+  _setup_bash_starship
+  [[ -n $prompt_cmd_bak ]] && PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}$prompt_cmd_bak"
+}
+
+_setup_bash_starship_lazy() {
+  PROMPT_COMMAND="_setup_bash_starship_from_lazy${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
 }
 
 _setup_bash_zoxide() {
@@ -331,10 +377,10 @@ command_exists "python3" && _setup_bash_python3
 command_exists "stowsh" && _setup_bash_stowsh
 command_exists "just" && _setup_bash_just
 command_exists "fzf" && _setup_bash_fzf
+command_exists "starship" && _setup_bash_starship # Starship init overrides `$PROMPT_COMMAND`
 command_exists "direnv" && _setup_bash_direnv
-command_exists "pyenv" && _setup_bash_pyenv
+command_exists "pyenv" && _setup_bash_pyenv_lazy
 command_exists "mise" && _setup_bash_mise
-command_exists "starship" && _setup_bash_starship
 command_exists "zoxide" && _setup_bash_zoxide
 # FIXME: `atuin init bash || echo $?` returns 1 on Latios (not tested elsewhere)
 # Atuin preexec setup may be incompatible with other loaded
