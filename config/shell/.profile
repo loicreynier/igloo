@@ -11,6 +11,37 @@ command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+log() {
+  [ -n "$PS1" ] &&
+    # [ -n "$__HOME_PROFILE_DEBUG" ] &&
+    printf '%s\n' "$*"
+}
+
+if command_exists "sha256sum"; then
+  hash_cmd="sha256sum"
+elif command_exists "shasum"; then
+  hash_cmd="shasum -a 256"
+else
+  hash_cmd=""
+fi
+
+hash256() {
+  if [ -n "$hash_cmd" ]; then
+    $hash_cmd | awk '{print $1}'
+  else
+    return 1
+  fi
+}
+
+path_prepend() {
+  [ -n "$1" ] || return 0
+  [ -d "$1" ] || return 0
+  case ":$PATH:" in
+  *":$1:"*) ;;
+  *) PATH="$1:$PATH" ;;
+  esac
+}
+
 [ -z "$UID" ] && UID="$(id -u)"
 [ -z "$HOSTNAME" ] && HOSTNAME="$(hostname)"
 
@@ -24,89 +55,89 @@ command_exists() {
 
 if [ -z "$SYSTEM" ]; then
   SYSTEM="unknown"
-  system_id=""
 
-  # First try to determine system from `/etc/machine-id`
-  if [ -r /etc/machine-id ]; then
-    system_id=$(cat /etc/machine-id)
-  fi
+  if [ -n "$hash_cmd" ]; then
+    system_id=""
 
-  # ... then try from `hostnamectl`'s machine ID (slower)
-  if [ "$SYSTEM" = "unknown" ] && command_exists "hostnamectl"; then
-    system_id=$(hostnamectl 2>/dev/null | awk -F': ' '/Machine ID/{print $2}')
-  fi
-
-  if [ -n "$system_id" ]; then
-    system_id=$(printf "%s" "$system_id" | sha256sum | awk '{print $1}')
+    # First try to determine system from `/etc/machine-id`
+    if [ -r /etc/machine-id ]; then
+      if system_id=$(cat /etc/machine-id | hash256); then
+        :
+      else
+        system_id=""
+      fi
+    # ... then try from `hostnamectl`'s machine ID (slower)
+    elif command_exists "hostnamectl"; then
+      if system_id=$(cat /etc/machine-id | hash256); then
+        :
+      else
+        system_id=""
+      fi
+    else
+      log "System not recognized from hardware:" \
+        "'/etc/machine-id' or 'hostnamectl' not found"
+    fi
 
     case "$system_id" in
     "6b1a62a469cfe86e197f5a04746504696971733f8ad47978a04dcbf26cad1cd2")
       SYSTEM="workstation_ONERA"
       ;;
-    *)
-      SYSTEM="unknown"
-      ;;
     esac
 
     if [ "$SYSTEM" = "unknown" ]; then
-      echo "System not recognized from hardware"
+      log "System not recognized from hardware"
     else
-      echo "System recognized from hardware as: '$SYSTEM'"
+      log "System recognized from hardware as: '$SYSTEM'"
     fi
 
     unset system_id
-  else
-    echo "System not recognized from hardware:" \
-      "'/etc/machine-id' or 'hostnamectl' not found"
   fi
 
-  # Automatically determine system based on hostname if not recognized
+  # Automatically determine system based on hostname if not recognized before
   if [ "$SYSTEM" = "unknown" ]; then
-    hostname_sha=$(printf "%s" "$HOSTNAME" | sha256sum | awk '{print $1}')
+    hostname_sha=$(printf "%s" "$HOSTNAME" | hash256)
 
     case "$hostname_sha" in
     "120d48ac77121271bd444cf4c93769ba6d6f36b3c6228c61949c5a25a40f1b5a")
       SYSTEM="workstation_ONERA"
       ;;
     *)
-      SYSTEM="unknown"
-      ;;
-    esac
-
-    case "$HOSTNAME" in
-    latios)
-      SYSTEM="laptop_Latios"
-      ;;
-    ldmpe*)
-      SYSTEM="workstation_ONERA"
-      ;;
-    olympe*)
-      SYSTEM="HPCC_Olympe"
-      ;;
-    turpanvisu*)
-      SYSTEM="HPCC_Turpan_visu"
-      ;;
-    turpan*)
-      SYSTEM="HPCC_Turpan"
-      ;;
-    topaze*)
-      SYSTEM="HPCC_Topaze"
-      ;;
-    hpc-vesta*)
-      SYSTEM="HPCC_Vesta"
-      ;;
-    *)
-      SYSTEM="unknown"
+      case "$HOSTNAME" in
+      latios)
+        SYSTEM="laptop_Latios"
+        ;;
+      ldmpe*)
+        SYSTEM="workstation_ONERA"
+        ;;
+      olympe*)
+        SYSTEM="HPCC_Olympe"
+        ;;
+      turpanvisu*)
+        SYSTEM="HPCC_Turpan_visu"
+        ;;
+      turpan*)
+        SYSTEM="HPCC_Turpan"
+        ;;
+      topaze*)
+        SYSTEM="HPCC_Topaze"
+        ;;
+      hpc-vesta*)
+        SYSTEM="HPCC_Vesta"
+        ;;
+      *)
+        SYSTEM="unknown"
+        ;;
+      esac
       ;;
     esac
 
     if [ "$SYSTEM" = "unknown" ]; then
-      echo "System not recognized from hostname"
+      log "System not recognized from hostname"
     else
-      echo "System recognized from hostname as: '$SYSTEM'"
+      log "System recognized from hostname as: '$SYSTEM'"
     fi
 
-    unset hostname
+    unset hostname_sha
   fi
 
   export SYSTEM
@@ -169,7 +200,7 @@ esac
 
 # -- System configuration
 
-export PATH="$HOME/.local/bin":"$PATH"
+path_prepend "$HOME/.local/bin"
 
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -219,18 +250,14 @@ export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 
-if [ -d "$HOME/.local/opt/pyenv" ]; then
-  export PYENV_ROOT="$HOME/.local/opt/pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-fi
+export PYENV_ROOT="$HOME/.local/opt/pyenv"
+path_prepend "$PYENV_ROOT/bin"
 
 export MISE_DATA_DIR="$HOME/.local/opt/mise"
 
 export CARGO_HOME="$HOME/.local/opt/cargo"
 export RUSTUP_HOME="$HOME/.local/opt/rustup"
-if [ -d "$HOME/.local/opt/cargo" ]; then
-  export PATH="$CARGO_HOME/bin:$PATH"
-fi
+path_prepend "$CARGO_HOME/bin"
 
 if [ -d "$HOME/.local/lib/perl5" ]; then
   export PERL5LIB="$HOME/.local/lib/perl5"
@@ -238,26 +265,25 @@ fi
 
 # -- User environment variables
 
-if [ -d "$HOME/git/config/igloo" ]; then
-  export NH_FLAKE="$HOME/git/config/igloo"
+if [ -d "$HOME/igloo" ]; then
+  export NH_FLAKE="$HOME/igloo"
+  export IGLOO="$HOME/igloo"
 fi
 
 # == SHELL CONFIGURATION =======================================================
 
-if [ "$0" = "-bash" ] ||
-  [ "$0" = "/bin/bash" ] ||
-  [ "$0" = "bash" ] &&
-  [ -n "$PS1" ]; then
+if [ -n "$PS1" ] &&
+  { [ "$0" = "-bash" ] || [ "$0" = "/bin/bash" ] || [ "$0" = "bash" ]; }; then
   if [ -f "$HOME/.local/etc/profile.d/bash_completion.sh" ]; then
     unset BASH_COMPLETION_VERSINFO # Unset if already loaded by `/etc/profile.d`
-    echo "Sourcing '~/.local/etc/profile.d/bash_completion.sh'"
+    log "Sourcing '~/.local/etc/profile.d/bash_completion.sh'"
     . "$HOME/.local/etc/profile.d/bash_completion.sh"
   elif [ -f /etc/profile.d/bash_completion.sh ]; then
-    echo "Sourcing '/etc/profile.d/bash_completion.sh'"
+    log "Sourcing '/etc/profile.d/bash_completion.sh'"
     . /etc/profile.d/bash_completion.sh
   fi
   if [ -f "${HOME}/.bashrc" ]; then
-    echo "Sourcing '${HOME}/.bashrc'"
+    log "Sourcing '${HOME}/.bashrc'"
     . "${HOME}/.bashrc"
   fi
 fi
@@ -266,7 +292,7 @@ fi
 # if system is not automatically recognized
 
 _setup_shell_workstation_ONERA() {
-  export PATH="$HOME/.bin":"$PATH"
+  path_prepend "$HOME/.bin"
 
   module -s purge
   module -s load cmake/3.29.3
@@ -292,7 +318,7 @@ _setup_shell_HPCC_Turpan() {
 }
 
 _setup_shell_HPCC_Turpan_visu() {
-  export PATH="$HOME/.local/binx86":"$PATH"
+  path_prepend "$HOME/.local/binx86"
 }
 
 _setup_shell_HPCC_Topaze() {
@@ -301,20 +327,23 @@ _setup_shell_HPCC_Topaze() {
   module -s load python/3.11.4
 }
 
-_setup_shel_HPCC_Vesta() {
+_setup_shell_HPCC_Vesta() {
   GPG_TTY="$(tty)"
   export GPG_TTY
 }
 
 case "$SYSTEM" in
-"workstation_ONERA") _setup_shell_ONERA_workstation ;;
+"workstation_ONERA") _setup_shell_workstation_ONERA ;;
 "HPCC_Olympe") _setup_shell_HPCC_Olympe ;;
 "HPCC_Turpan") _setup_shell_HPCC_Turpan ;;
 "HPCC_Turpan_visu") _setup_shell_HPCC_Turpan_visu ;;
 "HPCC_Topaze") _setup_shell_HPCC_Topaze ;;
-"HPCC_Vesta") _setup_shel_HPCC_Vesta ;;
+"HPCC_Vesta") _setup_shell_HPCC_Vesta ;;
 esac
 
 # == CLEANING ==================================================================
 
-unset -f command_exists
+export PATH # Required as `path_prepend` doesn't export
+
+unset -f command_exists log hash256 path_prepend
+unset hash_cmd
