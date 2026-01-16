@@ -15,6 +15,11 @@ For example, `_setup_bash_fzf` installs and configure `fzf` Bash integration
 and is only when the `fzf` is available.
 This allows running the setup functions manually is the Bash session.
 
+To streamline command availability checks, a global associative array variable `HAS` is used,
+where the key `HAS[fzf]` is created (and set to `1`) only if `fzf` is available.
+Sourced functions in [`functions/`](./functions) can also reference `HAS` to speed up checks,
+avoiding repeated calls to `command -v`.
+
 System-specific settings use `$SYSTEM_...` variables from the global shell [profile].
 
 [profile]: ../shell

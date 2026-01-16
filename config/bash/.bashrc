@@ -31,9 +31,11 @@ fi
 
 # == UTILITY FUNCTIONS AND VARIABLES ===============================================================
 
-command_exists() {
-  command -v "$1" >/dev/null 2>&1
-}
+declare -A HAS
+for cmd in bat comma direnv eza fd fzf git just mise nvim \
+  pass pyenv python3 starship stowsh vim zoxide; do
+  command -v "$cmd" >/dev/null && HAS[$cmd]=1
+done
 
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}"
 data_dirs=(
@@ -95,7 +97,7 @@ alias +3="pushd +3"
 
 case "$SYSTEM" in
 "ONERA_workstation")
-  if command_exists "pass"; then
+  if [[ -v HAS[pass] ]]; then
     alias ssh-olympe="pass -c srv/olympe && ssh -X olympe"
     alias ssh-topaze="PASSWORD_STORE_CLIP_TIME=60 pass -c srv/topaze && ssh -X topaze"
   fi
@@ -143,7 +145,7 @@ _setup_bash_command_not_found() {
   for profile_dir in "${profile_dirs[@]}"; do
     source="$profile_dir/command-not-found.sh"
     [[ -f $source ]] && source "$source"
-    if command_exists "comma"; then
+    if [[ ${HAS[comma]} ]]; then
       source="$profile_dir/comma-command-not-found.sh"
       [[ -f $source ]] && source "$source"
     fi
@@ -220,12 +222,12 @@ _setup_bash_fzf() {
   local fzf_preview_dirs
   local fzf_preview_cmd
 
-  if command_exists "bat"; then
+  if [[ ${HAS[bat]} ]]; then
     fzf_preview_files="bat --color=always --style=plain"
   else
     fzf_preview_files="head -n 50"
   fi
-  if command_exists "eza"; then
+  if [[ ${HAS[eza]} ]]; then
     fzf_preview_dirs="eza -a
     --icons --no-quotes --group-directories-first
     --color=always --color-scale-mode=fixed"
@@ -240,7 +242,7 @@ _setup_bash_fzf() {
   --bind='f2:toggle-preview'
   --bind 'alt-u:preview-page-up,alt-d:preview-page-down'
   --color header:italic"
-  if command_exists "fd"; then
+  if [[ ${HAS[fd]} ]]; then
     export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --strip-cwd-prefix"
     export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
     export FZF_CTRL_T_COMMAND="fd --type f --hidden --follow --strip-cwd-prefix"
@@ -274,7 +276,7 @@ _setup_bash_fzf() {
   --no-multi --no-sort --scheme=path --exit-0 --select-1
   --preview '${fzf_preview_dirs} {2..}'"
 
-  if command_exists "bat"; then
+  if [[ ${HAS[bat]} ]]; then
     fzf_preview_cmd="just --show {} | ${fzf_preview_files} --language=Just"
   else
     fzf_preview_cmd="just --show {}"
@@ -367,24 +369,24 @@ _setup_bash_atuin() {
   done
 }
 
-command_exists "git" && _setup_bash_git
-command_exists "vim" && _setup_bash_vim
-command_exists "nvim" && _setup_bash_nvim
-command_exists "eza" && _setup_bash_eza
-command_exists "bat" && _setup_bash_bat
-command_exists "fd" && _setup_bash_fd
-command_exists "python3" && _setup_bash_python3
-command_exists "stowsh" && _setup_bash_stowsh
-command_exists "just" && _setup_bash_just
-command_exists "fzf" && _setup_bash_fzf
-command_exists "starship" && _setup_bash_starship # Starship init overrides `$PROMPT_COMMAND`
-command_exists "direnv" && _setup_bash_direnv
-command_exists "pyenv" && _setup_bash_pyenv_lazy
-command_exists "mise" && _setup_bash_mise
-command_exists "zoxide" && _setup_bash_zoxide
+[[ -v HAS[git] ]] && _setup_bash_git
+[[ -v HAS[vim] ]] && _setup_bash_vim
+[[ -v HAS[nvim] ]] && _setup_bash_nvim
+[[ -v HAS[eza] ]] && _setup_bash_eza
+[[ -v HAS[bat] ]] && _setup_bash_bat
+[[ -v HAS[fd] ]] && _setup_bash_fd
+[[ -v HAS[python3] ]] && _setup_bash_python3
+[[ -v HAS[stowsh] ]] && _setup_bash_stowsh
+[[ -v HAS[just] ]] && _setup_bash_just
+[[ -v HAS[fzf] ]] && _setup_bash_fzf
+[[ -v HAS[starship] ]] && _setup_bash_starship # Starship init overrides `$PROMPT_COMMAND`
+[[ -v HAS[direnv] ]] && _setup_bash_direnv
+[[ -v HAS[pyenv] ]] && _setup_bash_pyenv_lazy
+[[ -v HAS[mise] ]] && _setup_bash_mise
+[[ -v HAS[zoxide] ]] && _setup_bash_zoxide
 # FIXME: `atuin init bash || echo $?` returns 1 on Latios (not tested elsewhere)
 # Atuin preexec setup may be incompatible with other loaded
-# command_exists "atuin" && _setup_bash_atuin
+# [[ -v HAS[atuin] ]] && _setup_bash_atuin
 
 _setup_bash_completion
 _setup_bash_command_not_found
@@ -392,4 +394,3 @@ _setup_bash_command_not_found
 # == CLEANING ======================================================================================
 
 unset state_dir data_dirs data_dir profile_dirs profile_dir source
-unset -f command_exists

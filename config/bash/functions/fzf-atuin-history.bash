@@ -1,4 +1,8 @@
-if ! command -v fzf >/dev/null 2>&1 ||
+#!/usr/bin/env bash
+
+if [[ -v HAS[fzf] && -v HAS[atuin] ]]; then
+  :
+elif ! command -v fzf >/dev/null 2>&1 ||
   ! command -v atuin >/dev/null 2>&1; then
   return 1
 fi

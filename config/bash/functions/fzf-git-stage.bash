@@ -2,9 +2,14 @@
 
 # Homemade fzf-based interactive Git stage menu
 
-if ! command -v fzf >/dev/null 2>&1 ||
-  ! command -v git >/dev/null 2>&1 ||
-  ! command -v difft >/dev/null 2>&1; then
+if [[ -v HAS[fzf] && -v HAS[git] ]]; then
+  :
+elif ! command -v fzf >/dev/null 2>&1 ||
+  ! command -v git >/dev/null 2>&1; then
+  return 1
+fi
+
+if ! command -v difft >/dev/null 2>&1; then
   return 1
 fi
 
