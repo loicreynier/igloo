@@ -166,6 +166,7 @@ _setup_bash_nvim() {
 }
 
 _setup_bash_eza() {
+  unset LS_COLORS
   eza_flags="--git --color=auto --icons=auto"
   if [[ $SYSTEM == "HPCC_Turpan" ]] && [[ -n $VNCDESKTOP ]]; then
     eza_flags="--git --color=auto"
