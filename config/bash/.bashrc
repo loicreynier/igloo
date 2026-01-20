@@ -354,6 +354,21 @@ _setup_bash_zoxide() {
   eval "$(command zoxide init bash)"
 }
 
+_setup_bash_zoxide_lazy() {
+
+  z() {
+    unset -f z zi
+    _setup_bash_zoxide
+    z "$@"
+  }
+
+  zi() {
+    unset -f z zi
+    _setup_bash_zoxide
+    zi "$@"
+  }
+}
+
 _setup_bash_atuin() {
   for data_dir in "${data_dirs[@]}"; do
     source="$data_dir/bash/bash-preexec.sh"
@@ -383,7 +398,7 @@ _setup_bash_atuin() {
 [[ -v HAS[direnv] ]] && _setup_bash_direnv
 [[ -v HAS[pyenv] ]] && _setup_bash_pyenv_lazy
 [[ -v HAS[mise] ]] && _setup_bash_mise
-[[ -v HAS[zoxide] ]] && _setup_bash_zoxide
+[[ -v HAS[zoxide] ]] && _setup_bash_zoxide_lazy
 # FIXME: `atuin init bash || echo $?` returns 1 on Latios (not tested elsewhere)
 # Atuin preexec setup may be incompatible with other loaded
 # [[ -v HAS[atuin] ]] && _setup_bash_atuin
