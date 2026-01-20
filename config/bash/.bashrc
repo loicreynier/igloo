@@ -229,8 +229,8 @@ _setup_bash_fzf() {
     fzf_preview_files="head -n 50"
   fi
   if [[ ${HAS[eza]} ]]; then
-    fzf_preview_dirs="eza -a
-    --icons --no-quotes --group-directories-first
+    fzf_preview_dirs="eza -a \
+    --icons --no-quotes --group-directories-first \
     --color=always --color-scale-mode=fixed"
   else
     fzf_preview_dirs="ls -al"
