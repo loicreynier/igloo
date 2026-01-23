@@ -32,10 +32,6 @@ fi
 # == UTILITY FUNCTIONS AND VARIABLES ===============================================================
 
 declare -A HAS
-for cmd in bat comma direnv eza fd fzf git just mise nvim \
-  pass pyenv python3 starship stowsh vim zoxide; do
-  command -v "$cmd" >/dev/null && HAS[$cmd]=1
-done
 
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}"
 data_dirs=(
@@ -385,6 +381,23 @@ _setup_bash_atuin() {
   done
 }
 
+# First, check for commands whose integration may add commands to `$PATH`
+for cmd in mise pyenv starship; do
+  command -v "$cmd" >/dev/null && HAS[$cmd]=1
+done
+
+# Starship init overrides `$PROMPT_COMMAND`,
+# so it should be loaded before stuff such as mise, Zoxide and `direnv`
+[[ -v HAS[starship] ]] && _setup_bash_starship
+[[ -v HAS[mise] ]] && _setup_bash_mise
+[[ -v HAS[pyenv] ]] && _setup_bash_pyenv_lazy
+
+# Then, check for toher commands
+for cmd in bat comma direnv eza fd fzf git just nvim \
+  pass python3 starship stowsh vim zoxide; do
+  command -v "$cmd" >/dev/null && HAS[$cmd]=1
+done
+
 [[ -v HAS[git] ]] && _setup_bash_git
 [[ -v HAS[vim] ]] && _setup_bash_vim
 [[ -v HAS[nvim] ]] && _setup_bash_nvim
@@ -395,10 +408,7 @@ _setup_bash_atuin() {
 [[ -v HAS[stowsh] ]] && _setup_bash_stowsh
 [[ -v HAS[just] ]] && _setup_bash_just
 [[ -v HAS[fzf] ]] && _setup_bash_fzf
-[[ -v HAS[starship] ]] && _setup_bash_starship # Starship init overrides `$PROMPT_COMMAND`
 [[ -v HAS[direnv] ]] && _setup_bash_direnv
-[[ -v HAS[pyenv] ]] && _setup_bash_pyenv_lazy
-[[ -v HAS[mise] ]] && _setup_bash_mise
 [[ -v HAS[zoxide] ]] && _setup_bash_zoxide_lazy
 # FIXME: `atuin init bash || echo $?` returns 1 on Latios (not tested elsewhere)
 # Atuin preexec setup may be incompatible with other loaded
