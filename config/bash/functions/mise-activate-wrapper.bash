@@ -11,7 +11,7 @@
 # This edit could easily patched upstream (see `mise/src/shell/bash.rs`),
 # but doing so would add maintenance burden for a very edge-case usage.
 
-if [[ -v HAS[mise] ]]; then
+if [[ ${HAS[mise]+_} ]]; then
   :
 elif ! command -v mise >/dev/null 2>&1; then
   return 1

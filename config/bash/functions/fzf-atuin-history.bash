@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ -v HAS[fzf] && -v HAS[atuin] ]]; then
+if [[ ${HAS[fzf]+_} && ${HAS[atuin]+_} ]]; then
   :
 elif ! command -v fzf >/dev/null 2>&1 ||
   ! command -v atuin >/dev/null 2>&1; then

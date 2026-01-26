@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ -v HAS[fzf] ]]; then
+if [[ ${HAS[fzf]+_} ]]; then
   :
 elif ! command -v fzf >/dev/null 2>&1; then
   return 1

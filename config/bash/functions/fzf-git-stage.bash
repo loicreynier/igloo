@@ -2,7 +2,7 @@
 
 # Homemade fzf-based interactive Git stage menu
 
-if [[ -v HAS[fzf] && -v HAS[git] ]]; then
+if [[ ${HAS[fzf]+_} && ${HAS[git]+_} ]]; then
   :
 elif ! command -v fzf >/dev/null 2>&1 ||
   ! command -v git >/dev/null 2>&1; then

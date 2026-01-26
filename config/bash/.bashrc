@@ -93,7 +93,7 @@ alias +3="pushd +3"
 
 case "$SYSTEM" in
 "ONERA_workstation")
-  if [[ -v HAS[pass] ]]; then
+  if [[ ${HAS[pass]+_} ]]; then
     alias ssh-olympe="pass -c srv/olympe && ssh -X olympe"
     alias ssh-topaze="PASSWORD_STORE_CLIP_TIME=60 pass -c srv/topaze && ssh -X topaze"
   fi
@@ -141,7 +141,7 @@ _setup_bash_command_not_found() {
   for profile_dir in "${profile_dirs[@]}"; do
     source="$profile_dir/command-not-found.sh"
     [[ -f $source ]] && source "$source"
-    if [[ ${HAS[comma]} ]]; then
+    if [[ ${HAS[comma]+_} ]]; then
       source="$profile_dir/comma-command-not-found.sh"
       [[ -f $source ]] && source "$source"
     fi
@@ -219,12 +219,12 @@ _setup_bash_fzf() {
   local fzf_preview_dirs
   local fzf_preview_cmd
 
-  if [[ ${HAS[bat]} ]]; then
+  if [[ ${HAS[bat]+_} ]]; then
     fzf_preview_files="bat --color=always --style=plain"
   else
     fzf_preview_files="head -n 50"
   fi
-  if [[ ${HAS[eza]} ]]; then
+  if [[ ${HAS[eza]+_} ]]; then
     fzf_preview_dirs="eza -a \
     --icons --no-quotes --group-directories-first \
     --color=always --color-scale-mode=fixed"
@@ -239,7 +239,7 @@ _setup_bash_fzf() {
   --bind='f2:toggle-preview'
   --bind 'alt-u:preview-page-up,alt-d:preview-page-down'
   --color header:italic"
-  if [[ ${HAS[fd]} ]]; then
+  if [[ ${HAS[fd]+_} ]]; then
     export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --strip-cwd-prefix"
     export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
     export FZF_CTRL_T_COMMAND="fd --type f --hidden --follow --strip-cwd-prefix"
@@ -273,7 +273,7 @@ _setup_bash_fzf() {
   --no-multi --no-sort --scheme=path --exit-0 --select-1
   --preview '${fzf_preview_dirs} {2..}'"
 
-  if [[ ${HAS[bat]} ]]; then
+  if [[ ${HAS[bat]+_} ]]; then
     fzf_preview_cmd="just --show {} | ${fzf_preview_files} --language=Just"
   else
     fzf_preview_cmd="just --show {}"
@@ -388,9 +388,9 @@ done
 
 # Starship init overrides `$PROMPT_COMMAND`,
 # so it should be loaded before stuff such as mise, Zoxide and `direnv`
-[[ -v HAS[starship] ]] && _setup_bash_starship
-[[ -v HAS[mise] ]] && _setup_bash_mise
-[[ -v HAS[pyenv] ]] && _setup_bash_pyenv_lazy
+[[ ${HAS[starship]+_} ]] && _setup_bash_starship
+[[ ${HAS[mise]+_} ]] && _setup_bash_mise
+[[ ${HAS[pyenv]+_} ]] && _setup_bash_pyenv_lazy
 
 # Then, check for toher commands
 for cmd in bat comma direnv eza fd fzf git just nvim \
@@ -398,21 +398,21 @@ for cmd in bat comma direnv eza fd fzf git just nvim \
   command -v "$cmd" >/dev/null && HAS[$cmd]=1
 done
 
-[[ -v HAS[git] ]] && _setup_bash_git
-[[ -v HAS[vim] ]] && _setup_bash_vim
-[[ -v HAS[nvim] ]] && _setup_bash_nvim
-[[ -v HAS[eza] ]] && _setup_bash_eza
-[[ -v HAS[bat] ]] && _setup_bash_bat
-[[ -v HAS[fd] ]] && _setup_bash_fd
-[[ -v HAS[python3] ]] && _setup_bash_python3
-[[ -v HAS[stowsh] ]] && _setup_bash_stowsh
-[[ -v HAS[just] ]] && _setup_bash_just
-[[ -v HAS[fzf] ]] && _setup_bash_fzf
-[[ -v HAS[direnv] ]] && _setup_bash_direnv
-[[ -v HAS[zoxide] ]] && _setup_bash_zoxide_lazy
+[[ ${HAS[git]+_} ]] && _setup_bash_git
+[[ ${HAS[vim]+_} ]] && _setup_bash_vim
+[[ ${HAS[nvim]+_} ]] && _setup_bash_nvim
+[[ ${HAS[eza]+_} ]] && _setup_bash_eza
+[[ ${HAS[bat]+_} ]] && _setup_bash_bat
+[[ ${HAS[fd]+_} ]] && _setup_bash_fd
+[[ ${HAS[python3]+_} ]] && _setup_bash_python3
+[[ ${HAS[stowsh]+_} ]] && _setup_bash_stowsh
+[[ ${HAS[just]+_} ]] && _setup_bash_just
+[[ ${HAS[fzf]+_} ]] && _setup_bash_fzf
+[[ ${HAS[direnv]+_} ]] && _setup_bash_direnv
+[[ ${HAS[zoxide]+_} ]] && _setup_bash_zoxide_lazy
 # FIXME: `atuin init bash || echo $?` returns 1 on Latios (not tested elsewhere)
 # Atuin preexec setup may be incompatible with other loaded
-# [[ -v HAS[atuin] ]] && _setup_bash_atuin
+# [[ ${HAS[atuin]+_} ]] && _setup_bash_atuin
 
 _setup_bash_completion
 _setup_bash_command_not_found
