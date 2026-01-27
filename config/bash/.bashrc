@@ -382,13 +382,10 @@ _setup_bash_atuin() {
 }
 
 # First, check for commands whose integration may add commands to `$PATH`
-for cmd in mise pyenv starship; do
+for cmd in mise pyenv; do
   command -v "$cmd" >/dev/null && HAS[$cmd]=1
 done
 
-# Starship init overrides `$PROMPT_COMMAND`,
-# so it should be loaded before stuff such as mise, Zoxide and `direnv`
-[[ ${HAS[starship]+_} ]] && _setup_bash_starship
 [[ ${HAS[mise]+_} ]] && _setup_bash_mise
 [[ ${HAS[pyenv]+_} ]] && _setup_bash_pyenv_lazy
 
@@ -409,10 +406,19 @@ done
 [[ ${HAS[just]+_} ]] && _setup_bash_just
 [[ ${HAS[fzf]+_} ]] && _setup_bash_fzf
 [[ ${HAS[direnv]+_} ]] && _setup_bash_direnv
-[[ ${HAS[zoxide]+_} ]] && _setup_bash_zoxide_lazy
 # FIXME: `atuin init bash || echo $?` returns 1 on Latios (not tested elsewhere)
 # Atuin preexec setup may be incompatible with other loaded
 # [[ ${HAS[atuin]+_} ]] && _setup_bash_atuin
+
+# Starship init actually *does not* overrides `$PROMPT_COMMAND`,
+# it copies its content to `$STARSHIP_COMMAND_PROMPT` instead
+# and uses the original to generate timing information
+# See: https://github.com/starship/starship/blob/master/src/init/starship.bash
+[[ ${HAS[starship]+_} ]] && _setup_bash_starship
+
+# Zoxide should always be loaded last
+# See: https://github.com/ajeetdsouza/zoxide/pull/1136 for interaction with Starship
+[[ ${HAS[zoxide]+_} ]] && _setup_bash_zoxide_lazy
 
 _setup_bash_completion
 _setup_bash_command_not_found
