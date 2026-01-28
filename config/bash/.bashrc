@@ -153,6 +153,10 @@ _setup_bash_git() {
   alias groot='cd $(git rev-parse --show-toplevel)'
 }
 
+_setup_bash_difft() {
+  export GIT_EXTERNAL_DIFF=difft
+}
+
 _setup_bash_vim() {
   alias vi="vim"
 }
@@ -390,12 +394,13 @@ done
 [[ ${HAS[pyenv]+_} ]] && _setup_bash_pyenv_lazy
 
 # Then, check for toher commands
-for cmd in bat comma direnv eza fd fzf git just nvim \
+for cmd in bat comma direnv difft eza fd fzf git just nvim \
   pass python3 starship stowsh vim zoxide; do
   command -v "$cmd" >/dev/null && HAS[$cmd]=1
 done
 
 [[ ${HAS[git]+_} ]] && _setup_bash_git
+[[ ${HAS[difft]+_} ]] && _setup_bash_difft
 [[ ${HAS[vim]+_} ]] && _setup_bash_vim
 [[ ${HAS[nvim]+_} ]] && _setup_bash_nvim
 [[ ${HAS[eza]+_} ]] && _setup_bash_eza

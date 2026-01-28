@@ -18,7 +18,6 @@
 	gpgsign = true
 [diff]
 	algorithm = histogram
-	external = difft
 [log]
 	data = iso
 [push]
