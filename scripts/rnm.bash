@@ -15,6 +15,9 @@ print_usage() {
   echo "  -h, --help     Display this help message"
   echo "  -f, --force    Force rename if the new filename already exists"
   echo "  -c, --copy     Copy instead of renaming"
+  echo
+  echo "Examples:"
+  echo "  $name /path/to/foo bar"
 }
 
 # Transform long options to short ones for `getopts`
@@ -60,6 +63,13 @@ done
 shift $((OPTIND - 1))
 
 if [ $# -ne 2 ]; then
+  print_usage
+  exit 1
+fi
+
+if [[ $2 == *"/"* ]]; then
+  echo "Error: The new filename should not be a path"
+  echo
   print_usage
   exit 1
 fi
