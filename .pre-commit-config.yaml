@@ -58,3 +58,12 @@ repos:
         args: [--fix]
         name: "Lint   >> Python files (ruff-check)"
         priority: 10
+  - repo: local
+    hooks:
+      - id: taplo-format
+        name: "Format >> TOML files (taplo)"
+        entry: "taplo format"
+        types:
+          - toml
+        language: system
+        priority: 0

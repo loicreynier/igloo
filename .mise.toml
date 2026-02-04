@@ -5,3 +5,22 @@ prek = "latest"
 rg = "latest"
 shellcheck = "latest"
 shfmt = "latest"
+taplo = "latest"
+
+[tasks.todo]
+description = "Show TODO's and FIXME's notes"
+run = "rg --hidden --sort=path --glob='!.mise.toml' 'TODO|FIXME'"
+
+[tasks.pre-commit]
+description = "Run pre-commit checks"
+usage = '''
+flag "--nix" help="Use Nix-generated config"
+flag "--all" help="Run on all files"
+'''
+run = '''
+if [ "${usage_nix}" = "true" ]; then
+  prek run -c ./.pre-commit-config-nix.yaml ${usage_all:+--all-files}
+else
+  prek run ${usage_all:+--all-files}
+fi
+'''

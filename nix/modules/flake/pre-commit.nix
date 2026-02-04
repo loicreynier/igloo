@@ -41,10 +41,11 @@
           check-yaml = mkHook "Check  >> YAML Files (check-YAML)" { };
           typos = mkHook "Check  >> Typos (typos)" { };
           editorconfig-checker = mkHook "Check  >> EditorConfig compliance (editorconfig-checker)" { };
-          deadnix = mkHook "Lint   >>> Nix files (deadnix)" { };
-          statix = mkHook "Lint   >>> Nix files (statix)" { };
+          deadnix = mkHook "Lint   >> Nix files (deadnix)" { };
+          statix = mkHook "Lint   >> Nix files (statix)" { };
           ruff = mkHook "Lint   >> Python files (ruff-check)" { };
           shellcheck = mkHook "Lint   >> Shell files (shellcheck-system)" { };
+          taplo = mkHook "Format >> TOML Files (taplo)" { };
         };
       };
 
