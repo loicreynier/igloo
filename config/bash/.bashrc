@@ -4,6 +4,24 @@
 
 # shellcheck disable=SC1090,SC1091
 
+# == SYSTEM-SPECIFIC INITIALIZATION ================================================================
+
+case "$SYSTEM" in
+HPCC_Vesta)
+  if [[ -f "/nfs/mesonet/sw/profile/bashrc.default" ]]; then
+    echo "Sourcing '/nfs/mesonet/sw/profile/bashrc.default'"
+    source "/nfs/mesonet/sw/profile/bashrc.default"
+  fi
+  ;;
+HPCC_Turpan)
+  if [[ -n $VNCDESKTOP ]]; then
+    [[ -z $__HOME_PROFILE_SOURCED ]] && source "$HOME/.bash_profile"
+  fi
+  ;;
+esac
+
+# == GLOBAL INIT ===================================================================================
+
 if [ -n "$__HOME_BASHRC_SOURCED" ]; then return; fi
 __HOME_BASHRC_SOURCED=1
 
@@ -14,21 +32,6 @@ if [[ -f "/etc/bashrc" ]]; then
   source "/etc/bashrc"
 fi
 
-# == SYSTEM-SPECIFIC INITIALIZATION ================================================================
-
-if [[ $SYSTEM == "HPCC_Vesta" ]]; then
-  if [[ -f "/nfs/mesonet/sw/profile/bashrc.default" ]]; then
-    echo "Sourcing '/nfs/mesonet/sw/profile/bashrc.default'"
-    source "/nfs/mesonet/sw/profile/bashrc.default"
-  fi
-fi
-
-if [[ $SYSTEM == "HPCC_Turpan" ]]; then
-  if [[ -n $VNCDESKTOP ]]; then
-    export PATH="$HOME/.local/binx86":"$PATH"
-  fi
-fi
-
 # == UTILITY FUNCTIONS AND VARIABLES ===============================================================
 
 declare -A HAS
@@ -36,8 +39,8 @@ declare -A HAS
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}"
 data_dirs=(
   "$HOME/.nix-profile/share"
-  "${XDG_STATE_HOME-$HOME/.local/state}/nix/profiles/profile/share"
-  "${XDG_DATA_HOME-$HOME/.local/share}"
+  "${XDG_STATE_HOME:-$HOME/.local/state}/nix/profiles/profile/share"
+  "${XDG_DATA_HOME:-$HOME/.local/share}"
 )
 profile_dirs=(
   "$HOME/.nix-profile/etc/profile.d"
@@ -97,6 +100,10 @@ case "$SYSTEM" in
     alias ssh-olympe="pass -c srv/olympe && ssh -X olympe"
     alias ssh-topaze="PASSWORD_STORE_CLIP_TIME=60 pass -c srv/topaze && ssh -X topaze"
   fi
+  ;;
+"HPCC_Turpan")
+  # shellcheck disable=2139
+  alias runVisuSession.sh="( module purge; PATH=${PATH_SYSTEM:-$PATH} command runVisuSession.sh )"
   ;;
 "HPCC_Vesta")
   alias salloc="salloc -A m23003 -p mn-grant"

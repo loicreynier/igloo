@@ -2,10 +2,12 @@
 
 # ~/.profile
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC3043
 
 if [ -n "$__HOME_PROFILE_SOURCED" ]; then return; fi
 __HOME_PROFILE_SOURCED=1
+
+PATH_SYSTEM=$PATH
 
 command_exists() {
   command -v "$1" >/dev/null 2>&1
@@ -40,6 +42,18 @@ path_prepend() {
   *":$1:"*) ;;
   *) PATH="$1:$PATH" ;;
   esac
+}
+
+path_remove() {
+  [ -n "$1" ] || return 0
+  local path=""
+  local IFS=:
+  for dir in $PATH; do
+    if [ "$dir" != "$1" ]; then
+      path="${path:+$path:}$dir"
+    fi
+  done
+  PATH="$path"
 }
 
 [ -z "$UID" ] && UID="$(id -u)"
@@ -111,9 +125,6 @@ if [ -z "$SYSTEM" ]; then
         ;;
       olympe*)
         SYSTEM="HPCC_Olympe"
-        ;;
-      turpanvisu*)
-        SYSTEM="HPCC_Turpan_visu"
         ;;
       turpan*)
         SYSTEM="HPCC_Turpan"
@@ -272,21 +283,23 @@ fi
 
 # == SHELL CONFIGURATION =======================================================
 
-if [ -n "$PS1" ] &&
-  { [ "$0" = "-bash" ] || [ "$0" = "/bin/bash" ] || [ "$0" = "bash" ]; }; then
-  if [ -f "$HOME/.local/etc/profile.d/bash_completion.sh" ]; then
-    unset BASH_COMPLETION_VERSINFO # Unset if already loaded by `/etc/profile.d`
-    log "Sourcing '~/.local/etc/profile.d/bash_completion.sh'"
-    . "$HOME/.local/etc/profile.d/bash_completion.sh"
-  elif [ -f /etc/profile.d/bash_completion.sh ]; then
-    log "Sourcing '/etc/profile.d/bash_completion.sh'"
-    . /etc/profile.d/bash_completion.sh
+_setup_shell_bash() {
+  if [ -n "$PS1" ] &&
+    { [ "$0" = "-bash" ] || [ "$0" = "/bin/bash" ] || [ "$0" = "bash" ]; }; then
+    if [ -f "$HOME/.local/etc/profile.d/bash_completion.sh" ]; then
+      unset BASH_COMPLETION_VERSINFO # Unset if already loaded by `/etc/profile.d`
+      log "Sourcing '~/.local/etc/profile.d/bash_completion.sh'"
+      . "$HOME/.local/etc/profile.d/bash_completion.sh"
+    elif [ -f /etc/profile.d/bash_completion.sh ]; then
+      log "Sourcing '/etc/profile.d/bash_completion.sh'"
+      . /etc/profile.d/bash_completion.sh
+    fi
+    if [ -f "${HOME}/.bashrc" ]; then
+      log "Sourcing '${HOME}/.bashrc'"
+      . "${HOME}/.bashrc"
+    fi
   fi
-  if [ -f "${HOME}/.bashrc" ]; then
-    log "Sourcing '${HOME}/.bashrc'"
-    . "${HOME}/.bashrc"
-  fi
-fi
+}
 
 # Shell setups are stored as functions so then can be loaded manually
 # if system is not automatically recognized
@@ -310,15 +323,19 @@ _setup_shell_HPCC_Olympe() {
 }
 
 _setup_shell_HPCC_Turpan() {
-  GPG_TTY="$(tty)"
-  export GPG_TTY
-  module -s load cmake/3.25.1
-  module -s load gnu/12.2.0
-  module -s load python/3.10.9
-}
-
-_setup_shell_HPCC_Turpan_visu() {
-  path_prepend "$HOME/.local/binx86"
+  case "$HOSTNAME" in
+  turpanvisu*)
+    path_prepend "$HOME/.local/bin_x86"
+    path_remove "$CARGO_HOME/bin"
+    ;;
+  *)
+    GPG_TTY="$(tty)"
+    export GPG_TTY
+    module -s load cmake/3.25.1
+    module -s load gnu/12.2.0
+    module -s load python/3.10.9
+    ;;
+  esac
 }
 
 _setup_shell_HPCC_Topaze() {
@@ -336,14 +353,16 @@ case "$SYSTEM" in
 "workstation_ONERA") _setup_shell_workstation_ONERA ;;
 "HPCC_Olympe") _setup_shell_HPCC_Olympe ;;
 "HPCC_Turpan") _setup_shell_HPCC_Turpan ;;
-"HPCC_Turpan_visu") _setup_shell_HPCC_Turpan_visu ;;
 "HPCC_Topaze") _setup_shell_HPCC_Topaze ;;
 "HPCC_Vesta") _setup_shell_HPCC_Vesta ;;
 esac
 
+_setup_shell_bash
+
 # == CLEANING ==================================================================
 
 export PATH # Required as `path_prepend` doesn't export
+export PATH_SYSTEM
 
-unset -f command_exists log hash256 path_prepend
+unset -f command_exists log hash256 path_prepend path_remove
 unset hash_cmd
