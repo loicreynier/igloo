@@ -49,8 +49,10 @@
         };
       };
 
-      devShells.default = pkgs.mkShell {
-        inherit (config.pre-commit) shellHook;
+      devshells.default.devshell = {
+        startup = {
+          pre-commit.text = config.pre-commit.installationScript;
+        };
         packages = config.pre-commit.settings.enabledPackages;
       };
     };
