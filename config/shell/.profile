@@ -265,6 +265,7 @@ export PYENV_ROOT="$HOME/.local/opt/pyenv"
 path_prepend "$PYENV_ROOT/bin"
 
 export MISE_DATA_DIR="$HOME/.local/opt/mise"
+[ "$SYSTEM" = "unknown" ] || export MISE_ENV="sys_$SYSTEM"
 
 export CARGO_HOME="$HOME/.local/opt/cargo"
 export RUSTUP_HOME="$HOME/.local/opt/rustup"
@@ -316,26 +317,22 @@ _setup_shell_workstation_ONERA() {
 
 _setup_shell_HPCC_Olympe() {
   module -s purge
+  module -s load git/2.34.1
   module -s load cmake/3.30.3
   module -s load gcc/12.3.0
-  module -s load python/3.11.3
-  export CC=gcc
+  module -s load clang/16.0.0
 }
 
 _setup_shell_HPCC_Turpan() {
-  case "$HOSTNAME" in
-  turpanvisu*)
-    path_prepend "$HOME/.local/bin_x86"
-    path_remove "$CARGO_HOME/bin"
-    ;;
-  *)
-    GPG_TTY="$(tty)"
-    export GPG_TTY
-    module -s load cmake/3.25.1
-    module -s load gnu/12.2.0
-    module -s load python/3.10.9
-    ;;
-  esac
+  GPG_TTY="$(tty)"
+  export GPG_TTY
+  module -s load cmake/3.25.1
+  module -s load gnu/12.2.0
+  module -s load llvm/16.0.0
+}
+
+_setup_shell_HPCC_Turpan_visu() {
+  path_prepend "$HOME/.local/binx86"
 }
 
 _setup_shell_HPCC_Topaze() {
