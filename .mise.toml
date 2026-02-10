@@ -1,10 +1,13 @@
 [tools]
+editorconfig-checker = "latest"
 gum = "latest"
 prek = "latest"
 rg = "latest"
+ruff = "latest"
 shellcheck = "latest"
 shfmt = "latest"
 taplo = "latest"
+typos = "latest"
 
 [tasks.todo]
 description = "Show TODO's and FIXME's notes"

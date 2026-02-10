@@ -18,17 +18,23 @@ repos:
       - id: check-yaml
         name: "Check  >> YAML files (check-yaml)"
         priority: 10
-  - repo: "https://github.com/crate-ci/typos"
-    rev: v1.42.0
+  - repo: local
     hooks:
       - id: typos
         name: "Check  >> Typos (typos)"
+        entry: typos
+        types:
+          - text
+        language: system
         priority: 10
-  - repo: "https://github.com/editorconfig-checker/editorconfig-checker"
-    rev: v3.4.0
+  - repo: local
     hooks:
       - id: editorconfig-checker
         name: "Check  >> EditorConfig compliance (editorconfig-checker)"
+        entry: ec
+        types:
+          - text
+        language: system
         priority: 10
   - repo: local
     hooks:
@@ -48,14 +54,21 @@ repos:
           - shell
         language: system
         priority: 0
-  - repo: "https://github.com/astral-sh/ruff-pre-commit"
-    rev: v0.14.11
+  - repo: local
     hooks:
       - id: ruff-format
         name: "Format >> Python files (ruff-format)"
+        entry: ruff format --force-exclude
+        types:
+          - python
+        language: system
         priority: 0
       - id: ruff-check
+        entry: ruff check --force-exclude
         args: [--fix]
+        types:
+          - python
+        language: system
         name: "Lint   >> Python files (ruff-check)"
         priority: 10
   - repo: local
