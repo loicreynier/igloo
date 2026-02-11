@@ -265,7 +265,6 @@ export PYENV_ROOT="$HOME/.local/opt/pyenv"
 path_prepend "$PYENV_ROOT/bin"
 
 export MISE_DATA_DIR="$HOME/.local/opt/mise"
-[ "$SYSTEM" = "unknown" ] || export MISE_ENV="sys_$SYSTEM"
 
 export CARGO_HOME="$HOME/.local/opt/cargo"
 export RUSTUP_HOME="$HOME/.local/opt/rustup"
@@ -321,6 +320,7 @@ _setup_shell_HPCC_Olympe() {
   module -s load cmake/3.30.3
   module -s load gcc/12.3.0
   module -s load clang/16.0.0
+  export MISE_ENV=ssh
 }
 
 _setup_shell_HPCC_Turpan() {
@@ -329,6 +329,7 @@ _setup_shell_HPCC_Turpan() {
   module -s load cmake/3.25.1
   module -s load gnu/12.2.0
   module -s load llvm/16.0.0
+  export MISE_ENV=ssh
 }
 
 _setup_shell_HPCC_Turpan_visu() {
