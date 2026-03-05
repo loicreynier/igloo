@@ -17,7 +17,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     git-hooks = {
-      url = "github:cachix/git-hooks.nix";
+      # url = "github:cachix/git-hooks.nix";
+      url = "github:loicreynier/git-hooks.nix/fix/shfmt/ln-editorconfig";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
