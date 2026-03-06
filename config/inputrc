@@ -1,7 +1,8 @@
 # ~/.inputrc
 
-# Vim > Emacs
-# set editing-mode vi # TODO: configure keymaps
+# Check active bindings with: bind -P
+# Check options with: bind -v
+# Reload configuration with: bind -f ~/.config/inputrc
 
 # Keymaps
 # Necessary to bind stty special characters
@@ -9,20 +10,21 @@
 # https://stackoverflow.com/questions/23349325/inputrc-override-controlw
 set bind-tty-special-chars off
 
-"\C-w": unix-filename-rubout
-"\C-n": history-search-forward
-"\C-p": history-search-backward
+"\C-g": undo
+"\C-w": backward-kill-word
+"\C-n": history-substring-search-forward
+"\C-p": history-substring-search-backward
+"\C-i": menu-complete
+"\C-o": menu-complete-backward
 
 # 8bit input
 set input-meta on
 set output-meta on
 set convert-meta off
 
-# Smart case handling
+# Smart completion
 set completion-ignore-case on
 set completion-map-case on
-
-# Smart completion
 set skip-completed-text on
 set match-hidden-files off # Don't match dotfile if not specified
 set mark-symlinked-directories off
@@ -31,13 +33,18 @@ set mark-symlinked-directories off
 set menu-complete-display-prefix on
 set show-all-if-ambiguous on
 
+# History
+set history-preserve-point on
+
 # Interpret pasted command as a single input
 set enable-bracketed-paste on
 
 # Make it sexy
-# set show-mode-in-prompt on # TODO: integration with Starship
 set colored-stats on
 set colored-completion-prefix on
 set blink-matching-paren on
+
+# Shut the fuck up
+set bell-style none
 
 # vim: ft=readline
