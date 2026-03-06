@@ -437,4 +437,4 @@ _setup_bash_command_not_found
 
 # == CLEANING ======================================================================================
 
-unset state_dir data_dirs data_dir profile_dirs profile_dir source
+unset file state_dir data_dirs data_dir profile_dirs profile_dir source
