@@ -17,6 +17,10 @@ set bind-tty-special-chars off
 "\C-i": menu-complete
 "\C-o": menu-complete-backward
 
+$if Bash
+  Space: magic-space # History expansion "!!<Space> -> expand last command"
+$endif
+
 # 8bit input
 set input-meta on
 set output-meta on
