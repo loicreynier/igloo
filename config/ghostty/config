@@ -1,0 +1,12 @@
+config-file = ?"~/.config/ghostty/themes/vscode-dark.conf"
+
+font-size = 9
+
+link-url = true
+
+keybind = ctrl+m=text:\r
+keybind = ctrl+i=text:\t
+keybind = ctrl+alt+k=goto_split:down
+keybind = ctrl+alt+l=goto_split:right
+keybind = ctrl+alt+h=goto_split:left
+keybind = ctrl+alt+j=goto_split:left
