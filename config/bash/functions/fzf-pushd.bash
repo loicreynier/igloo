@@ -63,16 +63,11 @@ function __fzf_pushf__() {
   fi
 }
 
-# shellcheck disable=2016
-bind -m emacs-standard '"\ev": " \C-b\C-k \C-u`__fzf_pushf__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
 # Binding from fzf `ALT_C_COMMAND` Bash binding:
-# \C-b\C-k \C-u : clear line
-# `__fzf_pushf` : print the pushd command to execute
-# \e            : start escape sequence
-# \er           : repaint line
-# \C-m          : press enter & execute the command
-# \C-y          : yank (paste) the last killed text
-# \ey           : move back one work
-# \C-x\C-x      : swap cursor positions
+# https://github.com/junegunn/fzf/blob/master/shell/key-bindings.bash
+# Basically uses Readline's killring to cut current context, then print and evaluate `__fzf_pushf__` output
+# and finally print back the context
+# shellcheck disable=2016
+bind -m emacs-standard '"\ev": " \C-b\C-k \C-u`__fzf_pushf__`\e\C-e\C-\e(\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-y\ey\C-_"'
 bind -m vi-command '"\ev": "\C-z\ev\C-z"'
 bind -m vi-insert '"\ev": "\C-z\ev\C-z"'
