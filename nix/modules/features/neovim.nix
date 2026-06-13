@@ -1,6 +1,11 @@
 {
   perSystem =
-    { pkgs, lib, ... }:
+    {
+      pkgs,
+      lib,
+      inputs',
+      ...
+    }:
     let
       wrapperArgs = [
         "--prefix"
@@ -78,9 +83,12 @@
       ];
       postInstallCommands = map (target: "rm -f $out/share/nvim/runtime/${target}") excluededRuntimeFiles;
 
-      # Reference: https://github.com/nix-community/home-manager/blob/master/modules/programs/neovim.nix
-      neovimWrapped =
-        (pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
+      # References:
+      # - https://github.com/nix-community/home-manager/blob/master/modules/programs/neovim.nix
+      # - https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/editors/neovim/wrapper.nix
+      neovimWrapper =
+        pkg:
+        (pkgs.wrapNeovimUnstable pkg {
           wrapRc = false;
           wrapperArgs = wrapperArgs ++ wrapperArgsPkgs;
           autowrapRuntime = true;
@@ -96,8 +104,18 @@
               ${builtins.concatStringsSep "\n" postInstallCommands}
             '';
           });
+
+      neovimWrapped = neovimWrapper pkgs.neovim-unwrapped;
+      neovimWrappedNightly = pkgs.writeShellScriptBin "nvim-nightly" ''
+        exec ${neovimWrapper inputs'.neovim-nightly-overlay.packages.default}/bin/nvim "$@"
+      '';
     in
     {
-      packages = { inherit neovimWrapped; };
+      packages = {
+        inherit
+          neovimWrapped
+          neovimWrappedNightly
+          ;
+      };
     };
 }
