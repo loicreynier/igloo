@@ -16,9 +16,12 @@
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     git-hooks = {
-      # url = "github:cachix/git-hooks.nix";
-      url = "github:loicreynier/git-hooks.nix/fix/shfmt/ln-editorconfig";
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
