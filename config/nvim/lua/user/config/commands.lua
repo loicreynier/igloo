@@ -51,3 +51,13 @@ cmd("TouchFile", function(opts)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "x", false)
   require("user.utils.functions").touch_file_from_selection(opts.bang)
 end, { bang = true, range = true, desc = "Create file from visual selected path" })
+
+cmd("Groot", function()
+  local git_root = vim.fs.root(0, ".git")
+  if not git_root then
+    vim.notify("Not inside a Git repository", vim.log.levels.WARN, { title = "Groot" })
+    return
+  end
+  vim.fn.chdir(git_root)
+  vim.notify(git_root, vim.log.levels.INFO, { title = "Groot" })
+end, { desc = "Change working directory to Git root" })
