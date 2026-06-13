@@ -1,0 +1,16 @@
+{
+  "letin": {
+    "prefix": "let",
+    "body": [
+      "let",
+      "\t$1",
+      "in $0"
+    ],
+    "description": "let-in block"
+  },
+  "hash": {
+    "prefix": "hash",
+    "body": "\"${1:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";",
+    "description": "Empty hash"
+  }
+}

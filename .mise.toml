@@ -1,4 +1,5 @@
 [tools]
+"cargo:stylua" = "latest"
 editorconfig-checker = "latest"
 gum = "latest"
 prek = "latest"

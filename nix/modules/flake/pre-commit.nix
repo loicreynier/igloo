@@ -37,6 +37,7 @@
             };
           };
           ruff-format = mkHook "Format >> Python files (ruff-format)" { priority = 0; };
+          stylua = mkHook "Format >> Lua files (stylua)" { priority = 0; };
           taplo = mkHook "Format >> TOML Files (taplo)" { priority = 0; };
           end-of-file-fixer = mkHook "Format >> End of line fixer (end-of-file-fixer)" { priority = 1; };
           check-symlinks = mkHook "Check  >> Symlinks (check-symlinks)" { priority = 10; };

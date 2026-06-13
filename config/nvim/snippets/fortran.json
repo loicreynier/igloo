@@ -1,0 +1,59 @@
+{
+  "program": {
+    "prefix": [
+      "prog",
+      "program"
+    ],
+    "body": [
+      "program ${1:name}",
+      "",
+      "\timplicit none",
+      "",
+      "\t$0",
+      "",
+      "end program $1"
+    ],
+    "scope": "source.fortran"
+  },
+  "module": {
+    "prefix": [
+      "mod",
+      "module"
+    ],
+    "body": [
+      "module ${1:name}",
+      "",
+      "\timplicit none",
+      "",
+      "\t$0",
+      "",
+      "end module $1"
+    ],
+    "scope": "source.fortran"
+  },
+  "subroutine": {
+    "prefix": [
+      "sub",
+      "subroutine"
+    ],
+    "body": [
+      "subroutine ${1:name}(${2:input})",
+      "\t$0",
+      "end subroutine $1"
+    ],
+    "scope": "source.fortran"
+  },
+  "dyjeat_loop": {
+    "prefix": "dyjeatdo",
+    "body": [
+      "do k = ${1:sz-3}, ${2:ez+3}",
+      "\tdo j = ${3:sy-3}, ${4:ey+3}",
+      "\t\tdo i = ${5:sx-3}, ${6:ex+3}",
+      "\t\t\t$0",
+      "\t\tend do",
+      "\tend do",
+      "end do"
+    ],
+    "scope": "source.fortran"
+  }
+}

@@ -33,10 +33,17 @@ indent_style = tab
 indent_size = off
 max_line_length = off
 
+[*.lua]
+max_line_length = 120
+quote_style = double
+call_parentheses = always
+collapse_simple_statement = always
+sort_requires = true
+
 [.justfile]
 indent_size = 4
 
-[*.lock]
+[*{.lock,lock.json}]
 # Should not be opened nor linted
 end_of_line = unset
 insert_final_newline = unset

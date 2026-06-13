@@ -6,12 +6,23 @@
 "cargo:fd-find" = "latest"
 "cargo:hyperfine" = "latest"
 "cargo:starship" = "latest"
-"cargo:tree-sitter-cli" = "latest"
 "cargo:zoxide" = "latest"
 direnv = "latest"
 fzf = "latest"
 node = "latest"
 rg = "latest"
 sd = "latest"
+shellcheck = "latest"
 usage = "latest"
 uv = "latest"
+
+# Neovim/editor external tools
+lua-language-server = "latest"
+"cargo:stylua" = "latest"
+"cargo:tree-sitter-cli" = "latest"
+ruff = "latest"
+ty = "latest"
+"pipx:fortls" = { version = "latest", uvx = "true" }
+"pipx:fprettify" = { version = "latest", uvx = "true" }
+"pipx:fortitude-lint" = { version = "latest", uvx = "true" }
+"cargo:ffmt" = "latest"

@@ -1,0 +1,56 @@
+{
+  "subscript": {
+    "prefix": "__",
+    "body": "_{${1:${TM_SELECTED_TEXT}}}",
+    "description": "subscript"
+  },
+  "superscript": {
+    "prefix": "**",
+    "body": "^{${1:${TM_SELECTED_TEXT}}}",
+    "description": "superscript"
+  },
+  "itemize": {
+    "prefix": [
+      "- ",
+      "\\itemize",
+      "itemize"
+    ],
+    "body": [
+      "\\begin{itemize}",
+      "\t\\item $1",
+      "\\end{itemize}$0"
+    ]
+  },
+  "Minted environment": {
+    "prefix": [
+      "\\codeblock",
+      "codeblock",
+      "\\minted",
+      "minted"
+    ],
+    "body": [
+      "\\begin{minted}{${1:python}}",
+      "$0",
+      "\\end{minted}"
+    ],
+    "description": "Minted code block"
+  },
+  "Minted inline": {
+    "prefix": [
+      "\\code",
+      "code",
+      "\\mintinline",
+      "mintinline"
+    ],
+    "body": [
+      "\\mintinline{${1:bash}}{$0}"
+    ],
+    "description": "Minted inline code"
+  },
+  "LTeX": {
+    "prefix": [
+      "ltex"
+    ],
+    "body": "% LTeX: ${1:enabled=false}"
+  }
+}

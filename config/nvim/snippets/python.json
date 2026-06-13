@@ -1,0 +1,49 @@
+{
+  "if __name__ == __main__": {
+    "prefix": "ifmain",
+    "body": [
+      "if __name__ == \"__main__\":",
+      "\t${1:main()}"
+    ],
+    "description": "Execute code if the file is executed directly"
+  },
+  "if": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition}:",
+      "\t${2:pass}"
+    ]
+  },
+  "elif": {
+    "prefix": "elif",
+    "body": [
+      "elif ${1:expression}:",
+      "\t${2:pass}"
+    ]
+  },
+  "else": {
+    "prefix": "else",
+    "body": [
+      "else:",
+      "\t${1:pass}"
+    ]
+  },
+  "if/else": {
+    "prefix": "ifelse",
+    "body": [
+      "if ${1:condition}:",
+      "\t${2:pass}",
+      "else:",
+      "\t${3:pass}"
+    ]
+  },
+  "try/except": {
+    "prefix": "try",
+    "body": [
+      "try:",
+      "\t${1:pass}",
+      "except ${2:Exception} as ${3:e}:",
+      "\traise $3"
+    ]
+  }
+}

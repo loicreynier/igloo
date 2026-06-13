@@ -1,0 +1,38 @@
+{
+  "if": {
+    "prefix": "if",
+    "body": [
+      "if ${1:true} then",
+      "\t$0",
+      "end"
+    ]
+  },
+  "elseif": {
+    "prefix": "elseif",
+    "body": [
+      "elseif ${1:true} then",
+      "\t$0"
+    ]
+  },
+  "function": {
+    "prefix": "fun",
+    "body": [
+      "function ${1:name}($2)",
+      "\t${0}",
+      "end"
+    ]
+  },
+  "module": {
+    "prefix": [
+      "mod",
+      "M"
+    ],
+    "body": [
+      "local M = {}",
+      "",
+      "$0",
+      "",
+      "return M"
+    ]
+  }
+}
