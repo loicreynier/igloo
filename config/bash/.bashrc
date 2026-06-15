@@ -101,10 +101,6 @@ case "$SYSTEM" in
     alias ssh-topaze="PASSWORD_STORE_CLIP_TIME=60 pass -c srv/topaze && ssh -X topaze"
   fi
   ;;
-"HPCC_Turpan")
-  # shellcheck disable=2139
-  alias runVisuSession.sh="( module purge; PATH=${PATH_SYSTEM:-$PATH} command runVisuSession.sh )"
-  ;;
 "HPCC_Vesta")
   alias salloc="salloc -A m23003 -p mn-grant"
   alias salloc2g="salloc --gres=gpu:2"
