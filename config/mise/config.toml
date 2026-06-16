@@ -26,3 +26,7 @@ ty = "latest"
 "pipx:fprettify" = { version = "latest", uvx = "true" }
 "pipx:fortitude-lint" = { version = "latest", uvx = "true" }
 "cargo:ffmt" = "latest"
+"cargo:neocmakelsp" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
+taplo = "latest"
+"cargo:https://github.com/tekumara/typos-lsp" = "latest"
