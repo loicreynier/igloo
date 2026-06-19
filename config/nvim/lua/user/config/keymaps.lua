@@ -7,6 +7,8 @@ local set_api = vim.api.nvim_set_keymap
 M.leader = vim.g.mapleader
 
 -- Azerty
+-- TODO: replace by langmap when https://github.com/neovim/neovim/pull/40148 is released (0.12.4)
+-- vim.opt.langmap = "ù[,*]"
 set_api("n", "ù", "[", {})
 set_api("n", "*", "]", {})
 set_api("n", "ùù", "[[", {})
