@@ -219,25 +219,4 @@ return {
       },
     },
   },
-  {
-    "saghen/blink.cmp",
-    dependencies = { "MahanRahmati/blink-nerdfont.nvim" },
-    ---@module "blink.cmp"
-    ---@type blink.cmp.Config
-    opts = {
-      sources = {
-        default = { "nerdfont" },
-        providers = {
-          nerdfont = {
-            module = "blink-nerdfont",
-            name = "Nerd Fonts",
-            opts = {
-              insert = true,
-              trigger = ":",
-            },
-          },
-        },
-      },
-    },
-  },
 }
