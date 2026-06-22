@@ -127,17 +127,9 @@ return {
 
   -- Diff in interactive rebase edit
   {
-    "yutkat/git-rebase-auto-diff.nvim",
-    ft = { "gitrebase" },
-    opts = {
-      size = vim.fn.float2nr(vim.o.lines * 0.33),
-      run_show = true,
-    },
-  },
-
-  -- Diff in interactive rebase edit
-  {
-    "yutkat/git-rebase-auto-diff.nvim",
+    -- "yutkat/git-rebase-auto-diff.nvim",
+    "loicreynier/git-rebase-auto-diff.nvim",
+    branch = "fix/worktrees",
     ft = { "gitrebase" },
     opts = {
       size = vim.fn.float2nr(vim.o.lines * 0.33),
