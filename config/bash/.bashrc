@@ -2,7 +2,7 @@
 
 # ~/.bashrc
 
-# shellcheck disable=SC1090,SC1091
+# shellcheck disable=SC1090,SC1091 # Sourced files
 
 # == SYSTEM-SPECIFIC INITIALIZATION ================================================================
 

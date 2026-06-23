@@ -2,7 +2,8 @@
 
 # ~/.profile
 
-# shellcheck disable=SC1091,SC3043
+# shellcheck disable=SC1091 # Sourced files
+# shellcheck disable=SC2329 # Unused functions
 
 if [ -n "$__HOME_PROFILE_SOURCED" ]; then return; fi
 __HOME_PROFILE_SOURCED=1
@@ -44,6 +45,7 @@ path_prepend() {
   esac
 }
 
+# shellcheck disable=SC3043 # Local is not defined in POSIX `sh`
 path_remove() {
   [ -n "$1" ] || return 0
   local path=""
