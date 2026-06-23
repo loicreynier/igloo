@@ -59,6 +59,47 @@ set("c", "<C-o>", function() return vim.fn.wildmenumode() == 1 and "<S-Tab>" end
 set("c", "<C-p>", function() return vim.fn.wildmenumode() == 1 and "<Left>" or "<Up>" end, { expr = true })
 set("c", "<C-n>", function() return vim.fn.wildmenumode() == 1 and "<Right>" or "<Down>" end, { expr = true })
 
+-- Diagnostics ---------------------------------------------------------------------------------------------------------
+
+local diagnos = vim.diagnostic
+local error = diagnos.severity.ERROR
+local warn = diagnos.severity.WARN
+
+set("n", "]d", function() diagnos.jump({ count = vim.v.count1 }) end, { desc = "Next diagnostic" })
+set("n", "[d", function() diagnos.jump({ count = -vim.v.count1 }) end, { desc = "Previous diagnostic" })
+set("n", "]D", function() diagnos.jump({ count = vim._maxint, wrap = false }) end, { desc = "Last diagnostic" })
+set("n", "[D", function() diagnos.jump({ count = -vim._maxint, wrap = false }) end, { desc = "First diagnostic" })
+
+set("n", "]e", function() diagnos.jump({ count = vim.v.count1, severity = error }) end, { desc = "Next error" })
+set("n", "[e", function() diagnos.jump({ count = vim.v.count1, severity = error }) end, { desc = "Previous error" })
+set(
+  "n",
+  "]E",
+  function() diagnos.jump({ count = vim._maxint, wrap = false, severity = error }) end,
+  { desc = "Last error" }
+)
+set(
+  "n",
+  "[E",
+  function() diagnos.jump({ count = -vim._maxint, wrap = false, severity = error }) end,
+  { desc = "First error" }
+)
+
+set("n", "]w", function() diagnos.jump({ count = vim.v.count1, severity = warn }) end, { desc = "Next warning" })
+set("n", "[w", function() diagnos.jump({ count = vim.v.count1, severity = warn }) end, { desc = "Previous warning" })
+set(
+  "n",
+  "]W",
+  function() diagnos.jump({ count = vim._maxint, wrap = false, severity = warn }) end,
+  { desc = "Last warning" }
+)
+set(
+  "n",
+  "[W",
+  function() diagnos.jump({ count = -vim._maxint, wrap = false, severity = warn }) end,
+  { desc = "First warning" }
+)
+
 -- LSP -----------------------------------------------------------------------------------------------------------------
 
 local lsp = vim.lsp
