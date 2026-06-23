@@ -17,7 +17,11 @@ return {
         if not require("user.utils.format").enabled(bufnr) then return end
         return { timeout_ms = 500, lsp_format = "fallback" }
       end,
-      formatters_by_ft = {},
+      formatters_by_ft = {
+        c = { "clang_format" },
+        cpp = { "clang_format" },
+        cuda = { "clang_format" },
+      },
     },
     init = function() vim.o.formatexpr = "v:lua.require('conform').formatexpr()" end,
   },
