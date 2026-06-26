@@ -61,3 +61,61 @@ cmd("Groot", function()
   vim.fn.chdir(git_root)
   vim.notify(git_root, vim.log.levels.INFO, { title = "Groot" })
 end, { desc = "Change working directory to Git root" })
+
+cmd("InsertNumbers", function(opts)
+  -- Parse string of args
+  local args = {}
+  for arg in opts.args:gmatch("%S+") do
+    table.insert(args, arg)
+  end
+
+  -- Parse padding: InsertNumbers 01 10 -> 01 02 .. 10
+  local arg1_raw = args[1]
+  local pad = arg1_raw and arg1_raw:match("^0%d") and #arg1_raw or nil
+
+  local formatted_num = function(n)
+    if pad then return string.format("%0" .. pad .. "d", n) end
+    return tostring(n)
+  end
+
+  for i, v in ipairs(args) do
+    args[i] = tonumber(v)
+  end
+  local start = args[1] or 1
+  local step = args[2] or 1
+
+  local start_row, end_row, col
+  local is_visual = opts.range > 0
+
+  if is_visual then
+    start_row = vim.fn.line("'<")
+    end_row = vim.fn.line("'>")
+    col = vim.fn.col("'<") - 1
+  else
+    if not args[3] then
+      vim.notify(
+        "No line count provided. Usage: InsertNumbers [start] [step] [lines]",
+        vim.log.levels.ERROR,
+        { title = "InsertNumbers" }
+      )
+      return
+    end
+    local num_lines = args[3] or 1
+    start_row = vim.fn.line(".")
+    end_row = start_row + num_lines - 1
+    col = vim.fn.col(".") - 1
+  end
+
+  local current = start
+
+  for row = start_row, end_row do
+    local line = vim.fn.getline(row)
+    local new_line = line:sub(1, col) .. formatted_num(current) .. line:sub(col + 1)
+    vim.fn.setline(row, new_line)
+    current = current + step
+  end
+
+  if is_visual then vim.cmd("normal! gv") end
+
+  vim.cmd("normal! gv")
+end, { range = true, nargs = "*", desc = "Insert incrementally number sequence" })
