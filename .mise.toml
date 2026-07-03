@@ -9,6 +9,7 @@ shellcheck = "latest"
 shfmt = "latest"
 taplo = "latest"
 typos = "latest"
+uv = "latest"
 
 [tasks.todo]
 description = "Show TODO's and FIXME's notes"
@@ -27,3 +28,18 @@ else
   prek run ${usage_all:+--all-files}
 fi
 '''
+
+[tasks.dotbot]
+description = "Run dotbot"
+quiet = true
+run = '''
+if [ command -v dotbot >/dev/null 2>&1 ]; then
+  dotbot -c ./.dotbot.yaml
+else
+  uv run python ./.deps/dotbot/bin/dotbot -c ./.dotbot.yaml
+fi
+'''
+
+[tasks.git-submodules-update]
+description = "Update Git submodules"
+run = "git submodule update --init --recursive"

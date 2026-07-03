@@ -13,7 +13,10 @@
       devshells.default.devshell = {
         motd = "{bold}❄️ 🐧 Welcome to Igloo's devshell 🐧❄️{reset}";
         # $(type -p menu &>/dev/null && menu)
-        packages = with pkgs; [ mise ];
+        packages = with pkgs; [
+          mise
+          dotbot
+        ];
       };
     };
 }

@@ -1,0 +1,43 @@
+---
+- create:
+    - ~/.config
+    - ~/.local
+    - ~/code
+
+- clean:
+    ~/.config:
+      recursive: true
+
+- link:
+    ~/.profile: config/shell/.profile
+    ~/.bashrc: config/bash/.bashrc
+    ~/.config/bash/functions:
+      create: true
+      path: config/bash/functions
+    ~/.config/git: config/git
+    ~/.config/nvim: config/nvim
+    ~/.config/inputrc: config/inputrc
+    ~/.config/atuin:
+      if: "command -v atuin"
+      path: config/atuin
+    ~/.config/bat:
+      if: "command -v bat"
+      path: config/bat
+    ~/.config/direnv:
+      if: "command -v direnv"
+      path: config/direnv
+    ~/.config/mise:
+      if: "command -v mise"
+      path: config/mise
+    ~/.config/python:
+      if: "command -v python"
+      path: config/python
+    ~/.config/ipython:
+      if: "command -v ipython"
+      path: config/ipython
+    ~/.config/ripgreprc:
+      if: "command -v rg"
+      path: config/ripgreprc
+    ~/.config/tmux:
+      if: "command -v tmux"
+      path: config/tmux
