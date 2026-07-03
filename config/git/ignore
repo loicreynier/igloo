@@ -3,6 +3,10 @@
 .direnv/
 __pycache__/
 
+# Logs
+*.~lock
+debug.log
+
 # Builds
 result
 
