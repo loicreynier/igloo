@@ -1,5 +1,4 @@
 [tools]
-"cargo:stylua" = "latest"
 editorconfig-checker = "latest"
 gum = "latest"
 prek = "latest"
@@ -7,16 +6,19 @@ rg = "latest"
 ruff = "latest"
 shellcheck = "latest"
 shfmt = "latest"
+stylua = "latest"
 taplo = "latest"
 typos = "latest"
+usage = "latest"
 uv = "latest"
 
 [tasks.todo]
 description = "Show TODO's and FIXME's notes"
-run = "rg --hidden --sort=path --glob='!.mise.toml' 'TODO|FIXME'"
+run = "rg --hidden --sort=path --glob='!.mise.toml' '(TODO|FIXME)(\\([a-zA-Z0-9_-]+\\))?:'"
 
 [tasks.pre-commit]
 description = "Run pre-commit checks"
+quiet = true
 usage = '''
 flag "--nix" help="Use Nix-generated config"
 flag "--all" help="Run on all files"
