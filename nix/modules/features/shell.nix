@@ -22,19 +22,23 @@ let
     ];
 in
 {
-  flake.nixosModules.base = { pkgs, ... }: {
-    environment.systemPackages = (userPkgs pkgs) ++ (adminPkgs pkgs);
+  flake.nixosModules.base =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = (userPkgs pkgs) ++ (adminPkgs pkgs);
 
-    programs = {
-      gnupg.agent.enable = true;
+      programs = {
+        gnupg.agent.enable = true;
+      };
+
+      services = {
+        openssh.enable = true;
+      };
     };
 
-    services = {
-      openssh.enable = true;
+  flake.module.home.base =
+    { pkgs, ... }:
+    {
+      home.packages = userPkgs pkgs;
     };
-  };
-
-  flake.module.home.base = { pkgs, ... }: {
-    home.packages = userPkgs pkgs;
-  };
 }

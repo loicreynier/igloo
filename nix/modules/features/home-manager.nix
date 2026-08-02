@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   flake.homeModules.base = {
     programs.home-manager.enable = true;
     news.display = "silent";
@@ -9,14 +10,16 @@
     };
   };
 
-  flake.nixosModules.home-manager = { ... }: {
-    imports = [
-      inputs.home-manager.nixosModules.default
-    ];
+  flake.nixosModules.home-manager =
+    { ... }:
+    {
+      imports = [
+        inputs.home-manager.nixosModules.default
+      ];
 
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+      };
     };
-  };
 }

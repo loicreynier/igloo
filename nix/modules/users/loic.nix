@@ -1,9 +1,12 @@
-{ self, ... }: {
-  flake.homeModules.userLoic = { system, ... }: {
-    home.packages = [
-      self.packages.${system}.neovimWrapped
-    ];
-  };
+{ self, ... }:
+{
+  flake.homeModules.userLoic =
+    { system, ... }:
+    {
+      home.packages = [
+        self.packages.${system}.neovimWrapped
+      ];
+    };
 
   flake.nixosModules.userLoic = {
     users.users.loic = {
