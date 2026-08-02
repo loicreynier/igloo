@@ -13,6 +13,7 @@
         ":"
         "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
       ];
+      pkgsUnstable = inputs'.nixpkgs-unstable.legacyPackages;
       extraPackages = with pkgs; [
         # -- Unix utilities
         lsof
@@ -51,7 +52,7 @@
         ruff
         ty
         # Fortran
-        fortitude
+        pkgsUnstable.fortitude
         fortls
         fprettify
         # C/C++
@@ -68,6 +69,8 @@
         taplo
         yamllint
         vscode-langservers-extracted # Provides `jsonls`
+        # -- Misc tooling
+        pkgsUnstable.txm
       ];
       wrapperArgsPkgs = lib.optionals (extraPackages != [ ]) [
         "--suffix"
