@@ -1,9 +1,11 @@
+{ inputs, ... }:
 {
   flake.nixosModules.graphical =
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
         firefox
+        inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.ghostty
         parsec-bin
         thunderbird
         vlc
