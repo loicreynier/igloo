@@ -51,7 +51,7 @@ end
 
 ---@type vim.lsp.Config
 return {
-  cmd = { "ltex-ls" },
+  cmd = { "ltex-ls-plus" },
   filetypes = filetypes,
   root_markers = {
     ".ltex",
