@@ -44,6 +44,10 @@
       url = "github:loicreynier/git-hooks.nix/feat/prek_pass_filenames";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
+      inputs.flake-compat.follows = "";
+    };
 
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";

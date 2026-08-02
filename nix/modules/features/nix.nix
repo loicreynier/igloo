@@ -1,3 +1,4 @@
+{ inputs, ... }:
 let
   nixPrograms =
     pkgs: with pkgs; [
@@ -50,9 +51,13 @@ in
 
       programs = {
         nix-ld.enable = true;
+        nix-index.enable = true;
       };
 
-      environment.systemPackages = nixPrograms pkgs;
+      environment.systemPackages = [
+        inputs.nix-alien.packages.${pkgs.system}.default
+      ]
+      ++ nixPrograms pkgs;
     };
 
   flake.homeModules.base =
