@@ -1,0 +1,23 @@
+[tools]
+neovim = "nightly"
+opencode = "2.1.3" # "latest" pulls 1.x
+
+# Lua/Neovim
+lua-language-server = "latest"
+"cargo:stylua" = "latest"
+"cargo:tree-sitter-cli" = "latest"
+# Shell
+shellcheck = "latest"
+# Python
+ruff = "latest"
+ty = "latest"
+# Fortran
+"pipx:fortls" = { version = "latest", uvx = "true" }
+"pipx:fprettify" = { version = "latest", uvx = "true" }
+"pipx:fortitude-lint" = { version = "latest", uvx = "true" }
+"cargo:ffmt" = "latest"
+# Misc
+taplo = "latest"
+"cargo:https://github.com/tekumara/typos-lsp" = "latest"
+"cargo:neocmakelsp" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
