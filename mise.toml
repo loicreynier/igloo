@@ -1,3 +1,21 @@
+[settings]
+dotfiles.default_mode = "symlink"
+
+[dotfiles]
+"~/.profile" = { source = "config/shell/.profile" }
+"~/.bashrc" = { source = "config/bash/.bashrc" }
+"~/.config/bash/functions" = { source = "config/bash/functions" }
+"~/.config/inputrc" = { source = "config/inputrc" }
+"~/.config/git" = { source = "config/git" }
+"~/.config/nvim" = { source = "config/nvim", exclude = ["README.md"] }
+"~/.config/bat" = { source = "config/bat" }
+"~/.config/ripgreprc" = { source = "config/ripgreprc" }
+"~/.config/direnv" = { source = "config/direnv" }
+"~/.config/mise" = { source = "config/mise" }
+"~/.config/python" = { source = "config/python" }
+"~/.config/tmux" = { source = "config/tmux" }
+"~/.config/ghostty" = { source = "config/ghostty" }
+
 [tools]
 editorconfig-checker = "latest"
 gum = "latest"
