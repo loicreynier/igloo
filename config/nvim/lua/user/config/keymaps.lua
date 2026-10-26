@@ -62,43 +62,35 @@ set("c", "<C-n>", function() return vim.fn.wildmenumode() == 1 and "<Right>" or 
 -- Diagnostics ---------------------------------------------------------------------------------------------------------
 
 local diagnos = vim.diagnostic
-local error = diagnos.severity.ERROR
-local warn = diagnos.severity.WARN
+local maps = {
+  { key = "d", label = "diagnostic", severity = nil },
+  { key = "e", label = "error", severity = diagnos.severity.ERROR },
+  { key = "w", label = "warning", severity = diagnos.severity.WARN },
+  { key = "i", label = "info", severity = diagnos.severity.INFO },
+  { key = "h", label = "hint", severity = diagnos.severity.HINT },
+}
 
-set("n", "]d", function() diagnos.jump({ count = vim.v.count1 }) end, { desc = "Next diagnostic" })
-set("n", "[d", function() diagnos.jump({ count = -vim.v.count1 }) end, { desc = "Previous diagnostic" })
-set("n", "]D", function() diagnos.jump({ count = vim._maxint, wrap = false }) end, { desc = "Last diagnostic" })
-set("n", "[D", function() diagnos.jump({ count = -vim._maxint, wrap = false }) end, { desc = "First diagnostic" })
+for _, m in ipairs(maps) do
+  local function jump(count, wrap)
+    local opts = { count = count, wrap = wrap }
 
-set("n", "]e", function() diagnos.jump({ count = vim.v.count1, severity = error }) end, { desc = "Next error" })
-set("n", "[e", function() diagnos.jump({ count = vim.v.count1, severity = error }) end, { desc = "Previous error" })
-set(
-  "n",
-  "]E",
-  function() diagnos.jump({ count = vim._maxint, wrap = false, severity = error }) end,
-  { desc = "Last error" }
-)
-set(
-  "n",
-  "[E",
-  function() diagnos.jump({ count = -vim._maxint, wrap = false, severity = error }) end,
-  { desc = "First error" }
-)
+    if m.severity then opts.severity = m.severity end
 
-set("n", "]w", function() diagnos.jump({ count = vim.v.count1, severity = warn }) end, { desc = "Next warning" })
-set("n", "[w", function() diagnos.jump({ count = vim.v.count1, severity = warn }) end, { desc = "Previous warning" })
-set(
-  "n",
-  "]W",
-  function() diagnos.jump({ count = vim._maxint, wrap = false, severity = warn }) end,
-  { desc = "Last warning" }
-)
-set(
-  "n",
-  "[W",
-  function() diagnos.jump({ count = -vim._maxint, wrap = false, severity = warn }) end,
-  { desc = "First warning" }
-)
+    diagnos.jump(opts)
+  end
+
+  local label = m.label
+
+  set("n", "]" .. m.key, function() jump(vim.v.count1) end, { desc = "Next " .. label })
+
+  set("n", "[" .. m.key, function() jump(-vim.v.count1) end, { desc = "Previous " .. label })
+
+  local key_upper = m.key:upper()
+
+  set("n", "]" .. key_upper, function() jump(vim._maxint, false) end, { desc = "Last " .. label })
+
+  set("n", "[" .. key_upper, function() jump(-vim._maxint, false) end, { desc = "First " .. label })
+end
 
 -- LSP -----------------------------------------------------------------------------------------------------------------
 

@@ -1,0 +1,3 @@
+[dotfiles]
+"~/.config/opencode/opencode.jsonc" = { source = "config/opencode/opencode.jsonc" }
+"~/.local/bin/vllm-serve" = { source = "scripts/vllm-serve.sh", mode = "copy", permissions = "0777" }

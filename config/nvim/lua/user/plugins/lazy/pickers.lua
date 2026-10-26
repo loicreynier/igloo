@@ -38,6 +38,8 @@ return {
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
               ["<C-u>"] = false, -- Clear prompt instead of scroll the preview
+              ["<C-x>"] = false, -- Default key for opening in split
+              ["<C-s>"] = actions.file_split,
               ["<M-u>"] = actions.preview_scrolling_up,
               ["<M-d>"] = actions.preview_scrolling_down,
             },
@@ -94,6 +96,7 @@ return {
     "jghauser/papis.nvim",
     enabled = not sinfo.is_hpcc,
     lazy = false, -- Initializes itself lazyly on `init_filetypes`
+    cond = vim.fn.executable("papis") == 1,
     dependencies = {
       "kkharji/sqlite.lua",
       "MunifTanjim/nui.nvim",

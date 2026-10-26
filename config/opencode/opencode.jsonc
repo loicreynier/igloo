@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "vllm/Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+  "providers": {
+    "vllm": {
+      "name": "Local vLLM",
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "http://127.0.0.1:8000/v1",
+      },
+      "models": {
+        "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8": {
+          "name": "Qwen3 Coder 30B A3B FP8 @ NVIDIA A800",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        }
+      }
+    }
+  }
+}

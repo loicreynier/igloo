@@ -20,12 +20,12 @@ return {
     keys = {
       {
         "[[",
-        function() require("lsp-document-highlight").jump(-vim.v.count1, true) end,
+        function() require("lsp-document-highlight").jump(-vim.v.count1) end,
         desc = "Previous reference",
       },
       {
         "]]",
-        function() require("lsp-document-highlight").jump(vim.v.count1, true) end,
+        function() require("lsp-document-highlight").jump(vim.v.count1) end,
         desc = "Next reference",
       },
     },
@@ -33,7 +33,7 @@ return {
     ---@type LDH.config
     opts = {
       throttle = 50,
-      navigation = {},
+      clamp_jumps = true,
     },
   },
 
