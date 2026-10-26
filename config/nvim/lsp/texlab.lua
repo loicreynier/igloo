@@ -84,10 +84,10 @@ return {
   },
   on_attach = function(client, bufnr)
     for _, cmd in ipairs({
-      { name = "TexlabBuild", fn = buf_build, desc = "Build the current buffer" },
-      { name = "TexlabCancelBuild", fn = buf_cancel_build, desc = "Cancel the current build" },
-      { name = "TexlabForward", fn = buf_search, desc = "Forward search from current position" },
-      { name = "TexlabDependencyGraph", fn = dependency_graph, desc = "Show the dependency graph" },
+      { name = "LspTexlabBuild", fn = buf_build, desc = "Build the current buffer" },
+      { name = "LspTexlabCancelBuild", fn = buf_cancel_build, desc = "Cancel the current build" },
+      { name = "LspTexlabForward", fn = buf_search, desc = "Forward search from current position" },
+      { name = "LspTexlabDependencyGraph", fn = dependency_graph, desc = "Show the dependency graph" },
     }) do
       vim.api.nvim_buf_create_user_command(
         bufnr,

@@ -25,6 +25,7 @@ local filetypes = {
   "xhtml",
   "mail",
   "text",
+  "typst",
 }
 
 local function get_language_id(_, filetype)

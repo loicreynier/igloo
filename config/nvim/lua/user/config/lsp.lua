@@ -79,6 +79,7 @@ vim.lsp.enable({
   "stylua",
   "taplo",
   "texlab",
+  "tinymist",
   "ty",
   "typos_lsp",
 })
