@@ -1,3 +1,10 @@
+---@brief
+---
+--- https://github.com/Myriad-Dreamin/tinymist - Integrated language service for Typst
+---
+--- See https://myriad-dreamin.github.io/tinymist/config/neovim.html for configuration options.
+---
+
 ---@type string[]
 local tinymist_commands = {
   "tinymist.exportSvg",
@@ -54,4 +61,15 @@ return {
       vim.api.nvim_buf_create_user_command(bufnr, "Lsp" .. cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
     end
   end,
+  settings = {
+    tinymist = {
+      rootPath = vim.env.TYPST_ROOT or nil,
+      lint = {
+        enabled = true,
+        when = "onSave",
+      },
+      completion = { postfix = false },
+      formatterMode = vim.fn.executable("typstyle") == 1 and "typstyle" or "disable",
+    },
+  },
 }
