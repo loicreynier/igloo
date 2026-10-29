@@ -109,12 +109,14 @@ esac
 
 # == CUSTOM FUNCTIONS ==============================================================================
 
-path() {
+printpath() {
   # IFS = Internal Field Separator
   local IFS=':'
   local -a path_array
 
-  read -r -a path_array <<<"${1:-$PATH}"
+  local default_path="$PATH"
+  [[ "${1:-}" == "--ld" ]] && default_path="${LD_LIBRARY_PATH:-}"
+  read -r -a path_array <<<"${2:-$default_path}"
 
   for element in "${path_array[@]}"; do
     echo "$element"
