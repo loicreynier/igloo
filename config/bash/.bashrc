@@ -128,7 +128,6 @@ _setup_bash_functions() {
     [ -f "$file" ] && source "$file"
   done
 }
-_setup_bash_functions
 
 # == SOFTWARE SETUP ================================================================================
 
@@ -349,7 +348,7 @@ _setup_bash_starship_from_lazy() {
   PROMPT_COMMAND="${PROMPT_COMMAND//_setup_bash_starship_from_lazy/}"
   local prompt_cmd_bak=$PROMPT_COMMAND
   _setup_bash_starship
-  [[ -n $prompt_cmd_bak ]] && PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}$prompt_cmd_bak"
+  [[ -n $prompt_cmd_bak ]] && PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND';'}$prompt_cmd_bak"
 }
 
 _setup_bash_starship_lazy() {
@@ -398,10 +397,11 @@ done
 [[ ${HAS[mise]+_} ]] && _setup_bash_mise
 [[ ${HAS[pyenv]+_} ]] && _setup_bash_pyenv_lazy
 
-# Then, check for toher commands
+# Then, check for other commands
 for cmd in bat comma direnv difft eza fd fzf git just nvim \
   pass python3 starship stowsh vim zoxide; do
   command -v "$cmd" >/dev/null && HAS[$cmd]=1
+  # printf 'HAS[%s]=%s\n' "$cmd" "${HAS[$cmd]}"
 done
 
 [[ ${HAS[git]+_} ]] && _setup_bash_git
@@ -430,6 +430,7 @@ done
 # See: https://github.com/ajeetdsouza/zoxide/pull/1136 for interaction with Starship
 [[ ${HAS[zoxide]+_} ]] && _setup_bash_zoxide_lazy
 
+_setup_bash_functions
 _setup_bash_completion
 _setup_bash_command_not_found
 
