@@ -335,6 +335,7 @@ _setup_bash_mise() {
     __mise_activate_wrapper
   else
     eval "$(command mise activate bash)"
+    eval "$(command mise completion bash)"
   fi
 }
 
