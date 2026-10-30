@@ -51,8 +51,8 @@ profile_dirs=(
 
 HISTFILE="$state_dir/bash_history"
 HISTCONTROL=ignoredups:ignorespace:erasedups
-HISTFILESIZE=1000
-HISTIGNORE='?:??:pwd:clear:tree:history:exit:pass*'
+HISTFILESIZE=10000
+HISTIGNORE='?:??:pwd:clear:tree:file:type:history:rmhist:exit:pass*:file=*'
 
 shopt -s "autocd"     # Treat command as `cd` argument if command is a path
 shopt -s "cdspell"    # Fix spelling while `cd`-ing
@@ -121,6 +121,10 @@ printpath() {
   for element in "${path_array[@]}"; do
     echo "$element"
   done
+}
+
+rmhist() {
+  history -d $((HISTCMD))
 }
 
 _setup_bash_functions() {
