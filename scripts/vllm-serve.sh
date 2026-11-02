@@ -102,6 +102,7 @@ print_help() {
   cat <<EOF
 Start a vLLM server in an ephemeral uv-managed environment.
 
+vLLM settings are tailored for running on a NVIDIA A800 40GB.
 Only supports the Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 model for now.
 
 Models are downloaded to: ~/.cache/huggingface/hub (may be altered by HF environment variables).
@@ -200,4 +201,8 @@ exec uv run --with "vllm" \
   --max-model-len 32768 \
   --enable-auto-tool-choice \
   --tool-call-parser qwen3_coder \
-  --enable-prefix-caching
+  --enable-prefix-caching \
+  --gpu-memory-utilization 0.95 \
+  --kv-cache-dtype fp8 \
+  --max-num-seqs 4 \
+  --served-model-name Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8
