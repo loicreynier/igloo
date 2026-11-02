@@ -105,6 +105,7 @@ if [ -z "$CUDA_HOME" ]; then
 fi
 
 export UV_PYTHON=3.12
+export UV_MANAGED_PYTHON=1
 export UV_NO_PROJECT=1
 export UV_TORCH_BACKEND=auto
 export HF_HUB_DISABLE_XET=1 # Standard download
