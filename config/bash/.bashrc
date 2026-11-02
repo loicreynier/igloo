@@ -114,9 +114,14 @@ printpath() {
   local IFS=':'
   local -a path_array
 
-  local default_path="$PATH"
-  [[ "${1:-}" == "--ld" ]] && default_path="${LD_LIBRARY_PATH:-}"
-  read -r -a path_array <<<"${2:-$default_path}"
+  local var="PATH"
+  if [[ "${1:-}" == "--ld" ]]; then
+    var="LD_LIBRARY_PATH"
+    shift
+  fi
+
+  # ${1:-${!var:-}}: first argument otherwise the value of the variable named by `$var`
+  read -r -a path_array <<<"${1:-${!var:-}}"
 
   for element in "${path_array[@]}"; do
     echo "$element"
