@@ -10,7 +10,7 @@
       },
       "models": {
         "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8": {
-          "name": "Qwen3 Coder 30B A3B FP8 @ NVIDIA A800",
+          "name": "Qwen3 Coder 30B A3B FP8 @ A800",
           "capabilities": {
             "tools": true,
             "input": [
@@ -22,8 +22,25 @@
           },
           "limit": {
             "context": 32768,
-            "output": 8192
+            "output": 4096,
           }
+        }
+      }
+    }
+  },
+  "compaction": {
+    "auto": true,
+    "buffer": "20%",
+  },
+  "mcp": {
+    "servers": {
+      "fortran-mcp": {
+        "type": "local",
+        "command": [
+          "fortran-mcp"
+        ],
+        "environment": {
+          "FORTRAN_MCP_SEARCH_PROVIDER": "semantic"
         }
       }
     }
