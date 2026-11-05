@@ -64,15 +64,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1793686154,
-        "narHash": "sha256-Zb/0L3soxrkfcrywpfp0J++0WFLB3tzh0Xtx9up+VNc=",
-        "owner": "cachix",
+        "lastModified": 1793893438,
+        "narHash": "sha256-aD7p+op88UEAn4HQ/s1kP8qIXbZhUCk8Ufl/TaORYKU=",
+        "owner": "loicreynier",
         "repo": "git-hooks.nix",
-        "rev": "204b6977e00caac19e2313015a598543ca7be150",
+        "rev": "9ea94fcbad9ebf9d0df3303c4dafe35910e29b6f",
         "type": "github"
       },
       "original": {
-        "owner": "cachix",
+        "owner": "loicreynier",
+        "ref": "feat/prek_pass_filenames",
         "repo": "git-hooks.nix",
         "type": "github"
       }

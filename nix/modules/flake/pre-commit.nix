@@ -54,6 +54,13 @@
           statix = mkHook "Lint   >> Nix files (statix)" { priority = 10; };
           ruff = mkHook "Lint   >> Python files (ruff-check)" { priority = 10; };
           shellcheck = mkHook "Lint   >> Shell files (shellcheck-system)" { priority = 10; };
+          render-scripts = mkHook "Render >> Script files from templates (render-scripts)" {
+            entry = "scripts/templates/render.py";
+            language = "script";
+            files = "^scripts/templates/[^/]*\\.(sh|bash)$";
+            pass_filenames = 1;
+            priority = 20;
+          };
         };
       };
 

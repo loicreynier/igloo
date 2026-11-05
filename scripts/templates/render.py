@@ -86,7 +86,7 @@ def main() -> None:
     output.write_text(result)
 
     if sys.stdout.isatty():
-        sys.stdout.write(f"{template_path} -> {output}")
+        sys.stdout.write(f"{template_path} -> {output}\n")
 
 
 if __name__ == "__main__":

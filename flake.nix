@@ -40,7 +40,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     git-hooks = {
-      url = "github:cachix/git-hooks.nix";
+      # url = "github:cachix/git-hooks.nix";
+      url = "github:loicreynier/git-hooks.nix/feat/prek_pass_filenames";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -93,7 +93,8 @@ repos:
     hooks:
       - id: render-scripts
         name: "Render >> Script files from templates (render-scripts)"
-        entry: ./scripts/templates/render.py
+        entry: scripts/templates/render.py
         files: "^scripts/templates/[^/]*\\.(sh|bash)$"
-        language: system
+        pass_filenames: 1
+        language: script
         priority: 20
