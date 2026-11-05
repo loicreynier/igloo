@@ -2,6 +2,8 @@
 
 # vLLM server uv-based wrapper script
 
+# shellcheck disable=SC2016 # Back quotes in single quotes
+
 set -eu
 
 CUDA_HOME="${CUDA_HOME:-${CUDA_PATH:-}}"
@@ -124,4 +126,5 @@ exec uv run --with "vllm" \
   --gpu-memory-utilization 0.95 \
   --kv-cache-dtype fp8 \
   --max-num-seqs 4 \
-  --served-model-name Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8
+  --served-model-name Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 \
+  -- "$@"

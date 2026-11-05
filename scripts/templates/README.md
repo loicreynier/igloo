@@ -23,4 +23,3 @@ The renderer replace the directive `$___INCLUDE "lib/usage.bash"` by the content
 
 > [!WARNING]
 > The first two lines of the included file are skipped (shebang + blank line)
-

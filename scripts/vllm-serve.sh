@@ -2,6 +2,8 @@
 
 # vLLM server uv-based wrapper script
 
+# shellcheck disable=SC2016 # Back quotes in single quotes
+
 set -eu
 
 CUDA_HOME="${CUDA_HOME:-${CUDA_PATH:-}}"
@@ -28,17 +30,17 @@ _usage_color() {
 _usage_opt_width=${_usage_opt_width:-30}
 
 if [ -t 1 ] && [ -z "${NO_COLOR:-}" ]; then
-    _usage_bgreen=$(_usage_color bgreen)
-    _usage_bcyan=$(_usage_color bcyan)
-    _usage_cyan=$(_usage_color cyan)
-    _usage_bred=$(_usage_color bred)
-    _usage_nocolor=$(_usage_color nocolor)
+  _usage_bgreen=$(_usage_color bgreen)
+  _usage_bcyan=$(_usage_color bcyan)
+  _usage_cyan=$(_usage_color cyan)
+  _usage_bred=$(_usage_color bred)
+  _usage_nocolor=$(_usage_color nocolor)
 else
-    _usage_bgreen=''
-    _usage_bcyan=''
-    _usage_cyan=''
-    _usage_bred=''
-    _usage_nocolor=''
+  _usage_bgreen=''
+  _usage_bcyan=''
+  _usage_cyan=''
+  _usage_bred=''
+  _usage_nocolor=''
 fi
 
 _usage_usage() {
@@ -95,8 +97,6 @@ _usage_error() {
 print_error() {
   _usage_error "$1" >&2
 }
-
-
 
 print_help() {
   cat <<EOF
@@ -205,4 +205,5 @@ exec uv run --with "vllm" \
   --gpu-memory-utilization 0.95 \
   --kv-cache-dtype fp8 \
   --max-num-seqs 4 \
-  --served-model-name Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8
+  --served-model-name Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 \
+  -- "$@"

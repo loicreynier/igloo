@@ -13,17 +13,17 @@ _usage_color() {
 _usage_opt_width=${_usage_opt_width:-30}
 
 if [ -t 1 ] && [ -z "${NO_COLOR:-}" ]; then
-    _usage_bgreen=$(_usage_color bgreen)
-    _usage_bcyan=$(_usage_color bcyan)
-    _usage_cyan=$(_usage_color cyan)
-    _usage_bred=$(_usage_color bred)
-    _usage_nocolor=$(_usage_color nocolor)
+  _usage_bgreen=$(_usage_color bgreen)
+  _usage_bcyan=$(_usage_color bcyan)
+  _usage_cyan=$(_usage_color cyan)
+  _usage_bred=$(_usage_color bred)
+  _usage_nocolor=$(_usage_color nocolor)
 else
-    _usage_bgreen=''
-    _usage_bcyan=''
-    _usage_cyan=''
-    _usage_bred=''
-    _usage_nocolor=''
+  _usage_bgreen=''
+  _usage_bcyan=''
+  _usage_cyan=''
+  _usage_bred=''
+  _usage_nocolor=''
 fi
 
 _usage_usage() {
@@ -80,5 +80,3 @@ _usage_error() {
 print_error() {
   _usage_error "$1" >&2
 }
-
-

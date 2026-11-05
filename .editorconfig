@@ -8,21 +8,18 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 tab_width = 2
-max_line_length = 100
+max_line_length = 120
 
 [*.nix]
 max_line_length = off
 
 [*.{bash,sh}]
-max_line_length = 120
 simplify = true
 
 [.bashrc]
-max_line_length = 120
 simplify = true
 
 [.profile]
-max_line_length = 120
 simplify = true
 
 [config/git/config]
@@ -40,8 +37,8 @@ call_parentheses = always
 collapse_simple_statement = always
 sort_requires = true
 
-[.justfile]
-indent_size = 4
+[*.{json,toml}]
+max_line_length = unset
 
 [*{.lock,lock.json}]
 # Should not be opened nor linted

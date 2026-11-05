@@ -13,17 +13,17 @@ _usage_name="glibexec" # Program name
 _usage_opt_width=17    # Longest option width
 
 if [[ -t 1 && -z ${NO_COLOR:-} ]]; then
-    _usage_bgreen=$'\e[1;32m'
-    _usage_bcyan=$'\e[1;36m'
-    _usage_cyan=$'\e[36m'
-    _usage_bred=$'\e[1;31m'
-    _usage_nocolor=$'\e[0m'
+  _usage_bgreen=$'\e[1;32m'
+  _usage_bcyan=$'\e[1;36m'
+  _usage_cyan=$'\e[36m'
+  _usage_bred=$'\e[1;31m'
+  _usage_nocolor=$'\e[0m'
 else
-    _usage_bgreen=''
-    _usage_bcyan=''
-    _usage_cyan=''
-    _usage_bred=''
-    _usage_nocolor=''
+  _usage_bgreen=''
+  _usage_bcyan=''
+  _usage_cyan=''
+  _usage_bred=''
+  _usage_nocolor=''
 fi
 
 _usage_opt_width=${_usage_opt_width:-30}
