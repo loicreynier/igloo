@@ -1,6 +1,6 @@
 [tools]
 neovim = "nightly"
-opencode = "2.1.3" # "latest" pulls 1.x
+opencode = "latest"
 
 # Lua/Neovim
 lua-language-server = "latest"
