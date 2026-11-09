@@ -115,7 +115,7 @@ printpath() {
   local -a path_array
 
   local var="PATH"
-  if [[ "${1:-}" == "--ld" ]]; then
+  if [[ ${1:-} == "--ld" ]]; then
     var="LD_LIBRARY_PATH"
     shift
   fi
@@ -399,6 +399,38 @@ _setup_bash_atuin() {
   done
 }
 
+_setup_bash_typst_lazy() {
+  _setup_bash_typst_from_lazy() {
+    local completion
+    local status
+    completion="$(typst completions bash 2>&1)" || {
+      status=$?
+      echo "Error: Typst init failed: could not generate completion"
+      return $status
+    }
+    eval "$completion" || {
+      status=$?
+      echo "Error: Typst init failed: could not load completion"
+      return $status
+    }
+  }
+
+  typst() {
+    unset -f typst
+    _setup_bash_typst_from_lazy
+    typst "$@"
+  }
+
+  _typst_lazy_completion() {
+    unset -f typst
+    unset -f _typst_lazy_completion
+    _setup_bash_typst_from_lazy || return 1
+    _typst "$@"
+  }
+
+  complete -F _typst_lazy_completion typst
+}
+
 # First, check for commands whose integration may add commands to `$PATH`
 for cmd in mise pyenv; do
   command -v "$cmd" >/dev/null && HAS[$cmd]=1
@@ -409,7 +441,8 @@ done
 
 # Then, check for other commands
 for cmd in bat comma direnv difft eza fd fzf git just nvim \
-  pass python3 starship stowsh vim zoxide; do
+  pass python3 starship stowsh vim zoxide \
+  typst; do
   command -v "$cmd" >/dev/null && HAS[$cmd]=1
   # printf 'HAS[%s]=%s\n' "$cmd" "${HAS[$cmd]}"
 done
@@ -426,6 +459,7 @@ done
 [[ ${HAS[just]+_} ]] && _setup_bash_just
 [[ ${HAS[fzf]+_} ]] && _setup_bash_fzf
 [[ ${HAS[direnv]+_} ]] && _setup_bash_direnv
+[[ ${HAS[typst]+_} ]] && _setup_bash_typst_lazy
 # FIXME: `atuin init bash || echo $?` returns 1 on Latios (not tested elsewhere)
 # Atuin preexec setup may be incompatible with other loaded
 # [[ ${HAS[atuin]+_} ]] && _setup_bash_atuin
