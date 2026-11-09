@@ -399,6 +399,67 @@ _setup_bash_atuin() {
   done
 }
 
+_setup_bash_uv_lazy() {
+  _setup_bash_uv_from_lazy() {
+    local completion
+    local status
+    completion="$(uv generate-shell-completion bash 2>&1)" || {
+      status=$?
+      echo "Error: uv init failed: could not generate completion"
+      return $status
+    }
+    eval "$completion" || {
+      status=$?
+      echo "Error: uv init failed: could not load completion"
+      return $status
+    }
+  }
+
+  _setup_bash_uvx_from_lazy() {
+    local completion
+    local status
+    completion="$(uvx --generate-shell-completion bash 2>&1)" || {
+      status=$?
+      echo "Error: uvx init failed: could not generate completion"
+      return $status
+    }
+    eval "$completion" || {
+      status=$?
+      echo "Error: uvx init failed: could not load completion"
+      return $status
+    }
+  }
+
+  uv() {
+    unset -f uv
+    _setup_bash_uv_from_lazy
+    uv "$@"
+  }
+
+  uvx() {
+    unset -f uvx
+    _setup_bash_uvx_from_lazy
+    uvx "$@"
+  }
+
+  _uv_lazy() {
+    unset -f uv
+    unset -f _uv_lazy
+    _setup_bash_uv_from_lazy || return 1
+    _uv "$@"
+  }
+
+  _uvx_lazy() {
+    unset -f uvx
+    unset -f _uvx_lazy
+    _setup_bash_uvx_from_lazy || return 1
+    _uvx "$@"
+  }
+
+  complete -F _uv_lazy uv
+  complete -F _uvx_lazy uvx
+}
+
 _setup_bash_typst_lazy() {
   _setup_bash_typst_from_lazy() {
     local completion
@@ -421,14 +482,14 @@ _setup_bash_typst_lazy() {
     typst "$@"
   }
 
-  _typst_lazy_completion() {
+  _typst_lazy() {
     unset -f typst
-    unset -f _typst_lazy_completion
+    unset -f _typst_lazy
     _setup_bash_typst_from_lazy || return 1
     _typst "$@"
   }
 
-  complete -F _typst_lazy_completion typst
+  complete -F _typst_lazy typst
 }
 
 # First, check for commands whose integration may add commands to `$PATH`
@@ -441,8 +502,7 @@ done
 
 # Then, check for other commands
 for cmd in bat comma direnv difft eza fd fzf git just nvim \
-  pass python3 starship stowsh vim zoxide \
-  typst; do
+  pass python3 starship stowsh typst uv vim zoxide; do
   command -v "$cmd" >/dev/null && HAS[$cmd]=1
   # printf 'HAS[%s]=%s\n' "$cmd" "${HAS[$cmd]}"
 done
@@ -459,6 +519,7 @@ done
 [[ ${HAS[just]+_} ]] && _setup_bash_just
 [[ ${HAS[fzf]+_} ]] && _setup_bash_fzf
 [[ ${HAS[direnv]+_} ]] && _setup_bash_direnv
+[[ ${HAS[uv]+_} ]] && _setup_bash_uv_lazy
 [[ ${HAS[typst]+_} ]] && _setup_bash_typst_lazy
 # FIXME: `atuin init bash || echo $?` returns 1 on Latios (not tested elsewhere)
 # Atuin preexec setup may be incompatible with other loaded
