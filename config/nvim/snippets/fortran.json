@@ -55,5 +55,18 @@
       "end do"
     ],
     "scope": "source.fortran"
+  },
+  "3ddo": {
+    "prefix": "3ddo",
+    "body": [
+      "do k = ${1:1}, ${2:nz}",
+      "\tdo j = ${3:1}, ${4:ny}",
+      "\t\tdo i = ${5:1}, ${6:nx}",
+      "\t\t\t$0",
+      "\t\tend do",
+      "\tend do",
+      "end do"
+    ],
+    "scope": "source.fortran"
   }
 }
