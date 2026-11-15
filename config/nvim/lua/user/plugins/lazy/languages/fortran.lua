@@ -1,8 +1,8 @@
 ---@type LazySpec[]
 return {
   {
-    enabled = false,
-    url = "git@codeberg.org:loicreynier/fypp.vim",
+    "fypp.vim",
+    dir = "~/code/neovim/fypp.vim",
     lazy = false,
   },
 }
