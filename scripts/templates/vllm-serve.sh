@@ -127,4 +127,4 @@ exec uv run --with "vllm" \
   --kv-cache-dtype fp8 \
   --max-num-seqs 4 \
   --served-model-name Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 \
-  -- "$@"
+  "$@"
