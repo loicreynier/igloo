@@ -1,80 +1,76 @@
 local icons = require("user.rice").icons
 
+local opencode_cmd = "opencode"
+---@type snacks.terminal.Opts
+local snacks_terminal_opts = {
+  win = {
+    position = "right",
+    enter = false,
+  },
+}
+
+---@type opencode.Opts
+vim.g.opencode_opts = {
+  server = {
+    start = function() require("snacks.terminal").open(opencode_cmd, snacks_terminal_opts) end,
+  },
+}
+
 ---@module "lazy"
 ---@type LazySpec[]
 return {
   {
     "nickjvandyke/opencode.nvim",
-    version = "*",
-    cond = vim.fn.executable("opencode") == 1,
+    cond = vim.fn.executable(opencode_cmd) == 1,
     dependencies = {
       {
         ---@module "snacks"
         "folke/snacks.nvim",
-        optional = true,
         opts = {
-          input = {},
+          input = { enabled = true },
           picker = {
+            enabled = true,
             actions = {
-              opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
+              opencode_send = function(picker) ---@param picker snacks.Picker
+                local items = vim.tbl_map(function(item) ---@param item snacks.picker.Item
+                  return item.file
+                      and require("opencode").format({ path = item.file, from = item.pos, to = item.end_pos })
+                    or item.text
+                end, picker:selected({ fallback = true }))
+
+                require("opencode").prompt(table.concat(items, ", ") .. " ")
+              end,
             },
             win = {
               input = {
                 keys = {
-                  ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
+                  ["<a-o>"] = { "opencode_send", mode = { "n", "i" } },
                 },
               },
             },
           },
+          terminal = { enabled = true },
         },
       },
     },
     keys = {
       {
         "<Leader>oa",
-        function() require("opencode").ask("@this: ", { submit = true }) end,
-        desc = "Ask OpenCode...",
+        function() require("opencode").ask("@this: ") end,
+        desc = "Ask OpenCode",
         mode = { "n", "x" },
       },
       {
         "<Leader>ox",
         function() require("opencode").select() end,
-        desc = "Select OpenCode action...",
+        desc = "Select OpenCode action",
         mode = { "n", "x" },
       },
       {
-        "<Leader>oT",
-        function() require("opencode").toggle() end,
-        desc = "Toggle Opencode",
+        "<Leader>ot",
+        function() require("snacks.terminal").toggle(opencode_cmd, snacks_terminal_opts) end,
+        desc = "Toggle OpenCode",
         mode = { "n", "t" },
-      },
-      {
-        "go",
-        function() return require("opencode").operator("@this ") end,
-        desc = "Add range to Opencode",
-        mode = { "n", "x" },
-        expr = true,
-      },
-      {
-        "goo",
-        function() return require("opencode").operator("@this ") .. "_" end,
-        desc = "Add line to Opencode",
-        expr = true,
-      },
-      {
-        "<Leader>os",
-        function() require("opencode").select_session() end,
-        desc = "Select OpenCode session",
-      },
-      {
-        "<Leader>on",
-        function() require("opencode").command("session.new") end,
-        desc = "New OpenCode session",
-      },
-      {
-        "<Leader>oi",
-        function() require("opencode").command("session.interrupt") end,
-        desc = "Interrupt OpenCode",
       },
     },
     init = function()
@@ -82,6 +78,9 @@ return {
         { "<Leader>o", group = "OpenCode", icon = icons.plugins.Opencode },
       })
     end,
-    config = function() vim.g.opencode_opts = {} end,
+    config = function()
+      ---@type opencode.Opts
+      vim.g.opencode_opts = {}
+    end,
   },
 }

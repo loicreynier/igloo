@@ -1,2 +1,3 @@
 [default.extend-words]
 noice = "noice"
+ot = "ot"       # <Leader>ot
