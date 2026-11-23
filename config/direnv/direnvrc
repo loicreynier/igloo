@@ -18,14 +18,13 @@ direnv_layout_dir() {
 
 # -- Daemonize
 #
-# Sauce: https://github.com/direnv/direnv/wiki/Daemonize
+# Starts the command in the background when entering
+# Source: https://github.com/direnv/direnv/wiki/Daemonize
 #
 # Usage: daemonize <name> [<command> [...<args>]]
 #
-# Starts the command in the background with an exclusive lock on `$name`.
-# If no command is passed, it uses the name as the command.
 # Logs are in `$name.log` in the corresponding cache directory.
-# To kill the process, run `kill $(< .direnv/$name.pid)`.
+# To kill the process, run `kill $(< <cache-path>/$name.pid)`.
 daemonize() {
   local name pid_file log_file
   name=$1
