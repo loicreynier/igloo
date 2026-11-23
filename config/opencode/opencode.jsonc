@@ -2,6 +2,44 @@
   "$schema": "https://opencode.ai/config.json",
   "model": "vllm/Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
   "providers": {
+    "mammouth": {
+      "name": "Mammouth API",
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "https://api.mammouth.ai/v1",
+      },
+      // Get models with:
+      // curl -sS -H "Authorization: Bearer $KEY" https://api.mammouth.ai/v1/models | jq -r '.data[].id'
+      "models": {
+        "mammouth-recommended": {
+          "name": "Mammouth Recommended",
+        },
+        "mistral-medium-3-5": {
+          "name": "Mistral Medium 3.5",
+        },
+        "mistral-large-4": {
+          "name": "Mistral Large 4",
+        },
+        "codestral-2508": {
+          "name": "Codestral 2508",
+        },
+        "devstreal-2512": {
+          "name": "Devstral 2512",
+        },
+        "claude-haiku-5": {
+          "name": "Claude Haiku 5",
+        },
+        "claude-sonnet-5": {
+          "name": "Claude Sonnet 5",
+        },
+        "claude-opus-5": {
+          "name": "Claude Opus 5",
+        },
+        "claude-fable-5": {
+          "name": "Claude Fable 5",
+        },
+      },
+    },
     "vllm": {
       "name": "Local vLLM",
       "package": "@opencode/ai/providers/openai-compatible",
