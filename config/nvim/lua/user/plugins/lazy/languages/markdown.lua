@@ -27,6 +27,7 @@ return {
   -- Preview in browser
   {
     "iamcco/markdown-preview.nvim",
+    ft = { "markdown" },
     cmd = { "MarkdownPreview", "MarkdownPreviewToggle", "MarkdownPreviewStop" },
     enabled = not sinfo.is_ssh,
     build = function()

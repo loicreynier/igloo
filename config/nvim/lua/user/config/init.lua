@@ -6,7 +6,6 @@ require("user.config.clipboard")
 require("user.config.autocmds")
 require("user.config.lsp")
 require("user.config.treesitter")
-require("user.config.ui2")
 
 require("user.config.lazy")
 require("user.plugins.config.pickers").set_pickers_keymaps()
