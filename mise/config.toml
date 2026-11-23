@@ -19,6 +19,7 @@ dotfiles.default_mode = "symlink"
 [tools]
 editorconfig-checker = "latest"
 gum = "latest"
+neovim = "latest"
 prek = "latest"
 rg = "latest"
 ruff = "latest"

@@ -9,6 +9,8 @@
 "cargo:zoxide" = "latest"
 direnv = "latest"
 fzf = "latest"
+gum = "latest"
+neovim = "latest"
 node = "latest"
 rg = "latest"
 sd = "latest"

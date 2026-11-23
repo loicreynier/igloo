@@ -1,3 +1,6 @@
+[settings]
+minimum_release_age_excludes = ["opencode"]
+
 [tools]
 neovim = "nightly"
 opencode = "latest"
