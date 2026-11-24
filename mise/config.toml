@@ -6,6 +6,7 @@ dotfiles.default_mode = "symlink"
 "~/.bashrc" = { source = "../config/bash/.bashrc" }
 "~/.config/bash/functions" = { source = "../config/bash/functions" }
 "~/.config/inputrc" = { source = "../config/inputrc" }
+"~/.config/starship.toml" = { source = "../config/starship.toml" }
 "~/.config/git" = { source = "../config/git" }
 "~/.config/nvim" = { source = "../config/nvim", exclude = ["README.md"] }
 "~/.config/bat" = { source = "../config/bat" }

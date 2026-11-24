@@ -1,0 +1,59 @@
+# ~/.config/starship.toml
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch$git_commit$git_state$git_metrics$git_status\
+[| ](fg:bold bright-black)\
+$shell\
+$python\
+$nix_shell\
+$direnv\
+$jobs\
+$cmd_duration\
+[| ](fg:bold bright-black)\
+$time\
+$line_break\
+$character"""
+
+add_newline = true
+
+[username]
+detect_env_vars = ["WSL_DISTRO_NAME", "SSH_CONNECTION"]
+format = "[$user]($style)"
+style_user = "bold green"
+
+[hostname]
+ssh_only = false
+ssh_symbol = "ssh://"
+detect_env_vars = ["WSL_DISTRO_NAME", "SSH_CONNECTION"]
+format = "[@$ssh_symbol$hostname]($style) in "
+style = "bold green"
+
+[shell]
+disabled = false
+bash_indicator = "bsh"
+
+[cmd_duration]
+format = "[$duration]($style) "
+
+[time]
+disabled = false
+format = "[$time]($style) "
+style = "bold"
+
+[python]
+detect_extensions = []
+
+[nix_shell]
+format = "via [$symbol(\\($name/$state\\))]($style) "
+symbol = "❄️ "
+
+[direnv]
+disabled = false
+style = "bold green"
+format = "via [$symbol(\\($loaded/$allowed\\))]($style) "
+symbol = " "
