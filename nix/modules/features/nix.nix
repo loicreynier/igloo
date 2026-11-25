@@ -52,10 +52,11 @@ in
       programs = {
         nix-ld.enable = true;
         nix-index.enable = true;
+        command-not-found.enable = false;
       };
 
       environment.systemPackages = [
-        inputs.nix-alien.packages.${pkgs.system}.default
+        inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}.default
       ]
       ++ nixPrograms pkgs;
     };

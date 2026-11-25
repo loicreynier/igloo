@@ -5,7 +5,7 @@
     {
       environment.systemPackages = with pkgs; [
         firefox
-        inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.ghostty
+        inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.ghostty
         parsec-bin
         thunderbird
         vlc
