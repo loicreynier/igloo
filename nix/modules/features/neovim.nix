@@ -58,8 +58,10 @@
         # C/C++
         clang-tools
         # LaTeX
-        texlab
-        tex-fmt
+        pkgsUnstable.badness
+        # Typst
+        tinymist
+        typstyle
         # Spelling
         ltex-ls
         typos-lsp

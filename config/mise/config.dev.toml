@@ -19,6 +19,13 @@ ty = "latest"
 "pipx:fprettify" = { version = "latest", uvx = "true" }
 "pipx:fortitude-lint" = { version = "latest", uvx = "true" }
 "cargo:ffmt" = "latest"
+# LaTeX
+# tinytex = "latest"
+"aqua:jolars/badness" = "latest"
+# Typst
+typst = "latest"
+tinymist = "latest"
+typstyle = "latest"
 # Misc
 taplo = "latest"
 "cargo:https://github.com/tekumara/typos-lsp" = "latest"

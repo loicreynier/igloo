@@ -66,6 +66,7 @@ if vim.g.cmp_engine == "nvim" then
 end
 
 vim.lsp.enable({
+  "badness",
   "clangd",
   "lua_ls",
   -- "ffmt",
@@ -78,7 +79,7 @@ vim.lsp.enable({
   "ruff",
   "stylua",
   "taplo",
-  "texlab",
+  -- "texlab",
   "tinymist",
   "ty",
   "typos_lsp",

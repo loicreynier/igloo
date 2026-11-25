@@ -16,6 +16,7 @@ dotfiles.default_mode = "symlink"
 "~/.config/python" = { source = "../config/python" }
 "~/.config/tmux" = { source = "../config/tmux" }
 "~/.config/ghostty" = { source = "../config/ghostty" }
+"~/.config/badness" = { source = "../config/badness" }
 
 [tools]
 editorconfig-checker = "latest"
